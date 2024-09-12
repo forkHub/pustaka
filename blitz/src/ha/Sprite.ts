@@ -496,6 +496,12 @@ namespace ha.be {
 		}
 		public set tipeDrag(value: number) {
 			this._tipeDrag = value;
+			if (value > 0) {
+				this._dragable = true;
+			}
+			else {
+				this._dragable = false;
+			}
 		}
 
 		public get url(): string {

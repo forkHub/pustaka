@@ -72,6 +72,7 @@ namespace ha.be {
 					if (item.tipeDrag == TypeDrag.drag || (item.tipeDrag == 3)) {
 						item.x = pos.x - item.drgStartX
 						item.y = pos.y - item.drgStartY
+						console.debug('item drag move');
 					}
 					else if (item.tipeDrag == TypeDrag.rotasi || (item.tipeDrag == 4)) {
 						let sudut2: number = Transform.sudut(pos.x - item.x, pos.y - item.y);
