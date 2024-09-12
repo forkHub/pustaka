@@ -9,7 +9,7 @@
  * @param transparan {angka} opsional, transparan (0-100)
  */
 const Bersih = (merah?: number, hijau?: number, biru?: number, transparan?: number) => {
-    ha.be.Be.Bersih(merah, hijau, biru, transparan);
+	ha.be.Be.Bersih(merah, hijau, biru, transparan);
 }
 
 /**
@@ -21,7 +21,7 @@ const Bersih = (merah?: number, hijau?: number, biru?: number, transparan?: numb
  * @returns 
  */
 const Grafis = (panjang: number = 240, lebar: number = 320, canvas: HTMLCanvasElement = null, fullScreen: boolean = true, input: boolean = true) => {
-    ha.be.Be.Grafis(panjang, lebar, canvas, fullScreen, input);
+	ha.be.Be.Grafis(panjang, lebar, canvas, fullScreen, input);
 }
 
 /**
@@ -32,7 +32,7 @@ const Grafis = (panjang: number = 240, lebar: number = 320, canvas: HTMLCanvasEl
  * @param a (number) alpha (0-100)
  */
 const Warna = (r: number = 0, g: number = 0, b: number = 0, a: number = 100) => {
-    ha.be.Be.Warna(r, g, b, a);
+	ha.be.Be.Warna(r, g, b, a);
 }
 
 /**
@@ -40,14 +40,14 @@ const Warna = (r: number = 0, g: number = 0, b: number = 0, a: number = 100) => 
  * @returns (number) warna merah
  */
 const Merah = (): number => {
-    return ha.be.Be.Merah()
+	return ha.be.Be.Merah()
 };
 
 const Hijau = ha.be.Be.Hijau;
 const Biru = ha.be.Be.Biru;
 const Transparan = ha.be.Be.Transparan;
-const AmbilPiksel = ha.be.Image.AmbilPiksel;
-const SetPiksel = ha.be.Image.SetPiksel;
+const AmbilPiksel = ha.be.Img.AmbilPiksel;
+const SetPiksel = ha.be.Img.SetPiksel;
 const Kontek = ha.be.Be.Kontek;
 const Kanvas = ha.be.Be.Kanvas;
 const Garis = ha.be.Be.Garis;
