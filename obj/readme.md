@@ -1,0 +1,1 @@
+librry untuk  object: mencari key, clone, dll
