@@ -5,6 +5,35 @@ namespace ha {
 
 		}
 
+		private static parseArray(obj: any[], key: string, f: (key: string, obj: any) => void) {
+			if (Array.isArray(obj) == false) return;
+
+			let ar: any[] = obj;
+			for (let i = 0; i < ar.length - 1; i++) {
+				this.parse(ar[i], "", f);
+			}
+
+		}
+
+		static parse(obj: any, key: string, f: (key: string, obj: any) => void) {
+
+			if (Array.isArray(obj)) {
+				this.parseArray(obj, "", f);
+				return;
+			}
+
+			if (typeof obj != "object") return;
+
+			if (key != "") f(key, obj);
+
+			//cari di property
+			Object.keys(obj).forEach((keyItem) => {
+				let objItem: any = obj[keyItem];
+				this.parse(objItem, keyItem, f);
+			})
+		}
+
+		//depecrated
 		static cariAr(objAr: Array<any>, key: string, res: any[]): void {
 			if (Array.isArray(objAr) == false) return;
 
