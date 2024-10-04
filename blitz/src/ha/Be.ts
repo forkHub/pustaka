@@ -116,6 +116,7 @@ namespace ha.be {
 			Be._canvasAr.push(canvas);
 
 			Be.canvasAktif = canvas;
+			ha.be.Teks.Rata("center");
 		}
 
 		private static backupWarna(): void {
@@ -265,8 +266,8 @@ namespace ha.be {
 
 				//font default
 				// Teks.Font("12px cursive");
-				Teks.Rata("left");
-				Teks.Goto(0, 10);
+				Teks.Rata("center");
+				Teks.Goto(169, 10);
 				Be.Warna(255, 255, 255, 100);
 				Be.canvasAktif.ctx.strokeStyle = "#ffffff";
 			}
