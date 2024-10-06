@@ -1,4 +1,3 @@
-
-backlog:
-========
-get by label
+prefab image
+configurasi
+dynamic prop
