@@ -3,7 +3,7 @@ namespace ha.be {
 	export class Teks {
 		private static nama: string = 'cursive';
 		private static ukuran: number = 30;
-		private static x: number = 0;
+		private static x: number = 120;
 		private static y: number = 10;
 		private static _stroke: boolean = false;
 		private static _jarak: number = 15;
