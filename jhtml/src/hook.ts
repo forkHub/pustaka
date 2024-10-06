@@ -3,18 +3,22 @@ function Jhtml(j: jhtml.IJhtml) {
     return Jhtml(j);
 }
 
-function FORM(): jhtml.FormBuilder {
-    return new jhtml.FormBuilder();
+function FORM(b: jhtml.Builder[] = []): jhtml.FormBuilder {
+    return new jhtml.FormBuilder(b);
 }
 
-function DIV(): jhtml.DivBuilder {
-    return new jhtml.DivBuilder();
+function DIV(): jhtml.Builder {
+    return jhtml.Builder.create("div");
 }
 
-function LABEL(): jhtml.LabelBuilder {
-    return new jhtml.LabelBuilder();
+function LABEL(b: jhtml.Builder[] = []): jhtml.LabelBuilder {
+    return new jhtml.LabelBuilder(b);
 }
 
-function INPUT(): jhtml.InputBuilder {
-    return new jhtml.InputBuilder();
+function INPUT(b: jhtml.Builder[] = []): jhtml.InputBuilder {
+    return new jhtml.InputBuilder(b);
+}
+
+function SPAN(b: jhtml.Builder[] = []): jhtml.InputBuilder {
+    return new jhtml.InputBuilder(b);
 }
