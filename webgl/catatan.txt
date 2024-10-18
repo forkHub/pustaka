@@ -1,0 +1,7 @@
+demo
+- kotak
+- effect api
+- bola dengan effect ekor
+- efek skala gambar jantung/buah
+- efek button
+- efek tint
