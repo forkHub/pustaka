@@ -9,7 +9,7 @@ enum EInput {
 namespace ha.be {
 	class EventHandler {
 
-		move(input: IInput, buffer: IGbr, e: PointerEvent): void {
+		move(input: IInput, buffer: HTMLCanvasElement, e: PointerEvent): void {
 			let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
 			input.x = pos.x;
 			input.y = pos.y;
@@ -103,7 +103,7 @@ namespace ha.be {
 
 		private static _inputGlobal: IInput;	//global input
 
-		private static _event: EventHandler = new EventHandler();
+		private static _evt: EventHandler = new EventHandler();
 
 		constructor() {
 		}
@@ -113,8 +113,8 @@ namespace ha.be {
 		 * @returns (number)
 		 */
 		static JmlTap(): number {
-			let tap = Input.inputGlobal.tapJml;
-			Input.inputGlobal.tapJml = 0;
+			let tap = Input.global.tapJml;
+			Input.global.tapJml = 0;
 			return tap;
 		}
 
@@ -123,8 +123,8 @@ namespace ha.be {
 		 * @returns (number)
 		 */
 		static JmlUp(): number {
-			let up = Input.inputGlobal.upJml;
-			Input.inputGlobal.tapJml = 0;
+			let up = Input.global.upJml;
+			Input.global.tapJml = 0;
 			return up;
 		}
 
@@ -133,8 +133,8 @@ namespace ha.be {
 		 * @returns 
 		 */
 		static JmlDragSelesai(): number {
-			let s = Input.inputGlobal.dragSelesaiJml;
-			Input.inputGlobal.dragSelesaiJml = 0;
+			let s = Input.global.dragSelesaiJml;
+			Input.global.dragSelesaiJml = 0;
 			return s;
 		}
 
@@ -143,7 +143,7 @@ namespace ha.be {
 		 * @returns (EInput) 
 		 */
 		static InputType(): EInput {
-			return Input.inputGlobal.type;
+			return Input.global.type;
 		}
 
 		/**
@@ -151,8 +151,8 @@ namespace ha.be {
 		 * @returns (number)
 		 */
 		static InputHit(): number {
-			let hit: number = Input.inputGlobal.hit;
-			Input.inputGlobal.hit = 0;
+			let hit: number = Input.global.hit;
+			Input.global.hit = 0;
 
 			return hit;
 		}
@@ -163,7 +163,7 @@ namespace ha.be {
 		 * 
 		 * */
 		static InputXAwal(): number {
-			return Input.inputGlobal.xStart;
+			return Input.global.xStart;
 		}
 
 		/**
@@ -171,7 +171,7 @@ namespace ha.be {
 		 * @returns (number)
 		 */
 		static InputYAwal(): number {
-			return Input.inputGlobal.yStart;
+			return Input.global.yStart;
 		}
 
 		/**
@@ -179,7 +179,7 @@ namespace ha.be {
 		 * @returns (number)
 		 */
 		static InputX(): number {
-			return Input.inputGlobal.x;
+			return Input.global.x;
 		}
 
 		/**
@@ -187,7 +187,7 @@ namespace ha.be {
 		 * @returns 
 		 */
 		static InputY(): number {
-			return Input.inputGlobal.y;
+			return Input.global.y;
 		}
 
 		/**
@@ -195,7 +195,7 @@ namespace ha.be {
 		 * @returns (number)
 		 */
 		static GeserX(): number {
-			return Input.inputGlobal.xDrag
+			return Input.global.xDrag
 		}
 
 		/**
@@ -203,7 +203,7 @@ namespace ha.be {
 		 * @returns (number)
 		 */
 		static GeserY(): number {
-			return Input.inputGlobal.yDrag
+			return Input.global.yDrag
 		}
 
 		/**
@@ -218,8 +218,8 @@ namespace ha.be {
 		 * 
 		 */
 		static JmlDragMulai(): number {
-			let hasil = Input.inputGlobal.dragJml;
-			Input.inputGlobal.dragJml = 0;
+			let hasil = Input.global.dragJml;
+			Input.global.dragJml = 0;
 
 			return hasil;
 		}
@@ -229,7 +229,7 @@ namespace ha.be {
 		 * @returns (boolean) 
 		 */
 		static Pencet(): boolean {
-			return Input.inputGlobal.isDown;
+			return Input.global.isDown;
 		}
 
 		/**
@@ -237,7 +237,7 @@ namespace ha.be {
 		 * @returns (boolean)
 		 */
 		static Geser(): boolean {
-			return Input.inputGlobal.isDrag;
+			return Input.global.isDrag;
 		}
 
 		private static getMouseKeyId(e: PointerEvent): string {
@@ -251,14 +251,14 @@ namespace ha.be {
 			throw Error('');
 		}
 
-		static init(buffer: IGbr): void {
+		static init(buffer: HTMLCanvasElement): void {
 			console.log('input init');
 
 			Input._inputGlobal = this.buatInputDefault();
 
-			buffer.canvas.style.touchAction = 'none';
+			buffer.style.touchAction = 'none';
 
-			buffer.canvas.onpointerdown = (e: PointerEvent) => {
+			buffer.onpointerdown = (e: PointerEvent) => {
 				e.stopPropagation();
 				e.preventDefault();
 
@@ -273,7 +273,7 @@ namespace ha.be {
 				sprInteraksi.inputDown(pos, e.pointerId);
 			}
 
-			buffer.canvas.onpointermove = (e: PointerEvent) => {
+			buffer.onpointermove = (e: PointerEvent) => {
 				e.stopPropagation();
 				e.preventDefault();
 
@@ -282,23 +282,23 @@ namespace ha.be {
 				let input: IInput = this.baru(key, e.pointerType as EInput);
 
 				Input.event.move(input, buffer, e);
-				Input.event.move(this.inputGlobal, buffer, e);
+				Input.event.move(this.global, buffer, e);
 
 				//sprite
 				sprInteraksi.inputMove(pos, e.pointerId);
 			}
 
-			buffer.canvas.onpointerout = (e: PointerEvent) => {
+			buffer.onpointerout = (e: PointerEvent) => {
 				e.stopPropagation();
 				e.preventDefault();
 			}
 
-			buffer.canvas.onpointercancel = (e: PointerEvent) => {
+			buffer.onpointercancel = (e: PointerEvent) => {
 				e.stopPropagation();
 				e.preventDefault();
 			}
 
-			buffer.canvas.onpointerup = (e: PointerEvent) => {
+			buffer.onpointerup = (e: PointerEvent) => {
 				e.stopPropagation();
 				e.preventDefault();
 
@@ -306,7 +306,7 @@ namespace ha.be {
 				let input: IInput = this.baru(key, e.pointerType as EInput);
 
 				Input.event.up(input);
-				Input.event.up(this.inputGlobal);
+				Input.event.up(this.global);
 
 				//sprite up
 				//sprite hit
@@ -353,9 +353,6 @@ namespace ha.be {
 				Input.inputs.pop();
 			}
 			Input.flushByInput(Input._inputGlobal);
-			// this.flushByInput(this._mouseGlobal);
-			// this.flushByInput(this._touchGlobal);
-			// this.flushByInput(this._keybGlobal);
 		}
 
 		private static flushByInput(input: IInput): void {
@@ -414,14 +411,14 @@ namespace ha.be {
 			return input;
 		}
 
-		static getPos = (cx: number, cy: number, buffer: IGbr) => {
-			let rect: DOMRect = buffer.canvas.getBoundingClientRect();
+		static getPos = (cx: number, cy: number, c: HTMLCanvasElement) => {
+			let r: DOMRect = c.getBoundingClientRect();
 
-			let canvasScaleX = parseInt(window.getComputedStyle(buffer.canvas).width) / buffer.canvas.width;
-			let canvasScaleY = parseInt(window.getComputedStyle(buffer.canvas).height) / buffer.canvas.height;
+			let cSclX = parseInt(window.getComputedStyle(c).width) / c.width;
+			let cSclY = parseInt(window.getComputedStyle(c).height) / c.height;
 
-			let poslx: number = Math.floor((cx - rect.x) / canvasScaleX);
-			let posly: number = Math.floor((cy - rect.y) / canvasScaleY);
+			let poslx: number = Math.floor((cx - r.x) / cSclX);
+			let posly: number = Math.floor((cy - r.y) / cSclY);
 
 			return {
 				x: poslx,
@@ -434,10 +431,10 @@ namespace ha.be {
 		}
 
 		public static get event(): EventHandler {
-			return Input._event;
+			return Input._evt;
 		}
 
-		public static get inputGlobal(): IInput {
+		public static get global(): IInput {
 			return Input._inputGlobal;
 		}
 

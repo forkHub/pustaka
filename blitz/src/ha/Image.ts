@@ -9,7 +9,7 @@ namespace ha.be {
 		frameH: number = 32;
 		alpha: number = 100;
 		isAnim: boolean = false;
-		rect: IKotak = new Kotak();
+		rect: Ikt = new Kotak();
 		load: boolean = false;
 		handleX: number = 0;
 		handleY: number = 0;
@@ -78,7 +78,7 @@ namespace ha.be {
 			canvas.width = w;
 			canvas.height = h;
 
-			let rect: IKotak = ha.be.Kotak.buat(0, 0, frameW, frameH);
+			let rect: Ikt = ha.be.Kotak.buat(0, 0, frameW, frameH);
 
 			img = new ImgObj();
 			img.load = true;
@@ -97,17 +97,6 @@ namespace ha.be {
 			img.load = true;
 			img.panjangDiSet = true;
 			img.lebarDiSet = true;
-			// img = {
-
-			// 	set rotasi(n: number) {
-			// 		console.debug('[xxx] set rotasi: ' + n);
-			// 		this.rotasi = n;
-			// 	},
-
-			// 	get rotasi(): number {
-			// 		return this.rotasi;
-			// 	}
-			// }
 
 			return img;
 		}
@@ -156,7 +145,7 @@ namespace ha.be {
 		static muatAnimAsyncCanvas(url: string, fw: number, fh: number, canvas: HTMLCanvasElement): IGbr {
 			let img: HTMLImageElement = document.createElement('img'); //;
 			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
-			let rect: IKotak;
+			let rect: Ikt;
 
 			rect = ha.be.Kotak.buat(0, 0, fw, fh);
 
@@ -247,7 +236,7 @@ namespace ha.be {
 		static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload: () => void): IGbr {
 			let img: HTMLImageElement = document.createElement('img');
 			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
-			let rect: IKotak;
+			let rect: Ikt;
 
 			rect = ha.be.Kotak.buat(0, 0, img.naturalWidth, img.naturalHeight);
 
@@ -294,6 +283,7 @@ namespace ha.be {
 			function imgOnLoad(imgP: HTMLImageElement): void {
 				canvas.width = imgP.naturalWidth;
 				canvas.height = imgP.naturalHeight;
+
 				ctx.drawImage(imgP, 0, 0);
 				gbr.rect = ha.be.Kotak.buat(0, 0, imgP.naturalWidth, imgP.naturalHeight);
 
@@ -312,20 +302,6 @@ namespace ha.be {
 
 				gbr.frameH = imgP.naturalHeight;
 				gbr.frameW = imgP.naturalWidth;
-
-				// ctx.fillStyle = 'rgba(255, 255, 255, 100)';
-				// ctx.strokeStyle = 'rgba(255, 0, 0, 100)';
-				// ctx.beginPath();
-				// ctx.rect(0, 0, 32, 32);
-				// ctx.moveTo(0, 0);
-				// ctx.lineTo(31, 31);
-				// ctx.moveTo(0, 31);
-				// ctx.lineTo(31, 0);
-				// ctx.stroke();
-
-				// ctx.fillRect(0, 0, 32, 32);
-
-
 
 				ha.be.cache.setFile(url, imgP);
 			}
@@ -470,7 +446,7 @@ namespace ha.be {
 
 			if (gbr.load == false) return;
 
-			gbr.ctrIdx = ha.be.Spr.ctrDraw++;
+			gbr.ctrIdx = ha.be.SprObj.ctrDraw++;
 			frame = Math.floor(frame);
 
 			jmlH = Math.floor(gbr.img.naturalWidth / gbr.frameW);
@@ -531,7 +507,7 @@ namespace ha.be {
 		}
 
 		public static resetRect(img: IGbr): void {
-			let rect: IKotak = img.rect;
+			let rect: Ikt = img.rect;
 			let p: IV2D;
 
 			p = rect.vs[0];
@@ -553,7 +529,7 @@ namespace ha.be {
 		}
 
 		static rectToImageTransform(image: IGbr, x: number, y: number): void {
-			let rect: IKotak = image.rect;
+			let rect: Ikt = image.rect;
 			let p: IV2D;
 			let x2: number = image.panjang
 			let y2: number = image.lebar;

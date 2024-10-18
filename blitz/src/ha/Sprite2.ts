@@ -78,11 +78,9 @@ namespace ha.be {
 						let sudut2: number = Transform.sudut(pos.x - item.x, pos.y - item.y);
 						let perbedaan: number = sudut2 - item.sudutTekanAwal;
 						item.buff.rotasi = item.sudutAwal + perbedaan;
-
-						// console.debug('item drag move');
-						// console.debug('sudut ptr: ' + sudut2);
-						// console.debug('perbedaan: ' + perbedaan);
-						// console.debug('item rotasi: ' + item.buffer.rotasi);
+					}
+					else {
+						//TODO:
 					}
 
 				}

@@ -2,64 +2,15 @@
 
 namespace ha.be {
 
-	export class Spr implements ISpr {
+	export class Spr {
 		static readonly daftar: ISpr[] = [];
-		private static _ctrDraw: number = 0;
 
-		private _buff: IGbr;
-		private _x: number = 0;
-		private _y: number = 0;
-		private _dragged: boolean = false;
-		private _down: boolean = false;
-		private _hit: number = 0;
-		private _dragStartY: number = 0;
-		private _dragStartX: number = 0;
-		private _dragable: boolean = false;
-		private _url: string;
-		private _tipeDrag: number;
-		private _sudutTekanAwal: number;
-		private _sudutAwal: number;
-		private _inputId: number;
-
-		constructor(buffer: IGbr, dragable: boolean = false) {
-			this.buff = buffer;
-			this.dragable = dragable;
-		}
+		//Attribute
 
 		static DragMode(s: ISpr, n: number): void {
 			if (n > 0) {
 				s.tipeDrag = n;
 				s.dragable = true;
-			}
-		}
-
-		/** 
-		 * 
-		 * @param spr 
-		 * @returns 
-		 */
-		static kontek(spr: ISpr): CanvasRenderingContext2D {
-			return spr.buff.ctx;
-		}
-
-		/**
-		 * 
-		 * @param sprS {ISpr} sprite 
-		 * @param onload {() => void} optional, fungsi yang dipanggil sprite selesai dimuat
-		 * @returns 
-		 */
-		static Copy(sprS: ISpr, onload?: () => void): ISpr {
-			if (!onload) {
-				onload = () => { };
-			}
-
-			if (sprS.buff.isAnim) {
-				console.debug('copy sprite anim');
-				console.debug(sprS);
-				return Spr.muatAnimasiAsyncKanvas(sprS.url, sprS.buff.frameW, sprS.buff.frameH, sprS.dragable, sprS.buff.canvas, sprS.tipeDrag);
-			}
-			else {
-				return Spr.muatAsyncBerbagiKanvas(sprS.url, sprS.dragable, sprS.buff.canvas, sprS.tipeDrag, onload)
 			}
 		}
 
@@ -89,6 +40,16 @@ namespace ha.be {
 
 			return hasil;
 		}
+
+		/** 
+		 * 
+		 * @param spr 
+		 * @returns 
+		 */
+		static kontek(spr: ISpr): CanvasRenderingContext2D {
+			return spr.buff.ctx;
+		}
+
 
 		/**
 		 * 
@@ -183,7 +144,7 @@ namespace ha.be {
 		 * @param s 
 		 * @returns 
 		 */
-		static Bound(s: ISpr): IKotak {
+		static Bound(s: ISpr): Ikt {
 			Img.resetRect(s.buff);
 			Img.rectToImageTransform(s.buff, s.x, s.y);
 			return s.buff.rect;
@@ -210,6 +171,43 @@ namespace ha.be {
 
 		/**
 		 * 
+		 * @param gbr 
+		 * @param w 
+		 * @param h 
+		 */
+		static Ukuran(gbr: ISpr, w: number, h: number): void {
+			Img.ukuran(gbr.buff, w, h);
+		}
+
+
+		//================
+		//Image Operation:
+		//================
+
+		/**
+		 * 
+		 * @param sprS {ISpr} sprite 
+		 * @param onload {() => void} optional, fungsi yang dipanggil sprite selesai dimuat
+		 * @returns 
+		 */
+		static Copy(sprS: ISpr, onload?: () => void): ISpr {
+			if (!onload) {
+				onload = () => { };
+			}
+
+			if (sprS.buff.isAnim) {
+				console.debug('copy sprite anim');
+				console.debug(sprS);
+				return Spr.muatAnimasiAsyncKanvas(sprS.url, sprS.buff.frameW, sprS.buff.frameH, sprS.dragable, sprS.buff.canvas, sprS.tipeDrag);
+			}
+			else {
+				return Spr.muatAsyncBerbagiKanvas(sprS.url, sprS.dragable, sprS.buff.canvas, sprS.tipeDrag, onload)
+			}
+		}
+
+
+		/**
+		 * 
 		 */
 		static GambarSemua() {
 			for (let i: number = 0; i < Spr.daftar.length; i++) {
@@ -228,6 +226,7 @@ namespace ha.be {
 			return Img.tabrakan(spr.buff, Spr.PosisiX(spr), Spr.PosisiY(spr), spr2.buff, Spr.PosisiX(spr2), Spr.PosisiY(spr2))
 		}
 
+		//TODO: depecrated
 		static TabrakanXY(spr: ISpr, x1: number, y1: number, spr2: ISpr, x2: number, y2: number): boolean {
 			return Img.tabrakan(spr.buff, x1, y1, spr2.buff, x2, y2)
 		}
@@ -271,21 +270,6 @@ namespace ha.be {
 
 		/**
 		 * 
-		 * @param url 
-		 * @param bisaDiDrag 
-		 * @param tipeDrag 
-		 * @returns 
-		 */
-		static async MuatAsync(url: string, bisaDiDrag = false, tipeDrag: number = 0): Promise<ISpr> {
-			return new Promise((resolve, _reject) => {
-				let hasil: ISpr = Spr.Muat(url, bisaDiDrag, tipeDrag, () => {
-					resolve(hasil);
-				});
-			});
-		}
-
-		/**
-		 * 
 		 * @param url (string) url gambar
 		 * @param bisaDiDrag 
 		 * @param tipeDrag 
@@ -299,16 +283,6 @@ namespace ha.be {
 			return spr;
 		}
 
-		/**
-		 * 
-		 * @param gbr 
-		 * @param w 
-		 * @param h 
-		 */
-		static Ukuran(gbr: ISpr, w: number, h: number): void {
-			Img.ukuran(gbr.buff, w, h);
-		}
-
 		private static buatPrivate(
 			image: IGbr,
 			dragable: boolean = false,
@@ -317,7 +291,7 @@ namespace ha.be {
 
 			let hasil: ISpr;
 
-			hasil = new Spr(image, dragable);
+			hasil = new SprObj(image, dragable);
 			hasil.tipeDrag = tipeDrag;
 			hasil.url = url;
 			if (hasil.dragable) {
@@ -340,11 +314,8 @@ namespace ha.be {
 		 * @param frame 
 		 */
 		static Gambar(sprite: ISpr, frame?: number): void {
-			if (sprite == null) {
-				Spr.GambarSemua();
-				return;
-			}
 			Img.gambar(sprite.buff, sprite.x, sprite.y, frame);
+			//TODO: webgl
 		}
 
 		/**
@@ -381,6 +352,7 @@ namespace ha.be {
 			p.x *= skalaX;
 			p.x += x2;
 
+			//tilt
 			Transform.rotateRel(p.x, p.y, x2, y2, tilt);
 			p.x = Transform.lastX;
 			p.y = Transform.lastY;
@@ -419,109 +391,6 @@ namespace ha.be {
 			})
 
 			return hasil;
-		}
-
-		public get drgStartX(): number {
-			return this._dragStartX;
-		}
-		public set drgStartX(value: number) {
-			this._dragStartX = value;
-		}
-		public get drgStartY(): number {
-			return this._dragStartY;
-		}
-		public set drgStartY(value: number) {
-			this._dragStartY = value;
-		}
-
-		public get dragged(): boolean {
-			return this._dragged;
-		}
-		public set dragged(value: boolean) {
-			this._dragged = value;
-		}
-		public get buff(): IGbr {
-			return this._buff;
-		}
-		public set buff(value: IGbr) {
-			this._buff = value;
-		}
-		public get x(): number {
-			return this._x;
-		}
-		public set x(value: number) {
-			this._x = value;
-		}
-		public get y(): number {
-			return this._y;
-		}
-		public set y(value: number) {
-			this._y = value;
-		}
-
-		public get jmlHit(): number {
-			return this._hit;
-		}
-		public set jmlHit(value: number) {
-			this._hit = value;
-		}
-		public get down(): boolean {
-			return this._down;
-		}
-		public set down(value: boolean) {
-			this._down = value;
-		}
-		public get dragable(): boolean {
-			return this._dragable;
-		}
-		public set dragable(value: boolean) {
-			this._dragable = value;
-		}
-		public get sudutAwal(): number {
-			return this._sudutAwal;
-		}
-		public set sudutAwal(value: number) {
-			this._sudutAwal = value;
-		}
-
-		public get sudutTekanAwal(): number {
-			return this._sudutTekanAwal;
-		}
-		public set sudutTekanAwal(value: number) {
-			this._sudutTekanAwal = value;
-		}
-
-		public get tipeDrag(): number {
-			return this._tipeDrag;
-		}
-		public set tipeDrag(value: number) {
-			this._tipeDrag = value;
-			if (value > 0) {
-				this._dragable = true;
-			}
-			else {
-				this._dragable = false;
-			}
-		}
-
-		public get url(): string {
-			return this._url;
-		}
-		public set url(value: string) {
-			this._url = value;
-		}
-		public static get ctrDraw(): number {
-			return Spr._ctrDraw;
-		}
-		public static set ctrDraw(value: number) {
-			Spr._ctrDraw = value;
-		}
-
-		public get inputId(): number {
-			return this._inputId;
-		}
-		public set inputId(value: number) {
-			this._inputId = value;
 		}
 
 	}

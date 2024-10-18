@@ -5,7 +5,8 @@
 
 
 
-interface IKotak {
+//Ikotak
+interface Ikt {
 	vs?: IV2D[],
 	segs?: ISegment[]
 }
@@ -49,7 +50,7 @@ interface IGbr {
 	rotasi: number;
 	alpha: number;
 	isAnim: boolean;
-	rect: IKotak;
+	rect: Ikt;
 	load: boolean;
 	ctrIdx: number;		//index counter buat drawing
 
