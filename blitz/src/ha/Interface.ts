@@ -39,32 +39,34 @@ interface IInput {
 	upJml: number;
 }
 
-interface IGbr {
-	//share-ble
-	img: HTMLImageElement;
-	canvas: HTMLCanvasElement;
-	ctx: CanvasRenderingContext2D;
+// interface ISprImgObj {
+// 	//share-ble
+// 	img: HTMLImageElement;
+// 	canvas: HTMLCanvasElement;
+// 	ctx: CanvasRenderingContext2D;
 
-	frameW: number;
-	frameH: number;
-	rotasi: number;
-	alpha: number;
-	isAnim: boolean;
-	rect: Ikt;
-	load: boolean;
-	ctrIdx: number;		//index counter buat drawing
+// 	x: number;
+// 	y: number;
+// 	frameW: number;
+// 	frameH: number;
+// 	rotasi: number;
+// 	alpha: number;
+// 	isAnim: boolean;
+// 	rect: Ikt;
+// 	ctrIdx: number;		//index counter buat drawing
+// 	panjang: number;
+// 	lebar: number;
+// 	handleX: number;	//dipakai cuman pas saat gambar, dan perhitungan geometri, posisi tetap pakai x
+// 	handleY: number;	//dipakai cuman pas saat gambar
+// 	load: boolean;
 
-	panjang: number;
-	lebar: number;
-	panjangDiSet: boolean;
-	lebarDiSet: boolean;
+// 	//status internal
+// 	panjangDiSet: boolean;
+// 	lebarDiSet: boolean;
 
-	handleX: number;	//dipakai cuman pas saat gambar, dan perhitungan geometri, posisi tetap pakai x
-	handleY: number;	//dipakai cuman pas saat gambar
-
-	ratioX?: number,	//buat canvas buffer saat window resize
-	ratioY?: number
-}
+// 	ratioX?: number,	//buat canvas buffer saat window resize
+// 	ratioY?: number
+// }
 
 //geom
 interface IV2D {
@@ -85,27 +87,25 @@ interface IAudio {
 	playedCount: number;
 }
 
-interface ISpr {
-	buff: IGbr,
-	x: number,
-	y: number,
-	dragable: boolean
-	dragged: boolean
-	down: boolean
+// interface ISprObj {
+// 	buff: ISprImgObj,
+// 	dragable: boolean
+// 	dragged: boolean
+// 	down: boolean
 
-	//TODO:
-	jmlHit?: number,
-	jmlup?: number,
-	jmlStartDrag?: number,
-	jmlEndDrag?: number,
+// 	//TODO:
+// 	jmlHit?: number,
+// 	jmlup?: number,
+// 	jmlStartDrag?: number,
+// 	jmlEndDrag?: number,
 
-	drgStartX: number
-	drgStartY: number
-	url: string
+// 	drgStartX: number
+// 	drgStartY: number
+// 	url: string
 
-	//
-	tipeDrag: number; //1 drag, 2 rotasi, 3 skew (todo)
-	sudutTekanAwal: number
-	sudutAwal: number
-	inputId: number
-}
+// 	//
+// 	tipeDrag: number; //1 drag, 2 rotasi, 3 skew (todo)
+// 	sudutTekanAwal: number
+// 	sudutAwal: number
+// 	inputId: number
+// }

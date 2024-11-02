@@ -310,7 +310,7 @@ namespace ha.be {
 
 				//sprite up
 				//sprite hit
-				Spr.daftar.forEach((item: ISpr) => {
+				Spr.daftar.forEach((item: SprObj) => {
 					if (e.pointerId == item.inputId) {
 						if (item.down) {
 							item.jmlHit++;

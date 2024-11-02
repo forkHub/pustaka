@@ -1,28 +1,77 @@
 namespace ha.be {
 
-	class ImgObj implements IGbr {
-
+	/*
+	export class SprObj {
 		img: HTMLImageElement;
 		canvas: HTMLCanvasElement;
 		ctx: CanvasRenderingContext2D;
-		frameW: number = 32;
-		frameH: number = 32;
-		alpha: number = 100;
 		isAnim: boolean = false;
 		rect: Ikt = new Kotak();
 		load: boolean = false;
-		handleX: number = 0;
-		handleY: number = 0;
 		ratioX?: number = 1;
 		ratioY?: number = 1;
-		klikKum: number = 0;
 
-		private _rotasi: number = 0;
-		private _panjang: number = 0;
-		private _lebar: number = 0;
 		private _panjangDiSet: boolean = false;
 		private _lebarDiSet: boolean = false;
 		private _ctrIdx: number = 0;
+
+		private _x: number = 0;
+		private _y: number = 0;
+		private _alpha: number = 100;
+		private _frameW: number = 32;
+		private _frameH: number = 32;
+		private _handleX: number = 0;
+		private _handleY: number = 0;
+		private _rotasi: number = 0;
+		private _panjang: number = 0;
+		private _lebar: number = 0;
+
+		public get frameW(): number {
+			return this._frameW;
+		}
+		public set frameW(value: number) {
+			this._frameW = value;
+		}
+		public get frameH(): number {
+			return this._frameH;
+		}
+		public set frameH(value: number) {
+			this._frameH = value;
+		}
+
+		public get x(): number {
+			return this._x;
+		}
+		public set x(value: number) {
+			this._x = value;
+		}
+		public get y(): number {
+			return this._y;
+		}
+		public set y(value: number) {
+			this._y = value;
+		}
+
+		public get alpha(): number {
+			return this._alpha;
+		}
+		public set alpha(value: number) {
+			this._alpha = value;
+		}
+
+		public get handleY(): number {
+			return this._handleY;
+		}
+		public set handleY(value: number) {
+			this._handleY = value;
+		}
+
+		public get handleX(): number {
+			return this._handleX;
+		}
+		public set handleX(value: number) {
+			this._handleX = value;
+		}
 
 		public get panjang(): number {
 			return this._panjang;
@@ -70,17 +119,20 @@ namespace ha.be {
 			this._rotasi = value;
 		}
 	}
+	*/
 
-	export class Img {
-		static buatBagiCanvas(canvas: HTMLCanvasElement, w: number = 32, h: number = 32, frameW: number = 32, frameH: number = 32): IGbr {
-			let img: IGbr;
+	export class SprImg {
+
+
+		static buatBagiCanvas(canvas: HTMLCanvasElement, w: number = 32, h: number = 32, frameW: number = 32, frameH: number = 32): SprObj {
+			let img: SprObj;
 
 			canvas.width = w;
 			canvas.height = h;
 
 			let rect: Ikt = ha.be.Kotak.buat(0, 0, frameW, frameH);
 
-			img = new ImgObj();
+			img = new SprObj();
 			img.load = true;
 			img.panjang = w;
 			img.lebar = h;
@@ -101,7 +153,7 @@ namespace ha.be {
 			return img;
 		}
 
-		static panjang(gbr: IGbr, pj?: number): number {
+		static panjang(gbr: SprObj, pj?: number): number {
 			if (typeof pj == 'number') {
 				gbr.panjang = pj;
 				gbr.panjangDiSet = true;
@@ -110,7 +162,7 @@ namespace ha.be {
 			return gbr.panjang;
 		};
 
-		static lebar(gbr: IGbr, lb?: number): number {
+		static lebar(gbr: SprObj, lb?: number): number {
 			if (typeof lb == 'number') {
 				gbr.lebar = lb;
 				gbr.lebarDiSet = true;
@@ -119,37 +171,37 @@ namespace ha.be {
 			return gbr.lebar;
 		};
 
-		static tabrakan(gbr1: IGbr, x1: number, y1: number, gbr2: IGbr, x2: number, y2: number): boolean {
-			Img.resetRect(gbr1);
-			Img.rectToImageTransform(gbr1, x1, y1);
+		static tabrakan(gbr1: SprObj, x1: number, y1: number, gbr2: SprObj, x2: number, y2: number): boolean {
+			SprImg.resetRect(gbr1);
+			SprImg.rectToImageTransform(gbr1, x1, y1);
 
-			Img.resetRect(gbr2);
-			Img.rectToImageTransform(gbr2, x2, y2);
+			SprImg.resetRect(gbr2);
+			SprImg.rectToImageTransform(gbr2, x2, y2);
 
 			return ha.be.Kotak.collide(gbr1.rect, gbr2.rect);
 		};
 
-		static dotDidalamGambar(gbr1: IGbr, x1: number, y1: number, x2: number, y2: number): boolean {
-			Img.resetRect(gbr1);
-			Img.rectToImageTransform(gbr1, x1, y1);
+		static dotDidalamGambar(gbr1: SprObj, x1: number, y1: number, x2: number, y2: number): boolean {
+			SprImg.resetRect(gbr1);
+			SprImg.rectToImageTransform(gbr1, x1, y1);
 
 			return ha.be.Kotak.collideDot(gbr1.rect, x2, y2);
 		};
 
-		static muatAnimAsync(url: string, fw: number, fh: number): IGbr {
+		static muatAnimAsync(url: string, fw: number, fh: number): SprObj {
 			let canvas: HTMLCanvasElement = document.createElement('canvas');
 
-			return Img.muatAnimAsyncCanvas(url, fw, fh, canvas);
+			return SprImg.muatAnimAsyncCanvas(url, fw, fh, canvas);
 		}
 
-		static muatAnimAsyncCanvas(url: string, fw: number, fh: number, canvas: HTMLCanvasElement): IGbr {
+		static muatAnimAsyncCanvas(url: string, fw: number, fh: number, canvas: HTMLCanvasElement): SprObj {
 			let img: HTMLImageElement = document.createElement('img'); //;
 			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
 			let rect: Ikt;
 
 			rect = ha.be.Kotak.buat(0, 0, fw, fh);
 
-			let gbr: IGbr = new ImgObj();
+			let gbr: SprObj = new SprObj();
 			gbr.isAnim = true;
 			gbr.img = img;
 			gbr.panjang = img.naturalWidth;
@@ -227,21 +279,21 @@ namespace ha.be {
 			return gbr;
 		}
 
-		static muatAsync(url: string, onload: () => void): IGbr {
+		static muatAsync(url: string, onload: () => void): SprObj {
 			let kanvas: HTMLCanvasElement = document.createElement('canvas');
 
-			return Img.muatAsyncKanvas(url, kanvas, onload);
+			return SprImg.muatAsyncKanvas(url, kanvas, onload);
 		}
 
-		static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload: () => void): IGbr {
+		static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload: () => void): SprObj {
 			let img: HTMLImageElement = document.createElement('img');
 			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
 			let rect: Ikt;
 
 			rect = ha.be.Kotak.buat(0, 0, img.naturalWidth, img.naturalHeight);
 
-			let gbr: IGbr;
-			gbr = new ImgObj();
+			let gbr: SprObj;
+			gbr = new SprObj();
 
 			gbr.img = img;
 			gbr.panjang = img.naturalWidth;
@@ -353,7 +405,7 @@ namespace ha.be {
 			return gbr;
 		}
 
-		static gambarUbin(gbr: IGbr, x: number = 0, y: number = 0, frame: number = 0) {
+		static gambarUbin(gbr: SprObj, x: number = 0, y: number = 0, frame: number = 0) {
 			let jmlH: number = 0;
 			let jmlV: number = 0;
 
@@ -389,7 +441,7 @@ namespace ha.be {
 
 			for (let i: number = 0; i < jmlH; i++) {
 				for (let j: number = 0; j < jmlV; j++) {
-					Img.gambar(gbr, x + (i * w2), y + (j * h2), frame);
+					SprImg.gambar(gbr, x + (i * w2), y + (j * h2), frame);
 				}
 			}
 		}
@@ -435,7 +487,7 @@ namespace ha.be {
 			Be.canvasAktif.ctx.fillRect(Math.floor(x), Math.floor(y), 1, 1);
 		}
 
-		static gambar(gbr: IGbr, x: number = 0, y: number = 0, frame: number = 0) {
+		static gambar(gbr: SprObj, x: number = 0, y: number = 0, frame: number = 0) {
 			let ctx: CanvasRenderingContext2D = Be.canvasAktif.ctx;
 			let jmlH: number = 0;
 			// let jmlV: number = 0;
@@ -479,13 +531,13 @@ namespace ha.be {
 				ctx.save();
 				ctx.translate(x, y);
 				ctx.rotate(gbr.rotasi * (Math.PI / 180));
-				ctx.globalAlpha = gbr.alpha;
+				ctx.globalAlpha = gbr.alpha / 100;
 				ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, - gbr.handleX, -gbr.handleY, w2, h2);
 				ctx.restore();
 			}
 			else {
 				ctx.save();
-				ctx.globalAlpha = gbr.alpha;
+				ctx.globalAlpha = gbr.alpha / 100;
 				ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, x2, y2, w2, h2);
 				ctx.restore();
 			}
@@ -499,14 +551,14 @@ namespace ha.be {
 		 * @param w 
 		 * @param h 
 		 */
-		static ukuran(gbr: IGbr, w: number = 32, h: number = 32): void {
+		static ukuran(gbr: SprObj, w: number = 32, h: number = 32): void {
 			gbr.panjang = w;
 			gbr.lebar = h;
 			gbr.panjangDiSet = true;
 			gbr.lebarDiSet = true;
 		}
 
-		public static resetRect(img: IGbr): void {
+		public static resetRect(img: SprObj): void {
 			let rect: Ikt = img.rect;
 			let p: IV2D;
 
@@ -528,7 +580,7 @@ namespace ha.be {
 
 		}
 
-		static rectToImageTransform(image: IGbr, x: number, y: number): void {
+		static rectToImageTransform(image: SprObj, x: number, y: number): void {
 			let rect: Ikt = image.rect;
 			let p: IV2D;
 			let x2: number = image.panjang

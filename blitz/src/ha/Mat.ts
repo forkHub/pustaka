@@ -2,6 +2,10 @@ namespace ha.be {
 
 	export class Mat {
 
+		static Jarak(x1: number, y1: number, x2: number, y2: number): number {
+			return Math.hypot(x2 - x1, y2 - y1);
+		}
+
 		/**
 		 * Menghitung sudut dari posisi relative ke posisi 0,0
 		 * @param x posisi x

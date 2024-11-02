@@ -13,8 +13,8 @@ namespace ha.be {
 	 * @memberof ha.be
 	 */
 	export class Be {
-		private static _canvasAr: IGbr[] = [];
-		private static _canvasAktif: IGbr;
+		private static _canvasAr: SprObj[] = [];
+		private static _canvasAktif: SprObj;
 		private static _skalaOtomatis: boolean = true;
 
 		private static _merah: number = 0;
@@ -80,36 +80,47 @@ namespace ha.be {
 			return Be.canvasAktif.ctx;
 		}
 
-		static buatCanvas(canvasEl: HTMLCanvasElement): IGbr {
-			let canvas: IGbr = {
-				canvas: canvasEl,
-				ctx: canvasEl.getContext('2d'),
-				lebar: canvasEl.height,
-				// scaleX: 1,
-				// scaleY: 1,
-				panjang: canvasEl.width,
-				frameH: canvasEl.height,
-				frameW: canvasEl.width,
-				handleX: 0,
-				handleY: 0,
-				img: null,
-				isAnim: false,
-				rotasi: 0,
-				alpha: 1,
-				rect: Kotak.buat(),
-				load: true,
-				panjangDiSet: true,
-				lebarDiSet: true,
-				ratioX: 1,
-				ratioY: 1,
-				ctrIdx: 0
-			}
+		static buatCanvas(canvasEl: HTMLCanvasElement): SprObj {
+			let canvas: SprObj = new SprObj();
+			canvas.canvas = canvasEl;
+			canvas.ctx = canvasEl.getContext('2d');
+			canvas.lebar = canvasEl.height;
+			canvas.panjang = canvasEl.width;
+			canvas.frameH = canvasEl.height;
+			canvas.frameW = canvasEl.width;
+			canvas.rect = Kotak.buat();
+			canvas.load = true;
+			canvas.panjangDiSet = true;
+			canvas.lebarDiSet = true;
+
+
+			// {
+			// 	canvas: canvasEl,
+			// 	ctx: canvasEl.getContext('2d'),
+			// 	lebar: canvasEl.height,
+			// 	panjang: canvasEl.width,
+			// 	frameH: canvasEl.height,
+			// 	frameW: canvasEl.width,
+			// 	handleX: 0,
+			// 	handleY: 0,
+			// 	img: null,
+			// 	isAnim: false,
+			// 	rotasi: 0,
+			// 	alpha: 1,
+			// 	rect: Kotak.buat(),
+			// 	load: true,
+			// 	panjangDiSet: true,
+			// 	lebarDiSet: true,
+			// 	ratioX: 1,
+			// 	ratioY: 1,
+			// 	ctrIdx: 0,
+			// }
 
 			return canvas;
 		}
 
 		static init(canvasBelakang: HTMLCanvasElement, canvasDepan: HTMLCanvasElement): void {
-			let canvas: IGbr = Be.buatCanvas(canvasBelakang);
+			let canvas: SprObj = Be.buatCanvas(canvasBelakang);
 			Be._canvasAr.push(canvas);
 
 			canvas = Be.buatCanvas(canvasDepan);
@@ -279,7 +290,7 @@ namespace ha.be {
 		 * helper method
 		 * */
 		private static Grafis2(p: number = 320, l: number = 240, ubahStyle: boolean): void {
-			let canvas: IGbr = Be.canvasAktif;
+			let canvas: SprObj = Be.canvasAktif;
 
 			canvas.canvas.width = p;
 			canvas.canvas.height = l;
@@ -395,18 +406,18 @@ namespace ha.be {
 			ctx.stroke();
 		}
 
-		public static get canvasAktif(): IGbr {
+		public static get canvasAktif(): SprObj {
 			return Be._canvasAktif;
 		}
 
-		public static set canvasAktif(value: IGbr) {
+		public static set canvasAktif(value: SprObj) {
 			Be._canvasAktif = value;
 		}
 
-		public static get canvasAr(): IGbr[] {
+		public static get canvasAr(): SprObj[] {
 			return Be._canvasAr;
 		}
-		public static set canvasAr(value: IGbr[]) {
+		public static set canvasAr(value: SprObj[]) {
 			Be._canvasAr = value;
 		}
 

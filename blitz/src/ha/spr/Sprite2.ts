@@ -9,15 +9,15 @@ namespace ha.be {
 	 */
 	class SpriteInteraksi {
 
-		spriteDown(lastSpr: ISpr, pos: any, id: number) {
-			lastSpr.down = true;
-			lastSpr.drgStartX = pos.x - lastSpr.x;
-			lastSpr.drgStartY = pos.y - lastSpr.y;
-			lastSpr.inputId = id;
-			lastSpr.jmlHit++;
+		private spriteDown(s: SprObj, pos: any, id: number) {
+			s.down = true;
+			s.drgStartX = pos.x - s.x;
+			s.drgStartY = pos.y - s.y;
+			s.inputId = id;
+			s.jmlHit++;
 
-			lastSpr.sudutTekanAwal = Transform.sudut(pos.x - lastSpr.x, pos.y - lastSpr.y);
-			lastSpr.sudutAwal = lastSpr.buff.rotasi;
+			s.sudutTekanAwal = Transform.sudut(pos.x - s.x, pos.y - s.y);
+			s.sudutAwal = s.rotasi;
 			console.log('sprite down event handler');
 		}
 
@@ -26,16 +26,16 @@ namespace ha.be {
 			console.log('input down');
 
 			let lastIdx: number = -1;
-			let lastSprite: ISpr = null;
+			let lastSprite: SprObj = null;
 
 			for (let i: number = Spr.daftar.length - 1; i >= 0; i--) {
-				let item: ISpr;
+				let item: SprObj;
 
 				item = Spr.daftar[i];
 
-				if (Img.dotDidalamGambar(item.buff, item.x, item.y, pos.x, pos.y)) {
-					if (item.buff.ctrIdx > lastIdx) {
-						lastIdx = item.buff.ctrIdx;
+				if (SprImg.dotDidalamGambar(item, item.x, item.y, pos.x, pos.y)) {
+					if (item.ctrIdx > lastIdx) {
+						lastIdx = item.ctrIdx;
 						lastSprite = item;
 					}
 				}
@@ -64,7 +64,7 @@ namespace ha.be {
 		}
 
 		inputMove(pos: any, pointerId: number): void {
-			Spr.daftar.forEach((item: ISpr) => {
+			Spr.daftar.forEach((item: SprObj) => {
 
 				if (item.down && item.dragable && (item.inputId == pointerId)) {
 					item.dragged = true;
@@ -77,7 +77,7 @@ namespace ha.be {
 					else if (item.tipeDrag == TypeDrag.rotasi || (item.tipeDrag == 4)) {
 						let sudut2: number = Transform.sudut(pos.x - item.x, pos.y - item.y);
 						let perbedaan: number = sudut2 - item.sudutTekanAwal;
-						item.buff.rotasi = item.sudutAwal + perbedaan;
+						item.rotasi = item.sudutAwal + perbedaan;
 					}
 					else {
 						//TODO:
@@ -88,13 +88,13 @@ namespace ha.be {
 		}
 
 		inputUp(): void {
-			Spr.daftar.forEach((item: ISpr) => {
+			Spr.daftar.forEach((item: SprObj) => {
 				if (item.down) {
 					// item.hit++;
 				}
 
 				if (item.dragged) {
-					console.log('input up: item rotasi ' + item.buff.rotasi)
+					console.log('input up: item rotasi ' + item.rotasi)
 				}
 
 				item.down = false;

@@ -1,4 +1,5 @@
 ///<reference path="./Route.ts"/>
+///<reference path="../spr/SpriteImage.ts"/>
 
 const Graphics = ha.be.Be.Grafis;
 
@@ -10,7 +11,7 @@ const Graphics = ha.be.Be.Grafis;
  * @param t 
  */
 function Cls(r?: number, g?: number, b?: number, t?: number) {
-    ha.be.Be.Bersih(r, g, b, t);
+	ha.be.Be.Bersih(r, g, b, t);
 }
 
 const Color = ha.be.Be.Warna;
@@ -27,8 +28,8 @@ const Green = ha.be.Be.Hijau;
 const Blue = ha.be.Be.Biru;
 const Alpha = ha.be.Be.Transparan;
 
-const GetPixel = ha.be.Img.AmbilPiksel;
-const SetPixel = ha.be.Img.SetPiksel;
+const GetPixel = ha.be.SprImg.AmbilPiksel;
+const SetPixel = ha.be.SprImg.SetPiksel;
 
 // const Kontek = ha.be.Be.Kontek;
 // const Kanvas = ha.be.Be.Kanvas;
