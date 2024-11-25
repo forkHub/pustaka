@@ -6,13 +6,7 @@ let lastY = 0;
 let div = document.querySelector('div[dragable]');
 let debugEl = document.querySelector('div.debug');
 console.log(div);
-window.onmousedown = (e) => {
-    startX = e.clientX;
-    startY = e.clientY;
-    console.log('mouse down');
-    getAbsPos(div);
-    debug();
-};
+let h = new Drag.Handler(div);
 function init() {
 }
 function debug() {
