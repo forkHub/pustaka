@@ -1,1 +1,3 @@
-dynamic prop
+ubah jadi basik-js
+depecrated method dipindah ke sprdep
+Sprite jadi pusat operasi

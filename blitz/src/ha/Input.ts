@@ -91,6 +91,7 @@ namespace ha.be {
 	}
 
 	export class Input {
+
 		private static _inputs: IInput[] = [];	//any input, todo: clean up
 		private static _debug: boolean = false;
 
@@ -258,69 +259,78 @@ namespace ha.be {
 
 			buffer.style.touchAction = 'none';
 
-			buffer.onpointerdown = (e: PointerEvent) => {
-				e.stopPropagation();
-				e.preventDefault();
+			buffer.addEventListener(
+				"pointerdown",
+				(e: PointerEvent) => {
+					e.stopPropagation();
+					e.preventDefault();
 
-				let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
-				let key: string = Input.getMouseKeyId(e);
-				let input: IInput = Input.baru(key, e.pointerType as EInput);
+					let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
+					let key: string = Input.getMouseKeyId(e);
+					let input: IInput = Input.baru(key, e.pointerType as EInput);
 
-				Input.event.down(input, key, e.pointerType as EInput, pos);
-				Input.event.down(this._inputGlobal, key, e.pointerType as EInput, pos);
+					Input.event.down(input, key, e.pointerType as EInput, pos);
+					Input.event.down(this._inputGlobal, key, e.pointerType as EInput, pos);
 
-
-				sprInteraksi.inputDown(pos, e.pointerId);
-			}
-
-			buffer.onpointermove = (e: PointerEvent) => {
-				e.stopPropagation();
-				e.preventDefault();
-
-				let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
-				let key: string = this.getMouseKeyId(e);
-				let input: IInput = this.baru(key, e.pointerType as EInput);
-
-				Input.event.move(input, buffer, e);
-				Input.event.move(this.global, buffer, e);
-
-				//sprite
-				sprInteraksi.inputMove(pos, e.pointerId);
-			}
-
-			buffer.onpointerout = (e: PointerEvent) => {
-				e.stopPropagation();
-				e.preventDefault();
-			}
-
-			buffer.onpointercancel = (e: PointerEvent) => {
-				e.stopPropagation();
-				e.preventDefault();
-			}
-
-			buffer.onpointerup = (e: PointerEvent) => {
-				e.stopPropagation();
-				e.preventDefault();
-
-				let key: string = this.getMouseKeyId(e);
-				let input: IInput = this.baru(key, e.pointerType as EInput);
-
-				Input.event.up(input);
-				Input.event.up(this.global);
-
-				//sprite up
-				//sprite hit
-				Spr.daftar.forEach((item: SprObj) => {
-					if (e.pointerId == item.inputId) {
-						if (item.down) {
-							item.jmlHit++;
-						}
-
-						item.down = false;
-						item.dragged = false;
-					}
+					sprInteraksi.inputDown(pos, e.pointerId);
 				});
-			}
+
+			buffer.addEventListener(
+				"pointermove",
+				(e: PointerEvent) => {
+					e.stopPropagation();
+					e.preventDefault();
+
+					let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
+					let key: string = this.getMouseKeyId(e);
+					let input: IInput = this.baru(key, e.pointerType as EInput);
+
+					Input.event.move(input, buffer, e);
+					Input.event.move(this.global, buffer, e);
+
+					//sprite
+					sprInteraksi.inputMove(pos, e.pointerId);
+				});
+
+			buffer.addEventListener(
+				"pointerout",
+				(e: PointerEvent) => {
+					e.stopPropagation();
+					e.preventDefault();
+				});
+
+			buffer.addEventListener(
+				"pointercancel",
+				(e: PointerEvent) => {
+					e.stopPropagation();
+					e.preventDefault();
+				});
+
+			buffer.addEventListener(
+				"pointerup",
+				(e: PointerEvent) => {
+					e.stopPropagation();
+					e.preventDefault();
+
+					let key: string = this.getMouseKeyId(e);
+					let input: IInput = this.baru(key, e.pointerType as EInput);
+
+					Input.event.up(input);
+					Input.event.up(this.global);
+
+					//sprite up
+					//sprite hit
+					Spr.daftar.forEach((item: SprObj) => {
+						if (e.pointerId == item.inputId) {
+							if (item.down) {
+								item.jmlHit++;
+							}
+
+							item.down = false;
+							item.dragged = false;
+						}
+					});
+				})
 		}
 
 		private static buatInputDefault(): IInput {

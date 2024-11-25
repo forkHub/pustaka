@@ -1,6 +1,5 @@
 namespace ha.be {
 
-	//Sprite Object
 	export class SprObj {
 		private static _ctrDraw: number = 0;
 		// private _buff: SprImgObj;

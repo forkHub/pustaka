@@ -18,12 +18,15 @@ namespace ha.be {
 
 			s.sudutTekanAwal = Transform.sudut(pos.x - s.x, pos.y - s.y);
 			s.sudutAwal = s.rotasi;
-			console.log('sprite down event handler');
+			console.group('sprite down event handler');
+			console.log("sudut tekan awal", s.sudutTekanAwal);
+			console.log("sudut awal", s.sudutAwal);
+			console.groupEnd();
 		}
 
 		inputDown(pos: any, id: number): void {
 			//sprite down
-			console.log('input down');
+			console.group('input down');
 
 			let lastIdx: number = -1;
 			let lastSprite: SprObj = null;
@@ -60,7 +63,7 @@ namespace ha.be {
 			}
 
 			//
-
+			console.groupEnd();
 		}
 
 		inputMove(pos: any, pointerId: number): void {
@@ -78,6 +81,14 @@ namespace ha.be {
 						let sudut2: number = Transform.sudut(pos.x - item.x, pos.y - item.y);
 						let perbedaan: number = sudut2 - item.sudutTekanAwal;
 						item.rotasi = item.sudutAwal + perbedaan;
+						console.group();
+						console.log("sudut", sudut2);
+						console.log("beda", perbedaan);
+						console.log("sudut tekan awal", item.sudutTekanAwal);
+						console.log("sudut awal", item.sudutAwal);
+						console.log("rotasi", item.rotasi);
+						console.log("posisi", item.x, item.y);
+						console.groupEnd();
 					}
 					else {
 						//TODO:

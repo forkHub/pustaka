@@ -1,22 +1,11 @@
-/**
- *  @namespace ha
- */
-
-/**
- *  @namespace be
- *  @memberof ha
- */
-
 namespace ha.be {
 
-	/**
-	 * @memberof ha.be
-	 */
 	export class Be {
 		private static _canvasAr: SprObj[] = [];
 		private static _canvasAktif: SprObj;
 		private static _skalaOtomatis: boolean = true;
 
+		//TODO: pindah ke konf
 		private static _merah: number = 0;
 		private static _hijau: number = 0;
 		private static _biru: number = 0;

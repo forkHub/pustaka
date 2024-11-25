@@ -9,10 +9,10 @@ namespace ha.be {
 			if (s == null) throw Error("Image belum di inisialisasi");
 		}
 
-		//Attribute
-
+		//Attribute [depecrated]
+		//depecrated
 		static DragMode(s: SprObj, n: number): void {
-			this.checkNull(s);
+			Spr.checkNull(s);
 
 			if (n > 0) {
 				s.tipeDrag = n;
@@ -20,19 +20,20 @@ namespace ha.be {
 			}
 		}
 
+		//depecrated
 		/**
 		 * 
 		 * @param s 
 		 * @returns 
 		 */
 		static Dimuat(s: SprObj): boolean {
-			this.checkNull(s);
+			Spr.checkNull(s);
 
 			return s.load;
 		}
 
 		/**
-		 * 
+		 * depecrated
 		 * @param s 
 		 * @returns 
 		 */
@@ -87,7 +88,7 @@ namespace ha.be {
 		}
 
 		/**
-		 * 
+		 * depecrated
 		 * @param s 
 		 * @param alpha 0-100s
 		 * @returns 
@@ -95,14 +96,14 @@ namespace ha.be {
 		static Alpha(s: SprObj, alpha?: number): number {
 			Spr.checkNull(s);
 			if (typeof (alpha) == 'number') {
-				s.alpha = alpha / 100;
+				s.alpha = alpha;
 			}
 
 			return s.alpha;
 		}
 
 		/**
-		 * 
+		 * depecrated
 		 * @param s 
 		 * @param sudut 
 		 * @returns 
@@ -115,6 +116,8 @@ namespace ha.be {
 
 			return Transform.normalizeDeg(s.rotasi);
 		}
+
+		//method
 
 		/**
 		 * 
@@ -129,7 +132,7 @@ namespace ha.be {
 		}
 
 		/**
-		 * 
+		 * depecrated
 		 * @param s 
 		 * @param x 
 		 * @returns 
@@ -144,7 +147,7 @@ namespace ha.be {
 		}
 
 		/**
-		 * 
+		 * depecrated
 		 * @param s 
 		 * @param y 
 		 * @returns 
@@ -185,6 +188,7 @@ namespace ha.be {
 			}
 		}
 
+		//depecrated
 		static HandleX(s: SprObj): number { return s.handleX; }
 		static HandleY(s: SprObj): number { return s.handleY; }
 
@@ -334,7 +338,6 @@ namespace ha.be {
 		 */
 		static Gambar(sprite: SprObj, frame?: number): void {
 			SprImg.gambar(sprite, sprite.x, sprite.y, frame);
-			//TODO: webgl
 		}
 
 		/**

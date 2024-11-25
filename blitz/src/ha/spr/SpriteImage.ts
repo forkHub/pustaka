@@ -1,128 +1,7 @@
 namespace ha.be {
 
-	/*
-	export class SprObj {
-		img: HTMLImageElement;
-		canvas: HTMLCanvasElement;
-		ctx: CanvasRenderingContext2D;
-		isAnim: boolean = false;
-		rect: Ikt = new Kotak();
-		load: boolean = false;
-		ratioX?: number = 1;
-		ratioY?: number = 1;
-
-		private _panjangDiSet: boolean = false;
-		private _lebarDiSet: boolean = false;
-		private _ctrIdx: number = 0;
-
-		private _x: number = 0;
-		private _y: number = 0;
-		private _alpha: number = 100;
-		private _frameW: number = 32;
-		private _frameH: number = 32;
-		private _handleX: number = 0;
-		private _handleY: number = 0;
-		private _rotasi: number = 0;
-		private _panjang: number = 0;
-		private _lebar: number = 0;
-
-		public get frameW(): number {
-			return this._frameW;
-		}
-		public set frameW(value: number) {
-			this._frameW = value;
-		}
-		public get frameH(): number {
-			return this._frameH;
-		}
-		public set frameH(value: number) {
-			this._frameH = value;
-		}
-
-		public get x(): number {
-			return this._x;
-		}
-		public set x(value: number) {
-			this._x = value;
-		}
-		public get y(): number {
-			return this._y;
-		}
-		public set y(value: number) {
-			this._y = value;
-		}
-
-		public get alpha(): number {
-			return this._alpha;
-		}
-		public set alpha(value: number) {
-			this._alpha = value;
-		}
-
-		public get handleY(): number {
-			return this._handleY;
-		}
-		public set handleY(value: number) {
-			this._handleY = value;
-		}
-
-		public get handleX(): number {
-			return this._handleX;
-		}
-		public set handleX(value: number) {
-			this._handleX = value;
-		}
-
-		public get panjang(): number {
-			return this._panjang;
-		}
-		public set panjang(value: number) {
-			console.log('set panjang: ' + value);
-			this._panjang = value;
-			this._panjangDiSet = true;
-		}
-
-		public get lebar(): number {
-			return this._lebar;
-		}
-		public set lebar(value: number) {
-			this._lebar = value;
-			this._lebarDiSet = true;
-		}
-
-		public get panjangDiSet(): boolean {
-			return this._panjangDiSet;
-		}
-		public set panjangDiSet(value: boolean) {
-			this._panjangDiSet = value;
-		}
-
-		public get lebarDiSet(): boolean {
-			return this._lebarDiSet;
-		}
-		public set lebarDiSet(value: boolean) {
-			this._lebarDiSet = value;
-		}
-
-		public get ctrIdx(): number {
-			return this._ctrIdx;
-		}
-		public set ctrIdx(value: number) {
-			this._ctrIdx = value;
-		}
-
-		public get rotasi(): number {
-			return this._rotasi;
-		}
-		public set rotasi(value: number) {
-			// console.debug('set value: ' + value);
-			this._rotasi = value;
-		}
-	}
-	*/
-
 	export class SprImg {
-
+		static readonly props: string[] = [];
 
 		static buatBagiCanvas(canvas: HTMLCanvasElement, w: number = 32, h: number = 32, frameW: number = 32, frameH: number = 32): SprObj {
 			let img: SprObj;
@@ -141,7 +20,7 @@ namespace ha.be {
 			img.frameW = frameW;
 			img.handleX = 0;
 			img.handleY = 0;
-			img.alpha = 1;
+			img.alpha = 100;
 			img.isAnim = false;
 			img.canvas = canvas;
 			img.ctx = canvas.getContext('2d');
@@ -153,6 +32,7 @@ namespace ha.be {
 			return img;
 		}
 
+		//depecrated
 		static panjang(gbr: SprObj, pj?: number): number {
 			if (typeof pj == 'number') {
 				gbr.panjang = pj;
@@ -162,6 +42,7 @@ namespace ha.be {
 			return gbr.panjang;
 		};
 
+		//depecrated
 		static lebar(gbr: SprObj, lb?: number): number {
 			if (typeof lb == 'number') {
 				gbr.lebar = lb;
@@ -212,7 +93,7 @@ namespace ha.be {
 			gbr.handleX = 0;
 			gbr.handleY = 0;
 			gbr.rotasi = 0;
-			gbr.alpha = 1;
+			gbr.alpha = 100;
 			gbr.ctx = ctx;
 			gbr.canvas = canvas;
 			gbr.rect = rect;
@@ -285,9 +166,7 @@ namespace ha.be {
 			return SprImg.muatAsyncKanvas(url, kanvas, onload);
 		}
 
-		static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload: () => void): SprObj {
-			let img: HTMLImageElement = document.createElement('img');
-			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+		static def(img: HTMLImageElement, ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement): SprObj {
 			let rect: Ikt;
 
 			rect = ha.be.Kotak.buat(0, 0, img.naturalWidth, img.naturalHeight);
@@ -295,6 +174,7 @@ namespace ha.be {
 			let gbr: SprObj;
 			gbr = new SprObj();
 
+			//TODO: refaktor
 			gbr.img = img;
 			gbr.panjang = img.naturalWidth;
 			gbr.lebar = img.naturalHeight;
@@ -306,12 +186,23 @@ namespace ha.be {
 			gbr.handleX = 0;
 			gbr.handleY = 0;
 			gbr.rotasi = 0;
-			gbr.alpha = 1;
+			gbr.alpha = 100;
 			gbr.ctx = ctx;
 			gbr.canvas = canvas;
 			gbr.rect = rect;
 			gbr.load = false;
 			gbr.ctrIdx = 0
+
+			return gbr;
+		}
+
+		static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload: () => void): SprObj {
+			let img: HTMLImageElement = document.createElement('img');
+			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+
+			let gbr: SprObj;
+			gbr = new SprObj();
+			gbr = SprImg.def(img, ctx, canvas);
 
 			img.onload = () => {
 				onload();
@@ -531,15 +422,29 @@ namespace ha.be {
 				ctx.save();
 				ctx.translate(x, y);
 				ctx.rotate(gbr.rotasi * (Math.PI / 180));
-				ctx.globalAlpha = gbr.alpha / 100;
-				ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, - gbr.handleX, -gbr.handleY, w2, h2);
+
+				// ctx.globalAlpha = gbr.alpha / 100;
+				// ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, -gbr.handleX, -gbr.handleY, w2, h2);
+				drawImpl(-gbr.handleX, -gbr.handleY)
+
 				ctx.restore();
 			}
 			else {
 				ctx.save();
-				ctx.globalAlpha = gbr.alpha / 100;
-				ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, x2, y2, w2, h2);
+
+				// ctx.globalAlpha = gbr.alpha / 100;
+				// ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, x2, y2, w2, h2);
+				drawImpl(x2, y2);
+
 				ctx.restore();
+			}
+
+			function drawImpl(dx: number, dy: number) {
+				ctx.globalAlpha = gbr.alpha / 100;
+				ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, dx, dy, w2, h2);
+				console.group('gmbar image');
+				console.log("x:", x, "y:", y, "x2:", x2, "y2:", y2);
+				console.groupEnd();
 			}
 
 			// debugger;
