@@ -1,8 +1,10 @@
-namespace ha.be {
+namespace Basik {
 
-	export class SprObj {
+	/**
+	 * 
+	 */
+	export class ImageObj {
 		private static _ctrDraw: number = 0;
-		// private _buff: SprImgObj;
 		private _url: string;
 
 		//image
@@ -34,7 +36,7 @@ namespace ha.be {
 		private _dragged: boolean = false;
 		private _down: boolean = false;
 		private _dragable: boolean = false;
-		private _hit: number = 0;
+		private _hitCount: number = 0;
 		private _tipeDrag: number = 0;
 		private _dragSelesaiJml: number = 0;
 
@@ -145,42 +147,6 @@ namespace ha.be {
 			this._rotasi = value;
 		}
 
-
-
-		// //image wrapper
-		// public get x(): number {
-		// 	return this._buff.x;
-		// }
-		// public set x(value: number) {
-		// 	this._buff.x = value;
-		// }
-		// public get y(): number {
-		// 	return this._buff.y;
-		// }
-		// public set y(value: number) {
-		// 	this._buff.y = value;
-		// }
-		// public get panjang(): number {
-		// 	return this._buff.panjang;
-		// }
-		// public set panjang(value: number) {
-		// 	this._buff.panjang = value;
-		// }
-		// public get lebar(): number {
-		// 	return this._buff.lebar;
-		// }
-		// public set lebar(value: number) {
-		// 	this._buff.lebar = value;
-		// }
-		// public get alpha(): number {
-		// 	return this._buff.alpha;
-		// }
-		// public set alpha(value: number) {
-		// 	this._buff.alpha = value;
-		// }
-		//TODO: wrapper yang lain
-		//untuk memudahkan membuat perintah shortcut dan penyederhanaan
-
 		constructor(dragable: boolean = false) {
 			this.dragable = dragable;
 		}
@@ -232,10 +198,10 @@ namespace ha.be {
 		// }
 
 		public get jmlHit(): number {
-			return this._hit;
+			return this._hitCount;
 		}
 		public set jmlHit(value: number) {
-			this._hit = value;
+			this._hitCount = value;
 		}
 		public get down(): boolean {
 			return this._down;
@@ -278,10 +244,10 @@ namespace ha.be {
 			this._url = value;
 		}
 		public static get ctrDraw(): number {
-			return SprObj._ctrDraw;
+			return ImageObj._ctrDraw;
 		}
 		public static set ctrDraw(value: number) {
-			SprObj._ctrDraw = value;
+			ImageObj._ctrDraw = value;
 		}
 
 		public get inputId(): number {

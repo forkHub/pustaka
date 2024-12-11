@@ -74,12 +74,6 @@ interface IV2D {
 	y: number
 }
 
-//geom, redundant
-interface IPoint2D {
-	x: number,
-	y: number
-}
-
 interface IAudio {
 	src: string;
 	loaded: boolean;

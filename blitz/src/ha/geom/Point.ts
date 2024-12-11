@@ -1,4 +1,11 @@
-namespace ha.be {
+namespace Basik {
+
+	//geom, redundant
+	export interface IPoint2D {
+		x: number,
+		y: number
+	}
+
 	// internal class untuk menghandle geometri 
 	export class Point {
 

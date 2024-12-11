@@ -1,11 +1,30 @@
-namespace ha.be {
+namespace Basik {
 
-	export class Be {
-		private static _canvasAr: SprObj[] = [];
-		private static _canvasAktif: SprObj;
+	export class Graphic {
 		private static _skalaOtomatis: boolean = true;
+		private static _canvas: HTMLCanvasElement;
 
-		//TODO: pindah ke konf
+		static get context(): CanvasRenderingContext2D {
+			return Graphic.canvas.getContext('2d');
+		}
+
+		public static get canvas(): HTMLCanvasElement {
+			if (!Graphic._canvas) {
+				Graphic._canvas = document.body.querySelector('canvas') as HTMLCanvasElement;
+			}
+
+			if (!Graphic._canvas) {
+				Graphic._canvas = document.createElement('canvas') as HTMLCanvasElement;
+				document.body.appendChild(Graphic._canvas);
+			}
+
+			return Graphic._canvas;
+		}
+
+		// public static set canvas(value: HTMLCanvasElement) {
+		// 	Graphic._canvas = value;
+		// }
+
 		private static _merah: number = 0;
 		private static _hijau: number = 0;
 		private static _biru: number = 0;
@@ -20,18 +39,16 @@ namespace ha.be {
 
 		static Pause() {
 			debugger;
+			// this.canvasAktif.canvas.getcon
 		}
 
-		/**
-		 * Handle saat window di resize
-		 * @private
-		 */
-		private static windowResize(): void {
+		private static handleWindowResize(): void {
+			if (!Graphic._skalaOtomatis) return;
 			// console.debug('window on resize');
-			let canvas: HTMLCanvasElement = Be.canvasAktif.canvas;
+			let canvas: HTMLCanvasElement = Graphic.canvas;
 
-			let cp = Be.canvasAktif.canvas.width;
-			let cl = Be.canvasAktif.canvas.height;
+			let cp = Graphic.canvas.width;
+			let cl = Graphic.canvas.height;
 
 			let wp = window.innerWidth;
 			let wl = window.innerHeight;
@@ -41,8 +58,9 @@ namespace ha.be {
 			let cp2 = Math.floor(cp * ratio);
 			let cl2 = Math.floor(cl * ratio);
 
-			Be.canvasAktif.ratioX = ratio;
-			Be.canvasAktif.ratioY = ratio;
+			//TODO: rechek apakah masih dipakai
+			// Graphic.canvasAktif.ratioX = ratio;
+			// Graphic.canvasAktif.ratioY = ratio;
 
 			canvas.style.position = 'fixed';
 			canvas.style.zIndex = '1';
@@ -55,22 +73,8 @@ namespace ha.be {
 			// console.debug('canvas w: ' + canvas.style.width + '/ratio: ' + ratio);
 		}
 
-		/**
-		 * mengeset/mengembalikan Kontek yang sedang aktif
-		 * 
-		 * @param ctx (CanvasRenderingContext2D) | null
-		 * @returns CanvasRenderingContext2D
-		 */
-		static Kontek(ctx?: CanvasRenderingContext2D): CanvasRenderingContext2D {
-			if (ctx) {
-				Be.canvasAktif.ctx = ctx;
-			}
-
-			return Be.canvasAktif.ctx;
-		}
-
-		static buatCanvas(canvasEl: HTMLCanvasElement): SprObj {
-			let canvas: SprObj = new SprObj();
+		static buatCanvas(canvasEl: HTMLCanvasElement): ImageObj {
+			let canvas: ImageObj = new ImageObj();
 			canvas.canvas = canvasEl;
 			canvas.ctx = canvasEl.getContext('2d');
 			canvas.lebar = canvasEl.height;
@@ -108,57 +112,44 @@ namespace ha.be {
 			return canvas;
 		}
 
-		static init(canvasBelakang: HTMLCanvasElement, canvasDepan: HTMLCanvasElement): void {
-			let canvas: SprObj = Be.buatCanvas(canvasBelakang);
-			Be._canvasAr.push(canvas);
+		// static init(canvasBelakang: HTMLCanvasElement, canvasDepan: HTMLCanvasElement): void {
+		// 	// let canvas: ImageObj = Graphic.buatCanvas(canvasBelakang);
+		// 	// Graphic._canvasAr.push(canvas);
 
-			canvas = Be.buatCanvas(canvasDepan);
-			Be._canvasAr.push(canvas);
+		// 	// canvas = Graphic.buatCanvas(canvasDepan);
+		// 	// Graphic._canvasAr.push(canvas);
 
-			Be.canvasAktif = canvas;
-			ha.be.Teks.Rata("center");
-		}
+		// 	// Graphic.canvasAktif = canvas;
+		// 	Teks.Rata("center");
+		// }
 
 		private static backupWarna(): void {
-			Be.warnaBackup.b = Be.biru;
-			Be.warnaBackup.h = Be.hijau;
-			Be.warnaBackup.m = Be.merah;
-			Be.warnaBackup.t = Be.transparan;
+			Graphic.warnaBackup.b = Graphic.biru;
+			Graphic.warnaBackup.h = Graphic.hijau;
+			Graphic.warnaBackup.m = Graphic.merah;
+			Graphic.warnaBackup.t = Graphic.transparan;
 		}
 
 		private static restoreWarna(): void {
-			Be.biru = Be.warnaBackup.b;
-			Be.hijau = Be.warnaBackup.h;
-			Be.merah = Be.warnaBackup.m;
-			Be.transparan = Be.warnaBackup.t;
-			Be.updateStyleWarna();
+			Graphic.biru = Graphic.warnaBackup.b;
+			Graphic.hijau = Graphic.warnaBackup.h;
+			Graphic.merah = Graphic.warnaBackup.m;
+			Graphic.transparan = Graphic.warnaBackup.t;
+			Graphic.updateStyleWarna();
 		}
 
-		/**
-		 * 
-		 * @param merah {angka} warna merah, optional default = 0
-		 * @param hijau 
-		 * @param biru 
-		 * @param transparan 
-		 */
-		static Bersih(merah: number = 0, hijau: number = 0, biru: number = 0, transparan: number = 100): void {
-			let ctx: CanvasRenderingContext2D = Be.canvasAktif.ctx;
-			Be.backupWarna();
-			ctx.clearRect(0, 0, Be.canvasAktif.panjang, Be.canvasAktif.lebar);
-			ctx.fillStyle = `rgba(${merah}, ${hijau}, ${biru}, ${transparan / 100})`;
-			ctx.fillRect(0, 0, Be.canvasAktif.panjang, Be.canvasAktif.lebar);
-			Be.restoreWarna();
+		static Cls(red: number = 0, hijau: number = 0, biru: number = 0, transparan: number = 100): void {
+			let ctx: CanvasRenderingContext2D = Graphic.context;
+			// window.getComputedStyle()
+			Graphic.backupWarna();
+			ctx.clearRect(0, 0, parseInt(Graphic.canvas.style.width), parseInt(Graphic.canvas.style.height));
+			ctx.fillStyle = `rgba(${red}, ${hijau}, ${biru}, ${transparan / 100})`;
+			ctx.fillRect(0, 0, parseInt(Graphic.canvas.style.width), parseInt(Graphic.canvas.style.height));
+			Graphic.restoreWarna();
 		}
 
-		/**
-		 * Update style warna
-		 * @param r (0-255)
-		 * @param g (0-255)
-		 * @param b (0-255)
-		 * @param a (0-100)
-		 */
-		static Warna(r: number = 0, g: number = 0, b: number = 0, a: number = 100): void {
-			let h = Be;
+		static FillColor(r: number = 0, g: number = 0, b: number = 0, a: number = 100): void {
+			let h = Graphic;
 
 			h.merah = r;
 			h.biru = b;
@@ -168,14 +159,16 @@ namespace ha.be {
 		}
 
 		static StrokeColor(r: number = 0, g: number = 0, b: number = 0, a: number = 100): void {
-			let ctx: CanvasRenderingContext2D = Be.canvasAktif.ctx;
-			ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
+			Graphic.context.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
 		}
 
+		static NoColor() {
+			Graphic.context.strokeStyle = 'none';
+		}
 
 		private static updateStyleWarna(): void {
-			let ctx: CanvasRenderingContext2D = Be.canvasAktif.ctx;
-			ctx.fillStyle = `rgba(${Be.merah}, ${Be.hijau}, ${Be.biru}, ${Be.transparan})`;
+			// Graphics
+			Graphic.context.fillStyle = `rgba(${Graphic.merah}, ${Graphic.hijau}, ${Graphic.biru}, ${Graphic.transparan})`;
 		}
 
 		/**
@@ -183,11 +176,11 @@ namespace ha.be {
 		 * @returns (number) warna merah
 		 */
 		static Hijau(): number {
-			return Be.hijau;
+			return Graphic.hijau;
 		}
 
 		static Merah(): number {
-			return Be.merah;
+			return Graphic.merah;
 		}
 
 		/**
@@ -195,7 +188,7 @@ namespace ha.be {
 		 * @returns (number) warna biru
 		 */
 		static Biru(): number {
-			return Be.biru;
+			return Graphic.biru;
 		}
 
 		/**
@@ -203,74 +196,70 @@ namespace ha.be {
 		 * @returns 
 		 */
 		static Transparan(): number {
-			return Math.floor(Be.transparan * 100);
+			return Math.floor(Graphic.transparan * 100);
 		}
 
-		/**
-		 * 
-		 * @returns 
-		 */
-		static Kanvas(): HTMLCanvasElement {
-			return Be.canvasAktif.canvas;
-		}
+		// public static set context(value: CanvasRenderingContext2D) {
+		// 	Graphic._context = value;
+		// }
 
-		static Grafis(panjang: number = 320, lebar: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true, input: boolean = true) {
+		// private static getCanvas(canvas: HTMLCanvasElement): HTMLCanvasElement {
+		// 	//coba cari canvas
+		// 	if (!canvas) {
+		// 		canvas = document.body.querySelector('canvas') as HTMLCanvasElement;
+		// 	}
 
-			//coba cari canvas
-			if (!canvas) {
-				canvas = document.body.querySelector('canvas') as HTMLCanvasElement;
+		// 	if (!canvas) {
+		// 		document.body.appendChild(document.createElement('canvas'));
+		// 	}
+
+		// 	return canvas;
+		// }
+
+
+		static Start(panjang: number = 320, lebar: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true, input: boolean = true) {
+
+			if (canvas) {
+				Graphic._canvas = canvas;
+			}
+			Graphic._skalaOtomatis = fullScreen;
+
+			console.log('inisialisasi');
+			// Graphic.init(canvas, canvas);
+			Graphic.Grafis2(panjang, lebar, Graphic._skalaOtomatis);
+
+			if (input) {
+				Input.init(Graphic.canvas);
 			}
 
-			if (!canvas) {
-				document.body.appendChild(document.createElement('canvas'));
-			}
+			// if (Graphic.skalaOtomatis) {
+			window.addEventListener("resize", (): void => {
+				Graphic.handleWindowResize();
+			})
 
-			Be.skalaOtomatis = fullScreen;
-			// ha.be.Blijs._inputStatus = input
+			// window.onresize = (): void => {
+			// 	if (Graphic.skalaOtomatis) {
+			// 		Graphic.handleWindowResize();
+			// 	}
+			// }
+			// }
 
-			//sudah diinisialisasi atau belum
-			if (Be.canvasAktif) {
-				console.warn('init lebih dari sekali');
-				Be.Grafis2(panjang, lebar, Be.skalaOtomatis);
-			}
-			else {
-				console.log('inisialisasi');
-				Be.init(canvas, canvas);
-				Be.Grafis2(panjang, lebar, Be.skalaOtomatis);
 
-				if (input) {
-					Input.init(Be.canvasAktif.canvas);
-				}
+			setTimeout(() => {
+				Graphic.handleWindowResize();
+			}, 100);
 
-				if (Be.skalaOtomatis) {
-					window.onresize = (): void => {
-						if (Be.skalaOtomatis) {
-							Be.windowResize();
-						}
-					}
-				}
+			// setTimeout(() => {
+			// 	ha.be.Blijs.repeat();
+			// }, 0);
 
-				if (Be.skalaOtomatis) {
-					Be.windowResize();
-				}
+			//font default
+			// Teks.Font("12px cursive");
+			Teks.Rata("center");
+			Teks.Goto(169, 10);
+			Graphic.FillColor(255, 255, 255, 100);
+			Graphic.context.strokeStyle = "#ffffff";
 
-				setTimeout(() => {
-					if (Be.skalaOtomatis) {
-						Be.windowResize();
-					}
-				}, 100);
-
-				// setTimeout(() => {
-				// 	ha.be.Blijs.repeat();
-				// }, 0);
-
-				//font default
-				// Teks.Font("12px cursive");
-				Teks.Rata("center");
-				Teks.Goto(169, 10);
-				Be.Warna(255, 255, 255, 100);
-				Be.canvasAktif.ctx.strokeStyle = "#ffffff";
-			}
 		}
 
 
@@ -278,29 +267,24 @@ namespace ha.be {
 		 * @private 
 		 * helper method
 		 * */
-		private static Grafis2(p: number = 320, l: number = 240, ubahStyle: boolean): void {
-			let canvas: SprObj = Be.canvasAktif;
+		private static Grafis2(p: number = 320, l: number = 240, fullScreen: boolean): void {
+			let canvas = Graphic.canvas;
 
-			canvas.canvas.width = p;
-			canvas.canvas.height = l;
+			canvas.width = p;
+			canvas.height = l;
 
-			if (ubahStyle) {
-				canvas.canvas.style.width = p + 'px';
-				canvas.canvas.style.height = l + 'px';
-				canvas.canvas.style.padding = '0px';
-				canvas.canvas.style.margin = '0px';
+			if (fullScreen) {
+				canvas.style.width = p + 'px';
+				canvas.style.height = l + 'px';
+				canvas.style.padding = '0px';
+				canvas.style.margin = '0px';
 			}
 
-			canvas.panjang = p;
-			canvas.lebar = l;
+			// canvas.panjang = p;
+			// canvas.lebar = l;
 
 			setTimeout(() => {
-				if (Be.skalaOtomatis) {
-					Be.windowResize();
-				}
-				else {
-
-				}
+				Graphic.handleWindowResize();
 			}, 0);
 
 			// if (canvas2) {
@@ -319,22 +303,22 @@ namespace ha.be {
 
 		/**
 		 * 
-		 * @param x1 
-		 * @param y1 
-		 * @param x2 
-		 * @param y2 
+		 * @param Ax 
+		 * @param Ay 
+		 * @param Bx 
+		 * @param By 
 		 */
-		static Garis(x1: number, y1: number, x2: number, y2: number) {
-			let ctx: CanvasRenderingContext2D = Be.canvasAktif.ctx;
+		static Garis(Ax: number, Ay: number, Bx: number, By: number) {
+			let ctx: CanvasRenderingContext2D = Graphic.context;
 
-			x1 = Math.floor(x1);
-			y1 = Math.floor(y1);
-			x2 = Math.floor(x2);
-			y2 = Math.floor(y2);
+			Ax = Math.floor(Ax);
+			Ay = Math.floor(Ay);
+			Bx = Math.floor(Bx);
+			By = Math.floor(By);
 
 			ctx.beginPath();
-			ctx.moveTo(x1, y1);
-			ctx.lineTo(x2, y2);
+			ctx.moveTo(Ax, Ay);
+			ctx.lineTo(Bx, By);
 			ctx.stroke();
 		}
 
@@ -349,7 +333,7 @@ namespace ha.be {
 		 * @param rotasi 
 		 */
 		static Kotak(x1: number, y1: number, x2: number, y2: number, isi: boolean = false, garis: boolean = true, rotasi: number = 0) {
-			let ctx: CanvasRenderingContext2D = Be.canvasAktif.ctx;
+			let ctx: CanvasRenderingContext2D = Graphic.context;
 
 			//TODO: rotasi
 			rotasi;
@@ -373,7 +357,7 @@ namespace ha.be {
 		 * @param rotasi sudut oval
 		 */
 		static Oval(x: number = 0, y: number = 0, radius: number, skalaX: number = 1, skalaY = .5, rotasi: number = 0) {
-			let ctx: CanvasRenderingContext2D = Be.canvasAktif.ctx;
+			let ctx: CanvasRenderingContext2D = Graphic.context
 
 			// save state
 			ctx.save();
@@ -395,75 +379,59 @@ namespace ha.be {
 			ctx.stroke();
 		}
 
-		public static get canvasAktif(): SprObj {
-			return Be._canvasAktif;
-		}
-
-		public static set canvasAktif(value: SprObj) {
-			Be._canvasAktif = value;
-		}
-
-		public static get canvasAr(): SprObj[] {
-			return Be._canvasAr;
-		}
-		public static set canvasAr(value: SprObj[]) {
-			Be._canvasAr = value;
-		}
-
-		// public static get origin(): IV2D {
-		// 	return Main._origin;
+		// public static get canvasAktif(): ImageObj {
+		// 	return Graphic._canvasAktif;
 		// }
 
-		// public static set origin(value: IV2D) {
-		// 	Main._origin = value;
+		// public static set canvasAktif(value: ImageObj) {
+		// 	Graphic._canvasAktif = value;
 		// }
 
-		// public static get fps(): number {
-		// 	return Main._fps;
+		// public static get canvasAr(): ImageObj[] {
+		// 	return Graphic._canvasAr;
+		// }
+		// public static set canvasAr(value: ImageObj[]) {
+		// 	Graphic._canvasAr = value;
 		// }
 
-		// public static set fps(value: number) {
-		// 	Main._fps = value;
+		// public static get skalaOtomatis(): boolean {
+		// 	return Graphic._skalaOtomatis;
 		// }
 
-		public static get skalaOtomatis(): boolean {
-			return Be._skalaOtomatis;
-		}
-
-		public static set skalaOtomatis(value: boolean) {
-			Be._skalaOtomatis = value;
-		}
+		// public static set skalaOtomatis(value: boolean) {
+		// 	Graphic._skalaOtomatis = value;
+		// }
 
 		public static get merah(): number {
-			return Be._merah;
+			return Graphic._merah;
 		}
 
 		public static set merah(value: number) {
-			Be._merah = value;
+			Graphic._merah = value;
 		}
 
 		public static get hijau(): number {
-			return Be._hijau;
+			return Graphic._hijau;
 		}
 
 		public static set hijau(value: number) {
-			Be._hijau = value;
+			Graphic._hijau = value;
 		}
 
 		public static get biru(): number {
-			return Be._biru;
+			return Graphic._biru;
 		}
 
 		public static set biru(value: number) {
-			Be._biru = value;
+			Graphic._biru = value;
 		}
 
 		public static get transparan(): number {
-			return Be._transparan;
+			return Graphic._transparan;
 		}
 
 		public static set transparan(value: number) {
-			Be._transparan = value;
+			Graphic._transparan = value;
 		}
 	}
 

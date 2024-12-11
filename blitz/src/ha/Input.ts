@@ -6,7 +6,7 @@ enum EInput {
 	DEF = ''
 }
 
-namespace ha.be {
+namespace Basik {
 	class EventHandler {
 
 		move(input: IInput, buffer: HTMLCanvasElement, e: PointerEvent): void {
@@ -272,7 +272,7 @@ namespace ha.be {
 					Input.event.down(input, key, e.pointerType as EInput, pos);
 					Input.event.down(this._inputGlobal, key, e.pointerType as EInput, pos);
 
-					sprInteraksi.inputDown(pos, e.pointerId);
+					sprInt.inputDown(pos, e.pointerId);
 				});
 
 			buffer.addEventListener(
@@ -289,7 +289,7 @@ namespace ha.be {
 					Input.event.move(this.global, buffer, e);
 
 					//sprite
-					sprInteraksi.inputMove(pos, e.pointerId);
+					sprInt.inputMove(pos, e.pointerId);
 				});
 
 			buffer.addEventListener(
@@ -320,7 +320,7 @@ namespace ha.be {
 
 					//sprite up
 					//sprite hit
-					Spr.daftar.forEach((item: SprObj) => {
+					ImgImpl.daftar.forEach((item: ImageObj) => {
 						if (e.pointerId == item.inputId) {
 							if (item.down) {
 								item.jmlHit++;

@@ -1,4 +1,4 @@
-namespace ha.be {
+namespace Basik {
 
 	// internal class untuk menghandle geometri 
 	// Kotak

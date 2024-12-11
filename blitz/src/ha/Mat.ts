@@ -1,4 +1,4 @@
-namespace ha.be {
+namespace Basik {
 
 	export class Mat {
 

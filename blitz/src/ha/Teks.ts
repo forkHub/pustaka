@@ -1,4 +1,4 @@
-namespace ha.be {
+namespace Basik {
 
 	export class Teks {
 		private static nama: string = 'cursive';
@@ -29,7 +29,7 @@ namespace ha.be {
 		}
 
 		private static get ctx(): CanvasRenderingContext2D {
-			return Be.canvasAktif.ctx;
+			return Graphic.context
 		}
 
 		static Goto(x: number, y: number): void {

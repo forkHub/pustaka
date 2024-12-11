@@ -1,8 +1,8 @@
 ///<reference path="./Route.ts"/>
-///<reference path="../spr/SpriteImage.ts"/>
+///<reference path="../spr/ImageImpl.ts"/>
+///<reference path="../spr/Image.ts"/>
 
-const Graphics = ha.be.Be.Grafis;
-
+const Graphics = Basik.Graphic.Start;
 /**
  * Clear Screen and optionally use color
  * @param r number = 0 - 255 (optional) the red color
@@ -11,32 +11,31 @@ const Graphics = ha.be.Be.Grafis;
  * @param t 
  */
 function Cls(r?: number, g?: number, b?: number, t?: number) {
-	ha.be.Be.Bersih(r, g, b, t);
+	Basik.Graphic.Cls(r, g, b, t);
 }
 
-const Color = ha.be.Be.Warna;
-const Stroke = ha.be.Be.StrokeColor;
+// const Color = Basik.Graphic.Warna;
+const Stroke = Basik.Graphic.StrokeColor;
 
 // /**
 //  * Mengembalikan warna merah dari perintah AmbilPixel terakhir
 //  * @returns (number) warna merah
 //  */
 // };
+const Red = Basik.Graphic.Merah;
+const Green = Basik.Graphic.Hijau;
+const Blue = Basik.Graphic.Biru;
+const Alpha = Basik.Graphic.Transparan;
 
-const Red = ha.be.Be.Merah;
-const Green = ha.be.Be.Hijau;
-const Blue = ha.be.Be.Biru;
-const Alpha = ha.be.Be.Transparan;
+const GetPixel = Basik.Image.GetPixel;
+const SetPixel = Basik.Image.SetPiksel;
 
-const GetPixel = ha.be.SprImg.AmbilPiksel;
-const SetPixel = ha.be.SprImg.SetPiksel;
+// const Kontek = Basik.Graphic.Kontek;
+// const Kanvas = Basik.Graphic.Kanvas;
 
-// const Kontek = ha.be.Be.Kontek;
-// const Kanvas = ha.be.Be.Kanvas;
-
-const Line = ha.be.Be.Garis;
-const Rect = ha.be.Be.Kotak;
-const Oval = ha.be.Be.Oval;
+const Line = Basik.Graphic.Garis;
+const Rect = Basik.Graphic.Kotak;
+const Oval = Basik.Graphic.Oval;
 
 
 const CreateDict = Dict.create;

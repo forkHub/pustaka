@@ -1,4 +1,4 @@
-namespace ha.be {
+namespace Basik {
 
 	export class Transform {
 		static readonly RAD2DEG: number = 180.0 / Math.PI;

@@ -1,41 +1,41 @@
 ///<reference path="./Route.ts"/>
 
-const InputHit = ha.be.Input.InputHit;
-const InputX = ha.be.Input.InputX;
-const InputY = ha.be.Input.InputY;
-const InputIsDown = ha.be.Input.Pencet;
+const InputHit = Basik.Input.InputHit;
+const InputX = Basik.Input.InputX;
+const InputY = Basik.Input.InputY;
+const InputIsDown = Basik.Input.Pencet;
 
 // //extended
-const FlushInput = ha.be.Input.FlushInput;
+const FlushInput = Basik.Input.FlushInput;
 
-const InputDragX = ha.be.Input.GeserX;
-const InputDragY = ha.be.Input.GeserY;
-const InputIsDragged = ha.be.Input.Geser;
-const InputType = ha.be.Input.InputType;
-const InputTapCount = ha.be.Input.JmlTap;
-const InputDragStartCount = ha.be.Input.JmlDragMulai;
-const InputDragEndCount = ha.be.Input.JmlDragSelesai;
-const InputDragStartX = ha.be.Input.InputXAwal;
-const InputDragStartY = ha.be.Input.InputYAwal;
+const InputDragX = Basik.Input.GeserX;
+const InputDragY = Basik.Input.GeserY;
+const InputIsDragged = Basik.Input.Geser;
+const InputType = Basik.Input.InputType;
+const InputTapCount = Basik.Input.JmlTap;
+const InputDragStartCount = Basik.Input.JmlDragMulai;
+const InputDragEndCount = Basik.Input.JmlDragSelesai;
+const InputDragStartX = Basik.Input.InputXAwal;
+const InputDragStartY = Basik.Input.InputYAwal;
 
 //TODO: input id
 
 
 // // const FlushKeys = () => {
-// // 	// ha.be.input.flushByInput(ha.be.input.keybGlobal);
-// // 	ha.be.input.flushByType('keyb');
+// // 	// Basik.input.flushByInput(Basik.input.keybGlobal);
+// // 	Basik.input.flushByType('keyb');
 // // }
 
 // // const GetKey = (): string => {
-// // 	return ha.be.input.keybGlobal.key;
+// // 	return Basik.input.keybGlobal.key;
 // // }
 
 // // const KeybDiPencet = (key: string = ''): boolean => {
 // // 	if ("" == key) {
-// // 		return ha.be.input.keybGlobal.isDown;
+// // 		return Basik.input.keybGlobal.isDown;
 // // 	}
 // // 	else {
-// // 		let input: IInput = ha.be.input.getInput(key, 'keyb');
+// // 		let input: IInput = Basik.input.getInput(key, 'keyb');
 // // 		if (input) {
 // // 			return input.isDown;
 // // 		}
@@ -46,12 +46,12 @@ const InputDragStartY = ha.be.Input.InputYAwal;
 
 // // const KeybHit = (key: string = ''): number => {
 // // 	if ("" == key) {
-// // 		let n: number = ha.be.input.keybGlobal.hit;
-// // 		ha.be.input.keybGlobal.hit = 0;
+// // 		let n: number = Basik.input.keybGlobal.hit;
+// // 		Basik.input.keybGlobal.hit = 0;
 // // 		return (n);
 // // 	}
 // // 	else {
-// // 		let input: IInput = ha.be.input.getInput(key, 'keyb');
+// // 		let input: IInput = Basik.input.getInput(key, 'keyb');
 // // 		let n: number = 0;
 
 // // 		if (input) {

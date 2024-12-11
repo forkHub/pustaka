@@ -1,15 +1,12 @@
-namespace ha.be {
+namespace Basik {
 	enum TypeDrag {
 		drag = 1,
 		rotasi = 2
 	}
 
-	/**
-	 * Handle interaksi sprite
-	 */
-	class SpriteInteraksi {
+	class SprInt {
 
-		private spriteDown(s: SprObj, pos: any, id: number) {
+		spriteDown(s: ImageObj, pos: any, id: number) {
 			s.down = true;
 			s.drgStartX = pos.x - s.x;
 			s.drgStartY = pos.y - s.y;
@@ -29,14 +26,14 @@ namespace ha.be {
 			console.group('input down');
 
 			let lastIdx: number = -1;
-			let lastSprite: SprObj = null;
+			let lastSprite: ImageObj = null;
 
-			for (let i: number = Spr.daftar.length - 1; i >= 0; i--) {
-				let item: SprObj;
+			for (let i: number = ImgImpl.daftar.length - 1; i >= 0; i--) {
+				let item: ImageObj;
 
-				item = Spr.daftar[i];
+				item = ImgImpl.daftar[i];
 
-				if (SprImg.dotDidalamGambar(item, item.x, item.y, pos.x, pos.y)) {
+				if (ImgImpl.dotDidalamGambar(item, item.x, item.y, pos.x, pos.y)) {
 					if (item.ctrIdx > lastIdx) {
 						lastIdx = item.ctrIdx;
 						lastSprite = item;
@@ -52,14 +49,6 @@ namespace ha.be {
 			//
 			if (lastSprite) {
 				this.spriteDown(lastSprite, pos, id);
-				// lastSprite.down = true;
-				// lastSprite.dragStartX = pos.x - lastSprite.x;
-				// lastSprite.dragStartY = pos.y - lastSprite.y;
-				// lastSprite.inputId = id;
-				// lastSprite.jmlHit++;
-
-				// lastSprite.sudutTekanAwal = Transform.sudut(pos.x - lastSprite.x, pos.y - lastSprite.y);
-				// lastSprite.sudutAwal = lastSprite.buff.rotasi;
 			}
 
 			//
@@ -67,7 +56,7 @@ namespace ha.be {
 		}
 
 		inputMove(pos: any, pointerId: number): void {
-			Spr.daftar.forEach((item: SprObj) => {
+			ImgImpl.daftar.forEach((item: ImageObj) => {
 
 				if (item.down && item.dragable && (item.inputId == pointerId)) {
 					item.dragged = true;
@@ -99,7 +88,7 @@ namespace ha.be {
 		}
 
 		inputUp(): void {
-			Spr.daftar.forEach((item: SprObj) => {
+			ImgImpl.daftar.forEach((item: ImageObj) => {
 				if (item.down) {
 					// item.hit++;
 				}
@@ -114,5 +103,5 @@ namespace ha.be {
 		}
 	}
 
-	export const sprInteraksi: SpriteInteraksi = new SpriteInteraksi();
+	export const sprInt: SprInt = new SprInt();
 }
