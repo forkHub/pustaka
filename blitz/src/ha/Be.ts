@@ -259,7 +259,7 @@ namespace Basik {
 			Teks.Goto(169, 10);
 			Graphic.FillColor(255, 255, 255, 100);
 			Graphic.context.strokeStyle = "#ffffff";
-
+			Graphic.Cls(0, 0, 0);
 		}
 
 

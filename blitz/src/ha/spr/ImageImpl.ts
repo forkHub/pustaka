@@ -33,7 +33,7 @@ namespace Basik {
 			}
 		}
 
-		static Bound(s: ImageObj): Ikt {
+		static Bound(s: ImageObj): Kotak {
 			ImgImpl.resetRect(s);
 			ImgImpl.rectToImageTransform(s, s.x, s.y);
 			return s.rect;
@@ -98,7 +98,7 @@ namespace Basik {
 		}
 
 		static PositionImagePolar(img: ImageObj, angle: number, jarak: number, x2: number, y2: number, skalaX: number = 1, skalaY: number = 1, tilt: number = 0): void {
-			let p: Basik.IPoint2D = Point.posPolar(jarak, angle, x2, y2);
+			let p: Basik.Point = Point.posPolar(jarak, angle, x2, y2);
 			p.y -= y2;
 			p.y *= skalaY;
 			p.y += y2;
@@ -122,7 +122,7 @@ namespace Basik {
 			canvas.width = w;
 			canvas.height = h;
 
-			let rect: Ikt = Kotak.buat(0, 0, frameW, frameH);
+			let rect: Kotak = Kotak.buat(0, 0, frameW, frameH);
 
 			img = new ImageObj();
 			img.load = true;
@@ -191,7 +191,7 @@ namespace Basik {
 		static muatAnimAsyncCanvas(url: string, fw: number, fh: number, canvas: HTMLCanvasElement): ImageObj {
 			let img: HTMLImageElement = document.createElement('img'); //;
 			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
-			let rect: Ikt;
+			let rect: Kotak;
 
 			rect = Kotak.buat(0, 0, fw, fh);
 
@@ -280,7 +280,7 @@ namespace Basik {
 		}
 
 		static def(img: HTMLImageElement, ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement): ImageObj {
-			let rect: Ikt;
+			let rect: Kotak;
 
 			rect = Kotak.buat(0, 0, img.naturalWidth, img.naturalHeight);
 
@@ -560,7 +560,7 @@ namespace Basik {
 		}
 
 		public static resetRect(img: ImageObj): void {
-			let rect: Ikt = img.rect;
+			let rect: Kotak = img.rect;
 			let p: IV2D;
 
 			p = rect.vs[0];
@@ -582,7 +582,7 @@ namespace Basik {
 		}
 
 		static rectToImageTransform(image: ImageObj, x: number, y: number): void {
-			let rect: Ikt = image.rect;
+			let rect: Kotak = image.rect;
 			let p: IV2D;
 			let x2: number = image.panjang
 			let y2: number = image.lebar;

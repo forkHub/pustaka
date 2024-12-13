@@ -3,16 +3,20 @@ namespace Basik {
 	// internal class untuk menghandle geometri 
 	// Kotak
 	export class Kotak {
+		readonly vs: Point[] = [];
+		readonly segs: Segment[] = [];
 
-		static buat(x1: number = 0, y1: number = 0, x2: number = 0, y2: number = 0): Ikt {
-			let r: Ikt = {}
-			r.vs = [];
+		constructor() {
+
+		}
+
+		static buat(x1: number = 0, y1: number = 0, x2: number = 0, y2: number = 0): Kotak {
+			let r: Kotak = new Kotak();
 			r.vs.push(Point.create(x1, y1));
 			r.vs.push(Point.create(x2, y1));
 			r.vs.push(Point.create(x2, y2));
 			r.vs.push(Point.create(x1, y2));
 
-			r.segs = [];
 			r.segs.push(Segment.create(r.vs[0], r.vs[1]));
 			r.segs.push(Segment.create(r.vs[1], r.vs[2]));
 			r.segs.push(Segment.create(r.vs[2], r.vs[3]));
@@ -21,12 +25,12 @@ namespace Basik {
 			return r;
 		}
 
-		private static copy(r: Ikt): Ikt {
+		private static copy(r: Kotak): Kotak {
 			// console.log('copy:');
 			// console.log(r.vs);
 
 			// let hasil: IRect = Rect.create(r.vs[0].x, r.vs[0].y, r.vs[2].x, r.vs[2].y);
-			let hasil: Ikt = Kotak.buat();
+			let hasil: Kotak = Kotak.buat();
 			Kotak.copyInfo(r, hasil);
 
 			// console.log(hasil.vs);
@@ -34,13 +38,13 @@ namespace Basik {
 			return hasil;
 		}
 
-		private static copyInfo(r1: Ikt, r2: Ikt): void {
+		private static copyInfo(r1: Kotak, r2: Kotak): void {
 			for (let i: number = 0; i < r1.segs.length; i++) {
 				Segment.copy(r1.segs[i], r2.segs[i]);
 			}
 		}
 
-		private static collideBound(r1: Ikt, r2: Ikt): boolean {
+		private static collideBound(r1: Kotak, r2: Kotak): boolean {
 			// console.debug('collide bound');
 
 			if (Kotak.maxX(r1) < Kotak.minX(r2)) {
@@ -69,7 +73,7 @@ namespace Basik {
 			return true;
 		}
 
-		static collide(r1: Ikt, r2: Ikt): boolean {
+		static collide(r1: Kotak, r2: Kotak): boolean {
 			let bound: boolean = Kotak.collideBound(r1, r2);
 			if (!bound) return false;
 
@@ -84,7 +88,7 @@ namespace Basik {
 			return false;
 		}
 
-		private static collideDotBound(r: Ikt, d: IPoint2D): boolean {
+		private static collideDotBound(r: Kotak, d: Point): boolean {
 			if (d.x < Kotak.minX(r)) {
 				// console.log('minx failed');
 				return false;
@@ -111,11 +115,11 @@ namespace Basik {
 			return true;
 		}
 
-		static collideDot(r: Ikt, x: number, y: number): boolean {
-			let r2: Ikt = Kotak.copy(r);
-			let p: IPoint2D = Point.create(x, y);
+		static collideDot(r: Kotak, x: number, y: number): boolean {
+			let r2: Kotak = Kotak.copy(r);
+			let p: Point = Point.create(x, y);
 			let d: number = Segment.deg(r2.segs[0]);
-			let pRot: IPoint2D = r2.vs[0];
+			let pRot: Point = r2.vs[0];
 
 			if (!Kotak.collideDotBound(r, p)) {
 				return false;
@@ -135,55 +139,55 @@ namespace Basik {
 			return true;
 		}
 
-		static minX(r: Ikt): number {
+		static minX(r: Kotak): number {
 			let x: number = r.vs[0].x;
 
-			r.vs.forEach((item: IPoint2D) => {
+			r.vs.forEach((item: Point) => {
 				if (item.x < x) x = item.x
 			})
 
 			return x;
 		}
 
-		static maxX(r: Ikt): number {
+		static maxX(r: Kotak): number {
 			let x: number = r.vs[0].x;
 
-			r.vs.forEach((item: IPoint2D) => {
+			r.vs.forEach((item: Point) => {
 				if (item.x > x) x = item.x
 			})
 
 			return x;
 		}
 
-		static minY(r: Ikt): number {
+		static minY(r: Kotak): number {
 			let y: number = r.vs[0].y;
 
-			r.vs.forEach((item: IPoint2D) => {
+			r.vs.forEach((item: Point) => {
 				if (item.y < y) y = item.y
 			})
 
 			return y;
 		}
 
-		static maxY(r: Ikt): number {
+		static maxY(r: Kotak): number {
 			let y: number = r.vs[0].y;
 
-			r.vs.forEach((item: IPoint2D) => {
+			r.vs.forEach((item: Point) => {
 				if (item.y > y) y = item.y
 			})
 
 			return y;
 		}
 
-		static translate(rect: Ikt, x: number, y: number): void {
-			rect.vs.forEach((v: IPoint2D) => {
+		static translate(rect: Kotak, x: number, y: number): void {
+			rect.vs.forEach((v: Point) => {
 				v.x += x;
 				v.y += y;
 			})
 		}
 
-		static rotate(r: Ikt, deg: number, xc: number = 0, yc: number, copy: boolean = true): Ikt {
-			let r2: Ikt;
+		static rotate(r: Kotak, deg: number, xc: number = 0, yc: number, copy: boolean = true): Kotak {
+			let r2: Kotak;
 
 			if (copy) {
 				r2 = Kotak.copy(r);
@@ -192,7 +196,7 @@ namespace Basik {
 				r2 = r;
 			}
 
-			r2.vs.forEach((p: IPoint2D) => {
+			r2.vs.forEach((p: Point) => {
 				Point.putarPoros(p, xc, yc, deg);
 			});
 

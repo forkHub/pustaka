@@ -1,38 +1,50 @@
 namespace Basik {
 
-	//geom, redundant
-	export interface IPoint2D {
-		x: number,
-		y: number
-	}
-
-	// internal class untuk menghandle geometri 
+	/**
+	 * 
+	 */
 	export class Point {
-
-		static create(x: number = 0, y: number = 0): IPoint2D {
-			return {
-				x: x,
-				y: y
-			}
+		private _x: number;
+		public get x(): number {
+			return this._x;
+		}
+		public set x(value: number) {
+			this._x = value;
+		}
+		private _y: number;
+		public get y(): number {
+			return this._y;
+		}
+		public set y(value: number) {
+			this._y = value;
 		}
 
-		static copy(p1: IPoint2D, p2: IPoint2D): void {
+		constructor(x: number = 0, y: number = 0) {
+			this.x = x;
+			this.y = y;
+		}
+
+		static create(x: number = 0, y: number = 0): Point {
+			return new Point(x, y);
+		}
+
+		static copy(p1: Point, p2: Point): void {
 			p2.x = p1.x;
 			p2.y = p1.y;
 		}
 
-		static clone(p: IPoint2D): IPoint2D {
-			let h: IPoint2D = Point.create(p.x, p.y);
+		static clone(p: Point): Point {
+			let h: Point = Point.create(p.x, p.y);
 			return h;
 		}
 
-		static sama(p1: IPoint2D, p2: IPoint2D): boolean {
+		static sama(p1: Point, p2: Point): boolean {
 			if (false == Transform.equal(p1.x, p2.x)) return false;
 			if (false == Transform.equal(p1.y, p2.y)) return false;
 			return true;
 		}
 
-		static putarPoros(p: IPoint2D, xc: number = 0, yc: number = 0, deg: number = 0): void {
+		static putarPoros(p: Point, xc: number = 0, yc: number = 0, deg: number = 0): void {
 			Transform.rotateRel(p.x, p.y, xc, yc, deg);
 
 			p.x = Transform.lastX;
@@ -40,12 +52,12 @@ namespace Basik {
 
 		}
 
-		static posDist(p: IPoint2D, xt: number, yt: number, jrk: number): IPoint2D {
+		static posDist(p: Point, xt: number, yt: number, jrk: number): Point {
 			let jrkA: number;
 			let i: number;
 			let j: number;
 			let rasio: number;
-			let hasil: IPoint2D = Point.create();
+			let hasil: Point = Point.create();
 
 			//jarak sekarang
 			jrkA = Transform.jarak(p.x, p.y, xt, yt);
@@ -63,8 +75,8 @@ namespace Basik {
 			return hasil;
 		}
 
-		static posPolar(jarak: number, sudut: number, xt: number, yt: number): IPoint2D {
-			let hasil: IPoint2D = Point.create();
+		static posPolar(jarak: number, sudut: number, xt: number, yt: number): Point {
+			let hasil: Point = Point.create();
 
 			hasil.x = jarak * Math.cos(sudut * Transform.DEG2RAD);
 			hasil.y = jarak * Math.sin(sudut * Transform.DEG2RAD);

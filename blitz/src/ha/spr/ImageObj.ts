@@ -12,7 +12,7 @@ namespace Basik {
 		canvas: HTMLCanvasElement;
 		ctx: CanvasRenderingContext2D;
 		isAnim: boolean = false;
-		rect: Ikt = new Kotak();
+		rect: Kotak = new Kotak();
 		load: boolean = false;
 		ratioX?: number = 1;
 		ratioY?: number = 1;

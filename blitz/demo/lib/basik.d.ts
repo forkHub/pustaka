@@ -166,14 +166,6 @@ declare namespace Basik {
     }
     export {};
 }
-interface Ikt {
-    vs?: IV2D[];
-    segs?: ISegment[];
-}
-interface ISegment {
-    v1: IV2D;
-    v2: IV2D;
-}
 interface IInput {
     xStart: number;
     yStart: number;
@@ -225,57 +217,70 @@ declare namespace Basik {
     }
 }
 declare namespace Basik {
-    interface IPoint2D {
-        x: number;
-        y: number;
-    }
     class Point {
-        static create(x?: number, y?: number): IPoint2D;
-        static copy(p1: IPoint2D, p2: IPoint2D): void;
-        static clone(p: IPoint2D): IPoint2D;
-        static sama(p1: IPoint2D, p2: IPoint2D): boolean;
-        static putarPoros(p: IPoint2D, xc?: number, yc?: number, deg?: number): void;
-        static posDist(p: IPoint2D, xt: number, yt: number, jrk: number): IPoint2D;
-        static posPolar(jarak: number, sudut: number, xt: number, yt: number): IPoint2D;
+        private _x;
+        get x(): number;
+        set x(value: number);
+        private _y;
+        get y(): number;
+        set y(value: number);
+        constructor(x?: number, y?: number);
+        static create(x?: number, y?: number): Point;
+        static copy(p1: Point, p2: Point): void;
+        static clone(p: Point): Point;
+        static sama(p1: Point, p2: Point): boolean;
+        static putarPoros(p: Point, xc?: number, yc?: number, deg?: number): void;
+        static posDist(p: Point, xt: number, yt: number, jrk: number): Point;
+        static posPolar(jarak: number, sudut: number, xt: number, yt: number): Point;
     }
 }
 declare namespace Basik {
     class Segment {
-        static create(v1?: IPoint2D, v2?: IPoint2D): ISegment;
-        static boundCollide(seg1: ISegment, seg2: ISegment): boolean;
-        static collide(seg1: ISegment, seg2: ISegment): boolean;
-        static copy(seg1: ISegment, seg2: ISegment): void;
-        static clone(seg: ISegment): ISegment;
-        static crossHor(seg: ISegment): boolean;
-        static deg(line: ISegment): number;
-        static getXAtIdx(seg: ISegment, idx: number): number;
-        static getYAtIdx(seg: ISegment, idx: number): number;
-        static vecI(seg: ISegment): number;
-        static vecJ(seg: ISegment): number;
-        static rotate(seg: ISegment, deg?: number, xc?: number, yc?: number): void;
-        static minX(seg: ISegment): number;
-        static maxX(seg: ISegment): number;
-        static minY(seg: ISegment): number;
-        static maxY(seg: ISegment): number;
-        static translate(seg: ISegment, x?: number, y?: number): void;
-        static xHorIdx(seg: ISegment): number;
+        private _A;
+        get A(): Point;
+        set A(value: Point);
+        private _B;
+        get B(): Point;
+        set B(value: Point);
+        constructor(A?: Point, B?: Point);
+        static create(v1?: Point, v2?: Point): Segment;
+        static boundCollide(seg1: Segment, seg2: Segment): boolean;
+        static collide(seg1: Segment, seg2: Segment): boolean;
+        static copy(seg1: Segment, seg2: Segment): void;
+        static clone(seg: Segment): Segment;
+        static crossHor(seg: Segment): boolean;
+        static deg(line: Segment): number;
+        static getXAtIdx(seg: Segment, idx: number): number;
+        static getYAtIdx(seg: Segment, idx: number): number;
+        static vecI(seg: Segment): number;
+        static vecJ(seg: Segment): number;
+        static rotate(seg: Segment, deg?: number, xc?: number, yc?: number): void;
+        static minX(seg: Segment): number;
+        static maxX(seg: Segment): number;
+        static minY(seg: Segment): number;
+        static maxY(seg: Segment): number;
+        static translate(seg: Segment, x?: number, y?: number): void;
+        static xHorIdx(seg: Segment): number;
     }
 }
 declare namespace Basik {
     class Kotak {
-        static buat(x1?: number, y1?: number, x2?: number, y2?: number): Ikt;
+        readonly vs: Point[];
+        readonly segs: Segment[];
+        constructor();
+        static buat(x1?: number, y1?: number, x2?: number, y2?: number): Kotak;
         private static copy;
         private static copyInfo;
         private static collideBound;
-        static collide(r1: Ikt, r2: Ikt): boolean;
+        static collide(r1: Kotak, r2: Kotak): boolean;
         private static collideDotBound;
-        static collideDot(r: Ikt, x: number, y: number): boolean;
-        static minX(r: Ikt): number;
-        static maxX(r: Ikt): number;
-        static minY(r: Ikt): number;
-        static maxY(r: Ikt): number;
-        static translate(rect: Ikt, x: number, y: number): void;
-        static rotate(r: Ikt, deg: number, xc: number, yc: number, copy?: boolean): Ikt;
+        static collideDot(r: Kotak, x: number, y: number): boolean;
+        static minX(r: Kotak): number;
+        static maxX(r: Kotak): number;
+        static minY(r: Kotak): number;
+        static maxY(r: Kotak): number;
+        static translate(rect: Kotak, x: number, y: number): void;
+        static rotate(r: Kotak, deg: number, xc: number, yc: number, copy?: boolean): Kotak;
     }
 }
 declare namespace Basik {
@@ -353,7 +358,7 @@ declare namespace Basik {
         static CreateImage(width: number, height: number): ImageObj;
         static MuatAnimasi(url: string, pf: number, lf: number, bisaDiDrag?: boolean, tipeDrag?: number): ImageObj;
         static GambarSemua(): void;
-        static Bound(s: ImageObj): Ikt;
+        static Bound(s: ImageObj): Kotak;
         static muatAnimasiAsyncKanvas(url: string, pf: number, lf: number, bisaDiDrag: boolean, canvas: HTMLCanvasElement, tipeDrag: number): ImageObj;
         static muatAsyncBerbagiKanvas(url: string, dragable: boolean, canvas: HTMLCanvasElement, tipeDrag: number, onload: () => void): ImageObj;
         private static register;
@@ -530,7 +535,7 @@ declare namespace Basik {
         canvas: HTMLCanvasElement;
         ctx: CanvasRenderingContext2D;
         isAnim: boolean;
-        rect: Ikt;
+        rect: Kotak;
         load: boolean;
         ratioX?: number;
         ratioY?: number;

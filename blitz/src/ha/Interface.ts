@@ -3,20 +3,6 @@
  * INTERFACE 
 */
 
-
-
-//Ikotak
-interface Ikt {
-	vs?: IV2D[],
-	segs?: ISegment[]
-}
-
-interface ISegment {
-	v1: IV2D,
-	v2: IV2D
-
-}
-
 interface IInput {
 	xStart: number;
 	yStart: number;
