@@ -6,6 +6,15 @@ namespace Basik {
 	export class ImageObj {
 		private static _ctrDraw: number = 0;
 		private _url: string;
+		readonly listeners: IEvent[] = [];
+
+		executeEvent(type: string): void {
+			this.listeners.forEach((item) => {
+				if (item.type === type) {
+					item.handle();
+				}
+			})
+		}
 
 		//image
 		img: HTMLImageElement;
@@ -53,7 +62,6 @@ namespace Basik {
 		public set sudutAwal(value: number) {
 			this._sudutAwal = value;
 		}
-
 
 		public get frameW(): number {
 			return this._frameW;

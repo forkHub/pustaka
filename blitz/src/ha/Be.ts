@@ -30,10 +30,10 @@ namespace Basik {
 		private static _biru: number = 0;
 		private static _transparan: number = 0;
 
-		private static warnaBackup: IWarna = {
-			m: 0,
+		private static warnaBackup: IRGB = {
+			r: 0,
 			b: 0,
-			h: 0,
+			g: 0,
 			t: 1
 		}
 
@@ -125,15 +125,15 @@ namespace Basik {
 
 		private static backupWarna(): void {
 			Graphic.warnaBackup.b = Graphic.biru;
-			Graphic.warnaBackup.h = Graphic.hijau;
-			Graphic.warnaBackup.m = Graphic.merah;
+			Graphic.warnaBackup.g = Graphic.hijau;
+			Graphic.warnaBackup.r = Graphic.merah;
 			Graphic.warnaBackup.t = Graphic.transparan;
 		}
 
 		private static restoreWarna(): void {
 			Graphic.biru = Graphic.warnaBackup.b;
-			Graphic.hijau = Graphic.warnaBackup.h;
-			Graphic.merah = Graphic.warnaBackup.m;
+			Graphic.hijau = Graphic.warnaBackup.g;
+			Graphic.merah = Graphic.warnaBackup.r;
 			Graphic.transparan = Graphic.warnaBackup.t;
 			Graphic.updateStyleWarna();
 		}
@@ -435,9 +435,15 @@ namespace Basik {
 		}
 	}
 
-	interface IWarna {
-		m: number,
-		h: number,
+	export interface IEvent {
+		id: string;
+		type: string,
+		handle: () => void;
+	}
+
+	interface IRGB {
+		r: number,
+		g: number,
 		b: number,
 		t: number
 	}

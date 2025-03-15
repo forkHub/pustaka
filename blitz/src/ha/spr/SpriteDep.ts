@@ -1,5 +1,8 @@
 namespace Basik {
 
+	/**
+	 * depecrated sprite functionality
+	 */
 	export class SprDep {
 
 		//depecrated
