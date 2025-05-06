@@ -7,14 +7,14 @@ namespace Basik {
 	//Sprite interactivity
 	class SprInt {
 
-		private spriteDown(s: ImageObj, pos: any, id: number) {
+		private spriteDown(s: ImgObj, pos: any, id: number) {
 			s.down = true;
 			s.drgStartX = pos.x - s.x;
 			s.drgStartY = pos.y - s.y;
 			s.inputId = id;
 			s.jmlHit++;
 
-			s.sudutTekanAwal = Transform.sudut(pos.x - s.x, pos.y - s.y);
+			s.sudutTekanAwal = Tf.sudut(pos.x - s.x, pos.y - s.y);
 			s.sudutAwal = s.rotasi;
 
 			s.executeEvent("down");
@@ -30,14 +30,14 @@ namespace Basik {
 			console.group('input down');
 
 			let lastIdx: number = -1;
-			let lastSprite: ImageObj = null;
+			let lastSprite: ImgObj = null;
 
-			for (let i: number = ImgImpl.daftar.length - 1; i >= 0; i--) {
-				let item: ImageObj;
+			for (let i: number = Ip.daftar.length - 1; i >= 0; i--) {
+				let item: ImgObj;
 
-				item = ImgImpl.daftar[i];
+				item = Ip.daftar[i];
 
-				if (ImgImpl.dotDidalamGambar(item, item.x, item.y, pos.x, pos.y)) {
+				if (Ip.dotDidalamGambar(item, item.x, item.y, pos.x, pos.y)) {
 					if (item.ctrIdx > lastIdx) {
 						lastIdx = item.ctrIdx;
 						lastSprite = item;
@@ -60,7 +60,7 @@ namespace Basik {
 		}
 
 		inputMove(pos: any, pointerId: number): void {
-			ImgImpl.daftar.forEach((item: ImageObj) => {
+			Ip.daftar.forEach((item: ImgObj) => {
 
 				if (item.down && item.dragable && (item.inputId == pointerId)) {
 					item.dragged = true;
@@ -72,7 +72,7 @@ namespace Basik {
 						// console.debug('item drag move');
 					}
 					else if (item.tipeDrag == TypeDrag.rotasi || (item.tipeDrag == 4)) {
-						let sudut2: number = Transform.sudut(pos.x - item.x, pos.y - item.y);
+						let sudut2: number = Tf.sudut(pos.x - item.x, pos.y - item.y);
 						let perbedaan: number = sudut2 - item.sudutTekanAwal;
 						item.rotasi = item.sudutAwal + perbedaan;
 						item.executeEvent("drag");
@@ -94,7 +94,7 @@ namespace Basik {
 		}
 
 		inputUp(): void {
-			ImgImpl.daftar.forEach((item: ImageObj) => {
+			Ip.daftar.forEach((item: ImgObj) => {
 				if (item.down) {
 					// item.hit++;
 					item.executeEvent('up');

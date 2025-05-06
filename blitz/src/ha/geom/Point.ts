@@ -3,7 +3,7 @@ namespace Basik {
 	/**
 	 * 
 	 */
-	export class Point {
+	export class Pt {
 		private _x: number;
 		public get x(): number {
 			return this._x;
@@ -24,43 +24,43 @@ namespace Basik {
 			this.y = y;
 		}
 
-		static create(x: number = 0, y: number = 0): Point {
-			return new Point(x, y);
+		static create(x: number = 0, y: number = 0): Pt {
+			return new Pt(x, y);
 		}
 
-		static copy(p1: Point, p2: Point): void {
+		static copy(p1: Pt, p2: Pt): void {
 			p2.x = p1.x;
 			p2.y = p1.y;
 		}
 
-		static clone(p: Point): Point {
-			let h: Point = Point.create(p.x, p.y);
+		static clone(p: Pt): Pt {
+			let h: Pt = Pt.create(p.x, p.y);
 			return h;
 		}
 
-		static sama(p1: Point, p2: Point): boolean {
-			if (false == Transform.equal(p1.x, p2.x)) return false;
-			if (false == Transform.equal(p1.y, p2.y)) return false;
+		static sama(p1: Pt, p2: Pt): boolean {
+			if (false == Tf.equal(p1.x, p2.x)) return false;
+			if (false == Tf.equal(p1.y, p2.y)) return false;
 			return true;
 		}
 
-		static putarPoros(p: Point, xc: number = 0, yc: number = 0, deg: number = 0): void {
-			Transform.rotateRel(p.x, p.y, xc, yc, deg);
+		static putarPoros(p: Pt, xc: number = 0, yc: number = 0, deg: number = 0): void {
+			Tf.rotateRel(p.x, p.y, xc, yc, deg);
 
-			p.x = Transform.lastX;
-			p.y = Transform.lastY;
+			p.x = Tf.lastX;
+			p.y = Tf.lastY;
 
 		}
 
-		static posDist(p: Point, xt: number, yt: number, jrk: number): Point {
+		static posDist(p: Pt, xt: number, yt: number, jrk: number): Pt {
 			let jrkA: number;
 			let i: number;
 			let j: number;
 			let rasio: number;
-			let hasil: Point = Point.create();
+			let hasil: Pt = Pt.create();
 
 			//jarak sekarang
-			jrkA = Transform.jarak(p.x, p.y, xt, yt);
+			jrkA = Tf.jarak(p.x, p.y, xt, yt);
 			i = xt - p.x;
 			j = yt - p.y;
 
@@ -75,11 +75,11 @@ namespace Basik {
 			return hasil;
 		}
 
-		static posPolar(jarak: number, sudut: number, xt: number, yt: number): Point {
-			let hasil: Point = Point.create();
+		static posPolar(jarak: number, sudut: number, xt: number, yt: number): Pt {
+			let hasil: Pt = Pt.create();
 
-			hasil.x = jarak * Math.cos(sudut * Transform.DEG2RAD);
-			hasil.y = jarak * Math.sin(sudut * Transform.DEG2RAD);
+			hasil.x = jarak * Math.cos(sudut * Tf.DEG2RAD);
+			hasil.y = jarak * Math.sin(sudut * Tf.DEG2RAD);
 
 			hasil.x += xt;
 			hasil.y += yt;

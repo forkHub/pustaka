@@ -13,7 +13,7 @@ namespace Basik {
 		 * @returns sudut relative ke posisi 0,0
 		 */
 		static Sudut(x: number, y: number): number {
-			return Transform.sudut(x, y);
+			return Tf.sudut(x, y);
 		}
 
 		static Pi(): number { return Math.PI }

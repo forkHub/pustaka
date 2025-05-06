@@ -2,28 +2,34 @@ namespace Basik {
 
 	export class Graphic {
 		private static _skalaOtomatis: boolean = true;
+		public static get skalaOtomatis(): boolean {
+			return G._skalaOtomatis;
+		}
+		public static set skalaOtomatis(value: boolean) {
+			G._skalaOtomatis = value;
+		}
 		private static _canvas: HTMLCanvasElement;
 
 		static get context(): CanvasRenderingContext2D {
-			return Graphic.canvas.getContext('2d');
+			return G.canvas.getContext('2d');
 		}
 
 		public static get canvas(): HTMLCanvasElement {
-			if (!Graphic._canvas) {
-				Graphic._canvas = document.body.querySelector('canvas') as HTMLCanvasElement;
+			if (!G._canvas) {
+				G._canvas = document.body.querySelector('canvas') as HTMLCanvasElement;
 			}
 
-			if (!Graphic._canvas) {
-				Graphic._canvas = document.createElement('canvas') as HTMLCanvasElement;
-				document.body.appendChild(Graphic._canvas);
+			if (!G._canvas) {
+				G._canvas = document.createElement('canvas') as HTMLCanvasElement;
+				document.body.appendChild(G._canvas);
 			}
 
-			return Graphic._canvas;
+			return G._canvas;
 		}
 
-		// public static set canvas(value: HTMLCanvasElement) {
-		// 	Graphic._canvas = value;
-		// }
+		public static set canvas(c: HTMLCanvasElement) {
+			G._canvas = c;
+		}
 
 		private static _merah: number = 0;
 		private static _hijau: number = 0;
@@ -42,13 +48,13 @@ namespace Basik {
 			// this.canvasAktif.canvas.getcon
 		}
 
-		private static handleWindowResize(): void {
-			if (!Graphic._skalaOtomatis) return;
+		static handleWindowResize(): void {
+			if (!G._skalaOtomatis) return;
 			// console.debug('window on resize');
-			let canvas: HTMLCanvasElement = Graphic.canvas;
+			let canvas: HTMLCanvasElement = G.canvas;
 
-			let cp = Graphic.canvas.width;
-			let cl = Graphic.canvas.height;
+			let cp = G.canvas.width;
+			let cl = G.canvas.height;
 
 			let wp = window.innerWidth;
 			let wl = window.innerHeight;
@@ -59,8 +65,8 @@ namespace Basik {
 			let cl2 = Math.floor(cl * ratio);
 
 			//TODO: rechek apakah masih dipakai
-			// Graphic.canvasAktif.ratioX = ratio;
-			// Graphic.canvasAktif.ratioY = ratio;
+			// G.canvasAktif.ratioX = ratio;
+			// G.canvasAktif.ratioY = ratio;
 
 			canvas.style.position = 'fixed';
 			canvas.style.zIndex = '1';
@@ -73,15 +79,15 @@ namespace Basik {
 			// console.debug('canvas w: ' + canvas.style.width + '/ratio: ' + ratio);
 		}
 
-		static buatCanvas(canvasEl: HTMLCanvasElement): ImageObj {
-			let canvas: ImageObj = new ImageObj();
+		static buatCanvas(canvasEl: HTMLCanvasElement): ImgObj {
+			let canvas: ImgObj = new ImgObj();
 			canvas.canvas = canvasEl;
 			canvas.ctx = canvasEl.getContext('2d');
 			canvas.lebar = canvasEl.height;
 			canvas.panjang = canvasEl.width;
 			canvas.frameH = canvasEl.height;
 			canvas.frameW = canvasEl.width;
-			canvas.rect = Kotak.buat();
+			canvas.rect = Ktk.buat();
 			canvas.load = true;
 			canvas.panjangDiSet = true;
 			canvas.lebarDiSet = true;
@@ -112,44 +118,23 @@ namespace Basik {
 			return canvas;
 		}
 
-		// static init(canvasBelakang: HTMLCanvasElement, canvasDepan: HTMLCanvasElement): void {
-		// 	// let canvas: ImageObj = Graphic.buatCanvas(canvasBelakang);
-		// 	// Graphic._canvasAr.push(canvas);
-
-		// 	// canvas = Graphic.buatCanvas(canvasDepan);
-		// 	// Graphic._canvasAr.push(canvas);
-
-		// 	// Graphic.canvasAktif = canvas;
-		// 	Teks.Rata("center");
-		// }
-
-		private static backupWarna(): void {
-			Graphic.warnaBackup.b = Graphic.biru;
-			Graphic.warnaBackup.g = Graphic.hijau;
-			Graphic.warnaBackup.r = Graphic.merah;
-			Graphic.warnaBackup.t = Graphic.transparan;
+		static backupWarna(): void {
+			G.warnaBackup.b = G.biru;
+			G.warnaBackup.g = G.hijau;
+			G.warnaBackup.r = G.merah;
+			G.warnaBackup.t = G.transparan;
 		}
 
-		private static restoreWarna(): void {
-			Graphic.biru = Graphic.warnaBackup.b;
-			Graphic.hijau = Graphic.warnaBackup.g;
-			Graphic.merah = Graphic.warnaBackup.r;
-			Graphic.transparan = Graphic.warnaBackup.t;
-			Graphic.updateStyleWarna();
-		}
-
-		static Cls(red: number = 0, hijau: number = 0, biru: number = 0, transparan: number = 100): void {
-			let ctx: CanvasRenderingContext2D = Graphic.context;
-			// window.getComputedStyle()
-			Graphic.backupWarna();
-			ctx.clearRect(0, 0, parseInt(Graphic.canvas.style.width), parseInt(Graphic.canvas.style.height));
-			ctx.fillStyle = `rgba(${red}, ${hijau}, ${biru}, ${transparan / 100})`;
-			ctx.fillRect(0, 0, parseInt(Graphic.canvas.style.width), parseInt(Graphic.canvas.style.height));
-			Graphic.restoreWarna();
+		static restoreColor(): void {
+			G.biru = G.warnaBackup.b;
+			G.hijau = G.warnaBackup.g;
+			G.merah = G.warnaBackup.r;
+			G.transparan = G.warnaBackup.t;
+			G.updateStyleWarna();
 		}
 
 		static FillColor(r: number = 0, g: number = 0, b: number = 0, a: number = 100): void {
-			let h = Graphic;
+			let h = G;
 
 			h.merah = r;
 			h.biru = b;
@@ -158,117 +143,18 @@ namespace Basik {
 			h.updateStyleWarna();
 		}
 
-		static StrokeColor(r: number = 0, g: number = 0, b: number = 0, a: number = 100): void {
-			Graphic.context.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
-		}
 
 		static NoColor() {
-			Graphic.context.strokeStyle = 'none';
+			G.context.strokeStyle = 'none';
 		}
 
-		private static updateStyleWarna(): void {
-			// Graphics
-			Graphic.context.fillStyle = `rgba(${Graphic.merah}, ${Graphic.hijau}, ${Graphic.biru}, ${Graphic.transparan})`;
+		static updateStyleWarna(): void {
+			// Gs
+			G.context.fillStyle = `rgba(${G.merah}, ${G.hijau}, ${G.biru}, ${G.transparan})`;
 		}
 
-		/**
-		 * Mengembalikan warna merah dari perintah AmbilPixel terakhir
-		 * @returns (number) warna merah
-		 */
-		static Hijau(): number {
-			return Graphic.hijau;
-		}
-
-		static Merah(): number {
-			return Graphic.merah;
-		}
-
-		/**
-		 * Mengembalikan warna biru dari perintah AmbilPixel terakhir
-		 * @returns (number) warna biru
-		 */
-		static Biru(): number {
-			return Graphic.biru;
-		}
-
-		/**
-		 * 
-		 * @returns 
-		 */
-		static Transparan(): number {
-			return Math.floor(Graphic.transparan * 100);
-		}
-
-		// public static set context(value: CanvasRenderingContext2D) {
-		// 	Graphic._context = value;
-		// }
-
-		// private static getCanvas(canvas: HTMLCanvasElement): HTMLCanvasElement {
-		// 	//coba cari canvas
-		// 	if (!canvas) {
-		// 		canvas = document.body.querySelector('canvas') as HTMLCanvasElement;
-		// 	}
-
-		// 	if (!canvas) {
-		// 		document.body.appendChild(document.createElement('canvas'));
-		// 	}
-
-		// 	return canvas;
-		// }
-
-
-		static Start(panjang: number = 320, lebar: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true, input: boolean = true) {
-
-			if (canvas) {
-				Graphic._canvas = canvas;
-			}
-			Graphic._skalaOtomatis = fullScreen;
-
-			console.log('inisialisasi');
-			// Graphic.init(canvas, canvas);
-			Graphic.Grafis2(panjang, lebar, Graphic._skalaOtomatis);
-
-			if (input) {
-				Input.init(Graphic.canvas);
-			}
-
-			// if (Graphic.skalaOtomatis) {
-			window.addEventListener("resize", (): void => {
-				Graphic.handleWindowResize();
-			})
-
-			// window.onresize = (): void => {
-			// 	if (Graphic.skalaOtomatis) {
-			// 		Graphic.handleWindowResize();
-			// 	}
-			// }
-			// }
-
-
-			setTimeout(() => {
-				Graphic.handleWindowResize();
-			}, 100);
-
-			// setTimeout(() => {
-			// 	ha.be.Blijs.repeat();
-			// }, 0);
-
-			//font default
-			// Teks.Font("12px cursive");
-			Teks.Rata("center");
-			Teks.Goto(169, 10);
-			Graphic.FillColor(255, 255, 255, 100);
-			Graphic.context.strokeStyle = "#ffffff";
-			Graphic.Cls(0, 0, 0);
-		}
-
-
-		/** 
-		 * @private 
-		 * helper method
-		 * */
-		private static Grafis2(p: number = 320, l: number = 240, fullScreen: boolean): void {
-			let canvas = Graphic.canvas;
+		static init(p: number = 320, l: number = 240, fullScreen: boolean): void {
+			let canvas = G.canvas;
 
 			canvas.width = p;
 			canvas.height = l;
@@ -284,7 +170,7 @@ namespace Basik {
 			// canvas.lebar = l;
 
 			setTimeout(() => {
-				Graphic.handleWindowResize();
+				G.handleWindowResize();
 			}, 0);
 
 			// if (canvas2) {
@@ -301,139 +187,39 @@ namespace Basik {
 			// ha_blitz.Main.windowResize();
 		}
 
-		/**
-		 * 
-		 * @param Ax 
-		 * @param Ay 
-		 * @param Bx 
-		 * @param By 
-		 */
-		static Garis(Ax: number, Ay: number, Bx: number, By: number) {
-			let ctx: CanvasRenderingContext2D = Graphic.context;
-
-			Ax = Math.floor(Ax);
-			Ay = Math.floor(Ay);
-			Bx = Math.floor(Bx);
-			By = Math.floor(By);
-
-			ctx.beginPath();
-			ctx.moveTo(Ax, Ay);
-			ctx.lineTo(Bx, By);
-			ctx.stroke();
-		}
-
-		/**
-		 * 
-		 * @param x1 
-		 * @param y1 
-		 * @param x2 
-		 * @param y2 
-		 * @param isi 
-		 * @param garis 
-		 * @param rotasi 
-		 */
-		static Kotak(x1: number, y1: number, x2: number, y2: number, isi: boolean = false, garis: boolean = true, rotasi: number = 0) {
-			let ctx: CanvasRenderingContext2D = Graphic.context;
-
-			//TODO: rotasi
-			rotasi;
-
-			if (isi) {
-				ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
-			}
-
-			if (garis) {
-				ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
-			}
-		}
-
-		/**
-		 * Menggambar Oval
-		 * @param x posisi x
-		 * @param y posisi y
-		 * @param radius radius
-		 * @param skalaX skala horizontal
-		 * @param skalaY skala vertikal
-		 * @param rotasi sudut oval
-		 */
-		static Oval(x: number = 0, y: number = 0, radius: number, skalaX: number = 1, skalaY = .5, rotasi: number = 0) {
-			let ctx: CanvasRenderingContext2D = Graphic.context
-
-			// save state
-			ctx.save();
-
-			// translate context
-			ctx.translate(x, y);
-
-			ctx.rotate(rotasi * (Math.PI / 180));
-
-			// scale context horizontally
-			ctx.scale(skalaX, skalaY);
-
-			// draw circle which will be stretched into an oval
-			ctx.beginPath();
-			ctx.arc(0, 0, radius, 0, 2 * Math.PI, false);
-
-			// restore to original state
-			ctx.restore();
-			ctx.stroke();
-		}
-
-		// public static get canvasAktif(): ImageObj {
-		// 	return Graphic._canvasAktif;
-		// }
-
-		// public static set canvasAktif(value: ImageObj) {
-		// 	Graphic._canvasAktif = value;
-		// }
-
-		// public static get canvasAr(): ImageObj[] {
-		// 	return Graphic._canvasAr;
-		// }
-		// public static set canvasAr(value: ImageObj[]) {
-		// 	Graphic._canvasAr = value;
-		// }
-
-		// public static get skalaOtomatis(): boolean {
-		// 	return Graphic._skalaOtomatis;
-		// }
-
-		// public static set skalaOtomatis(value: boolean) {
-		// 	Graphic._skalaOtomatis = value;
-		// }
-
 		public static get merah(): number {
-			return Graphic._merah;
+			return G._merah;
 		}
 
 		public static set merah(value: number) {
-			Graphic._merah = value;
+			G._merah = value;
 		}
 
 		public static get hijau(): number {
-			return Graphic._hijau;
+			return G._hijau;
 		}
 
 		public static set hijau(value: number) {
-			Graphic._hijau = value;
+			G._hijau = value;
 		}
 
 		public static get biru(): number {
-			return Graphic._biru;
+			return G._biru;
 		}
 
 		public static set biru(value: number) {
-			Graphic._biru = value;
+			G._biru = value;
 		}
 
 		public static get transparan(): number {
-			return Graphic._transparan;
+			return G._transparan;
 		}
 
 		public static set transparan(value: number) {
-			Graphic._transparan = value;
+			G._transparan = value;
 		}
 	}
+	export const G = Graphic;
 
 	export interface IEvent {
 		id: string;

@@ -3,91 +3,91 @@ namespace Basik {
 	/**
 	 * 
 	 */
-	export class Segment {
+	export class Seg {
 
 		/**
 		 * 
 		 */
-		private _A: Point;
-		public get A(): Point {
+		private _A: Pt;
+		public get A(): Pt {
 			return this._A;
 		}
-		public set A(value: Point) {
+		public set A(value: Pt) {
 			this._A = value;
 		}
 
 		/**
 		 * 
 		 */
-		private _B: Point;
-		public get B(): Point {
+		private _B: Pt;
+		public get B(): Pt {
 			return this._B;
 		}
-		public set B(value: Point) {
+		public set B(value: Pt) {
 			this._B = value;
 		}
 
-		constructor(A: Point = new Point(), B: Point = new Point()) {
+		constructor(A: Pt = new Pt(), B: Pt = new Pt()) {
 			this.A = A;
 			this.B = B;
 		}
 
-		static create(v1: Point = new Point(), v2: Point = new Point()): Segment {
-			return new Segment(v1, v2);
+		static create(v1: Pt = new Pt(), v2: Pt = new Pt()): Seg {
+			return new Sg(v1, v2);
 		}
 
-		static boundCollide(seg1: Segment, seg2: Segment): boolean {
-			if (Segment.maxX(seg1) < Segment.minX(seg2)) return false;
-			if (Segment.minX(seg1) > Segment.maxX(seg2)) return false;
+		static boundCollide(seg1: Seg, seg2: Seg): boolean {
+			if (Sg.maxX(seg1) < Sg.minX(seg2)) return false;
+			if (Sg.minX(seg1) > Sg.maxX(seg2)) return false;
 
-			if (Segment.maxY(seg1) < Segment.minY(seg2)) return false;
-			if (Segment.minY(seg1) > Segment.maxY(seg2)) return false;
+			if (Sg.maxY(seg1) < Sg.minY(seg2)) return false;
+			if (Sg.minY(seg1) > Sg.maxY(seg2)) return false;
 
 			return true;
 		}
 
-		static collide(seg1: Segment, seg2: Segment): boolean {
-			let bound: boolean = Segment.boundCollide(seg1, seg2);
+		static collide(seg1: Seg, seg2: Seg): boolean {
+			let bound: boolean = Sg.boundCollide(seg1, seg2);
 			if (!bound) return false;
 
-			// let deg: number = Segment.deg(seg2);
-			let seg2Copy: Segment = Segment.clone(seg2);
-			let seg1Copy: Segment = Segment.clone(seg1);
-			let deg: number = Segment.deg(seg2);
+			// let deg: number = Sg.deg(seg2);
+			let seg2Copy: Seg = Sg.clone(seg2);
+			let seg1Copy: Seg = Sg.clone(seg1);
+			let deg: number = Sg.deg(seg2);
 
-			Segment.rotate(seg2Copy, -deg, seg2.A.x, seg2.A.y);
-			Segment.rotate(seg1Copy, -deg, seg2.A.x, seg2.A.y);
+			Sg.rotate(seg2Copy, -deg, seg2.A.x, seg2.A.y);
+			Sg.rotate(seg1Copy, -deg, seg2.A.x, seg2.A.y);
 
-			if (!Segment.boundCollide(seg1Copy, seg2Copy)) return false;
+			if (!Sg.boundCollide(seg1Copy, seg2Copy)) return false;
 
-			Segment.translate(seg1Copy, -seg2.A.x, -seg2.A.y);
-			Segment.translate(seg2Copy, -seg2.A.x, -seg2.A.y);
+			Sg.translate(seg1Copy, -seg2.A.x, -seg2.A.y);
+			Sg.translate(seg2Copy, -seg2.A.x, -seg2.A.y);
 
-			if (!Segment.crossHor(seg1Copy)) {
+			if (!Sg.crossHor(seg1Copy)) {
 				return false;
 			}
 
-			let idx: number = Segment.xHorIdx(seg1Copy);
-			let x: number = Segment.getXAtIdx(seg1Copy, idx);
+			let idx: number = Sg.xHorIdx(seg1Copy);
+			let x: number = Sg.getXAtIdx(seg1Copy, idx);
 
-			if (x > Segment.maxX(seg2Copy)) return false;
-			if (x < Segment.minX(seg2Copy)) return false;
+			if (x > Sg.maxX(seg2Copy)) return false;
+			if (x < Sg.minX(seg2Copy)) return false;
 
 			return true;
 		}
 
-		static copy(seg1: Segment, seg2: Segment): void {
-			Point.copy(seg1.A, seg2.B);
-			Point.copy(seg1.B, seg2.B);
+		static copy(seg1: Seg, seg2: Seg): void {
+			Pt.copy(seg1.A, seg2.B);
+			Pt.copy(seg1.B, seg2.B);
 		}
 
-		static clone(seg: Segment): Segment {
-			return new Segment(Point.clone(seg.A), Point.clone(seg.B))
+		static clone(seg: Seg): Seg {
+			return new Seg(Pt.clone(seg.A), Pt.clone(seg.B))
 		}
 
-		static crossHor(seg: Segment): boolean {
-			if (Segment.maxY(seg) > 0) {
-				if (Segment.minY(seg) < 0) {
+		static crossHor(seg: Seg): boolean {
+			if (Sg.maxY(seg) > 0) {
+				if (Sg.minY(seg) < 0) {
 					return true;
 				}
 			}
@@ -95,51 +95,51 @@ namespace Basik {
 			return false;
 		}
 
-		static deg(line: Segment): number {
+		static deg(line: Seg): number {
 			let j: number = line.B.y - line.A.y;
 			let i: number = line.B.x - line.A.x;
 
-			return Transform.sudut(i, j);
+			return Tf.sudut(i, j);
 		}
 
-		static getXAtIdx(seg: Segment, idx: number): number {
-			return seg.A.x + (idx * Segment.vecI(seg));
+		static getXAtIdx(seg: Seg, idx: number): number {
+			return seg.A.x + (idx * Sg.vecI(seg));
 		}
 
-		static getYAtIdx(seg: Segment, idx: number): number {
-			return seg.A.y + (idx * Segment.vecJ(seg));
+		static getYAtIdx(seg: Seg, idx: number): number {
+			return seg.A.y + (idx * Sg.vecJ(seg));
 		}
 
-		static vecI(seg: Segment): number {
+		static vecI(seg: Seg): number {
 			return seg.B.x - seg.A.x;
 		}
 
-		static vecJ(seg: Segment): number {
+		static vecJ(seg: Seg): number {
 			return seg.B.y - seg.A.y;
 		}
 
-		static rotate(seg: Segment, deg: number = 0, xc: number = 0, yc: number = 0): void {
-			Point.putarPoros(seg.A, xc, yc, deg);
-			Point.putarPoros(seg.B, xc, yc, deg);
+		static rotate(seg: Seg, deg: number = 0, xc: number = 0, yc: number = 0): void {
+			Pt.putarPoros(seg.A, xc, yc, deg);
+			Pt.putarPoros(seg.B, xc, yc, deg);
 		}
 
-		static minX(seg: Segment): number {
+		static minX(seg: Seg): number {
 			return Math.min(seg.A.x, seg.B.x);
 		}
 
-		static maxX(seg: Segment): number {
+		static maxX(seg: Seg): number {
 			return Math.max(seg.A.x, seg.B.x);
 		}
 
-		static minY(seg: Segment): number {
+		static minY(seg: Seg): number {
 			return Math.min(seg.A.y, seg.B.y);
 		}
 
-		static maxY(seg: Segment): number {
+		static maxY(seg: Seg): number {
 			return Math.max(seg.A.y, seg.B.y);
 		}
 
-		static translate(seg: Segment, x: number = 0, y: number = 0) {
+		static translate(seg: Seg, x: number = 0, y: number = 0) {
 			seg.A.x += x;
 			seg.A.y += y;
 			seg.B.x += x;
@@ -147,8 +147,8 @@ namespace Basik {
 		}
 
 		//tested
-		static xHorIdx(seg: Segment): number {
-			if (!Segment.crossHor(seg)) return NaN;
+		static xHorIdx(seg: Seg): number {
+			if (!Seg.crossHor(seg)) return NaN;
 
 			let idx: number = 0;
 			idx = (0 - seg.A.y) / (seg.B.y - seg.A.y)
@@ -156,5 +156,6 @@ namespace Basik {
 			return idx;
 		}
 	}
+	export const Sg = Seg;
 
 }

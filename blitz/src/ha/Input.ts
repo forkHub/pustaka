@@ -113,7 +113,7 @@ namespace Basik {
 		 * berapa kali tap terjadi sejak pemanggilan terakhir kali
 		 * @returns (number)
 		 */
-		static JmlTap(): number {
+		static InputTapCount(): number {
 			let tap = Input.global.tapJml;
 			Input.global.tapJml = 0;
 			return tap;
@@ -133,7 +133,7 @@ namespace Basik {
 		 * berapa jumlah drag selesai sejak pemanggilan terakhir kali
 		 * @returns 
 		 */
-		static JmlDragSelesai(): number {
+		static InputDragEndCount(): number {
 			let s = Input.global.dragSelesaiJml;
 			Input.global.dragSelesaiJml = 0;
 			return s;
@@ -163,7 +163,7 @@ namespace Basik {
 		 * @returns (number)
 		 * 
 		 * */
-		static InputXAwal(): number {
+		static InputDragStartX(): number {
 			return Input.global.xStart;
 		}
 
@@ -171,7 +171,7 @@ namespace Basik {
 		 * posisi y awal drag
 		 * @returns (number)
 		 */
-		static InputYAwal(): number {
+		static InputDragStartY(): number {
 			return Input.global.yStart;
 		}
 
@@ -195,7 +195,7 @@ namespace Basik {
 		 * berapa jauh pointer digeser sejajar sumbu x
 		 * @returns (number)
 		 */
-		static GeserX(): number {
+		static InputDragX(): number {
 			return Input.global.xDrag
 		}
 
@@ -203,7 +203,7 @@ namespace Basik {
 		 * berapa jauh pointer di drag sejajar sumbu y
 		 * @returns (number)
 		 */
-		static GeserY(): number {
+		static InputDragY(): number {
 			return Input.global.yDrag
 		}
 
@@ -218,7 +218,7 @@ namespace Basik {
 		 * berapa kali drag dimulai sejak pemanggilan terakhir
 		 * 
 		 */
-		static JmlDragMulai(): number {
+		static InputDragStartCount(): number {
 			let hasil = Input.global.dragJml;
 			Input.global.dragJml = 0;
 
@@ -229,7 +229,7 @@ namespace Basik {
 		 * mengecek apakah pointer sedang ditekan
 		 * @returns (boolean) 
 		 */
-		static Pencet(): boolean {
+		static InputIsDown(): boolean {
 			return Input.global.isDown;
 		}
 
@@ -237,7 +237,7 @@ namespace Basik {
 		 * mengecheck apakah pointer sedang di drag
 		 * @returns (boolean)
 		 */
-		static Geser(): boolean {
+		static InputIsDragged(): boolean {
 			return Input.global.isDrag;
 		}
 
@@ -320,7 +320,7 @@ namespace Basik {
 
 					//sprite up
 					//sprite hit
-					ImgImpl.daftar.forEach((item: ImageObj) => {
+					Ip.daftar.forEach((item: ImgObj) => {
 						if (e.pointerId == item.inputId) {
 							if (item.down) {
 								item.jmlHit++;
@@ -449,6 +449,7 @@ namespace Basik {
 		}
 
 	}
+	export const In = Input;
 }
 
 

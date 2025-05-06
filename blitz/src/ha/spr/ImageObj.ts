@@ -3,7 +3,7 @@ namespace Basik {
 	/**
 	 * 
 	 */
-	export class ImageObj {
+	export class ImgObj {
 		private static _ctrDraw: number = 0;
 		private _url: string;
 		readonly listeners: IEvent[] = [];
@@ -21,7 +21,7 @@ namespace Basik {
 		canvas: HTMLCanvasElement;
 		ctx: CanvasRenderingContext2D;
 		isAnim: boolean = false;
-		rect: Kotak = new Kotak();
+		rect: Ktk = new Ktk();
 		load: boolean = false;
 		ratioX?: number = 1;
 		ratioY?: number = 1;
@@ -185,25 +185,6 @@ namespace Basik {
 		public set dragged(value: boolean) {
 			this._dragged = value;
 		}
-		// public get buff(): SprImgObj {
-		// 	return this._buff;
-		// }
-		// public set buff(value: SprImgObj) {
-		// 	this._buff = value;
-		// }
-
-		// public get x(): number {
-		// 	return this._x;
-		// }
-		// public set x(value: number) {
-		// 	this._x = value;
-		// }
-		// public get y(): number {
-		// 	return this._y;
-		// }
-		// public set y(value: number) {
-		// 	this._y = value;
-		// }
 
 		public get jmlHit(): number {
 			return this._hitCount;
@@ -252,10 +233,10 @@ namespace Basik {
 			this._url = value;
 		}
 		public static get ctrDraw(): number {
-			return ImageObj._ctrDraw;
+			return ImgObj._ctrDraw;
 		}
 		public static set ctrDraw(value: number) {
-			ImageObj._ctrDraw = value;
+			ImgObj._ctrDraw = value;
 		}
 
 		public get inputId(): number {

@@ -2,10 +2,10 @@ namespace Basik {
 
 	export class ImgImpl {
 		static readonly props: string[] = [];
-		static readonly daftar: ImageObj[] = [];
+		static readonly daftar: ImgObj[] = [];
 
-		static CreateImage(width: number, height: number): ImageObj {
-			let h: ImageObj = new ImageObj();
+		static CreateImage(width: number, height: number): ImgObj {
+			let h: ImgObj = new ImgObj();
 			h.canvas = document.createElement('canvas')
 			h.canvas.width = width;
 			h.canvas.height = height;
@@ -16,26 +16,26 @@ namespace Basik {
 			h.lebarDiSet = true;
 			h.load = true;
 			h.img = document.createElement('img');
-			ImgImpl.register(h, h.dragable, h.url, h.tipeDrag);
+			Ip.register(h, h.dragable, h.url, h.tipeDrag);
 			return h;
 		}
 
-		static MuatAnimasi(url: string, pf: number, lf: number, bisaDiDrag: boolean = false, tipeDrag: number = 0): ImageObj {
+		static MuatAnimasi(url: string, pf: number, lf: number, bisaDiDrag: boolean = false, tipeDrag: number = 0): ImgObj {
 
-			let img: ImageObj = ImgImpl.muatAnimAsync(url, pf, lf);
-			return ImgImpl.register(img, bisaDiDrag, url, tipeDrag);
+			let img: ImgObj = Ip.muatAnimAsync(url, pf, lf);
+			return Ip.register(img, bisaDiDrag, url, tipeDrag);
 		}
 
 		static GambarSemua() {
-			for (let i: number = 0; i < ImgImpl.daftar.length; i++) {
-				let item: ImageObj = ImgImpl.daftar[i];
-				Image.Draw(item);
+			for (let i: number = 0; i < Ip.daftar.length; i++) {
+				let item: ImgObj = Ip.daftar[i];
+				Im.DrawImage(item);
 			}
 		}
 
-		static Bound(s: ImageObj): Kotak {
-			ImgImpl.resetRect(s);
-			ImgImpl.rectToImageTransform(s, s.x, s.y);
+		static Bound(s: ImgObj): Ktk {
+			Ip.resetRect(s);
+			Ip.rectToImageTf(s, s.x, s.y);
 			return s.rect;
 		}
 
@@ -45,10 +45,10 @@ namespace Basik {
 			lf: number,
 			bisaDiDrag: boolean,
 			canvas: HTMLCanvasElement,
-			tipeDrag: number): ImageObj {
+			tipeDrag: number): ImgObj {
 
-			let img: ImageObj = ImgImpl.muatAnimAsyncCanvas(url, pf, lf, canvas);
-			return ImgImpl.register(img, bisaDiDrag, url, tipeDrag);
+			let img: ImgObj = Ip.muatAnimAsyncCanvas(url, pf, lf, canvas);
+			return Ip.register(img, bisaDiDrag, url, tipeDrag);
 		}
 
 		static muatAsyncBerbagiKanvas(
@@ -56,19 +56,19 @@ namespace Basik {
 			dragable = false,
 			canvas: HTMLCanvasElement,
 			tipeDrag: number,
-			onload: () => void): ImageObj {
+			onload: () => void): ImgObj {
 
-			let img: ImageObj = ImgImpl.muatAsyncKanvas(url, canvas, onload);
-			return ImgImpl.register(img, dragable, url, tipeDrag);
+			let img: ImgObj = Ip.muatAsyncKanvas(url, canvas, onload);
+			return Ip.register(img, dragable, url, tipeDrag);
 		}
 
 		private static register(
-			image: ImageObj,
+			image: ImgObj,
 			dragable: boolean = false,
 			url: string,
-			tipeDrag: number): ImageObj {
+			tipeDrag: number): ImgObj {
 
-			let hasil: ImageObj;
+			let hasil: ImgObj;
 			hasil = image;
 			hasil.dragable = dragable;
 			hasil.tipeDrag = tipeDrag;
@@ -79,26 +79,26 @@ namespace Basik {
 				}
 			}
 
-			ImgImpl.daftar.push(hasil);
+			Ip.daftar.push(hasil);
 
 			return hasil;
 		}
 
-		static Muat(url: string, bisaDiDrag: boolean = false, tipeDrag: number = 0, onload?: () => void): ImageObj {
+		static Muat(url: string, bisaDiDrag: boolean = false, tipeDrag: number = 0, onload?: () => void): ImgObj {
 			if (!onload) onload = () => { };
-			let img: ImageObj = ImgImpl.muatAsync(url, onload);
-			let spr: ImageObj = ImgImpl.register(img, bisaDiDrag, url, tipeDrag);
+			let img: ImgObj = Ip.muatAsync(url, onload);
+			let spr: ImgObj = Ip.register(img, bisaDiDrag, url, tipeDrag);
 			return spr;
 		}
 
-		static DrawImageXY(s: ImageObj, x: number, y: number, frame?: number): void {
+		static DrawImageXY(s: ImgObj, x: number, y: number, frame?: number): void {
 			s.x = x;
 			s.y = y;
-			ImgImpl.gambar(s, x, y, frame);
+			Ip.gambar(s, x, y, frame);
 		}
 
-		static PositionImagePolar(img: ImageObj, angle: number, jarak: number, x2: number, y2: number, skalaX: number = 1, skalaY: number = 1, tilt: number = 0): void {
-			let p: Basik.Point = Point.posPolar(jarak, angle, x2, y2);
+		static PositionImagePolar(img: ImgObj, angle: number, jarak: number, x2: number, y2: number, skalaX: number = 1, skalaY: number = 1, tilt: number = 0): void {
+			let p: Basik.Pt = Pt.posPolar(jarak, angle, x2, y2);
 			p.y -= y2;
 			p.y *= skalaY;
 			p.y += y2;
@@ -108,23 +108,23 @@ namespace Basik {
 			p.x += x2;
 
 			//tilt
-			Transform.rotateRel(p.x, p.y, x2, y2, tilt);
-			p.x = Transform.lastX;
-			p.y = Transform.lastY;
+			Tf.rotateRel(p.x, p.y, x2, y2, tilt);
+			p.x = Tf.lastX;
+			p.y = Tf.lastY;
 
 			img.x = p.x;
 			img.y = p.y;
 		}
 
-		static buatBagiCanvas(canvas: HTMLCanvasElement, w: number = 32, h: number = 32, frameW: number = 32, frameH: number = 32): ImageObj {
-			let img: ImageObj;
+		static buatBagiCanvas(canvas: HTMLCanvasElement, w: number = 32, h: number = 32, frameW: number = 32, frameH: number = 32): ImgObj {
+			let img: ImgObj;
 
 			canvas.width = w;
 			canvas.height = h;
 
-			let rect: Kotak = Kotak.buat(0, 0, frameW, frameH);
+			let rect: Ktk = Ktk.buat(0, 0, frameW, frameH);
 
-			img = new ImageObj();
+			img = new ImgObj();
 			img.load = true;
 			img.panjang = w;
 			img.lebar = h;
@@ -146,7 +146,7 @@ namespace Basik {
 		}
 
 		//depecrated
-		static panjang(gbr: ImageObj, pj?: number): number {
+		static panjang(gbr: ImgObj, pj?: number): number {
 			if (typeof pj == 'number') {
 				gbr.panjang = pj;
 				gbr.panjangDiSet = true;
@@ -156,7 +156,7 @@ namespace Basik {
 		};
 
 		//depecrated
-		static lebar(gbr: ImageObj, lb?: number): number {
+		static lebar(gbr: ImgObj, lb?: number): number {
 			if (typeof lb == 'number') {
 				gbr.lebar = lb;
 				gbr.lebarDiSet = true;
@@ -165,37 +165,37 @@ namespace Basik {
 			return gbr.lebar;
 		};
 
-		static tabrakan(gbr1: ImageObj, x1: number, y1: number, gbr2: ImageObj, x2: number, y2: number): boolean {
-			ImgImpl.resetRect(gbr1);
-			ImgImpl.rectToImageTransform(gbr1, x1, y1);
+		static tabrakan(gbr1: ImgObj, x1: number, y1: number, gbr2: ImgObj, x2: number, y2: number): boolean {
+			Ip.resetRect(gbr1);
+			Ip.rectToImageTf(gbr1, x1, y1);
 
-			ImgImpl.resetRect(gbr2);
-			ImgImpl.rectToImageTransform(gbr2, x2, y2);
+			Ip.resetRect(gbr2);
+			Ip.rectToImageTf(gbr2, x2, y2);
 
-			return Kotak.collide(gbr1.rect, gbr2.rect);
+			return Ktk.collide(gbr1.rect, gbr2.rect);
 		};
 
-		static dotDidalamGambar(gbr1: ImageObj, x1: number, y1: number, x2: number, y2: number): boolean {
-			ImgImpl.resetRect(gbr1);
-			ImgImpl.rectToImageTransform(gbr1, x1, y1);
+		static dotDidalamGambar(gbr1: ImgObj, x1: number, y1: number, x2: number, y2: number): boolean {
+			Ip.resetRect(gbr1);
+			Ip.rectToImageTf(gbr1, x1, y1);
 
-			return Kotak.collideDot(gbr1.rect, x2, y2);
+			return Ktk.collideDot(gbr1.rect, x2, y2);
 		};
 
-		static muatAnimAsync(url: string, fw: number, fh: number): ImageObj {
+		static muatAnimAsync(url: string, fw: number, fh: number): ImgObj {
 			let canvas: HTMLCanvasElement = document.createElement('canvas');
 
-			return ImgImpl.muatAnimAsyncCanvas(url, fw, fh, canvas);
+			return Ip.muatAnimAsyncCanvas(url, fw, fh, canvas);
 		}
 
-		static muatAnimAsyncCanvas(url: string, fw: number, fh: number, canvas: HTMLCanvasElement): ImageObj {
+		static muatAnimAsyncCanvas(url: string, fw: number, fh: number, canvas: HTMLCanvasElement): ImgObj {
 			let img: HTMLImageElement = document.createElement('img'); //;
 			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
-			let rect: Kotak;
+			let rect: Ktk;
 
-			rect = Kotak.buat(0, 0, fw, fh);
+			rect = Ktk.buat(0, 0, fw, fh);
 
-			let gbr: ImageObj = new ImageObj();
+			let gbr: ImgObj = new ImgObj();
 			gbr.isAnim = true;
 			gbr.img = img;
 			gbr.panjang = img.naturalWidth;
@@ -273,19 +273,19 @@ namespace Basik {
 			return gbr;
 		}
 
-		static muatAsync(url: string, onload: () => void): ImageObj {
+		static muatAsync(url: string, onload: () => void): ImgObj {
 			let kanvas: HTMLCanvasElement = document.createElement('canvas');
 
-			return ImgImpl.muatAsyncKanvas(url, kanvas, onload);
+			return Ip.muatAsyncKanvas(url, kanvas, onload);
 		}
 
-		static def(img: HTMLImageElement, ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement): ImageObj {
-			let rect: Kotak;
+		static def(img: HTMLImageElement, ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement): ImgObj {
+			let rect: Ktk;
 
-			rect = Kotak.buat(0, 0, img.naturalWidth, img.naturalHeight);
+			rect = Ktk.buat(0, 0, img.naturalWidth, img.naturalHeight);
 
-			let gbr: ImageObj;
-			gbr = new ImageObj();
+			let gbr: ImgObj;
+			gbr = new ImgObj();
 
 			//TODO: refaktor
 			gbr.img = img;
@@ -309,13 +309,13 @@ namespace Basik {
 			return gbr;
 		}
 
-		static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload: () => void): ImageObj {
+		static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload: () => void): ImgObj {
 			let img: HTMLImageElement = document.createElement('img');
 			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
 
-			let gbr: ImageObj;
-			gbr = new ImageObj();
-			gbr = ImgImpl.def(img, ctx, canvas);
+			let gbr: ImgObj;
+			gbr = new ImgObj();
+			gbr = Ip.def(img, ctx, canvas);
 
 			img.onload = () => {
 				onload();
@@ -341,7 +341,7 @@ namespace Basik {
 				canvas.height = imgP.naturalHeight;
 
 				ctx.drawImage(imgP, 0, 0);
-				gbr.rect = Kotak.buat(0, 0, imgP.naturalWidth, imgP.naturalHeight);
+				gbr.rect = Ktk.buat(0, 0, imgP.naturalWidth, imgP.naturalHeight);
 
 				gbr.load = true;
 				gbr.img = imgP;
@@ -373,7 +373,7 @@ namespace Basik {
 				gbr.img = document.createElement('img');
 				// ctx.drawImage(gbr.img, 0, 0);
 
-				gbr.rect = Kotak.buat(0, 0, 32, 32);
+				gbr.rect = Ktk.buat(0, 0, 32, 32);
 				ctx.fillStyle = 'rgba(255, 255, 255, 100)';
 				ctx.strokeStyle = 'rgba(255, 0, 0, 100)';
 				ctx.beginPath();
@@ -409,7 +409,7 @@ namespace Basik {
 			return gbr;
 		}
 
-		static gambarUbin(gbr: ImageObj, x: number = 0, y: number = 0, frame: number = 0) {
+		static gambarUbin(gbr: ImgObj, x: number = 0, y: number = 0, frame: number = 0) {
 			let jmlH: number = 0;
 			let jmlV: number = 0;
 
@@ -440,19 +440,19 @@ namespace Basik {
 
 			frame = Math.floor(frame);
 
-			jmlH = Math.ceil((Graphic.canvas.width + Math.abs(x)) / w2);
-			jmlV = Math.ceil((Graphic.canvas.height + Math.abs(y)) / h2);
+			jmlH = Math.ceil((G.canvas.width + Math.abs(x)) / w2);
+			jmlV = Math.ceil((G.canvas.height + Math.abs(y)) / h2);
 
 			for (let i: number = 0; i < jmlH; i++) {
 				for (let j: number = 0; j < jmlV; j++) {
-					ImgImpl.gambar(gbr, x + (i * w2), y + (j * h2), frame);
+					Ip.gambar(gbr, x + (i * w2), y + (j * h2), frame);
 				}
 			}
 		}
 
 		static AmbilPiksel(x: number = 0, y: number = 0): number[] {
 			try {
-				let data: Uint8ClampedArray = Graphic.context.getImageData(x, y, 1, 1).data;
+				let data: Uint8ClampedArray = G.context.getImageData(x, y, 1, 1).data;
 
 				let hasil: number[] = [];
 
@@ -461,11 +461,11 @@ namespace Basik {
 				hasil.push(data[2]);
 				hasil.push(data[3]);
 
-				Graphic.merah = data[0];
-				Graphic.hijau = data[1];
-				Graphic.biru = data[2];
-				Graphic.transparan = data[3];
-				Graphic.FillColor(Graphic.merah, Graphic.hijau, Graphic.biru, Graphic.transparan);
+				G.merah = data[0];
+				G.hijau = data[1];
+				G.biru = data[2];
+				G.transparan = data[3];
+				G.FillColor(G.merah, G.hijau, G.biru, G.transparan);
 
 				return hasil;
 			}
@@ -477,11 +477,11 @@ namespace Basik {
 		}
 
 		static SetPiksel(x: number = 0, y: number = 0) {
-			Graphic.context.fillRect(Math.floor(x), Math.floor(y), 1, 1);
+			G.context.fillRect(Math.floor(x), Math.floor(y), 1, 1);
 		}
 
-		static gambar(gbr: ImageObj, x: number = 0, y: number = 0, frame: number = 0) {
-			let ctx: CanvasRenderingContext2D = Graphic.context;
+		static gambar(gbr: ImgObj, x: number = 0, y: number = 0, frame: number = 0) {
+			let ctx: CanvasRenderingContext2D = G.context;
 			let jmlH: number = 0;
 			// let jmlV: number = 0;
 			let frameX: number = 0;
@@ -491,7 +491,7 @@ namespace Basik {
 
 			if (gbr.load == false) return;
 
-			gbr.ctrIdx = ImageObj.ctrDraw++;
+			gbr.ctrIdx = ImgObj.ctrDraw++;
 			frame = Math.floor(frame);
 
 			jmlH = Math.floor(gbr.img.naturalWidth / gbr.frameW);
@@ -552,15 +552,15 @@ namespace Basik {
 			// debugger;
 		}
 
-		static ukuran(gbr: ImageObj, w: number = 32, h: number = 32): void {
+		static ukuran(gbr: ImgObj, w: number = 32, h: number = 32): void {
 			gbr.panjang = w;
 			gbr.lebar = h;
 			gbr.panjangDiSet = true;
 			gbr.lebarDiSet = true;
 		}
 
-		public static resetRect(img: ImageObj): void {
-			let rect: Kotak = img.rect;
+		public static resetRect(img: ImgObj): void {
+			let rect: Ktk = img.rect;
 			let p: IV2D;
 
 			p = rect.vs[0];
@@ -581,8 +581,8 @@ namespace Basik {
 
 		}
 
-		static rectToImageTransform(image: ImageObj, x: number, y: number): void {
-			let rect: Kotak = image.rect;
+		static rectToImageTf(image: ImgObj, x: number, y: number): void {
+			let rect: Ktk = image.rect;
 			let p: IV2D;
 			let x2: number = image.panjang
 			let y2: number = image.lebar;
@@ -601,16 +601,16 @@ namespace Basik {
 			p.y = y2;
 
 			//translate
-			Kotak.translate(rect, x, y);
-			Kotak.translate(rect, -image.handleX, -image.handleY);
+			Ktk.translate(rect, x, y);
+			Ktk.translate(rect, -image.handleX, -image.handleY);
 
 			//rotate
-			Kotak.rotate(rect, image.rotasi, x, y, false);
+			Ktk.rotate(rect, image.rotasi, x, y, false);
 		}
 
 		static AllImageLoaded(): boolean {
-			for (let i = 0; i < ImgImpl.daftar.length; i++) {
-				let img = ImgImpl.daftar[i];
+			for (let i = 0; i < Ip.daftar.length; i++) {
+				let img = Ip.daftar[i];
 				if (!img.load) return false;
 			}
 
@@ -618,4 +618,5 @@ namespace Basik {
 		}
 
 	}
+	export const Ip = ImgImpl;
 }

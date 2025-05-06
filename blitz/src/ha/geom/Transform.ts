@@ -8,10 +8,10 @@ namespace Basik {
 		private static _lastY: number = 0;
 
 		public static get lastX(): number {
-			return Transform._lastX;
+			return Tf._lastX;
 		}
 		public static get lastY(): number {
-			return Transform._lastY;
+			return Tf._lastY;
 		}
 
 		static equal(n1: number, n2: number, toleransi: number = 1): boolean {
@@ -74,9 +74,9 @@ namespace Basik {
 
 			sin = y / l;
 			sin = Math.asin(sin);
-			sin *= Transform.RAD2DEG;
-			sin = Transform.quadDeg2(x, y, sin);
-			sin = Transform.normalizeDeg(sin);
+			sin *= Tf.RAD2DEG;
+			sin = Tf.quadDeg2(x, y, sin);
+			sin = Tf.normalizeDeg(sin);
 
 			return sin;
 		}
@@ -97,10 +97,10 @@ namespace Basik {
 		}
 
 		static degDistMax(angleS: number = 0, angleT: number): number {
-			angleS = Transform.normalizeDeg(angleS);
-			angleT = Transform.normalizeDeg(angleT);
+			angleS = Tf.normalizeDeg(angleS);
+			angleT = Tf.normalizeDeg(angleT);
 
-			let deg: number = Transform.degDistMin(angleS, angleT);
+			let deg: number = Tf.degDistMin(angleS, angleT);
 			if (deg >= 0) {
 				return -(360 - deg);
 			}
@@ -110,8 +110,8 @@ namespace Basik {
 		}
 
 		static degDistMin(angleS: number = 0, angleT: number): number {
-			angleS = Transform.normalizeDeg(angleS);
-			angleT = Transform.normalizeDeg(angleT);
+			angleS = Tf.normalizeDeg(angleS);
+			angleT = Tf.normalizeDeg(angleT);
 
 			if (angleT >= angleS) {
 				if (angleT - angleS > 180) {
@@ -143,13 +143,14 @@ namespace Basik {
 			let x1: number;
 			let y1: number;
 
-			deg *= Transform.DEG2RAD;
+			deg *= Tf.DEG2RAD;
 
 			x1 = xr * Math.cos(deg) - yr * Math.sin(deg);
 			y1 = xr * Math.sin(deg) + yr * Math.cos(deg);
 
-			Transform._lastX = x1 + xt;
-			Transform._lastY = y1 + yt;
+			Tf._lastX = x1 + xt;
+			Tf._lastY = y1 + yt;
 		}
 	}
+	export const Tf = Transform;
 }

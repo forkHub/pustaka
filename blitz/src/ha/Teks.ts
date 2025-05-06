@@ -29,7 +29,7 @@ namespace Basik {
 		}
 
 		private static get ctx(): CanvasRenderingContext2D {
-			return Graphic.context
+			return G.context
 		}
 
 		static Goto(x: number, y: number): void {
@@ -89,4 +89,5 @@ namespace Basik {
 		}
 
 	}
+	export const Tk = Teks;
 }
