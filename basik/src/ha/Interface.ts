@@ -14,7 +14,6 @@ namespace Basik {
 		// type: EInput;
 		timerStart: number;
 		timerEnd: number;
-		// id: number;	//TODO: mungkin bisa dihapus
 		// dragJml: number;
 		// dragSelesaiJml: number;
 		// tapJml: number;
@@ -68,12 +67,6 @@ namespace Basik {
 	// 	dragable: boolean
 	// 	dragged: boolean
 	// 	down: boolean
-
-	// 	//TODO:
-	// 	jmlHit?: number,
-	// 	jmlup?: number,
-	// 	jmlStartDrag?: number,
-	// 	jmlEndDrag?: number,
 
 	// 	drgStartX: number
 	// 	drgStartY: number

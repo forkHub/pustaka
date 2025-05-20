@@ -32,163 +32,39 @@ var ha;
 })(ha || (ha = {}));
 var Basik;
 (function (Basik) {
-    class Config {
-        stroke = new Stroke();
-        fill = new Stroke();
-    }
-    class RGB {
-        _m = 0;
-        _g = 0;
-        _b = 0;
-        get b() {
-            return this._b;
-        }
-        set b(value) {
-            this._b = value;
-        }
-        get g() {
-            return this._g;
-        }
-        set g(value) {
-            this._g = value;
-        }
-        get m() {
-            return this._m;
-        }
-        set m(value) {
-            this._m = value;
-        }
-    }
-    class Stroke {
-        _tebal = 1;
-        rgb = new RGB();
-        _aktif = false;
-        get aktif() {
-            return this._aktif;
-        }
-        set aktif(value) {
-            this._aktif = value;
-        }
-        get tebal() {
-            return this._tebal;
-        }
-        set tebal(value) {
-            this._tebal = value;
-        }
-    }
-    Basik.config = new Config();
-})(Basik || (Basik = {}));
-var Basik;
-(function (Basik) {
-    let Data;
-    (function (Data) {
-        class Obj {
-            _id = 0;
-            _entry;
-            _nama = '';
-            get id() {
-                return this._id;
-            }
-            set id(value) {
-                this._id = value;
-            }
-            get entry() {
-                return this._entry;
-            }
-            set entry(value) {
-                this._entry = value;
-            }
-            get nama() {
-                return this._nama;
-            }
-            set nama(value) {
-                this._nama = value;
-            }
-        }
-        Data.Obj = Obj;
-    })(Data = Basik.Data || (Basik.Data = {}));
-})(Basik || (Basik = {}));
-var Basik;
-(function (Basik) {
-    class RGBA {
-        color(r, g, b, a) {
-            this.r = r;
-            this.g = g;
-            this.b = b;
-            this.a = a;
-        }
-        _r = 0;
-        get r() {
-            return this._r;
-        }
-        set r(value) {
-            this._r = value;
-        }
-        _g = 0;
-        get g() {
-            return this._g;
-        }
-        set g(value) {
-            this._g = value;
-        }
-        _b = 0;
-        get b() {
-            return this._b;
-        }
-        set b(value) {
-            this._b = value;
-        }
-        _a = 0;
-        get a() {
-            return this._a;
-        }
-        set a(value) {
-            if (value > 100)
-                value = 100;
-            if (value > 1)
-                value /= 100;
-            this._a = value;
-        }
-    }
-    Basik.RGBA = RGBA;
     class Graphic {
-        static _skalaOtomatis = true;
-        static get skalaOtomatis() {
-            return Basik.G._skalaOtomatis;
-        }
-        static set skalaOtomatis(value) {
-            Basik.G._skalaOtomatis = value;
-        }
+        static _autoScale = true;
         static _canvas;
-        static get context() {
-            return Basik.G.canvas.getContext('2d');
-        }
         static get canvas() {
-            if (!Basik.G._canvas) {
-                Basik.G._canvas = document.body.querySelector('canvas');
-            }
-            if (!Basik.G._canvas) {
-                Basik.G._canvas = document.createElement('canvas');
-                document.body.appendChild(Basik.G._canvas);
-            }
-            return Basik.G._canvas;
+            return Graphic._canvas;
         }
-        static set canvas(c) {
-            Basik.G._canvas = c;
+        static _context;
+        static get context() {
+            return Graphic._context;
+        }
+        static set context(value) {
+            Graphic._context = value;
+        }
+        static _mainCtx;
+        static get mainCtx() {
+            return Graphic._mainCtx;
+        }
+        static get autoScale() {
+            return Basik.G._autoScale;
+        }
+        static set autoScale(value) {
+            Basik.G._autoScale = value;
         }
         static _merah = 0;
         static _hijau = 0;
         static _biru = 0;
         static _transparan = 0;
-        static Pause() {
-            debugger;
-        }
         static handleWindowResize() {
-            if (!Basik.G._skalaOtomatis)
+            if (!Basik.G._autoScale)
                 return;
-            let canvas = Basik.G.canvas;
-            let cp = Basik.G.canvas.width;
-            let cl = Basik.G.canvas.height;
+            let canvas = Basik.G._canvas;
+            let cp = Basik.G._canvas.width;
+            let cl = Basik.G._canvas.height;
             let wp = window.innerWidth;
             let wl = window.innerHeight;
             let ratio = Math.min((wp / cp), (wl / cl));
@@ -201,35 +77,63 @@ var Basik;
             canvas.style.top = ((wl - cl2) / 2) + 'px';
             canvas.style.left = ((wp - cp2) / 2) + 'px';
         }
-        static buatCanvas(canvasEl) {
-            let canvas = new Basik.ImgObj();
-            canvas.canvas = canvasEl;
-            canvas.ctx = canvasEl.getContext('2d');
-            canvas.lebar = canvasEl.height;
-            canvas.panjang = canvasEl.width;
-            canvas.frameH = canvasEl.height;
-            canvas.frameW = canvasEl.width;
-            canvas.rect = Basik.Ktk.buat();
-            canvas.load = true;
-            canvas.panjangDiSet = true;
-            canvas.lebarDiSet = true;
-            return canvas;
-        }
-        static init(p = 320, l = 240, fullScreen) {
-            let canvas = Basik.G.canvas;
-            canvas.width = p;
-            canvas.height = l;
-            if (fullScreen) {
-                canvas.style.width = p + 'px';
-                canvas.style.height = l + 'px';
-                canvas.style.padding = '0px';
-                canvas.style.margin = '0px';
+        static buildCanvas(w, h) {
+            if (!Basik.G._canvas) {
+                Basik.G._canvas = document.body.querySelector('canvas');
+            }
+            if (!Basik.G._canvas) {
+                Basik.G._canvas = document.createElement('canvas');
+                document.body.appendChild(Basik.G._canvas);
+                Basik.G._canvas.width = w;
+                Basik.G._canvas.height = h;
             }
         }
-        static get merah() {
+        static Graphics(w = 320, h = 240, canvas = null, fullScreen = true) {
+            if (canvas) {
+                Basik.G._canvas = canvas;
+            }
+            Basik.G.buildCanvas(w, h);
+            this._mainCtx = Basik.G._canvas.getContext("2d");
+            this._context = this._mainCtx;
+            Basik.G.autoScale = fullScreen;
+            console.log('inisialisasi');
+            Basik.G.setupCanvas(w, h, Basik.G.autoScale);
+            Basik.In.init(Basik.G._canvas);
+            window.addEventListener("resize", () => {
+                Basik.G.handleWindowResize();
+            });
+            function update() {
+                let updater = window["Update"];
+                if (typeof updater === "function") {
+                    updater();
+                }
+                window.requestAnimationFrame(update);
+            }
+            window.requestAnimationFrame(update);
+            setTimeout(() => {
+                Basik.G.handleWindowResize();
+            }, 100);
+            Basik.G.handleWindowResize();
+            NoStroke();
+            Cls();
+        }
+        static setupCanvas(p = 320, l = 240, fullScreen) {
+            Basik.G._canvas.width = p;
+            Basik.G._canvas.height = l;
+            if (fullScreen) {
+                Basik.G._canvas.style.width = p + 'px';
+                Basik.G._canvas.style.padding = '0px';
+                Basik.G._canvas.style.margin = '0px';
+            }
+        }
+        static Cls() {
+            let ctx = Basik.G.context;
+            ctx.clearRect(0, 0, (Basik.G._canvas.width), (Basik.G._canvas.height));
+        }
+        static get red() {
             return Basik.G._merah;
         }
-        static set merah(value) {
+        static set red(value) {
             Basik.G._merah = value;
         }
         static get hijau() {
@@ -256,81 +160,68 @@ var Basik;
 })(Basik || (Basik = {}));
 var Basik;
 (function (Basik) {
-    let EInput;
-    (function (EInput) {
-        EInput["TOUCH"] = "touch";
-        EInput["MOUSE"] = "mouse";
-        EInput["KEYB"] = "keyb";
-        EInput["DEF"] = "";
-    })(EInput = Basik.EInput || (Basik.EInput = {}));
-    class EventHandler {
-        move(input, buffer, e) {
-            let pos = Input.getPos(e.clientX, e.clientY, buffer);
-            input.x = pos.x;
-            input.y = pos.y;
-            input.id = e.pointerId;
-            if (input.isDown) {
-                if (input.isDrag == false) {
-                    input.dragJml++;
+    let input;
+    (function (input_1) {
+        class EventHandler {
+            move(input, buffer, e) {
+                let pos = Input.getPos(e.clientX, e.clientY, buffer);
+                input.x = pos.x;
+                input.y = pos.y;
+                input.key = e.button;
+                if (input.isDown) {
+                    input.isDrag = true;
+                    input.xDrag = input.x - input.xStart;
+                    input.yDrag = input.y - input.yStart;
                 }
-                input.isDrag = true;
-                input.xDrag = input.x - input.xStart;
-                input.yDrag = input.y - input.yStart;
+                let f = window["MouseMove"];
+                if (typeof f === 'function')
+                    f();
             }
-        }
-        down(input, key, type, pos) {
-            if (!input.isDown) {
-                input.hit++;
+            down(input, key, pos) {
+                input.xStart = pos.x;
+                input.yStart = pos.y;
+                input.xDrag = 0;
+                input.yDrag = 0;
+                input.x = pos.x;
+                input.y = pos.y;
+                input.isDown = true;
+                input.isTap = false;
+                input.isDrag = false;
+                input.key = key;
+                input.timerStart = Date.now();
+                let f = window["MouseDown"];
+                if (typeof f === 'function')
+                    f();
             }
-            input.xStart = pos.x;
-            input.yStart = pos.y;
-            input.xDrag = 0;
-            input.yDrag = 0;
-            input.x = pos.x;
-            input.y = pos.y;
-            input.isDown = true;
-            input.isTap = false;
-            input.isDrag = false;
-            input.key = key;
-            input.type = type;
-            input.timerStart = Date.now();
-        }
-        up(input) {
-            if (input.isDrag) {
-                input.dragSelesaiJml++;
-            }
-            input.isDown = false;
-            input.isDrag = false;
-            input.timerEnd = Date.now();
-            let isTap = this.checkTap(input);
-            input.isTap = (isTap == '');
-            if (input.isTap) {
-                if (Input.debug) {
-                    console.debug('tap ok');
+            up(input) {
+                input.isDown = false;
+                input.isDrag = false;
+                input.timerEnd = Date.now();
+                let isTap = this.checkTap(input);
+                input.isTap = (isTap == '');
+                if (input.isTap) {
+                    let f = window["MouseTap"];
+                    if (typeof f === 'function')
+                        f();
                 }
-                input.tapJml++;
+                let f = window["MouseUp"];
+                if (typeof f === 'function')
+                    f();
             }
-            else {
-                input.upJml++;
-                if (Input.debug) {
-                    console.debug('tap failed');
-                    console.debug(isTap);
-                }
+            checkTap(input) {
+                if (Math.abs(input.xDrag) > 5)
+                    return "drag x " + input.xDrag;
+                if (Math.abs(input.yDrag) > 5)
+                    return "drag y " + input.xDrag;
+                let timer = input.timerEnd - input.timerStart;
+                if ((timer) > 500)
+                    return "timer " + timer;
+                return '';
             }
         }
-        checkTap(input) {
-            if (Math.abs(input.xDrag) > 5)
-                return "drag x " + input.xDrag;
-            if (Math.abs(input.yDrag) > 5)
-                return "drag y " + input.xDrag;
-            let timer = input.timerEnd - input.timerStart;
-            if ((timer) > 500)
-                return "timer " + timer;
-            return '';
-        }
-    }
+        input_1.EventHandler = EventHandler;
+    })(input || (input = {}));
     class Input {
-        static _inputs = [];
         static _debug = false;
         static get debug() {
             return Input._debug;
@@ -338,203 +229,81 @@ var Basik;
         static set debug(value) {
             Input._debug = value;
         }
-        static _inputGlobal;
-        static _evt = new EventHandler();
+        static _obj;
+        static _evt = new input.EventHandler();
         constructor() {
         }
-        static InputTapCount() {
-            let tap = Input.global.tapJml;
-            Input.global.tapJml = 0;
-            return tap;
-        }
-        static JmlUp() {
-            let up = Input.global.upJml;
-            Input.global.tapJml = 0;
-            return up;
-        }
-        static InputDragEndCount() {
-            let s = Input.global.dragSelesaiJml;
-            Input.global.dragSelesaiJml = 0;
-            return s;
-        }
-        static InputType() {
-            return Input.global.type;
-        }
-        static InputHit() {
-            let hit = Input.global.hit;
-            Input.global.hit = 0;
-            return hit;
-        }
-        static InputDragStartX() {
-            return Input.global.xStart;
-        }
-        static InputDragStartY() {
-            return Input.global.yStart;
-        }
-        static InputX() {
-            return Input.global.x;
-        }
-        static InputY() {
-            return Input.global.y;
-        }
-        static InputDragX() {
-            return Input.global.xDrag;
-        }
-        static InputDragY() {
-            return Input.global.yDrag;
-        }
-        static FlushInput() {
-            Input.flush();
-        }
-        static InputDragStartCount() {
-            let hasil = Input.global.dragJml;
-            Input.global.dragJml = 0;
-            return hasil;
-        }
-        static InputIsDown() {
-            return Input.global.isDown;
-        }
-        static InputIsDragged() {
-            return Input.global.isDrag;
-        }
-        static getMouseKeyId(e) {
-            if (e.pointerType == 'touch') {
-                return e.pointerId + '';
-            }
-            else if (e.pointerType == 'mouse') {
-                return e.button + '';
-            }
-            throw Error('');
-        }
         static init(buffer) {
-            console.log('input init');
-            Input._inputGlobal = this.buatInputDefault();
+            console.log('Input init');
+            Input._obj = this.buatInputDefault();
             buffer.style.touchAction = 'none';
-            buffer.addEventListener("pointerdown", (e) => {
+            buffer.addEventListener("mousedown", (e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 let pos = Input.getPos(e.clientX, e.clientY, buffer);
-                let key = Input.getMouseKeyId(e);
-                let input = Input.baru(key, e.pointerType);
-                Input.event.down(input, key, e.pointerType, pos);
-                Input.event.down(Input._inputGlobal, key, e.pointerType, pos);
-                Basik.sprInt.inputDown(pos, e.pointerId);
-                let f = window["MouseHit"];
-                if (typeof f === "function")
-                    f();
+                let key = e.button;
+                Input.event.down(Input._obj, key, pos);
+                Basik.sprInt.inputDown(pos, e.button);
+                try {
+                    window.MouseDownEvent(e.button);
+                }
+                catch (e) {
+                    e;
+                }
             });
-            buffer.addEventListener("pointermove", (e) => {
+            buffer.addEventListener("mousemove", (e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 let pos = Input.getPos(e.clientX, e.clientY, buffer);
-                let key = this.getMouseKeyId(e);
-                let input = this.baru(key, e.pointerType);
-                Input.event.move(input, buffer, e);
-                Input.event.move(this.global, buffer, e);
-                Basik.sprInt.inputMove(pos, e.pointerId);
+                Input.event.move(this.obj, buffer, e);
+                Basik.sprInt.inputMove(pos, e.button);
+                try {
+                    window.MouseMoveEvent();
+                }
+                catch (e) {
+                    e;
+                }
             });
-            buffer.addEventListener("pointerout", (e) => {
+            buffer.addEventListener("mouseout", (e) => {
                 e.stopPropagation();
                 e.preventDefault();
-            });
-            buffer.addEventListener("pointercancel", (e) => {
-                e.stopPropagation();
-                e.preventDefault();
-            });
-            buffer.addEventListener("pointerup", (e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                let key = this.getMouseKeyId(e);
-                let input = this.baru(key, e.pointerType);
-                Input.event.up(input);
-                Input.event.up(this.global);
-                Basik.Ip.daftar.forEach((item) => {
-                    if (e.pointerId == item.inputId) {
-                        if (item.down) {
-                            item.jmlHit++;
-                        }
-                        item.down = false;
-                        item.dragged = false;
-                    }
+                Input.event.up(Input.obj);
+                Basik.Ip.daftar.forEach((img) => {
+                    img.down = false;
+                    img.dragged = false;
                 });
+            });
+            buffer.addEventListener("mouseup", (e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                Input.event.up(this.obj);
+                Basik.Ip.daftar.forEach((img) => {
+                    img.down = false;
+                    img.dragged = false;
+                });
+                try {
+                    window.MouseUpEvent(e.button);
+                }
+                catch (e) {
+                    e;
+                }
             });
         }
         static buatInputDefault() {
             return {
-                id: 0,
                 isDown: false,
                 isDrag: false,
                 isTap: false,
-                key: '',
+                key: 0,
                 timerEnd: 0,
                 timerStart: 0,
-                type: EInput.DEF,
                 x: 0,
                 xDrag: 0,
                 xStart: 0,
                 y: 0,
                 yDrag: 0,
                 yStart: 0,
-                hit: 0,
-                dragJml: 0,
-                dragSelesaiJml: 0,
-                tapJml: 0,
-                upJml: 0
             };
-        }
-        static flush() {
-            while (Input.inputs.length > 0) {
-                Input.inputs.pop();
-            }
-            Input.flushByInput(Input._inputGlobal);
-        }
-        static flushByInput(input) {
-            input.isDown = false;
-            input.isDrag = false;
-            input.isTap = false;
-            input.hit = 0;
-            input.tapJml = 0;
-            input.dragJml = 0;
-            input.dragSelesaiJml = 0;
-        }
-        static getInput(key, inputType) {
-            let inputHasil;
-            for (let i = 0; i < Input.inputs.length; i++) {
-                let input = Input.inputs[i];
-                if (input.type == inputType && input.key == key) {
-                    inputHasil = input;
-                    return inputHasil;
-                }
-            }
-            return inputHasil;
-        }
-        static baru(keyId, inputType) {
-            let input = Input.getInput(keyId, inputType);
-            if (!input) {
-                input = {
-                    key: keyId,
-                    type: inputType,
-                    isDown: false,
-                    isDrag: false,
-                    isTap: false,
-                    timerEnd: 0,
-                    timerStart: 0,
-                    x: 0,
-                    xDrag: 0,
-                    xStart: 0,
-                    y: 0,
-                    yDrag: 0,
-                    yStart: 0,
-                    id: 0,
-                    hit: 0,
-                    dragJml: 0,
-                    dragSelesaiJml: 0,
-                    tapJml: 0,
-                    upJml: 0
-                };
-                Input.inputs.push(input);
-            }
-            return input;
         }
         static getPos = (cx, cy, c) => {
             let r = c.getBoundingClientRect();
@@ -547,14 +316,11 @@ var Basik;
                 y: posly
             };
         };
-        static get inputs() {
-            return Input._inputs;
-        }
         static get event() {
             return Input._evt;
         }
-        static get global() {
-            return Input._inputGlobal;
+        static get obj() {
+            return Input._obj;
         }
     }
     Basik.Input = Input;
@@ -562,25 +328,27 @@ var Basik;
 })(Basik || (Basik = {}));
 var Basik;
 (function (Basik) {
-    class Mat {
-        static Dist(x1, y1, x2, y2) {
-            return Math.hypot(x2 - x1, y2 - y1);
-        }
-        static Angle(x, y) {
-            return Basik.Tf.sudut(x, y);
-        }
-        static Sin(n) { return Math.sin(n * Math.PI / 180); }
-        static Cos(n) { return Math.cos(n * Math.PI / 180); }
-        static Tan(n) { return Math.tan(n * Math.PI / 180); }
-        static Clamp(n, min, max) {
-            if (n < min)
-                return min;
-            if (n > max)
-                return max;
-            return n;
+    class Keyboard {
+        static init() {
+            window.addEventListener("keydown", (e) => {
+                try {
+                    window.KeyDownEvent(e.key);
+                }
+                catch (e) {
+                    e;
+                }
+            });
+            window.addEventListener("keyup", (e) => {
+                try {
+                    window.KeyUpEvent(e.key);
+                }
+                catch (e) {
+                    e;
+                }
+            });
         }
     }
-    Basik.Mat = Mat;
+    Basik.Keyboard = Keyboard;
 })(Basik || (Basik = {}));
 var Basik;
 (function (Basik) {
@@ -614,41 +382,10 @@ var Basik;
             let h = Pt.create(p.x, p.y);
             return h;
         }
-        static sama(p1, p2) {
-            if (false == Basik.Tf.equal(p1.x, p2.x))
-                return false;
-            if (false == Basik.Tf.equal(p1.y, p2.y))
-                return false;
-            return true;
-        }
         static putarPoros(p, xc = 0, yc = 0, deg = 0) {
             Basik.Tf.rotateRel(p.x, p.y, xc, yc, deg);
             p.x = Basik.Tf.lastX;
             p.y = Basik.Tf.lastY;
-        }
-        static posDist(p, xt, yt, jrk) {
-            let jrkA;
-            let i;
-            let j;
-            let rasio;
-            let hasil = Pt.create();
-            jrkA = Basik.Tf.jarak(p.x, p.y, xt, yt);
-            i = xt - p.x;
-            j = yt - p.y;
-            rasio = jrkA / jrk;
-            hasil.x = i * rasio;
-            hasil.y = j * rasio;
-            hasil.x = xt - hasil.x;
-            hasil.y = yt - hasil.y;
-            return hasil;
-        }
-        static posPolar(jarak, sudut, xt, yt) {
-            let hasil = Pt.create();
-            hasil.x = jarak * Math.cos(sudut * Basik.Tf.DEG2RAD);
-            hasil.y = jarak * Math.sin(sudut * Basik.Tf.DEG2RAD);
-            hasil.x += xt;
-            hasil.y += yt;
-            return hasil;
         }
     }
     Basik.Pt = Pt;
@@ -735,14 +472,8 @@ var Basik;
         static getXAtIdx(seg, idx) {
             return seg.A.x + (idx * Basik.Sg.vecI(seg));
         }
-        static getYAtIdx(seg, idx) {
-            return seg.A.y + (idx * Basik.Sg.vecJ(seg));
-        }
         static vecI(seg) {
             return seg.B.x - seg.A.x;
-        }
-        static vecJ(seg) {
-            return seg.B.y - seg.A.y;
         }
         static rotate(seg, deg = 0, xc = 0, yc = 0) {
             Basik.Pt.putarPoros(seg.A, xc, yc, deg);
@@ -931,11 +662,6 @@ var Basik;
         static get lastY() {
             return Basik.Tf._lastY;
         }
-        static equal(n1, n2, toleransi = 1) {
-            if (Math.abs(n1 - n2) <= toleransi)
-                return true;
-            return false;
-        }
         static quadDeg2(x, y, deg) {
             if (x == 0) {
                 if (y == 0) {
@@ -997,6 +723,14 @@ var Basik;
                 deg = 360 + deg;
             return deg;
         }
+        static degDist(angleS = 0, angleT, min = true) {
+            if (min) {
+                return Transform.degDistMin(angleS, angleT);
+            }
+            else {
+                return Transform.degDistMax(angleS, angleT);
+            }
+        }
         static degDistMax(angleS = 0, angleT) {
             angleS = Basik.Tf.normalizeDeg(angleS);
             angleT = Basik.Tf.normalizeDeg(angleT);
@@ -1027,11 +761,6 @@ var Basik;
                     return angleT - angleS;
                 }
             }
-        }
-        static jarak(x, y, xt, yt) {
-            let pjx = xt - x;
-            let pjy = yt - y;
-            return Math.sqrt(pjx * pjx + pjy * pjy);
         }
         static rotateRel(x = 0, y = 0, xt = 0, yt = 0, deg = 10) {
             let xr = x - xt;
@@ -1065,36 +794,30 @@ var Basik;
             h.lebarDiSet = true;
             h.load = true;
             h.img = document.createElement('img');
-            Basik.Ip.register(h, h.dragable, h.url, h.tipeDrag);
+            Basik.Ip.register(h, h.url, h.tipeDrag);
             return h;
         }
-        static MuatAnimasi(url, pf, lf, bisaDiDrag = false, tipeDrag = 0) {
+        static MuatAnimasi(url, pf, lf, tipeDrag = 0) {
             let img = Basik.Ip.muatAnimAsync(url, pf, lf);
-            return Basik.Ip.register(img, bisaDiDrag, url, tipeDrag);
+            return Basik.Ip.register(img, url, tipeDrag);
         }
         static GambarSemua() {
             for (let i = 0; i < Basik.Ip.daftar.length; i++) {
                 let item = Basik.Ip.daftar[i];
-                Basik.Im.DrawImage(item);
+                Basik.Ip.DrawSingle(item);
             }
         }
-        static Bound(s) {
-            Basik.Ip.resetRect(s);
-            Basik.Ip.rectToImageTf(s, s.x, s.y);
-            return s.rect;
-        }
-        static muatAnimasiAsyncKanvas(url, pf, lf, bisaDiDrag, canvas, tipeDrag) {
+        static muatAnimasiAsyncKanvas(url, pf, lf, canvas, tipeDrag) {
             let img = Basik.Ip.muatAnimAsyncCanvas(url, pf, lf, canvas);
-            return Basik.Ip.register(img, bisaDiDrag, url, tipeDrag);
+            return Basik.Ip.register(img, url, tipeDrag);
         }
-        static muatAsyncBerbagiKanvas(url, dragable = false, canvas, tipeDrag, onload) {
+        static muatAsyncBerbagiKanvas(url, canvas, tipeDrag, onload) {
             let img = Basik.Ip.muatAsyncKanvas(url, canvas, onload);
-            return Basik.Ip.register(img, dragable, url, tipeDrag);
+            return Basik.Ip.register(img, url, tipeDrag);
         }
-        static register(image, dragable = false, url, tipeDrag) {
+        static register(image, url, tipeDrag) {
             let hasil;
             hasil = image;
-            hasil.dragable = dragable;
             hasil.tipeDrag = tipeDrag;
             hasil.url = url;
             if (hasil.dragable) {
@@ -1105,53 +828,13 @@ var Basik;
             Basik.Ip.daftar.push(hasil);
             return hasil;
         }
-        static Muat(url, bisaDiDrag = false, tipeDrag = 0, onload) {
+        static Muat(url, tipeDrag = 0, onload) {
             if (!onload)
                 onload = () => { };
             let img = Basik.Ip.muatAsync(url, onload);
-            let spr = Basik.Ip.register(img, bisaDiDrag, url, tipeDrag);
+            let spr = Basik.Ip.register(img, url, tipeDrag);
             return spr;
         }
-        static buatBagiCanvas(canvas, w = 32, h = 32, frameW = 32, frameH = 32) {
-            let img;
-            canvas.width = w;
-            canvas.height = h;
-            let rect = Basik.Ktk.buat(0, 0, frameW, frameH);
-            img = new Basik.ImgObj();
-            img.load = true;
-            img.panjang = w;
-            img.lebar = h;
-            img.img = null;
-            img.frameH = frameH;
-            img.frameW = frameW;
-            img.handleX = 0;
-            img.handleY = 0;
-            img.alpha = 100;
-            img.isAnim = false;
-            img.canvas = canvas;
-            img.ctx = canvas.getContext('2d');
-            img.rect = rect;
-            img.load = true;
-            img.panjangDiSet = true;
-            img.lebarDiSet = true;
-            return img;
-        }
-        static panjang(gbr, pj) {
-            if (typeof pj == 'number') {
-                gbr.panjang = pj;
-                gbr.panjangDiSet = true;
-            }
-            return gbr.panjang;
-        }
-        ;
-        static lebar(gbr, lb) {
-            if (typeof lb == 'number') {
-                gbr.lebar = lb;
-                gbr.lebarDiSet = true;
-            }
-            return gbr.lebar;
-        }
-        ;
         static tabrakan(gbr1, x1, y1, gbr2, x2, y2) {
             Basik.Ip.resetRect(gbr1);
             Basik.Ip.rectToImageTf(gbr1, x1, y1);
@@ -1160,7 +843,7 @@ var Basik;
             return Basik.Ktk.collide(gbr1.rect, gbr2.rect);
         }
         ;
-        static dotDidalamGambar(gbr1, x1, y1, x2, y2) {
+        static dotInsideImage(gbr1, x1, y1, x2, y2) {
             Basik.Ip.resetRect(gbr1);
             Basik.Ip.rectToImageTf(gbr1, x1, y1);
             return Basik.Ktk.collideDot(gbr1.rect, x2, y2);
@@ -1348,7 +1031,7 @@ var Basik;
             jmlV = Math.ceil((Basik.G.canvas.height + Math.abs(y)) / h2);
             for (let i = 0; i < jmlH; i++) {
                 for (let j = 0; j < jmlV; j++) {
-                    Basik.Ip.gambar(gbr, x + (i * w2), y + (j * h2), frame);
+                    Basik.Ip.DrawSingle(gbr, x + (i * w2), y + (j * h2), frame);
                 }
             }
         }
@@ -1360,7 +1043,7 @@ var Basik;
                 hasil.push(data[1]);
                 hasil.push(data[2]);
                 hasil.push(data[3]);
-                Basik.G.merah = data[0];
+                Basik.G.red = data[0];
                 Basik.G.hijau = data[1];
                 Basik.G.biru = data[2];
                 Basik.G.alpha = data[3];
@@ -1371,7 +1054,15 @@ var Basik;
         static SetPiksel(x = 0, y = 0) {
             Basik.G.context.fillRect(Math.floor(x), Math.floor(y), 1, 1);
         }
-        static gambar(gbr, x = 0, y = 0, frame = 0) {
+        static Draw(gbr, x = 0, y = 0, frame = 0) {
+            if (gbr.tilable) {
+                Basik.Ip.gambarUbin(gbr, x, y, frame);
+            }
+            else {
+                Basik.Ip.DrawSingle(gbr, x, y, frame);
+            }
+        }
+        static DrawSingle(gbr, x = 0, y = 0, frame = 0) {
             let ctx = Basik.G.context;
             let jmlH = 0;
             let frameX = 0;
@@ -1459,67 +1150,9 @@ var Basik;
 })(Basik || (Basik = {}));
 var Basik;
 (function (Basik) {
-    class Img {
-        static CreateImage(width, height) {
-            return Basik.Ip.CreateImage(width, height);
-        }
-        static CopyImage(s, onload) {
-            if (!onload) {
-                onload = () => { };
-            }
-            if (s.isAnim) {
-                console.debug('copy sprite anim');
-                console.debug(s);
-                return Basik.Ip.muatAnimasiAsyncKanvas(s.url, s.frameW, s.frameH, s.dragable, s.canvas, s.tipeDrag);
-            }
-            else {
-                return Basik.Ip.muatAsyncBerbagiKanvas(s.url, s.dragable, s.canvas, s.tipeDrag, onload);
-            }
-        }
-        static DrawAllImage() {
-            Basik.Ip.GambarSemua();
-        }
-        static Collide(imgA, imgB) {
-            return Basik.Ip.tabrakan(imgA, imgA.x, imgA.y, imgB, imgB.x, imgB.y);
-        }
-        static LoadAnimImage(url, fw, fh, dragable = false, dragType = 0) {
-            return Basik.Ip.MuatAnimasi(url, fw, fh, dragable, dragType);
-        }
-        static LoadImage(url, dragable = false, dragType = 0) {
-            return Basik.Ip.Muat(url, dragable, dragType, () => { });
-        }
-        static DrawImage(img, frame) {
-            Basik.Ip.gambar(img, img.x, img.y, frame);
-        }
-        static Tile(img, x = 0, y = 0, frame = 0) {
-            Basik.Ip.gambarUbin(img, x, y, frame);
-        }
-        static GetPixel(x = 0, y = 0) {
-            Basik.Ip.AmbilPiksel(x, y);
-        }
-        static SetPiksel(x = 0, y = 0) {
-            return Basik.Ip.AmbilPiksel(x, y);
-        }
-        static AllImageLoaded() {
-            return Basik.Ip.AllImageLoaded();
-        }
-    }
-    Basik.Img = Img;
-    Basik.Im = Img;
-})(Basik || (Basik = {}));
-var Basik;
-(function (Basik) {
     class ImgObj {
         static _ctrDraw = 0;
         _url;
-        listeners = [];
-        executeEvent(type) {
-            this.listeners.forEach((item) => {
-                if (item.type === type) {
-                    item.handle();
-                }
-            });
-        }
         img;
         canvas;
         ctx;
@@ -1541,17 +1174,21 @@ var Basik;
         _rotasi = 0;
         _panjang = 0;
         _lebar = 0;
+        _tilable = false;
         _dragged = false;
         _down = false;
-        _dragable = false;
-        _hitCount = 0;
         _tipeDrag = 0;
-        _dragSelesaiJml = 0;
         _dragStartY = 0;
         _dragStartX = 0;
         _sudutTekanAwal = 0;
-        _inputId;
+        _button;
         _sudutAwal = 0;
+        get tilable() {
+            return this._tilable;
+        }
+        set tilable(value) {
+            this._tilable = value;
+        }
         get sudutAwal() {
             return this._sudutAwal;
         }
@@ -1638,14 +1275,7 @@ var Basik;
         set rotasi(value) {
             this._rotasi = value;
         }
-        constructor(dragable = false) {
-            this.dragable = dragable;
-        }
-        get dragSelesaiJml() {
-            return this._dragSelesaiJml;
-        }
-        set dragSelesaiJml(value) {
-            this._dragSelesaiJml = value;
+        constructor() {
         }
         get drgStartX() {
             return this._dragStartX;
@@ -1665,12 +1295,6 @@ var Basik;
         set dragged(value) {
             this._dragged = value;
         }
-        get jmlHit() {
-            return this._hitCount;
-        }
-        set jmlHit(value) {
-            this._hitCount = value;
-        }
         get down() {
             return this._down;
         }
@@ -1678,10 +1302,7 @@ var Basik;
             this._down = value;
         }
         get dragable() {
-            return this._dragable;
-        }
-        set dragable(value) {
-            this._dragable = value;
+            return this._tipeDrag > 0 ? true : false;
         }
         get sudutTekanAwal() {
             return this._sudutTekanAwal;
@@ -1694,12 +1315,6 @@ var Basik;
         }
         set tipeDrag(value) {
             this._tipeDrag = value;
-            if (value > 0) {
-                this._dragable = true;
-            }
-            else {
-                this._dragable = false;
-            }
         }
         get url() {
             return this._url;
@@ -1713,11 +1328,11 @@ var Basik;
         static set ctrDraw(value) {
             ImgObj._ctrDraw = value;
         }
-        get inputId() {
-            return this._inputId;
+        get button() {
+            return this._button;
         }
-        set inputId(value) {
-            this._inputId = value;
+        set button(value) {
+            this._button = value;
         }
     }
     Basik.ImgObj = ImgObj;
@@ -1730,109 +1345,58 @@ var Basik;
         TypeDrag[TypeDrag["rotasi"] = 2] = "rotasi";
     })(TypeDrag || (TypeDrag = {}));
     class SprInt {
-        spriteDown(s, pos, id) {
-            s.down = true;
-            s.drgStartX = pos.x - s.x;
-            s.drgStartY = pos.y - s.y;
-            s.inputId = id;
-            s.jmlHit++;
-            s.sudutTekanAwal = Basik.Tf.sudut(pos.x - s.x, pos.y - s.y);
-            s.sudutAwal = s.rotasi;
-            s.executeEvent("down");
+        spriteDown(img, pos, id) {
+            img.down = true;
+            img.drgStartX = pos.x - img.x;
+            img.drgStartY = pos.y - img.y;
+            img.button = id;
+            img.sudutTekanAwal = Basik.Tf.sudut(pos.x - img.x, pos.y - img.y);
+            img.sudutAwal = img.rotasi;
         }
-        inputDown(pos, id) {
+        inputDown(pos, button) {
             console.group('input down');
             let lastIdx = -1;
             let lastSprite = null;
             for (let i = Basik.Ip.daftar.length - 1; i >= 0; i--) {
-                let item;
-                item = Basik.Ip.daftar[i];
-                if (Basik.Ip.dotDidalamGambar(item, item.x, item.y, pos.x, pos.y)) {
-                    if (item.ctrIdx > lastIdx) {
-                        lastIdx = item.ctrIdx;
-                        lastSprite = item;
+                let img;
+                img = Basik.Ip.daftar[i];
+                if (Basik.Ip.dotInsideImage(img, img.x, img.y, pos.x, pos.y)) {
+                    if (img.ctrIdx > lastIdx) {
+                        lastIdx = img.ctrIdx;
+                        lastSprite = img;
                     }
                 }
                 else {
-                    if (item.tipeDrag == 3 || item.tipeDrag == 4) {
-                        this.spriteDown(item, pos, id);
+                    if (img.tipeDrag == 3 || img.tipeDrag == 4) {
+                        this.spriteDown(img, pos, button);
                     }
                 }
             }
             if (lastSprite) {
-                this.spriteDown(lastSprite, pos, id);
+                this.spriteDown(lastSprite, pos, button);
             }
             console.groupEnd();
         }
-        inputMove(pos, pointerId) {
+        inputMove(pos, button) {
             Basik.Ip.daftar.forEach((item) => {
-                if (item.down && item.dragable && (item.inputId == pointerId)) {
+                if (item.down && item.dragable && (item.button == button)) {
                     item.dragged = true;
                     if (item.tipeDrag == TypeDrag.drag || (item.tipeDrag == 3)) {
                         item.x = pos.x - item.drgStartX;
                         item.y = pos.y - item.drgStartY;
-                        item.executeEvent("drag");
                     }
                     else if (item.tipeDrag == TypeDrag.rotasi || (item.tipeDrag == 4)) {
                         let sudut2 = Basik.Tf.sudut(pos.x - item.x, pos.y - item.y);
                         let perbedaan = sudut2 - item.sudutTekanAwal;
                         item.rotasi = item.sudutAwal + perbedaan;
-                        item.executeEvent("drag");
                     }
                     else {
                     }
                 }
             });
         }
-        inputUp() {
-            Basik.Ip.daftar.forEach((item) => {
-                if (item.down) {
-                    item.executeEvent('up');
-                }
-                if (item.dragged) {
-                    console.log('input up: item rotasi ' + item.rotasi);
-                    item.executeEvent('up');
-                }
-                item.down = false;
-                item.dragged = false;
-            });
-        }
     }
     Basik.sprInt = new SprInt();
-})(Basik || (Basik = {}));
-var Basik;
-(function (Basik) {
-    class Spr3 {
-        static gerakX(s, n) {
-            s.x += n;
-        }
-        static gerakY(s, n) {
-            s.y += n;
-        }
-        static gerakXY(s, x, y) {
-            s.x += x;
-            s.y += y;
-        }
-        static gerakSudut(s, n, sudut) {
-            sudut *= Math.PI / 180;
-            Spr3.gerakX(s, n * Math.cos(sudut));
-            Spr3.gerakY(s, n * Math.sin(sudut));
-        }
-        static gerakPutar(s, sudut, sx, sy) {
-            Basik.Tf.rotateRel(s.x, s.y, sx, sy, sudut);
-            s.x += Basik.Tf.lastX;
-            s.y += Basik.Tf.lastY;
-        }
-        static menjauh(s, x, y, jml) {
-            let sudut = Basik.Tf.sudut(s.x - x, s.y - y);
-            Spr3.gerakSudut(s, jml, sudut);
-        }
-        static mendekat(s, x, y, jml) {
-            let sudut = Basik.Tf.sudut(x - s.x, y - s.y);
-            Spr3.gerakSudut(s, jml, sudut);
-        }
-    }
-    Basik.Spr3 = Spr3;
 })(Basik || (Basik = {}));
 var Basik;
 (function (Basik) {
@@ -1854,7 +1418,7 @@ var Basik;
         static Name(name = 'cursive') {
             Teks._name = name;
         }
-        static Size(n = 30) {
+        static Size(n = 12) {
             Teks.size = n;
         }
         static Write(teks) {
@@ -1870,10 +1434,17 @@ var Basik;
 (function (Basik) {
     class Sound {
         static list = [];
+        static _lastSound;
         _src = '';
         _loaded = false;
         _sound;
         _playedCount;
+        static get lastSound() {
+            return Sound._lastSound;
+        }
+        static set lastSound(value) {
+            Sound._lastSound = value;
+        }
         get playedCount() {
             return this._playedCount;
         }
@@ -1914,70 +1485,45 @@ function LoadSound(url) {
     };
     sound.onended = () => {
         s.playedCount++;
+        try {
+            window.SoundEnded(s);
+        }
+        catch (e) { }
     };
     sound.src = url;
     S.list.push(s);
+    return s;
 }
 function PlaySound(s) {
     s.sound.play();
-}
-function SoundEnded(s) {
-    let h = s.playedCount;
-    s.playedCount = 0;
-    return (h > 0);
 }
 function SoundLoaded(s) {
     return s.loaded;
 }
 const G = Basik.G;
 const T = Basik.Tk;
-const Im = Basik.Im;
 const Ip = Basik.Ip;
 const In = Basik.In;
 function MainBuffer() {
-    return G.context;
+    return G.mainCtx;
+}
+function SetBuffer(b) {
+    G.context = b;
 }
 function ClearArea(x, y, w, h) {
     G.context.clearRect(x, y, w, h);
 }
-function Graphics(w = 320, h = 240, canvas = null, fullScreen = true, input = true) {
-    if (canvas) {
-        G.canvas = canvas;
-    }
-    G.skalaOtomatis = fullScreen;
-    console.log('inisialisasi');
-    G.init(w, h, G.skalaOtomatis);
-    if (input) {
-        In.init(G.canvas);
-    }
-    window.addEventListener("resize", () => {
-        G.handleWindowResize();
-    });
-    function update() {
-        let updater = window["Update"];
-        if (typeof updater === "function") {
-            updater();
-        }
-        window.requestAnimationFrame(update);
-    }
-    window.requestAnimationFrame(update);
-    setTimeout(() => {
-        G.handleWindowResize();
-    }, 100);
-    G.handleWindowResize();
-    NoStroke();
-    Cls();
+function Graphics(w = 320, h = 240, canvas = null, fullScreen = true) {
+    G.Graphics(w, h, canvas, fullScreen);
 }
 function Cls() {
-    let ctx = G.context;
-    ctx.fillRect(0, 0, (G.canvas.width), (G.canvas.height));
-    ctx.clearRect(0, 0, (G.canvas.width), (G.canvas.height));
+    G.Cls();
 }
 function Green() {
     return G.hijau;
 }
 function Red() {
-    return G.merah;
+    return G.red;
 }
 function Blue() {
     return G.biru;
@@ -1988,50 +1534,92 @@ function Alpha() {
 function GetPixel(x = 0, y = 0) {
     return Ip.AmbilPiksel(x, y);
 }
-function SetPiksel(x = 0, y = 0, r = 0, g = 0, b = 0) {
-    r;
-    g;
-    b;
+function SetPiksel(x = 0, y = 0) {
     return Ip.SetPiksel(x, y);
 }
 function FillColor(r = 0, g = 0, b = 0, a = 1) {
     G.context.fillStyle = `rgba( ${r}, ${g}, ${b}, ${a})`;
 }
 function NoColor() {
-    FillColor(0, 0, 0, 0);
+    G.context.fillStyle = "none";
 }
 function StrokeColor(r = 0, g = 0, b = 0, a = 1) {
     G.context.strokeStyle = `rgba( ${r}, ${g}, ${b}, ${a})`;
 }
 function NoStroke() {
-    StrokeColor(0, 0, 0, 0);
+    G.context.strokeStyle = 'none';
 }
-const InputX = Basik.Input.InputX;
-const InputY = Basik.Input.InputY;
-const InputIsDown = Basik.Input.InputIsDown;
-const InputIsDragged = Basik.Input.InputIsDragged;
-const InputDragX = Basik.Input.InputDragX;
-const InputDragY = Basik.Input.InputDragY;
-const InputDragStartX = Basik.Input.InputDragStartX;
-const InputDragStartY = Basik.Input.InputDragStartY;
-const DistMin = Basik.Transform.degDistMin;
+function MouseIsDown() {
+    return In.obj.isDown;
+}
+function MouseIsDragged() {
+    return In.obj.isDrag;
+}
+function MouseDragXAmount() {
+    return In.obj.xDrag;
+}
+function MouseDragYAmount() {
+    return In.obj.yDrag;
+}
+function MouseX() {
+    return In.obj.x;
+}
+function MouseY() {
+    return In.obj.y;
+}
+function MouseDragStartX() {
+    return In.obj.xStart;
+}
+function MouseDragStartY() {
+    return In.obj.yStart;
+}
+const DistMin = Basik.Transform.degDist;
 function Distance(x1, y1, x2, y2) {
     return Math.hypot(x2 - x1, y2 - y1);
 }
-const LoadImage = Im.LoadImage;
-const LoadAnimImage = Im.LoadAnimImage;
-const DrawImage = Im.DrawImage;
-const Collide = Im.Collide;
+function Dist(x1, y1, x2, y2) {
+    return Math.hypot(x2 - x1, y2 - y1);
+}
+function Angle(x, y) {
+    return Basik.Tf.sudut(x, y);
+}
+function Sin(n) { return Math.sin(n * Math.PI / 180); }
+function Cos(n) { return Math.cos(n * Math.PI / 180); }
+function Tan(n) { return Math.tan(n * Math.PI / 180); }
+function Clamp(n, min, max) {
+    if (n < min)
+        return min;
+    if (n > max)
+        return max;
+    return n;
+}
+const LoadImage = Ip.Muat;
+const LoadAnimImage = Ip.MuatAnimasi;
+const DrawImage = Ip.Draw;
+const ImageCollide = Ip.tabrakan;
+const ImageCollidePoint = Ip.dotInsideImage;
+const CreateImage = Ip.CreateImage;
+function DrawAllImage() {
+    Ip.GambarSemua();
+}
 const ImageBuffer = (img) => {
     return img.ctx;
 };
-const Tile = Im.Tile;
-const AllImageLoaded = Im.AllImageLoaded;
-const DrawAllImage = Im.DrawAllImage;
-const CopyImage = Im.CopyImage;
+const AllImageLoaded = Ip.AllImageLoaded;
+function CopyImage(s, onload) {
+    if (!onload) {
+        onload = () => { };
+    }
+    if (s.isAnim) {
+        console.debug('copy sprite anim');
+        console.debug(s);
+        return Ip.muatAnimasiAsyncKanvas(s.url, s.frameW, s.frameH, s.canvas, s.tipeDrag);
+    }
+    else {
+        return Ip.muatAsyncBerbagiKanvas(s.url, s.canvas, s.tipeDrag, onload);
+    }
+}
 const TextPos = Basik.Teks.Goto;
 const Write = Basik.Teks.Write;
 const TextFont = Basik.Teks.Name;
-const TextSize = (size) => {
-    Basik.Teks.size = size;
-};
+const TextSize = Basik.Teks.Size;

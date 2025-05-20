@@ -8,82 +8,28 @@ declare namespace ha.be {
     export {};
 }
 declare namespace Basik {
-    class Config {
-        readonly stroke: Stroke;
-        readonly fill: Stroke;
-    }
-    class RGB {
-        private _m;
-        private _g;
-        private _b;
-        get b(): number;
-        set b(value: number);
-        get g(): number;
-        set g(value: number);
-        get m(): number;
-        set m(value: number);
-    }
-    class Stroke {
-        private _tebal;
-        readonly rgb: RGB;
-        private _aktif;
-        get aktif(): boolean;
-        set aktif(value: boolean);
-        get tebal(): number;
-        set tebal(value: number);
-    }
-    export var config: Config;
-    export {};
-}
-declare namespace Basik {
-    namespace Data {
-        class Obj {
-            private _id;
-            private _entry;
-            private _nama;
-            get id(): number;
-            set id(value: number);
-            get entry(): any[];
-            set entry(value: any[]);
-            get nama(): string;
-            set nama(value: string);
-        }
-    }
-}
-declare namespace Basik {
-    class RGBA {
-        color(r: number, g: number, b: number, a: number): void;
-        private _r;
-        get r(): number;
-        set r(value: number);
-        private _g;
-        get g(): number;
-        set g(value: number);
-        private _b;
-        get b(): number;
-        set b(value: number);
-        private _a;
-        get a(): number;
-        set a(value: number);
-    }
     class Graphic {
-        private static _skalaOtomatis;
-        static get skalaOtomatis(): boolean;
-        static set skalaOtomatis(value: boolean);
+        private static _autoScale;
         private static _canvas;
-        static get context(): CanvasRenderingContext2D;
         static get canvas(): HTMLCanvasElement;
-        static set canvas(c: HTMLCanvasElement);
+        private static _context;
+        static get context(): CanvasRenderingContext2D;
+        static set context(value: CanvasRenderingContext2D);
+        private static _mainCtx;
+        static get mainCtx(): CanvasRenderingContext2D;
+        static get autoScale(): boolean;
+        static set autoScale(value: boolean);
         private static _merah;
         private static _hijau;
         private static _biru;
         private static _transparan;
-        static Pause(): void;
         static handleWindowResize(): void;
-        static buatCanvas(canvasEl: HTMLCanvasElement): ImgObj;
-        static init(p: number, l: number, fullScreen: boolean): void;
-        static get merah(): number;
-        static set merah(value: number);
+        private static buildCanvas;
+        static Graphics(w?: number, h?: number, canvas?: HTMLCanvasElement, fullScreen?: boolean): void;
+        private static setupCanvas;
+        static Cls(): void;
+        static get red(): number;
+        static set red(value: number);
         static get hijau(): number;
         static set hijau(value: number);
         static get biru(): number;
@@ -92,68 +38,31 @@ declare namespace Basik {
         static set alpha(value: number);
     }
     const G: typeof Graphic;
-    interface IEvent {
-        id: string;
-        type: string;
-        handle: () => void;
-    }
-    interface IRGB {
-        r: number;
-        g: number;
-        b: number;
-        a: number;
-    }
 }
 declare namespace Basik {
-    export enum EInput {
-        TOUCH = "touch",
-        MOUSE = "mouse",
-        KEYB = "keyb",
-        DEF = ""
-    }
-    class EventHandler {
-        move(input: IInput, buffer: HTMLCanvasElement, e: PointerEvent): void;
-        down(input: IInput, key: string, type: EInput, pos: IV2D): void;
-        up(input: IInput): void;
-        private checkTap;
+    namespace input {
+        class EventHandler {
+            move(input: IInput, buffer: HTMLCanvasElement, e: MouseEvent): void;
+            down(input: IInput, key: number, pos: IV2D): void;
+            up(input: IInput): void;
+            private checkTap;
+        }
     }
     export class Input {
-        private static _inputs;
         private static _debug;
         static get debug(): boolean;
         static set debug(value: boolean);
-        private static _inputGlobal;
+        private static _obj;
         private static _evt;
         constructor();
-        static InputTapCount(): number;
-        static JmlUp(): number;
-        static InputDragEndCount(): number;
-        static InputType(): EInput;
-        static InputHit(): number;
-        static InputDragStartX(): number;
-        static InputDragStartY(): number;
-        static InputX(): number;
-        static InputY(): number;
-        static InputDragX(): number;
-        static InputDragY(): number;
-        static FlushInput(): void;
-        static InputDragStartCount(): number;
-        static InputIsDown(): boolean;
-        static InputIsDragged(): boolean;
-        private static getMouseKeyId;
         static init(buffer: HTMLCanvasElement): void;
         private static buatInputDefault;
-        private static flush;
-        private static flushByInput;
-        private static getInput;
-        private static baru;
         static getPos: (cx: number, cy: number, c: HTMLCanvasElement) => {
             x: number;
             y: number;
         };
-        static get inputs(): IInput[];
-        static get event(): EventHandler;
-        static get global(): IInput;
+        static get event(): input.EventHandler;
+        static get obj(): IInput;
     }
     export const In: typeof Input;
     export {};
@@ -169,16 +78,9 @@ declare namespace Basik {
         isDrag: boolean;
         isDown: boolean;
         isTap: boolean;
-        hit: number;
-        key: string;
-        type: EInput;
+        key: number;
         timerStart: number;
         timerEnd: number;
-        id: number;
-        dragJml: number;
-        dragSelesaiJml: number;
-        tapJml: number;
-        upJml: number;
     }
     interface IV2D {
         x: number;
@@ -192,13 +94,8 @@ declare namespace Basik {
     }
 }
 declare namespace Basik {
-    class Mat {
-        static Dist(x1: number, y1: number, x2: number, y2: number): number;
-        static Angle(x: number, y: number): number;
-        static Sin(n: number): number;
-        static Cos(n: number): number;
-        static Tan(n: number): number;
-        static Clamp(n: number, min: number, max: number): number;
+    class Keyboard {
+        static init(): void;
     }
 }
 declare namespace Basik {
@@ -213,10 +110,7 @@ declare namespace Basik {
         static create(x?: number, y?: number): Pt;
         static copy(p1: Pt, p2: Pt): void;
         static clone(p: Pt): Pt;
-        static sama(p1: Pt, p2: Pt): boolean;
         static putarPoros(p: Pt, xc?: number, yc?: number, deg?: number): void;
-        static posDist(p: Pt, xt: number, yt: number, jrk: number): Pt;
-        static posPolar(jarak: number, sudut: number, xt: number, yt: number): Pt;
     }
 }
 declare namespace Basik {
@@ -229,23 +123,21 @@ declare namespace Basik {
         set B(value: Pt);
         constructor(A?: Pt, B?: Pt);
         static create(v1?: Pt, v2?: Pt): Seg;
-        static boundCollide(seg1: Seg, seg2: Seg): boolean;
+        private static boundCollide;
         static collide(seg1: Seg, seg2: Seg): boolean;
         static copy(seg1: Seg, seg2: Seg): void;
-        static clone(seg: Seg): Seg;
-        static crossHor(seg: Seg): boolean;
+        private static clone;
+        private static crossHor;
         static deg(line: Seg): number;
-        static getXAtIdx(seg: Seg, idx: number): number;
-        static getYAtIdx(seg: Seg, idx: number): number;
-        static vecI(seg: Seg): number;
-        static vecJ(seg: Seg): number;
-        static rotate(seg: Seg, deg?: number, xc?: number, yc?: number): void;
-        static minX(seg: Seg): number;
-        static maxX(seg: Seg): number;
-        static minY(seg: Seg): number;
-        static maxY(seg: Seg): number;
-        static translate(seg: Seg, x?: number, y?: number): void;
-        static xHorIdx(seg: Seg): number;
+        private static getXAtIdx;
+        private static vecI;
+        private static rotate;
+        private static minX;
+        private static maxX;
+        private static minY;
+        private static maxY;
+        private static translate;
+        private static xHorIdx;
     }
     const Sg: typeof Seg;
 }
@@ -261,10 +153,10 @@ declare namespace Basik {
         static collide(r1: Ktk, r2: Ktk): boolean;
         private static collideDotBound;
         static collideDot(r: Ktk, x: number, y: number): boolean;
-        static minX(r: Ktk): number;
-        static maxX(r: Ktk): number;
-        static minY(r: Ktk): number;
-        static maxY(r: Ktk): number;
+        private static minX;
+        private static maxX;
+        private static minY;
+        private static maxY;
         static translate(rect: Ktk, x: number, y: number): void;
         static rotate(r: Ktk, deg: number, xc: number, yc: number, copy?: boolean): Ktk;
     }
@@ -277,13 +169,12 @@ declare namespace Basik {
         private static _lastY;
         static get lastX(): number;
         static get lastY(): number;
-        static equal(n1: number, n2: number, toleransi?: number): boolean;
         private static quadDeg2;
         static sudut(x: number, y: number): number;
-        static normalizeDeg(deg: number): number;
-        static degDistMax(angleS: number, angleT: number): number;
-        static degDistMin(angleS: number, angleT: number): number;
-        static jarak(x: number, y: number, xt: number, yt: number): number;
+        private static normalizeDeg;
+        static degDist(angleS: number, angleT: number, min?: boolean): number;
+        private static degDistMax;
+        private static degDistMin;
         static rotateRel(x?: number, y?: number, xt?: number, yt?: number, deg?: number): void;
     }
     const Tf: typeof Transform;
@@ -293,55 +184,34 @@ declare namespace Basik {
         static readonly props: string[];
         static readonly daftar: ImgObj[];
         static CreateImage(width: number, height: number): ImgObj;
-        static MuatAnimasi(url: string, pf: number, lf: number, bisaDiDrag?: boolean, tipeDrag?: number): ImgObj;
+        static MuatAnimasi(url: string, pf: number, lf: number, tipeDrag?: number): ImgObj;
         static GambarSemua(): void;
-        static Bound(s: ImgObj): Ktk;
-        static muatAnimasiAsyncKanvas(url: string, pf: number, lf: number, bisaDiDrag: boolean, canvas: HTMLCanvasElement, tipeDrag: number): ImgObj;
-        static muatAsyncBerbagiKanvas(url: string, dragable: boolean, canvas: HTMLCanvasElement, tipeDrag: number, onload: () => void): ImgObj;
+        static muatAnimasiAsyncKanvas(url: string, pf: number, lf: number, canvas: HTMLCanvasElement, tipeDrag: number): ImgObj;
+        static muatAsyncBerbagiKanvas(url: string, canvas: HTMLCanvasElement, tipeDrag: number, onload: () => void): ImgObj;
         private static register;
-        static Muat(url: string, bisaDiDrag?: boolean, tipeDrag?: number, onload?: () => void): ImgObj;
-        static buatBagiCanvas(canvas: HTMLCanvasElement, w?: number, h?: number, frameW?: number, frameH?: number): ImgObj;
-        static panjang(gbr: ImgObj, pj?: number): number;
-        static lebar(gbr: ImgObj, lb?: number): number;
+        static Muat(url: string, tipeDrag?: number, onload?: () => void): ImgObj;
         static tabrakan(gbr1: ImgObj, x1: number, y1: number, gbr2: ImgObj, x2: number, y2: number): boolean;
-        static dotDidalamGambar(gbr1: ImgObj, x1: number, y1: number, x2: number, y2: number): boolean;
-        static muatAnimAsync(url: string, fw: number, fh: number): ImgObj;
-        static muatAnimAsyncCanvas(url: string, fw: number, fh: number, canvas: HTMLCanvasElement): ImgObj;
-        static muatAsync(url: string, onload: () => void): ImgObj;
-        static def(img: HTMLImageElement, ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement): ImgObj;
-        static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload: () => void): ImgObj;
-        static gambarUbin(gbr: ImgObj, x?: number, y?: number, frame?: number): void;
+        static dotInsideImage(gbr1: ImgObj, x1: number, y1: number, x2: number, y2: number): boolean;
+        private static muatAnimAsync;
+        private static muatAnimAsyncCanvas;
+        private static muatAsync;
+        private static def;
+        private static muatAsyncKanvas;
+        private static gambarUbin;
         static AmbilPiksel(x?: number, y?: number): void;
         static SetPiksel(x?: number, y?: number): void;
-        static gambar(gbr: ImgObj, x?: number, y?: number, frame?: number): void;
-        static resetRect(img: ImgObj): void;
-        static rectToImageTf(image: ImgObj, x: number, y: number): void;
+        static Draw(gbr: ImgObj, x?: number, y?: number, frame?: number): void;
+        private static DrawSingle;
+        private static resetRect;
+        private static rectToImageTf;
         static AllImageLoaded(): boolean;
     }
     const Ip: typeof ImgImpl;
 }
 declare namespace Basik {
-    class Img {
-        static CreateImage(width: number, height: number): ImgObj;
-        static CopyImage(s: ImgObj, onload?: () => void): ImgObj;
-        static DrawAllImage(): void;
-        static Collide(imgA: ImgObj, imgB: ImgObj): boolean;
-        static LoadAnimImage(url: string, fw: number, fh: number, dragable?: boolean, dragType?: number): ImgObj;
-        static LoadImage(url: string, dragable?: boolean, dragType?: number): ImgObj;
-        static DrawImage(img: ImgObj, frame?: number): void;
-        static Tile(img: ImgObj, x?: number, y?: number, frame?: number): void;
-        static GetPixel(x?: number, y?: number): void;
-        static SetPiksel(x?: number, y?: number): void;
-        static AllImageLoaded(): boolean;
-    }
-    const Im: typeof Img;
-}
-declare namespace Basik {
     class ImgObj {
         private static _ctrDraw;
         private _url;
-        readonly listeners: IEvent[];
-        executeEvent(type: string): void;
         img: HTMLImageElement;
         canvas: HTMLCanvasElement;
         ctx: CanvasRenderingContext2D;
@@ -363,17 +233,17 @@ declare namespace Basik {
         private _rotasi;
         private _panjang;
         private _lebar;
+        private _tilable;
         private _dragged;
         private _down;
-        private _dragable;
-        private _hitCount;
         private _tipeDrag;
-        private _dragSelesaiJml;
         private _dragStartY;
         private _dragStartX;
         private _sudutTekanAwal;
-        private _inputId;
+        private _button;
         private _sudutAwal;
+        get tilable(): boolean;
+        set tilable(value: boolean);
         get sudutAwal(): number;
         set sudutAwal(value: number);
         get frameW(): number;
@@ -402,21 +272,16 @@ declare namespace Basik {
         set ctrIdx(value: number);
         get rotasi(): number;
         set rotasi(value: number);
-        constructor(dragable?: boolean);
-        get dragSelesaiJml(): number;
-        set dragSelesaiJml(value: number);
+        constructor();
         get drgStartX(): number;
         set drgStartX(value: number);
         get drgStartY(): number;
         set drgStartY(value: number);
         get dragged(): boolean;
         set dragged(value: boolean);
-        get jmlHit(): number;
-        set jmlHit(value: number);
         get down(): boolean;
         set down(value: boolean);
         get dragable(): boolean;
-        set dragable(value: boolean);
         get sudutTekanAwal(): number;
         set sudutTekanAwal(value: number);
         get tipeDrag(): number;
@@ -425,30 +290,18 @@ declare namespace Basik {
         set url(value: string);
         static get ctrDraw(): number;
         static set ctrDraw(value: number);
-        get inputId(): number;
-        set inputId(value: number);
+        get button(): number;
+        set button(value: number);
     }
 }
 declare namespace Basik {
     class SprInt {
         private spriteDown;
-        inputDown(pos: any, id: number): void;
-        inputMove(pos: any, pointerId: number): void;
-        inputUp(): void;
+        inputDown(pos: any, button: number): void;
+        inputMove(pos: any, button: number): void;
     }
     export const sprInt: SprInt;
     export {};
-}
-declare namespace Basik {
-    class Spr3 {
-        static gerakX(s: ImgObj, n: number): void;
-        static gerakY(s: ImgObj, n: number): void;
-        static gerakXY(s: ImgObj, x: number, y: number): void;
-        static gerakSudut(s: ImgObj, n: number, sudut: number): void;
-        static gerakPutar(s: ImgObj, sudut: number, sx: number, sy: number): void;
-        static menjauh(s: ImgObj, x: number, y: number, jml: number): void;
-        static mendekat(s: ImgObj, x: number, y: number, jml: number): void;
-    }
 }
 declare namespace Basik {
     class Teks {
@@ -468,10 +321,13 @@ declare namespace Basik {
 declare namespace Basik {
     class Sound implements IAudio {
         static readonly list: IAudio[];
+        private static _lastSound;
         private _src;
         private _loaded;
         private _sound;
         private _playedCount;
+        static get lastSound(): Sound;
+        static set lastSound(value: Sound);
         get playedCount(): number;
         set playedCount(value: number);
         get sound(): HTMLAudioElement;
@@ -484,49 +340,55 @@ declare namespace Basik {
     const Sn: typeof Sound;
 }
 declare const S: typeof Basik.Sound;
-declare function LoadSound(url: string): void;
+declare function LoadSound(url: string): Basik.Sound;
 declare function PlaySound(s: Basik.IAudio): void;
-declare function SoundEnded(s: Basik.IAudio): boolean;
 declare function SoundLoaded(s: Basik.IAudio): boolean;
 declare const G: typeof Basik.Graphic;
 declare const T: typeof Basik.Teks;
-declare const Im: typeof Basik.Img;
 declare const Ip: typeof Basik.ImgImpl;
 declare const In: typeof Basik.Input;
 declare function MainBuffer(): CanvasRenderingContext2D;
+declare function SetBuffer(b: CanvasRenderingContext2D): void;
 declare function ClearArea(x: number, y: number, w: number, h: number): void;
-declare function Graphics(w?: number, h?: number, canvas?: HTMLCanvasElement, fullScreen?: boolean, input?: boolean): void;
+declare function Graphics(w?: number, h?: number, canvas?: HTMLCanvasElement, fullScreen?: boolean): void;
 declare function Cls(): void;
 declare function Green(): number;
 declare function Red(): number;
 declare function Blue(): number;
 declare function Alpha(): number;
 declare function GetPixel(x?: number, y?: number): void;
-declare function SetPiksel(x?: number, y?: number, r?: number, g?: number, b?: number): void;
+declare function SetPiksel(x?: number, y?: number): void;
 declare function FillColor(r?: number, g?: number, b?: number, a?: number): void;
 declare function NoColor(): void;
 declare function StrokeColor(r?: number, g?: number, b?: number, a?: number): void;
 declare function NoStroke(): void;
-declare const InputX: typeof Basik.Input.InputX;
-declare const InputY: typeof Basik.Input.InputY;
-declare const InputIsDown: typeof Basik.Input.InputIsDown;
-declare const InputIsDragged: typeof Basik.Input.InputIsDragged;
-declare const InputDragX: typeof Basik.Input.InputDragX;
-declare const InputDragY: typeof Basik.Input.InputDragY;
-declare const InputDragStartX: typeof Basik.Input.InputDragStartX;
-declare const InputDragStartY: typeof Basik.Input.InputDragStartY;
-declare const DistMin: typeof Basik.Transform.degDistMin;
+declare function MouseIsDown(): boolean;
+declare function MouseIsDragged(): boolean;
+declare function MouseDragXAmount(): number;
+declare function MouseDragYAmount(): number;
+declare function MouseX(): number;
+declare function MouseY(): number;
+declare function MouseDragStartX(): number;
+declare function MouseDragStartY(): number;
+declare const DistMin: typeof Basik.Transform.degDist;
 declare function Distance(x1: number, y1: number, x2: number, y2: number): number;
-declare const LoadImage: typeof Basik.Img.LoadImage;
-declare const LoadAnimImage: typeof Basik.Img.LoadAnimImage;
-declare const DrawImage: typeof Basik.Img.DrawImage;
-declare const Collide: typeof Basik.Img.Collide;
+declare function Dist(x1: number, y1: number, x2: number, y2: number): number;
+declare function Angle(x: number, y: number): number;
+declare function Sin(n: number): number;
+declare function Cos(n: number): number;
+declare function Tan(n: number): number;
+declare function Clamp(n: number, min: number, max: number): number;
+declare const LoadImage: typeof Basik.ImgImpl.Muat;
+declare const LoadAnimImage: typeof Basik.ImgImpl.MuatAnimasi;
+declare const DrawImage: typeof Basik.ImgImpl.Draw;
+declare const ImageCollide: typeof Basik.ImgImpl.tabrakan;
+declare const ImageCollidePoint: typeof Basik.ImgImpl.dotInsideImage;
+declare const CreateImage: typeof Basik.ImgImpl.CreateImage;
+declare function DrawAllImage(): void;
 declare const ImageBuffer: (img: Basik.ImgObj) => CanvasRenderingContext2D;
-declare const Tile: typeof Basik.Img.Tile;
-declare const AllImageLoaded: typeof Basik.Img.AllImageLoaded;
-declare const DrawAllImage: typeof Basik.Img.DrawAllImage;
-declare const CopyImage: typeof Basik.Img.CopyImage;
+declare const AllImageLoaded: typeof Basik.ImgImpl.AllImageLoaded;
+declare function CopyImage(s: Basik.ImgObj, onload?: () => void): Basik.ImgObj;
 declare const TextPos: typeof Basik.Teks.Goto;
 declare const Write: typeof Basik.Teks.Write;
 declare const TextFont: typeof Basik.Teks.Name;
-declare const TextSize: (size: number) => void;
+declare const TextSize: typeof Basik.Teks.Size;

@@ -6,6 +6,7 @@ namespace Basik {
 	export class ImgObj {
 		private static _ctrDraw: number = 0;
 		private _url: string;
+
 		//image
 		img: HTMLImageElement;
 		canvas: HTMLCanvasElement;
@@ -30,11 +31,12 @@ namespace Basik {
 		private _rotasi: number = 0;
 		private _panjang: number = 0;
 		private _lebar: number = 0;
+		private _tilable: boolean = false;
 
 		//interaktif even
 		private _dragged: boolean = false;
 		private _down: boolean = false;
-		private _dragable: boolean = false;
+		// private _dragable: boolean = false;
 		private _tipeDrag: number = 0;
 
 		//internal interatif
@@ -43,6 +45,13 @@ namespace Basik {
 		private _sudutTekanAwal: number = 0;
 		private _button: number;
 		private _sudutAwal: number = 0;
+
+		public get tilable(): boolean {
+			return this._tilable;
+		}
+		public set tilable(value: boolean) {
+			this._tilable = value;
+		}
 
 		public get sudutAwal(): number {
 			return this._sudutAwal;
@@ -139,12 +148,10 @@ namespace Basik {
 			return this._rotasi;
 		}
 		public set rotasi(value: number) {
-			// console.debug('set value: ' + value);
 			this._rotasi = value;
 		}
 
-		constructor(dragable: boolean = false) {
-			this.dragable = dragable;
+		constructor() {
 		}
 
 		public get drgStartX(): number {
@@ -173,10 +180,7 @@ namespace Basik {
 			this._down = value;
 		}
 		public get dragable(): boolean {
-			return this._dragable;
-		}
-		public set dragable(value: boolean) {
-			this._dragable = value;
+			return this._tipeDrag > 0 ? true : false;
 		}
 
 		public get sudutTekanAwal(): number {
@@ -192,12 +196,6 @@ namespace Basik {
 
 		public set tipeDrag(value: number) {
 			this._tipeDrag = value;
-			if (value > 0) {
-				this._dragable = true;
-			}
-			else {
-				this._dragable = false;
-			}
 		}
 
 		public get url(): string {

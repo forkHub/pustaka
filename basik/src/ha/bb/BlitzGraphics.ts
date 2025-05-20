@@ -2,7 +2,7 @@
 
 const G = Basik.G;
 const T = Basik.Tk;
-const Im = Basik.Im;
+// const Im = Basik.Im;
 const Ip = Basik.Ip;
 const In = Basik.In;
 
@@ -26,8 +26,8 @@ function ClearArea(x: number, y: number, w: number, h: number) {
  * @param fullScreen 
  * @param input 
  */
-function Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true, input: boolean = true) {
-	G.Graphics(w, h, canvas, fullScreen, input);
+function Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true) {
+	G.Graphics(w, h, canvas, fullScreen);
 }
 
 /**
@@ -50,7 +50,7 @@ function Green(): number {
 }
 
 function Red(): number {
-	return G.merah;
+	return G.red;
 }
 
 /**
@@ -79,9 +79,7 @@ function GetPixel(x: number = 0, y: number = 0) {
 	return Ip.AmbilPiksel(x, y);
 }
 
-//TODO: rgb
-function SetPiksel(x: number = 0, y: number = 0, r: number = 0, g: number = 0, b: number = 0) {
-	r; g; b;
+function SetPiksel(x: number = 0, y: number = 0) {
 	return Ip.SetPiksel(x, y);
 }
 
@@ -90,7 +88,7 @@ function FillColor(r: number = 0, g: number = 0, b: number = 0, a: number = 1) {
 }
 
 function NoColor() {
-	FillColor(0, 0, 0, 0);
+	G.context.fillStyle = "none";
 }
 
 function StrokeColor(r: number = 0, g: number = 0, b: number = 0, a: number = 1) {
@@ -98,7 +96,7 @@ function StrokeColor(r: number = 0, g: number = 0, b: number = 0, a: number = 1)
 }
 
 function NoStroke() {
-	StrokeColor(0, 0, 0, 0);
+	G.context.strokeStyle = 'none';
 }
 
 

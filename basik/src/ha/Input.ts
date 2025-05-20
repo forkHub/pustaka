@@ -102,11 +102,11 @@ namespace Basik {
 					let key: number = e.button;
 
 					Input.event.down(Input._obj, key, pos);
-
 					sprInt.inputDown(pos, e.button);
-
-					let f = (window as any)["MouseHit"];
-					if (typeof f === "function") f();
+					try {
+						(window as any).MouseDownEvent(e.button);
+					}
+					catch (e) { e; }
 				});
 
 			buffer.addEventListener(
@@ -117,9 +117,12 @@ namespace Basik {
 
 					let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
 					Input.event.move(this.obj, buffer, e);
-
-					//sprite
 					sprInt.inputMove(pos, e.button);
+					try {
+						(window as any).MouseMoveEvent();
+					}
+					catch (e) { e; }
+
 				});
 
 			buffer.addEventListener(
@@ -133,6 +136,7 @@ namespace Basik {
 						img.down = false;
 						img.dragged = false;
 					});
+					//gak ada event handler
 				});
 
 			buffer.addEventListener(
@@ -140,86 +144,19 @@ namespace Basik {
 				(e: MouseEvent) => {
 					e.stopPropagation();
 					e.preventDefault();
+
 					Input.event.up(this.obj);
 					Ip.daftar.forEach((img: ImgObj) => {
 						img.down = false;
 						img.dragged = false;
 					});
+					try {
+						(window as any).MouseUpEvent(e.button);
+					}
+					catch (e) { e; }
+
 				})
 		}
-
-		/**
-		 * posisi x awal drag
-		 * @returns (number)
-		 * 
-		 * */
-		static InputDragStartX(): number {
-			return Input.obj.xStart;
-		}
-
-		/**
-		 * posisi y awal drag
-		 * @returns (number)
-		 */
-		static InputDragStartY(): number {
-			return Input.obj.yStart;
-		}
-
-		/**
-		 * posisi x pointer
-		 * @returns (number)
-		 */
-		static InputX(): number {
-			return Input.obj.x;
-		}
-
-		/**
-		 * posisi y pointer
-		 * @returns 
-		 */
-		static InputY(): number {
-			return Input.obj.y;
-		}
-
-		/**
-		 * berapa jauh pointer digeser sejajar sumbu x
-		 * @returns (number)
-		 */
-		static InputDragX(): number {
-			return Input.obj.xDrag
-		}
-
-		/**
-		 * berapa jauh pointer di drag sejajar sumbu y
-		 * @returns (number)
-		 */
-		static InputDragY(): number {
-			return Input.obj.yDrag
-		}
-
-		/**
-		 * menghapus data input
-		 */
-		static FlushInput(): void {
-			Input.flush();
-		}
-
-		/**
-		 * mengecek apakah pointer sedang ditekan
-		 * @returns (boolean) 
-		 */
-		static InputIsDown(): boolean {
-			return Input.obj.isDown;
-		}
-
-		/**
-		 * mengecheck apakah pointer sedang di drag
-		 * @returns (boolean)
-		 */
-		static InputIsDragged(): boolean {
-			return Input.obj.isDrag;
-		}
-
 
 		private static buatInputDefault(): IInput {
 			return {
@@ -238,19 +175,6 @@ namespace Basik {
 				yDrag: 0,
 				yStart: 0,
 			}
-		}
-
-		private static flush(): void {
-			// while (Input.inputs.length > 0) {
-			// 	Input.inputs.pop();
-			// }
-			Input.flushByInput(Input._obj);
-		}
-
-		private static flushByInput(input: IInput): void {
-			input.isDown = false;
-			input.isDrag = false;
-			input.isTap = false;
 		}
 
 		static getPos = (cx: number, cy: number, c: HTMLCanvasElement) => {

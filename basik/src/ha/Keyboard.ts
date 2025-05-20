@@ -1,25 +1,19 @@
 namespace Basik {
     export class Keyboard {
-        private static _key: string;
-        public static get key(): string {
-            return Keyboard._key;
-        }
-
         public static init() {
 
             window.addEventListener("keydown", (e: KeyboardEvent) => {
-                Keyboard._key = e.key;
-
-                let f = (window as any)["KeyDown"];
-                if (typeof f == "function") f();
+                try {
+                    (window as any).KeyDownEvent(e.key);
+                }
+                catch (e) { e; }
             })
 
             window.addEventListener("keyup", (e: KeyboardEvent) => {
-                Keyboard._key = e.key;
-
-                let f = (window as any)["KeyUp"];
-                if (typeof f == "function") f();
-
+                try {
+                    (window as any).KeyUpEvent(e.key);
+                }
+                catch (e) { e; }
             })
         }
     }

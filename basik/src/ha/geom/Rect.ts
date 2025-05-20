@@ -139,7 +139,7 @@ namespace Basik {
 			return true;
 		}
 
-		static minX(r: Ktk): number {
+		private static minX(r: Ktk): number {
 			let x: number = r.vs[0].x;
 
 			r.vs.forEach((item: Pt) => {
@@ -149,7 +149,7 @@ namespace Basik {
 			return x;
 		}
 
-		static maxX(r: Ktk): number {
+		private static maxX(r: Ktk): number {
 			let x: number = r.vs[0].x;
 
 			r.vs.forEach((item: Pt) => {
@@ -159,7 +159,7 @@ namespace Basik {
 			return x;
 		}
 
-		static minY(r: Ktk): number {
+		private static minY(r: Ktk): number {
 			let y: number = r.vs[0].y;
 
 			r.vs.forEach((item: Pt) => {
@@ -169,7 +169,7 @@ namespace Basik {
 			return y;
 		}
 
-		static maxY(r: Ktk): number {
+		private static maxY(r: Ktk): number {
 			let y: number = r.vs[0].y;
 
 			r.vs.forEach((item: Pt) => {

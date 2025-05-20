@@ -34,7 +34,7 @@ namespace Basik {
 
 				img = Ip.daftar[i];
 
-				if (Ip.dotDidalamGambar(img, img.x, img.y, pos.x, pos.y)) {
+				if (Ip.dotInsideImage(img, img.x, img.y, pos.x, pos.y)) {
 					if (img.ctrIdx > lastIdx) {
 						lastIdx = img.ctrIdx;
 						lastSprite = img;
@@ -81,7 +81,7 @@ namespace Basik {
 						// console.groupEnd();
 					}
 					else {
-						//TODO:
+
 					}
 
 				}

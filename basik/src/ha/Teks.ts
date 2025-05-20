@@ -23,7 +23,7 @@ namespace Basik {
 			Teks._name = name;
 		}
 
-		static Size(n: number = 30): void {
+		static Size(n: number = 12): void {
 			Teks.size = n;
 		}
 

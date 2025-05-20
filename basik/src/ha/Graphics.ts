@@ -1,45 +1,5 @@
 namespace Basik {
 
-	export class RGBA {
-		color(r: number, g: number, b: number, a: number) {
-			this.r = r;
-			this.g = g;
-			this.b = b;
-			this.a = a;
-		}
-
-		private _r: number = 0;
-		public get r(): number {
-			return this._r;
-		}
-		public set r(value: number) {
-			this._r = value;
-		}
-		private _g: number = 0;
-		public get g(): number {
-			return this._g;
-		}
-		public set g(value: number) {
-			this._g = value;
-		}
-		private _b: number = 0;
-		public get b(): number {
-			return this._b;
-		}
-		public set b(value: number) {
-			this._b = value;
-		}
-		private _a: number = 0;
-		public get a(): number {
-			return this._a;
-		}
-		public set a(value: number) {
-			if (value > 100) value = 100;
-			if (value > 1) value /= 100;
-			this._a = value;
-		}
-	}
-
 	export class Graphic {
 		private static _autoScale: boolean = true;
 		private static _canvas: HTMLCanvasElement;
@@ -72,10 +32,10 @@ namespace Basik {
 		private static _biru: number = 0;
 		private static _transparan: number = 0;
 
-		static Pause() {
-			debugger;
-			// this.canvasAktif.canvas.getcon
-		}
+		// static Pause() {
+		// 	debugger;
+		// 	// this.canvasAktif.canvas.getcon
+		// }
 
 		static handleWindowResize(): void {
 			if (!G._autoScale) return;
@@ -93,10 +53,6 @@ namespace Basik {
 			let cp2 = Math.floor(cp * ratio);
 			let cl2 = Math.floor(cl * ratio);
 
-			//TODO: rechek apakah masih dipakai
-			// G.canvasAktif.ratioX = ratio;
-			// G.canvasAktif.ratioY = ratio;
-
 			canvas.style.position = 'fixed';
 			canvas.style.zIndex = '1';
 			canvas.style.width = cp2 + 'px';
@@ -108,7 +64,7 @@ namespace Basik {
 			// console.debug('canvas w: ' + canvas.style.width + '/ratio: ' + ratio);
 		}
 
-		private static buildCanvas() {
+		private static buildCanvas(w: number, h: number) {
 			if (!G._canvas) {
 				G._canvas = document.body.querySelector('canvas') as HTMLCanvasElement;
 			}
@@ -116,15 +72,17 @@ namespace Basik {
 			if (!G._canvas) {
 				G._canvas = document.createElement('canvas') as HTMLCanvasElement;
 				document.body.appendChild(G._canvas);
+				G._canvas.width = w;
+				G._canvas.height = h;
 			}
 		}
 
-		static Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true, input: boolean = true) {
+		static Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true) {
 
 			if (canvas) {
 				G._canvas = canvas;
 			}
-			G.buildCanvas();
+			G.buildCanvas(w, h);
 			this._mainCtx = G._canvas.getContext("2d");
 			this._context = this._mainCtx;
 
@@ -134,9 +92,7 @@ namespace Basik {
 
 			G.setupCanvas(w, h, G.autoScale);
 
-			if (input) {
-				In.init(G._canvas);
-			}
+			In.init(G._canvas);
 
 			// if (Graphic.skalaOtomatis) {
 			window.addEventListener("resize", (): void => {
@@ -177,11 +133,11 @@ namespace Basik {
 			ctx.clearRect(0, 0, (G._canvas.width), (G._canvas.height));
 		}
 
-		public static get merah(): number {
+		public static get red(): number {
 			return G._merah;
 		}
 
-		public static set merah(value: number) {
+		public static set red(value: number) {
 			G._merah = value;
 		}
 

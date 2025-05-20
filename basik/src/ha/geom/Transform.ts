@@ -14,10 +14,10 @@ namespace Basik {
 			return Tf._lastY;
 		}
 
-		static equal(n1: number, n2: number, toleransi: number = 1): boolean {
-			if (Math.abs(n1 - n2) <= toleransi) return true;
-			return false;
-		}
+		// static equal(n1: number, n2: number, toleransi: number = 1): boolean {
+		// 	if (Math.abs(n1 - n2) <= toleransi) return true;
+		// 	return false;
+		// }
 
 		private static quadDeg2(x: number, y: number, deg: number): number {
 			if (x == 0) {
@@ -81,7 +81,7 @@ namespace Basik {
 			return sin;
 		}
 
-		static normalizeDeg(deg: number): number {
+		private static normalizeDeg(deg: number): number {
 
 			while (deg >= 360) {
 				deg -= 360;
@@ -96,7 +96,16 @@ namespace Basik {
 			return deg;
 		}
 
-		static degDistMax(angleS: number = 0, angleT: number): number {
+		static degDist(angleS: number = 0, angleT: number, min: boolean = true): number {
+			if (min) {
+				return Transform.degDistMin(angleS, angleT);
+			}
+			else {
+				return Transform.degDistMax(angleS, angleT);
+			}
+		}
+
+		private static degDistMax(angleS: number = 0, angleT: number): number {
 			angleS = Tf.normalizeDeg(angleS);
 			angleT = Tf.normalizeDeg(angleT);
 
@@ -109,7 +118,7 @@ namespace Basik {
 			}
 		}
 
-		static degDistMin(angleS: number = 0, angleT: number): number {
+		private static degDistMin(angleS: number = 0, angleT: number): number {
 			angleS = Tf.normalizeDeg(angleS);
 			angleT = Tf.normalizeDeg(angleT);
 
@@ -131,11 +140,11 @@ namespace Basik {
 			}
 		}
 
-		static jarak(x: number, y: number, xt: number, yt: number): number {
-			let pjx: number = xt - x;
-			let pjy: number = yt - y;
-			return Math.sqrt(pjx * pjx + pjy * pjy);
-		}
+		// static jarak(x: number, y: number, xt: number, yt: number): number {
+		// 	let pjx: number = xt - x;
+		// 	let pjy: number = yt - y;
+		// 	return Math.sqrt(pjx * pjx + pjy * pjy);
+		// }
 
 		static rotateRel(x: number = 0, y: number = 0, xt: number = 0, yt: number = 0, deg: number = 10): void {
 			let xr: number = x - xt;

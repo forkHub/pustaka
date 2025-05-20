@@ -36,7 +36,7 @@ namespace Basik {
 			return new Sg(v1, v2);
 		}
 
-		static boundCollide(seg1: Seg, seg2: Seg): boolean {
+		private static boundCollide(seg1: Seg, seg2: Seg): boolean {
 			if (Sg.maxX(seg1) < Sg.minX(seg2)) return false;
 			if (Sg.minX(seg1) > Sg.maxX(seg2)) return false;
 
@@ -81,11 +81,11 @@ namespace Basik {
 			Pt.copy(seg1.B, seg2.B);
 		}
 
-		static clone(seg: Seg): Seg {
+		private static clone(seg: Seg): Seg {
 			return new Seg(Pt.clone(seg.A), Pt.clone(seg.B))
 		}
 
-		static crossHor(seg: Seg): boolean {
+		private static crossHor(seg: Seg): boolean {
 			if (Sg.maxY(seg) > 0) {
 				if (Sg.minY(seg) < 0) {
 					return true;
@@ -102,52 +102,51 @@ namespace Basik {
 			return Tf.sudut(i, j);
 		}
 
-		static getXAtIdx(seg: Seg, idx: number): number {
+		private static getXAtIdx(seg: Seg, idx: number): number {
 			return seg.A.x + (idx * Sg.vecI(seg));
 		}
 
-		static getYAtIdx(seg: Seg, idx: number): number {
-			return seg.A.y + (idx * Sg.vecJ(seg));
-		}
+		// static getYAtIdx(seg: Seg, idx: number): number {
+		// 	return seg.A.y + (idx * Sg.vecJ(seg));
+		// }
 
-		static vecI(seg: Seg): number {
+		private static vecI(seg: Seg): number {
 			return seg.B.x - seg.A.x;
 		}
 
-		static vecJ(seg: Seg): number {
-			return seg.B.y - seg.A.y;
-		}
+		// static vecJ(seg: Seg): number {
+		// 	return seg.B.y - seg.A.y;
+		// }
 
-		static rotate(seg: Seg, deg: number = 0, xc: number = 0, yc: number = 0): void {
+		private static rotate(seg: Seg, deg: number = 0, xc: number = 0, yc: number = 0): void {
 			Pt.putarPoros(seg.A, xc, yc, deg);
 			Pt.putarPoros(seg.B, xc, yc, deg);
 		}
 
-		static minX(seg: Seg): number {
+		private static minX(seg: Seg): number {
 			return Math.min(seg.A.x, seg.B.x);
 		}
 
-		static maxX(seg: Seg): number {
+		private static maxX(seg: Seg): number {
 			return Math.max(seg.A.x, seg.B.x);
 		}
 
-		static minY(seg: Seg): number {
+		private static minY(seg: Seg): number {
 			return Math.min(seg.A.y, seg.B.y);
 		}
 
-		static maxY(seg: Seg): number {
+		private static maxY(seg: Seg): number {
 			return Math.max(seg.A.y, seg.B.y);
 		}
 
-		static translate(seg: Seg, x: number = 0, y: number = 0) {
+		private static translate(seg: Seg, x: number = 0, y: number = 0) {
 			seg.A.x += x;
 			seg.A.y += y;
 			seg.B.x += x;
 			seg.B.y += y;
 		}
 
-		//tested
-		static xHorIdx(seg: Seg): number {
+		private static xHorIdx(seg: Seg): number {
 			if (!Seg.crossHor(seg)) return NaN;
 
 			let idx: number = 0;

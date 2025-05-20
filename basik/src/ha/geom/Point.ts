@@ -38,11 +38,11 @@ namespace Basik {
 			return h;
 		}
 
-		static sama(p1: Pt, p2: Pt): boolean {
-			if (false == Tf.equal(p1.x, p2.x)) return false;
-			if (false == Tf.equal(p1.y, p2.y)) return false;
-			return true;
-		}
+		// static sama(p1: Pt, p2: Pt): boolean {
+		// 	if (false == Tf.equal(p1.x, p2.x)) return false;
+		// 	if (false == Tf.equal(p1.y, p2.y)) return false;
+		// 	return true;
+		// }
 
 		static putarPoros(p: Pt, xc: number = 0, yc: number = 0, deg: number = 0): void {
 			Tf.rotateRel(p.x, p.y, xc, yc, deg);
@@ -52,40 +52,40 @@ namespace Basik {
 
 		}
 
-		static posDist(p: Pt, xt: number, yt: number, jrk: number): Pt {
-			let jrkA: number;
-			let i: number;
-			let j: number;
-			let rasio: number;
-			let hasil: Pt = Pt.create();
+		// static posDist(p: Pt, xt: number, yt: number, jrk: number): Pt {
+		// 	let jrkA: number;
+		// 	let i: number;
+		// 	let j: number;
+		// 	let rasio: number;
+		// 	let hasil: Pt = Pt.create();
 
-			//jarak sekarang
-			jrkA = Tf.jarak(p.x, p.y, xt, yt);
-			i = xt - p.x;
-			j = yt - p.y;
+		// 	//jarak sekarang
+		// 	jrkA = Tf.jarak(p.x, p.y, xt, yt);
+		// 	i = xt - p.x;
+		// 	j = yt - p.y;
 
-			rasio = jrkA / jrk;
+		// 	rasio = jrkA / jrk;
 
-			hasil.x = i * rasio;
-			hasil.y = j * rasio;
+		// 	hasil.x = i * rasio;
+		// 	hasil.y = j * rasio;
 
-			hasil.x = xt - hasil.x;
-			hasil.y = yt - hasil.y;
+		// 	hasil.x = xt - hasil.x;
+		// 	hasil.y = yt - hasil.y;
 
-			return hasil;
-		}
+		// 	return hasil;
+		// }
 
-		static posPolar(jarak: number, sudut: number, xt: number, yt: number): Pt {
-			let hasil: Pt = Pt.create();
+		// static posPolar(jarak: number, sudut: number, xt: number, yt: number): Pt {
+		// 	let hasil: Pt = Pt.create();
 
-			hasil.x = jarak * Math.cos(sudut * Tf.DEG2RAD);
-			hasil.y = jarak * Math.sin(sudut * Tf.DEG2RAD);
+		// 	hasil.x = jarak * Math.cos(sudut * Tf.DEG2RAD);
+		// 	hasil.y = jarak * Math.sin(sudut * Tf.DEG2RAD);
 
-			hasil.x += xt;
-			hasil.y += yt;
+		// 	hasil.x += xt;
+		// 	hasil.y += yt;
 
-			return hasil;
-		}
+		// 	return hasil;
+		// }
 
 	}
 }

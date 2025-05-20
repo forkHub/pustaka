@@ -1,7 +1,6 @@
 ///<reference path="./Route.ts"/>
 
-// const Sudut = ha.be.Mat.Sudut; //TODO: min max options
-const DistMin = Basik.Transform.degDistMin;
+const DistMin = Basik.Transform.degDist;
 
 /**
  * 

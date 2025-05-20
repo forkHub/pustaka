@@ -1,7 +1,7 @@
 ///<reference path="./Route.ts"/>
 
 const S = Basik.Sn;
-function LoadSound(url: string): void {
+function LoadSound(url: string): Basik.Sound {
 	let sound: HTMLAudioElement = document.createElement("audio");
 
 	let s = new S();
@@ -12,22 +12,21 @@ function LoadSound(url: string): void {
 	sound.onload = () => {
 		s.loaded = true;
 	}
+
 	sound.onended = () => {
 		s.playedCount++;
+		try {
+			(window as any).SoundEnded(s);
+		} catch (e) { }
 	}
 	sound.src = url;
 
 	S.list.push(s);
+	return s;
 }
 
 function PlaySound(s: Basik.IAudio): void {
 	s.sound.play();
-}
-
-function SoundEnded(s: Basik.IAudio): boolean {
-	let h = s.playedCount;
-	s.playedCount = 0;
-	return (h > 0);
 }
 
 function SoundLoaded(s: Basik.IAudio): boolean {
