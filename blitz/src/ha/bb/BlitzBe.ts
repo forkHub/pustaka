@@ -34,6 +34,14 @@ function Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = 
 		G.handleWindowResize();
 	})
 
+	function update() {
+		let updater = (window as any)["Update"];
+		if (typeof updater === "function") {
+			updater();
+		}
+		window.requestAnimationFrame(update);
+	}
+	update();
 
 	setTimeout(() => {
 		G.handleWindowResize();
