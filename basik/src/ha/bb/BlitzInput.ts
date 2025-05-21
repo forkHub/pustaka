@@ -1,6 +1,10 @@
 ///<reference path="./Route.ts"/>
 
 /**
+ * Mouse Function
+ */
+
+/**
  * mengecek apakah pointer sedang ditekan
  * @returns (boolean) 
  */

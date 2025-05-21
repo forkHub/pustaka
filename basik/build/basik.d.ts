@@ -44,7 +44,7 @@ declare namespace Basik {
         class EventHandler {
             move(input: IInput, buffer: HTMLCanvasElement, e: MouseEvent): void;
             down(input: IInput, key: number, pos: IV2D): void;
-            up(input: IInput): void;
+            up(input: IInput, key: number): void;
             private checkTap;
         }
     }

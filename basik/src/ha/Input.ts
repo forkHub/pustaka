@@ -16,8 +16,10 @@ namespace Basik {
 					input.yDrag = input.y - input.yStart;
 				}
 
-				let f = (window as any)["MouseMove"];
-				if (typeof f === 'function') f();
+				try {
+					(window as any).MouseMoveEvent();
+				}
+				catch (e) { e; }
 			}
 
 			down(input: IInput, key: number, pos: IV2D): void {
@@ -31,28 +33,34 @@ namespace Basik {
 				input.isTap = false;
 				input.isDrag = false;
 				input.key = key;
-				// input.type = type;
 				input.timerStart = Date.now();
 
-				let f = (window as any)["MouseDown"];
-				if (typeof f === 'function') f();
+				try {
+					(window as any).MouseDownEvent(key);
+				}
+				catch (e) { e; }
 			}
 
-			up(input: IInput): void {
+			up(input: IInput, key: number): void {
 				input.isDown = false;
 				input.isDrag = false;
 				input.timerEnd = Date.now();
+				input.key = key;
 
 				let isTap = this.checkTap(input);
 				input.isTap = (isTap == '');
 
 				if (input.isTap) {
-					let f = (window as any)["MouseTap"];
-					if (typeof f === 'function') f();
+					try {
+						(window as any).MouseClickEvent(input.key);
+					}
+					catch (e) { e; }
 				}
 
-				let f = (window as any)["MouseUp"];
-				if (typeof f === 'function') f();
+				try {
+					(window as any).MouseUpEvent(input.key);
+				}
+				catch (e) { e; }
 			}
 
 			//check tap
@@ -103,10 +111,6 @@ namespace Basik {
 
 					Input.event.down(Input._obj, key, pos);
 					sprInt.inputDown(pos, e.button);
-					try {
-						(window as any).MouseDownEvent(e.button);
-					}
-					catch (e) { e; }
 				});
 
 			buffer.addEventListener(
@@ -118,11 +122,6 @@ namespace Basik {
 					let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
 					Input.event.move(this.obj, buffer, e);
 					sprInt.inputMove(pos, e.button);
-					try {
-						(window as any).MouseMoveEvent();
-					}
-					catch (e) { e; }
-
 				});
 
 			buffer.addEventListener(
@@ -131,7 +130,7 @@ namespace Basik {
 					e.stopPropagation();
 					e.preventDefault();
 
-					Input.event.up(Input.obj);
+					Input.event.up(Input.obj, e.button);
 					Ip.daftar.forEach((img: ImgObj) => {
 						img.down = false;
 						img.dragged = false;
@@ -145,15 +144,12 @@ namespace Basik {
 					e.stopPropagation();
 					e.preventDefault();
 
-					Input.event.up(this.obj);
+					Input.event.up(this.obj, e.button);
 					Ip.daftar.forEach((img: ImgObj) => {
 						img.down = false;
 						img.dragged = false;
 					});
-					try {
-						(window as any).MouseUpEvent(e.button);
-					}
-					catch (e) { e; }
+
 
 				})
 		}
