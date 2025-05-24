@@ -3,34 +3,55 @@
 const DistMin = Basik.Transform.degDist;
 
 /**
- * 
- * @param x1 
- * @param y1 
- * @param x2 
- * @param y2 
- * @returns 
+ * Calculate distance between two points
+ * @param x1 x position of the first point
+ * @param y1 y position of the first point
+ * @param x2 x position of the second point
+ * @param y2 y position of the second point
+ * @returns {number}
  */
 function Distance(x1: number, y1: number, x2: number, y2: number): number {
 	return Math.hypot(x2 - x1, y2 - y1);
 }
 
-function Dist(x1: number, y1: number, x2: number, y2: number): number {
-	return Math.hypot(x2 - x1, y2 - y1);
-}
-
 /**
- * Menghitung sudut dari posisi relative ke posisi 0,0
- * @param x posisi x
- * @param y posisi y
- * @returns sudut relative ke posisi 0,0
+ * Calculae the angle of a point relative to the horizontal line
+ * @param x {number} the x position
+ * @param y {number} the y position
+ * @returns {number} the angle in degrees
  */
 function Angle(x: number, y: number): number {
 	return Basik.Tf.sudut(x, y);
 }
 
-function Sin(n: number) { return Math.sin(n * Math.PI / 180) }
-function Cos(n: number) { return Math.cos(n * Math.PI / 180) }
-function Tan(n: number) { return Math.tan(n * Math.PI / 180) }
+/**
+ * Calculate the Sin of an angle
+ * @param n {number} the angle in degrees
+ * @returns {number} 
+ */
+function Sin(n: number): number { return Math.sin(n * Math.PI / 180) }
+
+/**
+ * Calculate the Cos of an angle
+ * @param n {number} the angle in degrees
+ * @returns {number} 
+ */
+function Cos(n: number): number { return Math.cos(n * Math.PI / 180) }
+
+/**
+ * Calculate the Tan of an angle
+ * @param n {number} the angle in degrees
+ * @returns {number} 
+ */
+function Tan(n: number): number { return Math.tan(n * Math.PI / 180) }
+
+/**
+ * Restrict a value within a specified range
+ * @param n {number} the number to clamp
+ * @param min {number} preferred minimum vaue
+ * @param max {number} preferred maximum value
+ * @returns {number}
+ */
 function Clamp(n: number, min: number, max: number): number {
 	if (n < min) return min;
 	if (n > max) return max;

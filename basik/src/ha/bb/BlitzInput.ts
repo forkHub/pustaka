@@ -1,74 +1,70 @@
 ///<reference path="./Route.ts"/>
 
 /**
- * Mouse Function
- */
-
-/**
- * mengecek apakah pointer sedang ditekan
- * @returns (boolean) 
+ * muouse is down status
+ * @returns {boolean}
  */
 function MouseIsDown(): boolean {
-    return In.obj.isDown;
+	return In.obj.isDown;
 }
 
 /**
- * mengecheck apakah pointer sedang di drag
- * @returns (boolean)
+ * mouse is dragged
+ * @returns {boolean}
  */
 function MouseIsDragged(): boolean {
-    return In.obj.isDrag;
+	return In.obj.isDrag;
 }
 
 
 /**
- * berapa jauh pointer digeser sejajar sumbu x
- * @returns (number)
+ * drag horizontal length
+ * @returns {number}
  */
 function MouseDragXAmount(): number {
-    return In.obj.xDrag
+	return In.obj.xDrag
 }
 
 /**
- * berapa jauh pointer di drag sejajar sumbu y
- * @returns (number)
+ * drag vertical length
+ * @returns {number}
  */
 function MouseDragYAmount(): number {
-    return In.obj.yDrag
+	return In.obj.yDrag
 }
 
 /**
- * posisi x pointer
- * @returns (number)
+ * mouse x position
+ * @returns {number}
  */
 function MouseX(): number {
-    return In.obj.x;
+	return In.obj.x;
 }
 
 /**
- * posisi y pointer
- * @returns 
+ * mouse y position
+ * @returns {number}
  */
 function MouseY(): number {
-    return In.obj.y;
+	return In.obj.y;
 }
 
 
 /**
- * posisi x awal drag
- * @returns (number)
+ * drag start x position
+ * @returns {number}
  * 
  * */
 function MouseDragStartX(): number {
-    return In.obj.xStart;
+	return In.obj.xStart;
 }
 
 /**
- * posisi y awal drag
- * @returns (number)
+ * drag start y position
+ * @returns {number}
  */
 function MouseDragStartY(): number {
-    return In.obj.yStart;
+	return In.obj.yStart;
 }
 
 

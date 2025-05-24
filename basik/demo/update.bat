@@ -1,3 +1,3 @@
-copy c:\tsmodule\basik.js .\web
-copy c:\tsmodule\basik.d.ts .\lib
+copy ..\build\basik.js .\web
+copy ..\build\basik.d.ts .\lib
 pause

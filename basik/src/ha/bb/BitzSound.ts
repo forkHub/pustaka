@@ -1,6 +1,12 @@
 ///<reference path="./Route.ts"/>
 
 const S = Basik.Sn;
+
+/**
+ * Load sound
+ * @param url {string} the url
+ * @returns {Basik.Sound} 
+ */
 function LoadSound(url: string): Basik.Sound {
 	let sound: HTMLAudioElement = document.createElement("audio");
 
@@ -25,10 +31,19 @@ function LoadSound(url: string): Basik.Sound {
 	return s;
 }
 
-function PlaySound(s: Basik.IAudio): void {
+/**
+ * Play Sound
+ * @param s {Basic.Sound}
+ */
+function PlaySound(s: Basik.Sound): void {
 	s.sound.play();
 }
 
-function SoundLoaded(s: Basik.IAudio): boolean {
+/**
+ * Check if a sound has been loaded
+ * @param s {Basik.Sound} the sound object
+ * @returns {boolean}
+ */
+function SoundLoaded(s: Basik.Sound): boolean {
 	return s.loaded;
 }

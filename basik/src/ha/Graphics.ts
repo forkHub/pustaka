@@ -2,22 +2,8 @@ namespace Basik {
 
 	export class Graphic {
 		private static _autoScale: boolean = true;
-		private static _canvas: HTMLCanvasElement;
-		public static get canvas(): HTMLCanvasElement {
-			return Graphic._canvas;
-		}
-		private static _context: CanvasRenderingContext2D;
-		public static get context(): CanvasRenderingContext2D {
-			return Graphic._context;
-		}
-		public static set context(value: CanvasRenderingContext2D) {
-			Graphic._context = value;
-		}
-
-		private static _mainCtx: CanvasRenderingContext2D;
-		public static get mainCtx(): CanvasRenderingContext2D {
-			return Graphic._mainCtx;
-		}
+		private static canvas: HTMLCanvasElement;
+		private static mainCanvas: HTMLCanvasElement;
 
 		public static get autoScale(): boolean {
 			return G._autoScale;
@@ -40,10 +26,10 @@ namespace Basik {
 		static handleWindowResize(): void {
 			if (!G._autoScale) return;
 			// console.debug('window on resize');
-			let canvas: HTMLCanvasElement = G._canvas;
+			let canvas: HTMLCanvasElement = G.canvas;
 
-			let cp = G._canvas.width;
-			let cl = G._canvas.height;
+			let cp = G.canvas.width;
+			let cl = G.canvas.height;
 
 			let wp = window.innerWidth;
 			let wl = window.innerHeight;
@@ -64,35 +50,46 @@ namespace Basik {
 			// console.debug('canvas w: ' + canvas.style.width + '/ratio: ' + ratio);
 		}
 
-		private static buildCanvas(w: number, h: number) {
-			if (!G._canvas) {
-				G._canvas = document.body.querySelector('canvas') as HTMLCanvasElement;
-			}
+		private static buildCanvas(w: number, h: number): HTMLCanvasElement {
+			let canvas: HTMLCanvasElement;
 
-			if (!G._canvas) {
-				G._canvas = document.createElement('canvas') as HTMLCanvasElement;
-				document.body.appendChild(G._canvas);
-				G._canvas.width = w;
-				G._canvas.height = h;
+			canvas = document.body.querySelector('canvas') as HTMLCanvasElement;
+
+			if (!canvas) {
+				canvas = document.createElement('canvas') as HTMLCanvasElement;
+				document.body.appendChild(canvas);
+				canvas.width = w;
+				canvas.height = h;
 			}
+			return canvas;
+		}
+
+		static Canvas(): HTMLCanvasElement {
+			return G.canvas;
+		}
+
+		static MainCanvas(): HTMLCanvasElement {
+			return G.mainCanvas;
+		}
+
+		static SetCanvas(canvas: HTMLCanvasElement): void {
+			G.mainCanvas = canvas;
 		}
 
 		static Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true) {
 
-			if (canvas) {
-				G._canvas = canvas;
-			}
-			G.buildCanvas(w, h);
-			this._mainCtx = G._canvas.getContext("2d");
-			this._context = this._mainCtx;
+			if (!canvas) canvas = G.buildCanvas(w, h);
+
+			G.mainCanvas = canvas;
+			G.canvas = canvas;
 
 			G.autoScale = fullScreen;
 
 			console.log('inisialisasi');
 
-			G.setupCanvas(w, h, G.autoScale);
+			G.setupMainCanvas(w, h, G.autoScale);
 
-			In.init(G._canvas);
+			In.init(G.canvas);
 
 			// if (Graphic.skalaOtomatis) {
 			window.addEventListener("resize", (): void => {
@@ -100,10 +97,11 @@ namespace Basik {
 			})
 
 			function update() {
-				let updater = (window as any)["Update"];
-				if (typeof updater === "function") {
-					updater();
-				}
+				// let updater = (window as any)["UpdateEvent"];
+				// if (typeof updater === "function") {
+				// 	updater();
+				// }
+				Event.call("update");
 				window.requestAnimationFrame(update);
 			}
 			window.requestAnimationFrame(update);
@@ -117,20 +115,20 @@ namespace Basik {
 			Cls();
 		}
 
-		private static setupCanvas(p: number = 320, l: number = 240, fullScreen: boolean): void {
-			G._canvas.width = p;
-			G._canvas.height = l;
+		private static setupMainCanvas(p: number = 320, l: number = 240, fullScreen: boolean): void {
+			G.mainCanvas.width = p;
+			G.mainCanvas.height = l;
 
 			if (fullScreen) {
-				G._canvas.style.width = p + 'px';
-				G._canvas.style.padding = '0px';
-				G._canvas.style.margin = '0px';
+				G.mainCanvas.style.width = p + 'px';
+				G.mainCanvas.style.padding = '0px';
+				G.mainCanvas.style.margin = '0px';
 			}
 		}
 
 		static Cls() {
-			let ctx: CanvasRenderingContext2D = G.context;
-			ctx.clearRect(0, 0, (G._canvas.width), (G._canvas.height));
+			let ctx: CanvasRenderingContext2D = G.canvas.getContext('2d');
+			ctx.clearRect(0, 0, (G.canvas.width), (G.canvas.height));
 		}
 
 		public static get red(): number {
@@ -141,19 +139,19 @@ namespace Basik {
 			G._merah = value;
 		}
 
-		public static get hijau(): number {
+		public static get green(): number {
 			return G._hijau;
 		}
 
-		public static set hijau(value: number) {
+		public static set green(value: number) {
 			G._hijau = value;
 		}
 
-		public static get biru(): number {
+		public static get blue(): number {
 			return G._biru;
 		}
 
-		public static set biru(value: number) {
+		public static set blue(value: number) {
 			G._biru = value;
 		}
 

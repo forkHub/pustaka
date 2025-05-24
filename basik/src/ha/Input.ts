@@ -14,12 +14,21 @@ namespace Basik {
 					input.isDrag = true;
 					input.xDrag = input.x - input.xStart;
 					input.yDrag = input.y - input.yStart;
+
+					// try {
+					// 	let f = (window as any)["MouseDragEvent"];
+					// 	if (typeof f == "function") (window as any).MouseDragEvent();
+					// }
+					// catch (e) { e; }
+					Event.call("mousedrag");
 				}
 
-				try {
-					(window as any).MouseMoveEvent();
-				}
-				catch (e) { e; }
+				// try {
+				// 	let f = (window as any)["MouseMoveEvent"];
+				// 	if (typeof f == "function") (window as any).MouseMoveEvent();
+				// }
+				// catch (e) { e; }
+				Event.call("mousemove");
 			}
 
 			down(input: IInput, key: number, pos: IV2D): void {
@@ -35,10 +44,11 @@ namespace Basik {
 				input.key = key;
 				input.timerStart = Date.now();
 
-				try {
-					(window as any).MouseDownEvent(key);
-				}
-				catch (e) { e; }
+				// try {
+				// 	(window as any).MouseDownEvent(key);
+				// }
+				// catch (e) { e; }
+				Event.call("mousedown");
 			}
 
 			up(input: IInput, key: number): void {
@@ -51,16 +61,18 @@ namespace Basik {
 				input.isTap = (isTap == '');
 
 				if (input.isTap) {
-					try {
-						(window as any).MouseClickEvent(input.key);
-					}
-					catch (e) { e; }
+					// try {
+					// 	(window as any).MouseClickEvent(input.key);
+					// }
+					// catch (e) { e; }
+					Event.call("mouseclick");
 				}
 
-				try {
-					(window as any).MouseUpEvent(input.key);
-				}
-				catch (e) { e; }
+				// try {
+				// 	(window as any).MouseUpEvent(input.key);
+				// }
+				// catch (e) { e; }
+				Event.call("mouseup");
 			}
 
 			//check tap

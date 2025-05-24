@@ -4,7 +4,9 @@ var ha;
     var be;
     (function (be) {
         class Cache {
-            files = [];
+            constructor() {
+                this.files = [];
+            }
             getGbr(url) {
                 for (let i = 0; i < this.files.length; i++) {
                     if (this.files[i].url == url) {
@@ -32,39 +34,49 @@ var ha;
 })(ha || (ha = {}));
 var Basik;
 (function (Basik) {
+    class Event {
+        constructor(type, f) {
+            this._type = '';
+            this._type = type;
+            this._f = f;
+        }
+        get type() {
+            return this._type;
+        }
+        get f() {
+            return this._f;
+        }
+        static addListener(type, f) {
+            let e = new Event(type.toLowerCase(), f);
+            Event.list.push(e);
+            return e;
+        }
+        static call(type) {
+            Event.list.forEach((item) => {
+                if (item.type === type.toLowerCase()) {
+                    item.f();
+                }
+            });
+        }
+    }
+    Event.list = [];
+    Basik.Event = Event;
+})(Basik || (Basik = {}));
+var Basik;
+(function (Basik) {
     class Graphic {
-        static _autoScale = true;
-        static _canvas;
-        static get canvas() {
-            return Graphic._canvas;
-        }
-        static _context;
-        static get context() {
-            return Graphic._context;
-        }
-        static set context(value) {
-            Graphic._context = value;
-        }
-        static _mainCtx;
-        static get mainCtx() {
-            return Graphic._mainCtx;
-        }
         static get autoScale() {
             return Basik.G._autoScale;
         }
         static set autoScale(value) {
             Basik.G._autoScale = value;
         }
-        static _merah = 0;
-        static _hijau = 0;
-        static _biru = 0;
-        static _transparan = 0;
         static handleWindowResize() {
             if (!Basik.G._autoScale)
                 return;
-            let canvas = Basik.G._canvas;
-            let cp = Basik.G._canvas.width;
-            let cl = Basik.G._canvas.height;
+            let canvas = Basik.G.canvas;
+            let cp = Basik.G.canvas.width;
+            let cl = Basik.G.canvas.height;
             let wp = window.innerWidth;
             let wl = window.innerHeight;
             let ratio = Math.min((wp / cp), (wl / cl));
@@ -78,35 +90,39 @@ var Basik;
             canvas.style.left = ((wp - cp2) / 2) + 'px';
         }
         static buildCanvas(w, h) {
-            if (!Basik.G._canvas) {
-                Basik.G._canvas = document.body.querySelector('canvas');
+            let canvas;
+            canvas = document.body.querySelector('canvas');
+            if (!canvas) {
+                canvas = document.createElement('canvas');
+                document.body.appendChild(canvas);
+                canvas.width = w;
+                canvas.height = h;
             }
-            if (!Basik.G._canvas) {
-                Basik.G._canvas = document.createElement('canvas');
-                document.body.appendChild(Basik.G._canvas);
-                Basik.G._canvas.width = w;
-                Basik.G._canvas.height = h;
-            }
+            return canvas;
+        }
+        static Canvas() {
+            return Basik.G.canvas;
+        }
+        static MainCanvas() {
+            return Basik.G.mainCanvas;
+        }
+        static SetCanvas(canvas) {
+            Basik.G.mainCanvas = canvas;
         }
         static Graphics(w = 320, h = 240, canvas = null, fullScreen = true) {
-            if (canvas) {
-                Basik.G._canvas = canvas;
-            }
-            Basik.G.buildCanvas(w, h);
-            this._mainCtx = Basik.G._canvas.getContext("2d");
-            this._context = this._mainCtx;
+            if (!canvas)
+                canvas = Basik.G.buildCanvas(w, h);
+            Basik.G.mainCanvas = canvas;
+            Basik.G.canvas = canvas;
             Basik.G.autoScale = fullScreen;
             console.log('inisialisasi');
-            Basik.G.setupCanvas(w, h, Basik.G.autoScale);
-            Basik.In.init(Basik.G._canvas);
+            Basik.G.setupMainCanvas(w, h, Basik.G.autoScale);
+            Basik.In.init(Basik.G.canvas);
             window.addEventListener("resize", () => {
                 Basik.G.handleWindowResize();
             });
             function update() {
-                let updater = window["Update"];
-                if (typeof updater === "function") {
-                    updater();
-                }
+                Basik.Event.call("update");
                 window.requestAnimationFrame(update);
             }
             window.requestAnimationFrame(update);
@@ -117,18 +133,18 @@ var Basik;
             NoStroke();
             Cls();
         }
-        static setupCanvas(p = 320, l = 240, fullScreen) {
-            Basik.G._canvas.width = p;
-            Basik.G._canvas.height = l;
+        static setupMainCanvas(p = 320, l = 240, fullScreen) {
+            Basik.G.mainCanvas.width = p;
+            Basik.G.mainCanvas.height = l;
             if (fullScreen) {
-                Basik.G._canvas.style.width = p + 'px';
-                Basik.G._canvas.style.padding = '0px';
-                Basik.G._canvas.style.margin = '0px';
+                Basik.G.mainCanvas.style.width = p + 'px';
+                Basik.G.mainCanvas.style.padding = '0px';
+                Basik.G.mainCanvas.style.margin = '0px';
             }
         }
         static Cls() {
-            let ctx = Basik.G.context;
-            ctx.clearRect(0, 0, (Basik.G._canvas.width), (Basik.G._canvas.height));
+            let ctx = Basik.G.canvas.getContext('2d');
+            ctx.clearRect(0, 0, (Basik.G.canvas.width), (Basik.G.canvas.height));
         }
         static get red() {
             return Basik.G._merah;
@@ -136,16 +152,16 @@ var Basik;
         static set red(value) {
             Basik.G._merah = value;
         }
-        static get hijau() {
+        static get green() {
             return Basik.G._hijau;
         }
-        static set hijau(value) {
+        static set green(value) {
             Basik.G._hijau = value;
         }
-        static get biru() {
+        static get blue() {
             return Basik.G._biru;
         }
-        static set biru(value) {
+        static set blue(value) {
             Basik.G._biru = value;
         }
         static get alpha() {
@@ -155,6 +171,11 @@ var Basik;
             Basik.G._transparan = value;
         }
     }
+    Graphic._autoScale = true;
+    Graphic._merah = 0;
+    Graphic._hijau = 0;
+    Graphic._biru = 0;
+    Graphic._transparan = 0;
     Basik.Graphic = Graphic;
     Basik.G = Graphic;
 })(Basik || (Basik = {}));
@@ -172,13 +193,9 @@ var Basik;
                     input.isDrag = true;
                     input.xDrag = input.x - input.xStart;
                     input.yDrag = input.y - input.yStart;
+                    Basik.Event.call("mousedrag");
                 }
-                try {
-                    window.MouseMoveEvent();
-                }
-                catch (e) {
-                    e;
-                }
+                Basik.Event.call("mousemove");
             }
             down(input, key, pos) {
                 input.xStart = pos.x;
@@ -192,12 +209,7 @@ var Basik;
                 input.isDrag = false;
                 input.key = key;
                 input.timerStart = Date.now();
-                try {
-                    window.MouseDownEvent(key);
-                }
-                catch (e) {
-                    e;
-                }
+                Basik.Event.call("mousedown");
             }
             up(input, key) {
                 input.isDown = false;
@@ -207,19 +219,9 @@ var Basik;
                 let isTap = this.checkTap(input);
                 input.isTap = (isTap == '');
                 if (input.isTap) {
-                    try {
-                        window.MouseClickEvent(input.key);
-                    }
-                    catch (e) {
-                        e;
-                    }
+                    Basik.Event.call("mouseclick");
                 }
-                try {
-                    window.MouseUpEvent(input.key);
-                }
-                catch (e) {
-                    e;
-                }
+                Basik.Event.call("mouseup");
             }
             checkTap(input) {
                 if (Math.abs(input.xDrag) > 5)
@@ -235,16 +237,13 @@ var Basik;
         input_1.EventHandler = EventHandler;
     })(input || (input = {}));
     class Input {
-        static _debug = false;
+        constructor() {
+        }
         static get debug() {
             return Input._debug;
         }
         static set debug(value) {
             Input._debug = value;
-        }
-        static _obj;
-        static _evt = new input.EventHandler();
-        constructor() {
         }
         static init(buffer) {
             console.log('Input init');
@@ -300,17 +299,6 @@ var Basik;
                 yStart: 0,
             };
         }
-        static getPos = (cx, cy, c) => {
-            let r = c.getBoundingClientRect();
-            let cSclX = parseInt(window.getComputedStyle(c).width) / c.width;
-            let cSclY = parseInt(window.getComputedStyle(c).height) / c.height;
-            let poslx = Math.floor((cx - r.x) / cSclX);
-            let posly = Math.floor((cy - r.y) / cSclY);
-            return {
-                x: poslx,
-                y: posly
-            };
-        };
         static get event() {
             return Input._evt;
         }
@@ -318,28 +306,39 @@ var Basik;
             return Input._obj;
         }
     }
+    Input._debug = false;
+    Input._evt = new input.EventHandler();
+    Input.getPos = (cx, cy, c) => {
+        let r = c.getBoundingClientRect();
+        let cSclX = parseInt(window.getComputedStyle(c).width) / c.width;
+        let cSclY = parseInt(window.getComputedStyle(c).height) / c.height;
+        let poslx = Math.floor((cx - r.x) / cSclX);
+        let posly = Math.floor((cy - r.y) / cSclY);
+        return {
+            x: poslx,
+            y: posly
+        };
+    };
     Basik.Input = Input;
     Basik.In = Input;
 })(Basik || (Basik = {}));
 var Basik;
 (function (Basik) {
     class Keyboard {
+        static get key() {
+            return Keyboard._key;
+        }
+        static set key(value) {
+            Keyboard._key = value;
+        }
         static init() {
             window.addEventListener("keydown", (e) => {
-                try {
-                    window.KeyDownEvent(e.key);
-                }
-                catch (e) {
-                    e;
-                }
+                Keyboard.key = e.key;
+                Basik.Event.call("keydown");
             });
             window.addEventListener("keyup", (e) => {
-                try {
-                    window.KeyUpEvent(e.key);
-                }
-                catch (e) {
-                    e;
-                }
+                Keyboard.key = e.key;
+                Basik.Event.call("keyup");
             });
         }
     }
@@ -348,23 +347,21 @@ var Basik;
 var Basik;
 (function (Basik) {
     class Pt {
-        _x;
+        constructor(x = 0, y = 0) {
+            this.x = x;
+            this.y = y;
+        }
         get x() {
             return this._x;
         }
         set x(value) {
             this._x = value;
         }
-        _y;
         get y() {
             return this._y;
         }
         set y(value) {
             this._y = value;
-        }
-        constructor(x = 0, y = 0) {
-            this.x = x;
-            this.y = y;
         }
         static create(x = 0, y = 0) {
             return new Pt(x, y);
@@ -388,23 +385,21 @@ var Basik;
 var Basik;
 (function (Basik) {
     class Seg {
-        _A;
+        constructor(A = new Basik.Pt(), B = new Basik.Pt()) {
+            this.A = A;
+            this.B = B;
+        }
         get A() {
             return this._A;
         }
         set A(value) {
             this._A = value;
         }
-        _B;
         get B() {
             return this._B;
         }
         set B(value) {
             this._B = value;
-        }
-        constructor(A = new Basik.Pt(), B = new Basik.Pt()) {
-            this.A = A;
-            this.B = B;
         }
         static create(v1 = new Basik.Pt(), v2 = new Basik.Pt()) {
             return new Basik.Sg(v1, v2);
@@ -506,9 +501,9 @@ var Basik;
 var Basik;
 (function (Basik) {
     class Ktk {
-        vs = [];
-        segs = [];
         constructor() {
+            this.vs = [];
+            this.segs = [];
         }
         static buat(x1 = 0, y1 = 0, x2 = 0, y2 = 0) {
             let r = new Ktk();
@@ -647,10 +642,6 @@ var Basik;
 var Basik;
 (function (Basik) {
     class Transform {
-        static RAD2DEG = 180.0 / Math.PI;
-        static DEG2RAD = Math.PI / 180.0;
-        static _lastX = 0;
-        static _lastY = 0;
         static get lastX() {
             return Basik.Tf._lastX;
         }
@@ -769,14 +760,16 @@ var Basik;
             Basik.Tf._lastY = y1 + yt;
         }
     }
+    Transform.RAD2DEG = 180.0 / Math.PI;
+    Transform.DEG2RAD = Math.PI / 180.0;
+    Transform._lastX = 0;
+    Transform._lastY = 0;
     Basik.Transform = Transform;
     Basik.Tf = Transform;
 })(Basik || (Basik = {}));
 var Basik;
 (function (Basik) {
     class ImgImpl {
-        static props = [];
-        static daftar = [];
         static CreateImage(width, height) {
             let h = new Basik.ImgObj();
             h.canvas = document.createElement('canvas');
@@ -799,15 +792,15 @@ var Basik;
         static GambarSemua() {
             for (let i = 0; i < Basik.Ip.daftar.length; i++) {
                 let item = Basik.Ip.daftar[i];
-                Basik.Ip.Draw(item, item.x, item.y);
+                Basik.Ip.Draw(item);
             }
         }
         static muatAnimasiAsyncKanvas(url, pf, lf, canvas, tipeDrag) {
             let img = Basik.Ip.muatAnimAsyncCanvas(url, pf, lf, canvas);
             return Basik.Ip.register(img, url, tipeDrag);
         }
-        static muatAsyncBerbagiKanvas(url, canvas, tipeDrag, onload) {
-            let img = Basik.Ip.muatAsyncKanvas(url, canvas, onload);
+        static muatAsyncBerbagiKanvas(url, canvas, tipeDrag) {
+            let img = Basik.Ip.muatAsyncKanvas(url, canvas, () => { });
             return Basik.Ip.register(img, url, tipeDrag);
         }
         static register(image, url, tipeDrag) {
@@ -856,8 +849,8 @@ var Basik;
             let gbr = new Basik.ImgObj();
             gbr.isAnim = true;
             gbr.img = img;
-            gbr.panjang = img.naturalWidth;
-            gbr.lebar = img.naturalHeight;
+            gbr.width = img.naturalWidth;
+            gbr.height = img.naturalHeight;
             gbr.frameH = fh;
             gbr.frameW = fw;
             gbr.isAnim = true;
@@ -890,12 +883,12 @@ var Basik;
                 ctx.drawImage(img, 0, 0);
                 gbr.load = true;
                 if (!gbr.panjangDiSet) {
-                    gbr.panjang = fw;
+                    gbr.width = fw;
                     gbr.panjangDiSet = true;
                 }
                 if (!gbr.lebarDiSet) {
                     gbr.lebarDiSet = true;
-                    gbr.lebar = fh;
+                    gbr.height = fh;
                 }
                 ha.be.cache.setFile(url, img);
             }
@@ -911,8 +904,8 @@ var Basik;
             let gbr;
             gbr = new Basik.ImgObj();
             gbr.img = img;
-            gbr.panjang = img.naturalWidth;
-            gbr.lebar = img.naturalHeight;
+            gbr.width = img.naturalWidth;
+            gbr.height = img.naturalHeight;
             gbr.panjangDiSet = false;
             gbr.lebarDiSet = false;
             gbr.frameH = img.naturalHeight;
@@ -959,10 +952,10 @@ var Basik;
                 gbr.img = imgP;
                 if (!gbr.panjangDiSet) {
                     gbr.panjangDiSet = true;
-                    gbr.panjang = imgP.naturalWidth;
+                    gbr.width = imgP.naturalWidth;
                 }
                 if (!gbr.lebarDiSet) {
-                    gbr.lebar = imgP.naturalHeight;
+                    gbr.height = imgP.naturalHeight;
                     gbr.lebarDiSet = true;
                 }
                 gbr.frameH = imgP.naturalHeight;
@@ -987,17 +980,16 @@ var Basik;
                 gbr.load = true;
                 if (!gbr.panjangDiSet) {
                     gbr.panjangDiSet = true;
-                    gbr.panjang = 32;
+                    gbr.width = 32;
                 }
                 if (!gbr.lebarDiSet) {
-                    gbr.lebar = 32;
+                    gbr.height = 32;
                     gbr.lebarDiSet = true;
                 }
                 gbr.frameH = 32;
                 gbr.frameW = 32;
                 ha.be.cache.setFile(url, gbr.img);
             }
-            console.log(gbr);
             return gbr;
         }
         static gambarUbin(gbr, x = 0, y = 0, frame = 0) {
@@ -1005,8 +997,8 @@ var Basik;
             let jmlV = 0;
             if (gbr.load == false)
                 return;
-            let w2 = Math.floor(gbr.panjang);
-            let h2 = Math.floor(gbr.lebar);
+            let w2 = Math.floor(gbr.width);
+            let h2 = Math.floor(gbr.height);
             while (x < 0) {
                 x += w2;
             }
@@ -1022,8 +1014,8 @@ var Basik;
             x -= w2;
             y -= h2;
             frame = Math.floor(frame);
-            jmlH = Math.ceil((Basik.G.canvas.width + Math.abs(x)) / w2);
-            jmlV = Math.ceil((Basik.G.canvas.height + Math.abs(y)) / h2);
+            jmlH = Math.ceil((Basik.G.MainCanvas().width + Math.abs(x)) / w2);
+            jmlV = Math.ceil((Basik.G.MainCanvas().height + Math.abs(y)) / h2);
             for (let i = 0; i < jmlH; i++) {
                 for (let j = 0; j < jmlV; j++) {
                     Basik.Ip.DrawSingle(gbr, x + (i * w2), y + (j * h2), frame);
@@ -1032,33 +1024,33 @@ var Basik;
         }
         static AmbilPiksel(x = 0, y = 0) {
             try {
-                let data = Basik.G.context.getImageData(x, y, 1, 1).data;
+                let data = Basik.G.Canvas().getContext('2d').getImageData(x, y, 1, 1).data;
                 let hasil = [];
                 hasil.push(data[0]);
                 hasil.push(data[1]);
                 hasil.push(data[2]);
                 hasil.push(data[3]);
                 Basik.G.red = data[0];
-                Basik.G.hijau = data[1];
-                Basik.G.biru = data[2];
+                Basik.G.green = data[1];
+                Basik.G.blue = data[2];
                 Basik.G.alpha = data[3];
             }
             catch (e) {
             }
         }
         static SetPiksel(x = 0, y = 0) {
-            Basik.G.context.fillRect(Math.floor(x), Math.floor(y), 1, 1);
+            Basik.G.Canvas().getContext('2d').fillRect(Math.floor(x), Math.floor(y), 1, 1);
         }
-        static Draw(gbr, x = 0, y = 0, frame = 0) {
-            if (gbr.tilable) {
-                Basik.Ip.gambarUbin(gbr, x, y, frame);
+        static Draw(img, frame = 0) {
+            if (img.tilable) {
+                Basik.Ip.gambarUbin(img, img.x, img.y, frame);
             }
             else {
-                Basik.Ip.DrawSingle(gbr, x, y, frame);
+                Basik.Ip.DrawSingle(img, img.x, img.y, frame);
             }
         }
         static DrawSingle(gbr, x = 0, y = 0, frame = 0) {
-            let ctx = Basik.G.context;
+            let ctx = Basik.G.Canvas().getContext('2d');
             let jmlH = 0;
             let frameX = 0;
             let frameY = 0;
@@ -1075,8 +1067,8 @@ var Basik;
             frameY = Math.floor(frameY);
             let x2 = Math.floor(x);
             let y2 = Math.floor(y);
-            let w2 = Math.floor(gbr.panjang);
-            let h2 = Math.floor(gbr.lebar);
+            let w2 = Math.floor(gbr.width);
+            let h2 = Math.floor(gbr.height);
             x2 -= (gbr.handleX);
             y2 -= (gbr.handleY);
             if (gbr.rotasi != 0) {
@@ -1094,9 +1086,6 @@ var Basik;
             function drawImpl(dx, dy) {
                 ctx.globalAlpha = gbr.alpha / 100;
                 ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, Math.floor(dx), Math.floor(dy), w2, h2);
-                console.group('draw image');
-                console.log("x:", x, "y:", y, "x2:", x2, "y2:", y2);
-                console.groupEnd();
             }
         }
         static resetRect(img) {
@@ -1118,8 +1107,8 @@ var Basik;
         static rectToImageTf(image, x, y) {
             let rect = image.rect;
             let p;
-            let x2 = image.panjang;
-            let y2 = image.lebar;
+            let x2 = image.width;
+            let y2 = image.height;
             p = rect.vs[1];
             p.x = x2;
             p.y = 0;
@@ -1142,44 +1131,48 @@ var Basik;
             return true;
         }
     }
+    ImgImpl.props = [];
+    ImgImpl.daftar = [];
     Basik.ImgImpl = ImgImpl;
     Basik.Ip = ImgImpl;
 })(Basik || (Basik = {}));
 var Basik;
 (function (Basik) {
     class ImgObj {
-        static _ctrDraw = 0;
-        _url;
-        img;
-        canvas;
-        ctx;
-        isAnim = false;
-        rect = new Basik.Ktk();
-        load = false;
-        ratioX = 1;
-        ratioY = 1;
-        _panjangDiSet = false;
-        _lebarDiSet = false;
-        _ctrIdx = 0;
-        _x = 0;
-        _y = 0;
-        _alpha = 100;
-        _frameW = 32;
-        _frameH = 32;
-        _handleX = 0;
-        _handleY = 0;
-        _rotasi = 0;
-        _panjang = 0;
-        _lebar = 0;
-        _tilable = false;
-        _dragged = false;
-        _down = false;
-        _tipeDrag = 0;
-        _dragStartY = 0;
-        _dragStartX = 0;
-        _sudutTekanAwal = 0;
-        _button;
-        _sudutAwal = 0;
+        constructor() {
+            this._x = 0;
+            this._y = 0;
+            this._alpha = 100;
+            this._handleX = 0;
+            this._handleY = 0;
+            this._panjang = 0;
+            this._lebar = 0;
+            this._rotasi = 0;
+            this._tilable = false;
+            this._frameW = 32;
+            this._frameH = 32;
+            this._dragged = false;
+            this._down = false;
+            this.load = false;
+            this._panjangDiSet = false;
+            this._lebarDiSet = false;
+            this._ctrIdx = 0;
+            this.isAnim = false;
+            this.rect = new Basik.Ktk();
+            this.ratioX = 1;
+            this.ratioY = 1;
+            this._tipeDrag = 0;
+            this._dragStartY = 0;
+            this._dragStartX = 0;
+            this._sudutTekanAwal = 0;
+            this._sudutAwal = 0;
+        }
+        get canvas() {
+            return this._canvas;
+        }
+        set canvas(value) {
+            this._canvas = value;
+        }
         get tilable() {
             return this._tilable;
         }
@@ -1234,17 +1227,17 @@ var Basik;
         set handleX(value) {
             this._handleX = value;
         }
-        get panjang() {
+        get width() {
             return this._panjang;
         }
-        set panjang(value) {
+        set width(value) {
             this._panjang = value;
             this._panjangDiSet = true;
         }
-        get lebar() {
+        get height() {
             return this._lebar;
         }
-        set lebar(value) {
+        set height(value) {
             this._lebar = value;
             this._lebarDiSet = true;
         }
@@ -1271,8 +1264,6 @@ var Basik;
         }
         set rotasi(value) {
             this._rotasi = value;
-        }
-        constructor() {
         }
         get drgStartX() {
             return this._dragStartX;
@@ -1332,6 +1323,7 @@ var Basik;
             this._button = value;
         }
     }
+    ImgObj._ctrDraw = 0;
     Basik.ImgObj = ImgObj;
 })(Basik || (Basik = {}));
 var Basik;
@@ -1398,10 +1390,6 @@ var Basik;
 var Basik;
 (function (Basik) {
     class Teks {
-        static _name = 'Arial';
-        static _size = 12;
-        static _x = 120;
-        static _y = 10;
         static get size() {
             return Teks._size;
         }
@@ -1419,23 +1407,25 @@ var Basik;
             Teks.size = n;
         }
         static Write(teks) {
-            Basik.G.context.font = Teks.size + 'px ' + Teks._name;
-            Basik.G.context.fillText(teks, Teks._x, Teks._y);
-            Basik.G.context.strokeText(teks, Teks._x, Teks._y);
+            Basik.G.Canvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
+            Basik.G.Canvas().getContext('2d').fillText(teks, Teks._x, Teks._y);
+            Basik.G.Canvas().getContext('2d').strokeText(teks, Teks._x, Teks._y);
         }
     }
+    Teks._name = 'Arial';
+    Teks._size = 12;
+    Teks._x = 120;
+    Teks._y = 10;
     Basik.Teks = Teks;
     Basik.Tk = Teks;
 })(Basik || (Basik = {}));
 var Basik;
 (function (Basik) {
     class Sound {
-        static list = [];
-        static _lastSound;
-        _src = '';
-        _loaded = false;
-        _sound;
-        _playedCount;
+        constructor() {
+            this._src = '';
+            this._loaded = false;
+        }
         static get lastSound() {
             return Sound._lastSound;
         }
@@ -1467,6 +1457,7 @@ var Basik;
             this._src = value;
         }
     }
+    Sound.list = [];
     Basik.Sound = Sound;
     Basik.Sn = Sound;
 })(Basik || (Basik = {}));
@@ -1501,14 +1492,14 @@ const G = Basik.G;
 const T = Basik.Tk;
 const Ip = Basik.Ip;
 const In = Basik.In;
-function MainBuffer() {
-    return G.mainCtx;
+function MainCanvas() {
+    return G.MainCanvas();
 }
-function SetBuffer(b) {
-    G.context = b;
+function SetCanvas(c) {
+    G.SetCanvas(c);
 }
 function ClearArea(x, y, w, h) {
-    G.context.clearRect(x, y, w, h);
+    G.Canvas().getContext('2d').clearRect(x, y, w, h);
 }
 function Graphics(w = 320, h = 240, canvas = null, fullScreen = true) {
     G.Graphics(w, h, canvas, fullScreen);
@@ -1517,34 +1508,51 @@ function Cls() {
     G.Cls();
 }
 function Green() {
-    return G.hijau;
+    return G.green;
 }
 function Red() {
     return G.red;
 }
 function Blue() {
-    return G.biru;
+    return G.blue;
 }
 function Alpha() {
     return Math.floor(G.alpha * 100);
 }
 function GetPixel(x = 0, y = 0) {
-    return Ip.AmbilPiksel(x, y);
+    Ip.AmbilPiksel(x, y);
 }
-function SetPiksel(x = 0, y = 0) {
-    return Ip.SetPiksel(x, y);
+function SetPixel(x = 0, y = 0) {
+    Ip.SetPiksel(x, y);
 }
-function FillColor(r = 0, g = 0, b = 0, a = 1) {
-    G.context.fillStyle = `rgba( ${r}, ${g}, ${b}, ${a})`;
+function FillColor(r = 0, g = 0, b = 0, a = 100) {
+    G.Canvas().getContext('2d').fillStyle = `rgba( ${r}, ${g}, ${b}, ${a})`;
+    G.red = r;
+    G.green = g;
+    G.blue = b;
+    G.alpha = a;
 }
 function NoColor() {
-    G.context.fillStyle = "none";
+    G.Canvas().getContext('2d').fillStyle = "none";
 }
 function StrokeColor(r = 0, g = 0, b = 0, a = 1) {
-    G.context.strokeStyle = `rgba( ${r}, ${g}, ${b}, ${a})`;
+    G.Canvas().getContext('2d').strokeStyle = `rgba( ${r}, ${g}, ${b}, ${a})`;
+    G.red = r;
+    G.green = g;
+    G.blue = b;
+    G.alpha = a;
 }
 function NoStroke() {
-    G.context.strokeStyle = 'none';
+    G.Canvas().getContext('2d').strokeStyle = 'none';
+}
+function AddListener(type, f) {
+    Basik.Event.addListener(type, f);
+}
+function KeyboardKey() {
+    return Basik.Keyboard.key;
+}
+function MouseButton() {
+    return Basik.Input.obj.key;
 }
 function MouseIsDown() {
     return In.obj.isDown;
@@ -1574,9 +1582,6 @@ const DistMin = Basik.Transform.degDist;
 function Distance(x1, y1, x2, y2) {
     return Math.hypot(x2 - x1, y2 - y1);
 }
-function Dist(x1, y1, x2, y2) {
-    return Math.hypot(x2 - x1, y2 - y1);
-}
 function Angle(x, y) {
     return Basik.Tf.sudut(x, y);
 }
@@ -1590,33 +1595,40 @@ function Clamp(n, min, max) {
         return max;
     return n;
 }
-const LoadImage = Ip.Muat;
-const LoadAnimImage = Ip.MuatAnimasi;
-const DrawImage = Ip.Draw;
-const ImageCollide = Ip.tabrakan;
-const ImageCollidePoint = Ip.dotInsideImage;
-const CreateImage = Ip.CreateImage;
-function DrawAllImage() {
-    Ip.GambarSemua();
+function LoadImage(url) {
+    return Ip.Muat(url);
 }
-const ImageBuffer = (img) => {
-    return img.ctx;
+function LoadAnimImage(url, frameWidth, frameHeight) {
+    return Ip.MuatAnimasi(url, frameWidth, frameHeight);
+}
+function DrawImage(img) {
+    Ip.Draw(img);
+}
+function ImageCollide(img1, img2) {
+    return Ip.tabrakan(img1, img1.x, img1.y, img2, img2.x, img2.y);
+}
+function ImageCollidePoint(img, x, y) {
+    return Ip.dotInsideImage(img, img.x, img.y, x, y);
+}
+function CreateImage(width, height) {
+    return Ip.CreateImage(width, height);
+}
+const ImageCanvas = (img) => {
+    return img.canvas;
 };
-const AllImageLoaded = Ip.AllImageLoaded;
-function CopyImage(s, onload) {
+function AllImageLoaded() {
+    return Ip.AllImageLoaded();
+}
+function CopyImage(img) {
     if (!onload) {
         onload = () => { };
     }
-    if (s.isAnim) {
+    if (img.isAnim) {
         console.debug('copy sprite anim');
-        console.debug(s);
-        return Ip.muatAnimasiAsyncKanvas(s.url, s.frameW, s.frameH, s.canvas, s.tipeDrag);
+        console.debug(img);
+        return Ip.muatAnimasiAsyncKanvas(img.url, img.frameW, img.frameH, img.canvas, img.tipeDrag);
     }
     else {
-        return Ip.muatAsyncBerbagiKanvas(s.url, s.canvas, s.tipeDrag, onload);
+        return Ip.muatAsyncBerbagiKanvas(img.url, img.canvas, img.tipeDrag);
     }
 }
-const TextPos = Basik.Teks.Goto;
-const Write = Basik.Teks.Write;
-const TextFont = Basik.Teks.Name;
-const TextSize = Basik.Teks.Size;

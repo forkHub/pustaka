@@ -1,42 +1,59 @@
 namespace Basik {
 
 	/**
-	 * 
+	 * Image Object
 	 */
 	export class ImgObj {
-		private static _ctrDraw: number = 0;
-		private _url: string;
 
-		//image
-		img: HTMLImageElement;
-		canvas: HTMLCanvasElement;
-		ctx: CanvasRenderingContext2D;
-		isAnim: boolean = false;
-		rect: Ktk = new Ktk();
-		load: boolean = false;
-		ratioX?: number = 1;
-		ratioY?: number = 1;
+		/**
+		 * @property {number} x - x position
+		 * @property {number} y - y position
+		 * @property {number} rotation - rotation in degree
+		 * @property {number} alpha - alpha (0 - 100)
+		 * @property {number} width - 
+		 * @property {number} height - 
+		 * @property {number} handleX - handle x position
+		 * @property {number} handleY - handle y position
+		 * @property {boolean} tilable - image rendered as tile
+		 * @property {boolean} dragged - image is dragged
+		 * @property {boolean} down - image is pressed
+		 */
 
-		private _panjangDiSet: boolean = false;
-		private _lebarDiSet: boolean = false;
-		private _ctrIdx: number = 0;
+		constructor() {
+		}
 
+		//
 		private _x: number = 0;
 		private _y: number = 0;
 		private _alpha: number = 100;
-		private _frameW: number = 32;
-		private _frameH: number = 32;
 		private _handleX: number = 0;
 		private _handleY: number = 0;
-		private _rotasi: number = 0;
 		private _panjang: number = 0;
 		private _lebar: number = 0;
+		private _rotasi: number = 0;
 		private _tilable: boolean = false;
-
-		//interaktif even
+		private _frameW: number = 32;
+		private _frameH: number = 32;
 		private _dragged: boolean = false;
 		private _down: boolean = false;
-		// private _dragable: boolean = false;
+		private _frame: number = 0;
+
+		//internal
+		load: boolean = false;
+		private _panjangDiSet: boolean = false;
+		private _lebarDiSet: boolean = false;
+		private _ctrIdx: number = 0;
+		private static _ctrDraw: number = 0;
+		private _url: string;
+		img: HTMLImageElement;
+		private _canvas: HTMLCanvasElement;
+		ctx: CanvasRenderingContext2D;
+		isAnim: boolean = false;
+		rect: Ktk = new Ktk();
+		ratioX?: number = 1;
+		ratioY?: number = 1;
+
+		//interaktif even
 		private _tipeDrag: number = 0;
 
 		//internal interatif
@@ -45,6 +62,20 @@ namespace Basik {
 		private _sudutTekanAwal: number = 0;
 		private _button: number;
 		private _sudutAwal: number = 0;
+
+		public get frame(): number {
+			return this._frame;
+		}
+		public set frame(value: number) {
+			this._frame = value;
+		}
+
+		public get canvas(): HTMLCanvasElement {
+			return this._canvas;
+		}
+		public set canvas(value: HTMLCanvasElement) {
+			this._canvas = value;
+		}
 
 		public get tilable(): boolean {
 			return this._tilable;
@@ -79,6 +110,7 @@ namespace Basik {
 		public set x(value: number) {
 			this._x = value;
 		}
+
 		public get y(): number {
 			return this._y;
 		}
@@ -107,18 +139,18 @@ namespace Basik {
 			this._handleX = value;
 		}
 
-		public get panjang(): number {
+		public get width(): number {
 			return this._panjang;
 		}
-		public set panjang(value: number) {
+		public set width(value: number) {
 			this._panjang = value;
 			this._panjangDiSet = true;
 		}
 
-		public get lebar(): number {
+		public get height(): number {
 			return this._lebar;
 		}
-		public set lebar(value: number) {
+		public set height(value: number) {
 			this._lebar = value;
 			this._lebarDiSet = true;
 		}
@@ -149,9 +181,6 @@ namespace Basik {
 		}
 		public set rotasi(value: number) {
 			this._rotasi = value;
-		}
-
-		constructor() {
 		}
 
 		public get drgStartX(): number {

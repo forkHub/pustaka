@@ -104,6 +104,272 @@
     
 
     
+    <h4 class="name" id="AddListener"><span class="type-signature"></span>AddListener<span class="signature">(type, f)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Add Listener for certain event
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>type</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the event type, available are: mousedown, mouseup, mousemove, mousedrag, keydown, keyup</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">callback</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line140">line 140</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="AllImageLoaded"><span class="type-signature"></span>AllImageLoaded<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Check if all images have been loaded
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzSprite.js.html">bb/BlitzSprite.js</a>, <a href="bb_BlitzSprite.js.html#line70">line 70</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="Alpha"><span class="type-signature"></span>Alpha<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
@@ -156,7 +422,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1816">line 1816</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line75">line 75</a>
     </li></ul></dd>
     
 
@@ -185,7 +451,7 @@
 
         
 <div class="param-desc">
-    - the alpha color
+    the alpha color (0 - 100)
 </div>
 
 
@@ -214,7 +480,7 @@
     
 
     
-    <h4 class="name" id="Angle"><span class="type-signature"></span>Angle<span class="signature">(x, y)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Angle"><span class="type-signature"></span>Angle<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
     
@@ -222,7 +488,7 @@
 
 
 <div class="description">
-    Menghitung sudut dari posisi relative ke posisi 0,0
+    Calculae the angle of a point relative to the horizontal line
 </div>
 
 
@@ -263,13 +529,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">number</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">posisi x</td>
+            <td class="description last">the x position</td>
         </tr>
 
     
@@ -281,13 +552,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">number</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last">posisi y</td>
+            <td class="description last">the y position</td>
         </tr>
 
     
@@ -328,7 +604,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1946">line 1946</a>
+        <a href="bb_BlitzMath.js.html">bb/BlitzMath.js</a>, <a href="bb_BlitzMath.js.html#line21">line 21</a>
     </li></ul></dd>
     
 
@@ -357,10 +633,22 @@
 
         
 <div class="param-desc">
-    sudut relative ke posisi 0,0
+    the angle in degrees
 </div>
 
 
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
 
     
 
@@ -426,7 +714,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1809">line 1809</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line68">line 68</a>
     </li></ul></dd>
     
 
@@ -455,9 +743,210 @@
 
         
 <div class="param-desc">
-    - the blue color
+    the blue color (0 - 255)
 </div>
 
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="Clamp"><span class="type-signature"></span>Clamp<span class="signature">(n, min, max)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Restrict a value within a specified range
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the number to clamp</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>min</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">preferred minimum vaue</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>max</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">preferred maximum value</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzMath.js.html">bb/BlitzMath.js</a>, <a href="bb_BlitzMath.js.html#line49">line 49</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
 
 
 <dl>
@@ -654,7 +1143,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1769">line 1769</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line28">line 28</a>
     </li></ul></dd>
     
 
@@ -742,7 +1231,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1788">line 1788</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line47">line 47</a>
     </li></ul></dd>
     
 
@@ -778,12 +1267,16 @@
     
 
     
-    <h4 class="name" id="CopyImage"><span class="type-signature"></span>CopyImage<span class="signature">(s, onload)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="CopyImage"><span class="type-signature"></span>CopyImage<span class="signature">(img)</span><span class="type-signature"> &rarr; {Basik.ImgObj}</span></h4>
     
 
     
 
 
+
+<div class="description">
+    Copy image
+</div>
 
 
 
@@ -818,13 +1311,13 @@
 
         <tr>
             
-                <td class="name"><code>s</code></td>
+                <td class="name"><code>img</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">ISprObj</span>
+<span class="param-type">Basik.ImgObj</span>
 
 
             
@@ -834,25 +1327,7 @@
 
             
 
-            <td class="description last">sprite</td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>onload</code></td>
-            
-
-            <td class="type">
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"></td>
+            <td class="description last">the image to copy</td>
         </tr>
 
     
@@ -893,7 +1368,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1984">line 1984</a>
+        <a href="bb_BlitzSprite.js.html">bb/BlitzSprite.js</a>, <a href="bb_BlitzSprite.js.html#line78">line 78</a>
     </li></ul></dd>
     
 
@@ -923,6 +1398,18 @@
         
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Basik.ImgObj</span>
+
+
+    </dd>
+</dl>
+
     
 
 
@@ -935,12 +1422,349 @@
     
 
     
-    <h4 class="name" id="Distance"><span class="type-signature"></span>Distance<span class="signature">(x1, y1, x2, y2)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="Cos"><span class="type-signature"></span>Cos<span class="signature">(n)</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
     
 
 
+
+<div class="description">
+    Calculate the Cos of an angle
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the angle in degrees</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzMath.js.html">bb/BlitzMath.js</a>, <a href="bb_BlitzMath.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="CreateImage"><span class="type-signature"></span>CreateImage<span class="signature">(width, height)</span><span class="type-signature"> &rarr; {Basik.ImgObj}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Create a blank image
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>width</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">width</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>height</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">height</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzSprite.js.html">bb/BlitzSprite.js</a>, <a href="bb_BlitzSprite.js.html#line55">line 55</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Basik.ImgObj</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="Distance"><span class="type-signature"></span>Distance<span class="signature">(x1, y1, x2, y2)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculate distance between two points
+</div>
 
 
 
@@ -986,7 +1810,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">x position of the first point</td>
         </tr>
 
     
@@ -1004,7 +1828,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">y position of the first point</td>
         </tr>
 
     
@@ -1022,7 +1846,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">x position of the second point</td>
         </tr>
 
     
@@ -1040,7 +1864,7 @@
 
             
 
-            <td class="description last"></td>
+            <td class="description last">y position of the second point</td>
         </tr>
 
     
@@ -1081,7 +1905,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1934">line 1934</a>
+        <a href="bb_BlitzMath.js.html">bb/BlitzMath.js</a>, <a href="bb_BlitzMath.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -1111,6 +1935,18 @@
         
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
     
 
 
@@ -1123,19 +1959,72 @@
     
 
     
-    <h4 class="name" id="DrawAllImage"><span class="type-signature"></span>DrawAllImage<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="DrawImage"><span class="type-signature"></span>DrawImage<span class="signature">(img)</span><span class="type-signature"></span></h4>
     
 
     
 
 
 
+<div class="description">
+    Draw an image
+</div>
 
 
 
 
 
 
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>img</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Basik.ImgObj</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">Image to draw</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -1171,7 +2060,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1971">line 1971</a>
+        <a href="bb_BlitzSprite.js.html">bb/BlitzSprite.js</a>, <a href="bb_BlitzSprite.js.html#line26">line 26</a>
     </li></ul></dd>
     
 
@@ -1275,7 +2164,7 @@
                 </td>
             
 
-            <td class="description last">the red color</td>
+            <td class="description last">the red color (0 - 255)</td>
         </tr>
 
     
@@ -1304,7 +2193,7 @@
                 </td>
             
 
-            <td class="description last">the green color</td>
+            <td class="description last">the green color (0 - 255)</td>
         </tr>
 
     
@@ -1333,7 +2222,7 @@
                 </td>
             
 
-            <td class="description last">the blue color</td>
+            <td class="description last">the blue color (0 - 255)</td>
         </tr>
 
     
@@ -1357,12 +2246,12 @@
             
                 <td class="default">
                 
-                    1
+                    100
                 
                 </td>
             
 
-            <td class="description last">the alpha color</td>
+            <td class="description last">the alpha color (0 - 100)</td>
         </tr>
 
     
@@ -1403,7 +2292,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1843">line 1843</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line102">line 102</a>
     </li></ul></dd>
     
 
@@ -1447,7 +2336,7 @@
 
 
 <div class="description">
-    Get color information at the specific areaYou can get the red, green, blue, alpha component of the color by calling Red(), Green(), Blue(), Alpha() function respectively
+    Get color information at the specific position.<br/>You can read the red, green, blue, alpha component of the color by calling Red(), Green(), Blue(), Alpha() function respectively
 </div>
 
 
@@ -1577,7 +2466,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1825">line 1825</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line84">line 84</a>
     </li></ul></dd>
     
 
@@ -1739,7 +2628,7 @@
                 </td>
             
 
-            <td class="description last">(optional) the canvas element.  If canvas is not available, a new one will be created and the size will follow the preferred size</td>
+            <td class="description last">(optional) the canvas element.<br/>  If canvas is not available, a new one will be created and the size will follow the preferred size</td>
         </tr>
 
     
@@ -1809,7 +2698,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1782">line 1782</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line41">line 41</a>
     </li></ul></dd>
     
 
@@ -1897,7 +2786,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1795">line 1795</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line54">line 54</a>
     </li></ul></dd>
     
 
@@ -1926,7 +2815,7 @@
 
         
 <div class="param-desc">
-    - the green color
+    the green color (0 - 255)
 </div>
 
 
@@ -1955,7 +2844,7 @@
     
 
     
-    <h4 class="name" id="KeyDownEvent"><span class="type-signature"></span>KeyDownEvent<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ImageCanvas"><span class="type-signature"></span>ImageCanvas<span class="signature">(img)</span><span class="type-signature"> &rarr; {HTMLCanvasElement}</span></h4>
     
 
     
@@ -1963,7 +2852,7 @@
 
 
 <div class="description">
-    This function will be automatically called when available and there is a keydown event.Put any logic for mouse move event here
+    return the canvas of an image
 </div>
 
 
@@ -1974,180 +2863,53 @@
 
 
 
-
-
-
-
-<dl class="details">
-
+    <h5>Parameters:</h5>
     
 
-    
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line2032">line 2032</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        <th>Type</th>
 
         
-            
-
-    
-
-    
-    <h4 class="name" id="KeyUpEvent"><span class="type-signature"></span>KeyUpEvent<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function will be automatically called when available and there is a keyup event.Put any logic for mouse move event here
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line2039">line 2039</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>img</code></td>
             
 
-    
+            <td class="type">
+            
+                
+<span class="param-type">Basik.ImgObj</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the image</td>
+        </tr>
 
     
-    <h4 class="name" id="MainBuffer"><span class="type-signature"></span>MainBuffer<span class="signature">()</span><span class="type-signature"> &rarr; {CanvasRenderingContext2D}</span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    return the main buffer/the context of canvas.
-</div>
-
-
-
-
-
-
-
+    </tbody>
+</table>
 
 
 
@@ -2183,7 +2945,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1751">line 1751</a>
+        <a href="bb_BlitzSprite.js.html">bb/BlitzSprite.js</a>, <a href="bb_BlitzSprite.js.html#line63">line 63</a>
     </li></ul></dd>
     
 
@@ -2211,10 +2973,6 @@
 <h5>Returns:</h5>
 
         
-<div class="param-desc">
-    - the active buffer
-</div>
-
 
 
 <dl>
@@ -2223,7 +2981,7 @@
     </dt>
     <dd>
         
-<span class="param-type">CanvasRenderingContext2D</span>
+<span class="param-type">HTMLCanvasElement</span>
 
 
     </dd>
@@ -2241,7 +2999,7 @@
     
 
     
-    <h4 class="name" id="MouseClickEvent"><span class="type-signature"></span>MouseClickEvent<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ImageCollide"><span class="type-signature"></span>ImageCollide<span class="signature">(img1, img2)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -2249,7 +3007,7 @@
 
 
 <div class="description">
-    This function will be automatically called when available and there is a mouse click event.Put any logic for mouse move event here
+    Check if two images collide. Use box for collision detection. Also Take account the rotation
 </div>
 
 
@@ -2258,6 +3016,78 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>img1</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Basik.ImgObj</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the first image</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>img2</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Basik.ImgObj</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the second image</td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -2293,7 +3123,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line2025">line 2025</a>
+        <a href="bb_BlitzSprite.js.html">bb/BlitzSprite.js</a>, <a href="bb_BlitzSprite.js.html#line36">line 36</a>
     </li></ul></dd>
     
 
@@ -2318,6 +3148,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2329,7 +3177,7 @@
     
 
     
-    <h4 class="name" id="MouseDownEvent"><span class="type-signature"></span>MouseDownEvent<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="ImageCollidePoint"><span class="type-signature"></span>ImageCollidePoint<span class="signature">(img, x, y)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
     
 
     
@@ -2337,7 +3185,7 @@
 
 
 <div class="description">
-    This function will be automatically called when available and there is a mousedown event.Put any logic for mouse move event here
+    Check if an image collides a point
 </div>
 
 
@@ -2346,6 +3194,101 @@
 
 
 
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>img</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Basik.ImgObj</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>x</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
 
 
 
@@ -2381,7 +3324,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line2011">line 2011</a>
+        <a href="bb_BlitzSprite.js.html">bb/BlitzSprite.js</a>, <a href="bb_BlitzSprite.js.html#line46">line 46</a>
     </li></ul></dd>
     
 
@@ -2406,6 +3349,24 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2417,7 +3378,7 @@
     
 
     
-    <h4 class="name" id="MouseDragStartX"><span class="type-signature"></span>MouseDragStartX<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="KeyboardKey"><span class="type-signature"></span>KeyboardKey<span class="signature">()</span><span class="type-signature"> &rarr; {string}</span></h4>
     
 
     
@@ -2425,7 +3386,7 @@
 
 
 <div class="description">
-    posisi x awal drag
+    return the last keyboard event key
 </div>
 
 
@@ -2469,7 +3430,624 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1914">line 1914</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line147">line 147</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="LoadAnimImage"><span class="type-signature"></span>LoadAnimImage<span class="signature">(url, frameWidth, frameHeight)</span><span class="type-signature"> &rarr; {Basik.ImgObj}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Load a sprite-sheet as an animated image
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">image url</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>frameWidth</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">preferred frame width</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>frameHeight</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">preferred frame height</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzSprite.js.html">bb/BlitzSprite.js</a>, <a href="bb_BlitzSprite.js.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Basik.ImgObj</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="LoadImage"><span class="type-signature"></span>LoadImage<span class="signature">(url)</span><span class="type-signature"> &rarr; {Basik.ImgObj}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Load an image from url
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the url of image to load</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzSprite.js.html">bb/BlitzSprite.js</a>, <a href="bb_BlitzSprite.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Basik.ImgObj</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="LoadSound"><span class="type-signature"></span>LoadSound<span class="signature">(url)</span><span class="type-signature"> &rarr; {Basik.Sound}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Load sound
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>url</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the url</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BitzSound.js.html">bb/BitzSound.js</a>, <a href="bb_BitzSound.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Basik.Sound</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="MainCanvas"><span class="type-signature"></span>MainCanvas<span class="signature">()</span><span class="type-signature"> &rarr; {HTMLCanvasElement}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    return the main canvas. Main canvas is the one defined when application starts
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -2498,109 +4076,23 @@
 
         
 <div class="param-desc">
-    (number)
+    the main canvas object
 </div>
 
 
 
-    
-
-
-
-
-
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
         
-            
-
-    
-
-    
-    <h4 class="name" id="MouseDragStartY"><span class="type-signature"></span>MouseDragStartY<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
+<span class="param-type">HTMLCanvasElement</span>
 
 
-
-<div class="description">
-    posisi y awal drag
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1921">line 1921</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
+    </dd>
 </dl>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    (number)
-</div>
-
-
-
     
 
 
@@ -2613,7 +4105,7 @@
     
 
     
-    <h4 class="name" id="MouseDragXAmount"><span class="type-signature"></span>MouseDragXAmount<span class="signature">()</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="MouseButton"><span class="type-signature"></span>MouseButton<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
     
 
     
@@ -2621,7 +4113,7 @@
 
 
 <div class="description">
-    berapa jauh pointer digeser sejajar sumbu x
+    return the last mouse event button
 </div>
 
 
@@ -2665,673 +4157,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1885">line 1885</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    (number)
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="MouseDragYAmount"><span class="type-signature"></span>MouseDragYAmount<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    berapa jauh pointer di drag sejajar sumbu y
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1892">line 1892</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    (number)
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="MouseIsDown"><span class="type-signature"></span>MouseIsDown<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    mengecek apakah pointer sedang ditekan
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1871">line 1871</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    (boolean)
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="MouseIsDragged"><span class="type-signature"></span>MouseIsDragged<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    mengecheck apakah pointer sedang di drag
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1878">line 1878</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    (boolean)
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="MouseMoveEvent"><span class="type-signature"></span>MouseMoveEvent<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function will be automatically called when available and there is a mousemove event.Put any logic for mouse move event here
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line2005">line 2005</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="MouseUpEvent"><span class="type-signature"></span>MouseUpEvent<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    This function will be automatically called when available and there is a mouseup event.Put any logic for mouse move event here
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line2018">line 2018</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="MouseX"><span class="type-signature"></span>MouseX<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    posisi x pointer
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1899">line 1899</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    (number)
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="MouseY"><span class="type-signature"></span>MouseY<span class="signature">()</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    posisi y pointer
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1906">line 1906</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line154">line 154</a>
     </li></ul></dd>
     
 
@@ -3361,7 +4187,1180 @@
         
 
 
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="MouseDragStartX"><span class="type-signature"></span>MouseDragStartX<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    drag start x position
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzInput.js.html">bb/BlitzInput.js</a>, <a href="bb_BlitzInput.js.html#line50">line 50</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="MouseDragStartY"><span class="type-signature"></span>MouseDragStartY<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    drag start y position
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzInput.js.html">bb/BlitzInput.js</a>, <a href="bb_BlitzInput.js.html#line57">line 57</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="MouseDragXAmount"><span class="type-signature"></span>MouseDragXAmount<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    drag horizontal length
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzInput.js.html">bb/BlitzInput.js</a>, <a href="bb_BlitzInput.js.html#line21">line 21</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="MouseDragYAmount"><span class="type-signature"></span>MouseDragYAmount<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    drag vertical length
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzInput.js.html">bb/BlitzInput.js</a>, <a href="bb_BlitzInput.js.html#line28">line 28</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="MouseIsDown"><span class="type-signature"></span>MouseIsDown<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    muouse is down status
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzInput.js.html">bb/BlitzInput.js</a>, <a href="bb_BlitzInput.js.html#line7">line 7</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="MouseIsDragged"><span class="type-signature"></span>MouseIsDragged<span class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    mouse is dragged
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzInput.js.html">bb/BlitzInput.js</a>, <a href="bb_BlitzInput.js.html#line14">line 14</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="MouseX"><span class="type-signature"></span>MouseX<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    mouse x position
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzInput.js.html">bb/BlitzInput.js</a>, <a href="bb_BlitzInput.js.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="MouseY"><span class="type-signature"></span>MouseY<span class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    mouse y position
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzInput.js.html">bb/BlitzInput.js</a>, <a href="bb_BlitzInput.js.html#line42">line 42</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="NoColor"><span class="type-signature"></span>NoColor<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Set fill color to none
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line112">line 112</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="NoStroke"><span class="type-signature"></span>NoStroke<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Set stroke to none
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line132">line 132</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="PlaySound"><span class="type-signature"></span>PlaySound<span class="signature">(s)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Play Sound
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>s</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Basic.Sound</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BitzSound.js.html">bb/BitzSound.js</a>, <a href="bb_BitzSound.js.html#line33">line 33</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3425,7 +5424,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1802">line 1802</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -3454,7 +5453,7 @@
 
         
 <div class="param-desc">
-    - the red color
+    the red color (0 - 255)
 </div>
 
 
@@ -3483,7 +5482,7 @@
     
 
     
-    <h4 class="name" id="SetBuffer"><span class="type-signature"></span>SetBuffer<span class="signature">(buff)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="SetCanvas"><span class="type-signature"></span>SetCanvas<span class="signature">(c)</span><span class="type-signature"></span></h4>
     
 
     
@@ -3491,7 +5490,7 @@
 
 
 <div class="description">
-    Set the active buffer. Usefull if you want to change the buffer.
+    Set the active canvas.
 </div>
 
 
@@ -3527,13 +5526,13 @@
 
         <tr>
             
-                <td class="name"><code>buff</code></td>
+                <td class="name"><code>c</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">CanvasRenderingContext2D</span>
+<span class="param-type">HTMLCanvasElement</span>
 
 
             
@@ -3543,7 +5542,7 @@
 
             
 
-            <td class="description last">the new active buffer</td>
+            <td class="description last">the new active canvas</td>
         </tr>
 
     
@@ -3584,7 +5583,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1759">line 1759</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line18">line 18</a>
     </li></ul></dd>
     
 
@@ -3620,7 +5619,7 @@
     
 
     
-    <h4 class="name" id="SetPiksel"><span class="type-signature"></span>SetPiksel<span class="signature">(x, y)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="SetPixel"><span class="type-signature"></span>SetPixel<span class="signature">(x, y)</span><span class="type-signature"></span></h4>
     
 
     
@@ -3758,7 +5757,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="blitz_doc.js.html">blitz_doc.js</a>, <a href="blitz_doc.js.html#line1833">line 1833</a>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line92">line 92</a>
     </li></ul></dd>
     
 
@@ -3789,6 +5788,703 @@
 
 
         
+            
+
+    
+
+    
+    <h4 class="name" id="Sin"><span class="type-signature"></span>Sin<span class="signature">(n)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculate the Sin of an angle
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the angle in degrees</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzMath.js.html">bb/BlitzMath.js</a>, <a href="bb_BlitzMath.js.html#line29">line 29</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="SoundLoaded"><span class="type-signature"></span>SoundLoaded<span class="signature">(s)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Check if a sound has been loaded
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>s</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Basik.Sound</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the sound object</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BitzSound.js.html">bb/BitzSound.js</a>, <a href="bb_BitzSound.js.html#line41">line 41</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="StrokeColor"><span class="type-signature"></span>StrokeColor<span class="signature">(r, g, b, a)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Set stroke color
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>r</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">the red color (0 - 255)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>g</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">the green color (0 - 255)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    0
+                
+                </td>
+            
+
+            <td class="description last">the blue color (0 - 255)</td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    1
+                
+                </td>
+            
+
+            <td class="description last">the alpha color (0 - 100)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzGraphics.js.html">bb/BlitzGraphics.js</a>, <a href="bb_BlitzGraphics.js.html#line122">line 122</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="Tan"><span class="type-signature"></span>Tan<span class="signature">(n)</span><span class="type-signature"> &rarr; {number}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    Calculate the Tan of an angle
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>n</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">the angle in degrees</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="bb_BlitzMath.js.html">bb/BlitzMath.js</a>, <a href="bb_BlitzMath.js.html#line41">line 41</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">number</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
     
 
     
@@ -3804,13 +6500,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ImgObj.html">ImgObj</a></li><li><a href="Pt.html">Pt</a></li><li><a href="Seg.html">Seg</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Alpha">Alpha</a></li><li><a href="global.html#Angle">Angle</a></li><li><a href="global.html#Blue">Blue</a></li><li><a href="global.html#ClearArea">ClearArea</a></li><li><a href="global.html#Cls">Cls</a></li><li><a href="global.html#CopyImage">CopyImage</a></li><li><a href="global.html#Distance">Distance</a></li><li><a href="global.html#DrawAllImage">DrawAllImage</a></li><li><a href="global.html#FillColor">FillColor</a></li><li><a href="global.html#GetPixel">GetPixel</a></li><li><a href="global.html#Graphics">Graphics</a></li><li><a href="global.html#Green">Green</a></li><li><a href="global.html#KeyDownEvent">KeyDownEvent</a></li><li><a href="global.html#KeyUpEvent">KeyUpEvent</a></li><li><a href="global.html#MainBuffer">MainBuffer</a></li><li><a href="global.html#MouseClickEvent">MouseClickEvent</a></li><li><a href="global.html#MouseDownEvent">MouseDownEvent</a></li><li><a href="global.html#MouseDragStartX">MouseDragStartX</a></li><li><a href="global.html#MouseDragStartY">MouseDragStartY</a></li><li><a href="global.html#MouseDragXAmount">MouseDragXAmount</a></li><li><a href="global.html#MouseDragYAmount">MouseDragYAmount</a></li><li><a href="global.html#MouseIsDown">MouseIsDown</a></li><li><a href="global.html#MouseIsDragged">MouseIsDragged</a></li><li><a href="global.html#MouseMoveEvent">MouseMoveEvent</a></li><li><a href="global.html#MouseUpEvent">MouseUpEvent</a></li><li><a href="global.html#MouseX">MouseX</a></li><li><a href="global.html#MouseY">MouseY</a></li><li><a href="global.html#Red">Red</a></li><li><a href="global.html#SetBuffer">SetBuffer</a></li><li><a href="global.html#SetPiksel">SetPiksel</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ImgObj.html">ImgObj</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddListener">AddListener</a></li><li><a href="global.html#AllImageLoaded">AllImageLoaded</a></li><li><a href="global.html#Alpha">Alpha</a></li><li><a href="global.html#Angle">Angle</a></li><li><a href="global.html#Blue">Blue</a></li><li><a href="global.html#Clamp">Clamp</a></li><li><a href="global.html#ClearArea">ClearArea</a></li><li><a href="global.html#Cls">Cls</a></li><li><a href="global.html#CopyImage">CopyImage</a></li><li><a href="global.html#Cos">Cos</a></li><li><a href="global.html#CreateImage">CreateImage</a></li><li><a href="global.html#Distance">Distance</a></li><li><a href="global.html#DrawImage">DrawImage</a></li><li><a href="global.html#FillColor">FillColor</a></li><li><a href="global.html#GetPixel">GetPixel</a></li><li><a href="global.html#Graphics">Graphics</a></li><li><a href="global.html#Green">Green</a></li><li><a href="global.html#ImageCanvas">ImageCanvas</a></li><li><a href="global.html#ImageCollide">ImageCollide</a></li><li><a href="global.html#ImageCollidePoint">ImageCollidePoint</a></li><li><a href="global.html#KeyboardKey">KeyboardKey</a></li><li><a href="global.html#LoadAnimImage">LoadAnimImage</a></li><li><a href="global.html#LoadImage">LoadImage</a></li><li><a href="global.html#LoadSound">LoadSound</a></li><li><a href="global.html#MainCanvas">MainCanvas</a></li><li><a href="global.html#MouseButton">MouseButton</a></li><li><a href="global.html#MouseDragStartX">MouseDragStartX</a></li><li><a href="global.html#MouseDragStartY">MouseDragStartY</a></li><li><a href="global.html#MouseDragXAmount">MouseDragXAmount</a></li><li><a href="global.html#MouseDragYAmount">MouseDragYAmount</a></li><li><a href="global.html#MouseIsDown">MouseIsDown</a></li><li><a href="global.html#MouseIsDragged">MouseIsDragged</a></li><li><a href="global.html#MouseX">MouseX</a></li><li><a href="global.html#MouseY">MouseY</a></li><li><a href="global.html#NoColor">NoColor</a></li><li><a href="global.html#NoStroke">NoStroke</a></li><li><a href="global.html#PlaySound">PlaySound</a></li><li><a href="global.html#Red">Red</a></li><li><a href="global.html#SetCanvas">SetCanvas</a></li><li><a href="global.html#SetPixel">SetPixel</a></li><li><a href="global.html#Sin">Sin</a></li><li><a href="global.html#SoundLoaded">SoundLoaded</a></li><li><a href="global.html#StrokeColor">StrokeColor</a></li><li><a href="global.html#Tan">Tan</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.2</a> on Tue May 20 2025 22:09:54 GMT+0700 (Western Indonesia Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat May 24 2025 22:47:30 GMT+0700 (Western Indonesia Time)
 </footer>
 
 <script> prettyPrint(); </script>

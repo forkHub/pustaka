@@ -1,8 +1,5 @@
 namespace Basik {
 
-	/**
-	 * 
-	 */
 	export class Seg {
 
 		/**

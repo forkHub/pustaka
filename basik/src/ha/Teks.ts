@@ -28,9 +28,9 @@ namespace Basik {
 		}
 
 		static Write(teks: string): void {
-			G.context.font = Teks.size + 'px ' + Teks._name;
-			G.context.fillText(teks, Teks._x, Teks._y);
-			G.context.strokeText(teks, Teks._x, Teks._y);
+			G.Canvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
+			G.Canvas().getContext('2d').fillText(teks, Teks._x, Teks._y);
+			G.Canvas().getContext('2d').strokeText(teks, Teks._x, Teks._y);
 		}
 
 	}

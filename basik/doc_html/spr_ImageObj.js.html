@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: spr/ImageObj.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: spr/ImageObj.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+var Basik;
+(function (Basik) {
+    /**
+     * Image Object
+     */
+    class ImgObj {
+        /**
+         * @property {number} x - x position
+         * @property {number} y - y position
+         * @property {number} rotation - rotation in degree
+         * @property {number} alpha - alpha (0 - 100)
+         * @property {number} width -
+         * @property {number} height -
+         * @property {number} handleX - handle x position
+         * @property {number} handleY - handle y position
+         * @property {boolean} tilable - image rendered as tile
+         * @property {boolean} dragged - image is dragged
+         * @property {boolean} down - image is pressed
+         */
+        constructor() {
+            //
+            this._x = 0;
+            this._y = 0;
+            this._alpha = 100;
+            this._handleX = 0;
+            this._handleY = 0;
+            this._panjang = 0;
+            this._lebar = 0;
+            this._rotasi = 0;
+            this._tilable = false;
+            this._frameW = 32;
+            this._frameH = 32;
+            this._dragged = false;
+            this._down = false;
+            //internal
+            this.load = false;
+            this._panjangDiSet = false;
+            this._lebarDiSet = false;
+            this._ctrIdx = 0;
+            this.isAnim = false;
+            this.rect = new Basik.Ktk();
+            this.ratioX = 1;
+            this.ratioY = 1;
+            //interaktif even
+            this._tipeDrag = 0;
+            //internal interatif
+            this._dragStartY = 0;
+            this._dragStartX = 0;
+            this._sudutTekanAwal = 0;
+            this._sudutAwal = 0;
+        }
+        get canvas() {
+            return this._canvas;
+        }
+        set canvas(value) {
+            this._canvas = value;
+        }
+        get tilable() {
+            return this._tilable;
+        }
+        set tilable(value) {
+            this._tilable = value;
+        }
+        get sudutAwal() {
+            return this._sudutAwal;
+        }
+        set sudutAwal(value) {
+            this._sudutAwal = value;
+        }
+        get frameW() {
+            return this._frameW;
+        }
+        set frameW(value) {
+            this._frameW = value;
+        }
+        get frameH() {
+            return this._frameH;
+        }
+        set frameH(value) {
+            this._frameH = value;
+        }
+        get x() {
+            return this._x;
+        }
+        set x(value) {
+            this._x = value;
+        }
+        get y() {
+            return this._y;
+        }
+        set y(value) {
+            this._y = value;
+        }
+        get alpha() {
+            return this._alpha;
+        }
+        set alpha(value) {
+            this._alpha = value;
+        }
+        get handleY() {
+            return this._handleY;
+        }
+        set handleY(value) {
+            this._handleY = value;
+        }
+        get handleX() {
+            return this._handleX;
+        }
+        set handleX(value) {
+            this._handleX = value;
+        }
+        get width() {
+            return this._panjang;
+        }
+        set width(value) {
+            this._panjang = value;
+            this._panjangDiSet = true;
+        }
+        get height() {
+            return this._lebar;
+        }
+        set height(value) {
+            this._lebar = value;
+            this._lebarDiSet = true;
+        }
+        get panjangDiSet() {
+            return this._panjangDiSet;
+        }
+        set panjangDiSet(value) {
+            this._panjangDiSet = value;
+        }
+        get lebarDiSet() {
+            return this._lebarDiSet;
+        }
+        set lebarDiSet(value) {
+            this._lebarDiSet = value;
+        }
+        get ctrIdx() {
+            return this._ctrIdx;
+        }
+        set ctrIdx(value) {
+            this._ctrIdx = value;
+        }
+        get rotasi() {
+            return this._rotasi;
+        }
+        set rotasi(value) {
+            this._rotasi = value;
+        }
+        get drgStartX() {
+            return this._dragStartX;
+        }
+        set drgStartX(value) {
+            this._dragStartX = value;
+        }
+        get drgStartY() {
+            return this._dragStartY;
+        }
+        set drgStartY(value) {
+            this._dragStartY = value;
+        }
+        get dragged() {
+            return this._dragged;
+        }
+        set dragged(value) {
+            this._dragged = value;
+        }
+        get down() {
+            return this._down;
+        }
+        set down(value) {
+            this._down = value;
+        }
+        get dragable() {
+            return this._tipeDrag > 0 ? true : false;
+        }
+        get sudutTekanAwal() {
+            return this._sudutTekanAwal;
+        }
+        set sudutTekanAwal(value) {
+            this._sudutTekanAwal = value;
+        }
+        get tipeDrag() {
+            return this._tipeDrag;
+        }
+        set tipeDrag(value) {
+            this._tipeDrag = value;
+        }
+        get url() {
+            return this._url;
+        }
+        set url(value) {
+            this._url = value;
+        }
+        static get ctrDraw() {
+            return ImgObj._ctrDraw;
+        }
+        static set ctrDraw(value) {
+            ImgObj._ctrDraw = value;
+        }
+        get button() {
+            return this._button;
+        }
+        set button(value) {
+            this._button = value;
+        }
+    }
+    ImgObj._ctrDraw = 0;
+    Basik.ImgObj = ImgObj;
+})(Basik || (Basik = {}));
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="ImgObj.html">ImgObj</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AddListener">AddListener</a></li><li><a href="global.html#AllImageLoaded">AllImageLoaded</a></li><li><a href="global.html#Alpha">Alpha</a></li><li><a href="global.html#Angle">Angle</a></li><li><a href="global.html#Blue">Blue</a></li><li><a href="global.html#Clamp">Clamp</a></li><li><a href="global.html#ClearArea">ClearArea</a></li><li><a href="global.html#Cls">Cls</a></li><li><a href="global.html#CopyImage">CopyImage</a></li><li><a href="global.html#Cos">Cos</a></li><li><a href="global.html#CreateImage">CreateImage</a></li><li><a href="global.html#Distance">Distance</a></li><li><a href="global.html#DrawImage">DrawImage</a></li><li><a href="global.html#FillColor">FillColor</a></li><li><a href="global.html#GetPixel">GetPixel</a></li><li><a href="global.html#Graphics">Graphics</a></li><li><a href="global.html#Green">Green</a></li><li><a href="global.html#ImageCanvas">ImageCanvas</a></li><li><a href="global.html#ImageCollide">ImageCollide</a></li><li><a href="global.html#ImageCollidePoint">ImageCollidePoint</a></li><li><a href="global.html#KeyboardKey">KeyboardKey</a></li><li><a href="global.html#LoadAnimImage">LoadAnimImage</a></li><li><a href="global.html#LoadImage">LoadImage</a></li><li><a href="global.html#LoadSound">LoadSound</a></li><li><a href="global.html#MainCanvas">MainCanvas</a></li><li><a href="global.html#MouseButton">MouseButton</a></li><li><a href="global.html#MouseDragStartX">MouseDragStartX</a></li><li><a href="global.html#MouseDragStartY">MouseDragStartY</a></li><li><a href="global.html#MouseDragXAmount">MouseDragXAmount</a></li><li><a href="global.html#MouseDragYAmount">MouseDragYAmount</a></li><li><a href="global.html#MouseIsDown">MouseIsDown</a></li><li><a href="global.html#MouseIsDragged">MouseIsDragged</a></li><li><a href="global.html#MouseX">MouseX</a></li><li><a href="global.html#MouseY">MouseY</a></li><li><a href="global.html#NoColor">NoColor</a></li><li><a href="global.html#NoStroke">NoStroke</a></li><li><a href="global.html#PlaySound">PlaySound</a></li><li><a href="global.html#Red">Red</a></li><li><a href="global.html#SetCanvas">SetCanvas</a></li><li><a href="global.html#SetPixel">SetPixel</a></li><li><a href="global.html#Sin">Sin</a></li><li><a href="global.html#SoundLoaded">SoundLoaded</a></li><li><a href="global.html#StrokeColor">StrokeColor</a></li><li><a href="global.html#Tan">Tan</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Sat May 24 2025 22:47:30 GMT+0700 (Western Indonesia Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

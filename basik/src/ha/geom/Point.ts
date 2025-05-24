@@ -1,8 +1,5 @@
 namespace Basik {
 
-	/**
-	 * 
-	 */
 	export class Pt {
 		private _x: number;
 		public get x(): number {

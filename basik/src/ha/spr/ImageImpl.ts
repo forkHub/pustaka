@@ -29,7 +29,7 @@ namespace Basik {
 		static GambarSemua() {
 			for (let i: number = 0; i < Ip.daftar.length; i++) {
 				let item: ImgObj = Ip.daftar[i];
-				Ip.Draw(item, item.x, item.y);
+				Ip.Draw(item);
 			}
 		}
 
@@ -47,10 +47,9 @@ namespace Basik {
 		static muatAsyncBerbagiKanvas(
 			url: string,
 			canvas: HTMLCanvasElement,
-			tipeDrag: number,
-			onload: () => void): ImgObj {
+			tipeDrag: number): ImgObj {
 
-			let img: ImgObj = Ip.muatAsyncKanvas(url, canvas, onload);
+			let img: ImgObj = Ip.muatAsyncKanvas(url, canvas, () => { });
 			return Ip.register(img, url, tipeDrag);
 		}
 
@@ -114,8 +113,8 @@ namespace Basik {
 			let gbr: ImgObj = new ImgObj();
 			gbr.isAnim = true;
 			gbr.img = img;
-			gbr.panjang = img.naturalWidth;
-			gbr.lebar = img.naturalHeight;
+			gbr.width = img.naturalWidth;
+			gbr.height = img.naturalHeight;
 			gbr.frameH = fh;
 			gbr.frameW = fw;
 			gbr.isAnim = true;
@@ -173,13 +172,13 @@ namespace Basik {
 				gbr.load = true;
 
 				if (!gbr.panjangDiSet) {
-					gbr.panjang = fw;
+					gbr.width = fw;
 					gbr.panjangDiSet = true;
 				}
 
 				if (!gbr.lebarDiSet) {
 					gbr.lebarDiSet = true;
-					gbr.lebar = fh;
+					gbr.height = fh;
 				}
 
 				ha.be.cache.setFile(url, img);
@@ -203,8 +202,8 @@ namespace Basik {
 			gbr = new ImgObj();
 
 			gbr.img = img;
-			gbr.panjang = img.naturalWidth;
-			gbr.lebar = img.naturalHeight;
+			gbr.width = img.naturalWidth;
+			gbr.height = img.naturalHeight;
 			gbr.panjangDiSet = false;
 			gbr.lebarDiSet = false;
 			gbr.frameH = img.naturalHeight;
@@ -223,7 +222,7 @@ namespace Basik {
 			return gbr;
 		}
 
-		private static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload: () => void): ImgObj {
+		private static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload?: () => void): ImgObj {
 			let img: HTMLImageElement = document.createElement('img');
 			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
 
@@ -261,11 +260,11 @@ namespace Basik {
 
 				if (!gbr.panjangDiSet) {
 					gbr.panjangDiSet = true;
-					gbr.panjang = imgP.naturalWidth;
+					gbr.width = imgP.naturalWidth;
 				}
 
 				if (!gbr.lebarDiSet) {
-					gbr.lebar = imgP.naturalHeight;
+					gbr.height = imgP.naturalHeight;
 					gbr.lebarDiSet = true;
 				}
 
@@ -303,11 +302,11 @@ namespace Basik {
 
 				if (!gbr.panjangDiSet) {
 					gbr.panjangDiSet = true;
-					gbr.panjang = 32;
+					gbr.width = 32;
 				}
 
 				if (!gbr.lebarDiSet) {
-					gbr.lebar = 32;
+					gbr.height = 32;
 					gbr.lebarDiSet = true;
 				}
 
@@ -317,7 +316,7 @@ namespace Basik {
 				ha.be.cache.setFile(url, gbr.img);
 			}
 
-			console.log(gbr);
+			// console.log(gbr);
 			return gbr;
 		}
 
@@ -327,8 +326,8 @@ namespace Basik {
 
 			if (gbr.load == false) return;
 
-			let w2: number = Math.floor(gbr.panjang);
-			let h2: number = Math.floor(gbr.lebar);
+			let w2: number = Math.floor(gbr.width);
+			let h2: number = Math.floor(gbr.height);
 
 			while (x < 0) {
 				x += w2;
@@ -352,8 +351,8 @@ namespace Basik {
 
 			frame = Math.floor(frame);
 
-			jmlH = Math.ceil((G.canvas.width + Math.abs(x)) / w2);
-			jmlV = Math.ceil((G.canvas.height + Math.abs(y)) / h2);
+			jmlH = Math.ceil((G.MainCanvas().width + Math.abs(x)) / w2);
+			jmlV = Math.ceil((G.MainCanvas().height + Math.abs(y)) / h2);
 
 			for (let i: number = 0; i < jmlH; i++) {
 				for (let j: number = 0; j < jmlV; j++) {
@@ -364,7 +363,7 @@ namespace Basik {
 
 		static AmbilPiksel(x: number = 0, y: number = 0): void {
 			try {
-				let data: Uint8ClampedArray = G.context.getImageData(x, y, 1, 1).data;
+				let data: Uint8ClampedArray = G.Canvas().getContext('2d').getImageData(x, y, 1, 1).data;
 
 				let hasil: number[] = [];
 
@@ -374,8 +373,8 @@ namespace Basik {
 				hasil.push(data[3]);
 
 				G.red = data[0];
-				G.hijau = data[1];
-				G.biru = data[2];
+				G.green = data[1];
+				G.blue = data[2];
 				G.alpha = data[3];
 				// G.FillColor(G.merah, G.hijau, G.biru, G.alpha);
 
@@ -388,20 +387,20 @@ namespace Basik {
 		}
 
 		static SetPiksel(x: number = 0, y: number = 0) {
-			G.context.fillRect(Math.floor(x), Math.floor(y), 1, 1);
+			G.Canvas().getContext('2d').fillRect(Math.floor(x), Math.floor(y), 1, 1);
 		}
 
-		static Draw(gbr: ImgObj, x: number = 0, y: number = 0, frame: number = 0) {
-			if (gbr.tilable) {
-				Ip.gambarUbin(gbr, x, y, frame);
+		static Draw(img: ImgObj) {
+			if (img.tilable) {
+				Ip.gambarUbin(img, img.x, img.y, img.frame);
 			}
 			else {
-				Ip.DrawSingle(gbr, x, y, frame);
+				Ip.DrawSingle(img, img.x, img.y, img.frame);
 			}
 		}
 
 		private static DrawSingle(gbr: ImgObj, x: number = 0, y: number = 0, frame: number = 0) {
-			let ctx: CanvasRenderingContext2D = G.context;
+			let ctx: CanvasRenderingContext2D = G.Canvas().getContext('2d');
 			let jmlH: number = 0;
 			// let jmlV: number = 0;
 			let frameX: number = 0;
@@ -434,8 +433,8 @@ namespace Basik {
 			let x2: number = Math.floor(x);
 			let y2: number = Math.floor(y);
 
-			let w2: number = Math.floor(gbr.panjang);
-			let h2: number = Math.floor(gbr.lebar);
+			let w2: number = Math.floor(gbr.width);
+			let h2: number = Math.floor(gbr.height);
 
 			x2 -= (gbr.handleX);
 			y2 -= (gbr.handleY);
@@ -464,9 +463,9 @@ namespace Basik {
 			function drawImpl(dx: number, dy: number) {
 				ctx.globalAlpha = gbr.alpha / 100;
 				ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, Math.floor(dx), Math.floor(dy), w2, h2);
-				console.group('draw image');
-				console.log("x:", x, "y:", y, "x2:", x2, "y2:", y2);
-				console.groupEnd();
+				// console.group('draw image');
+				// console.log("x:", x, "y:", y, "x2:", x2, "y2:", y2);
+				// console.groupEnd();
 			}
 
 			// debugger;
@@ -504,8 +503,8 @@ namespace Basik {
 		private static rectToImageTf(image: ImgObj, x: number, y: number): void {
 			let rect: Ktk = image.rect;
 			let p: IV2D;
-			let x2: number = image.panjang
-			let y2: number = image.lebar;
+			let x2: number = image.width
+			let y2: number = image.height;
 
 			//scale
 			p = rect.vs[1];
@@ -527,6 +526,7 @@ namespace Basik {
 			//rotate
 			Ktk.rotate(rect, image.rotasi, x, y, false);
 		}
+
 
 		static AllImageLoaded(): boolean {
 			for (let i = 0; i < Ip.daftar.length; i++) {

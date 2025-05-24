@@ -61,6 +61,7 @@
 		"./ha/**/*",
 	],
 	"exclude": [
-		"./ha/event/**"
+		"./ha/event/**",
+		"./ha/event/**",
 	]
 }
