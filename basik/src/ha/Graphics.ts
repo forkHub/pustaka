@@ -111,7 +111,7 @@ namespace Basik {
 			}, 100);
 			G.handleWindowResize();
 
-			NoStroke();
+			// NoStroke();
 			Cls();
 		}
 

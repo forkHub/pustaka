@@ -9,6 +9,7 @@ namespace Basik {
 		isDrag: boolean;
 		isDown: boolean;
 		isTap: boolean;
+		evt: MouseEvent;
 		// hit: number;
 		key: number;
 		// type: EInput;

@@ -1,7 +1,7 @@
 ///<reference path="./Route.ts"/>
 
 const G = Basik.G;
-const T = Basik.Tk;
+// const T = Basik.Tk;
 const Ip = Basik.Ip;
 const In = Basik.In;
 
@@ -122,9 +122,9 @@ function FillColor(r: number = 0, g: number = 0, b: number = 0, a: number = 100)
 /**
  * Set fill color to none
  */
-function NoColor() {
-	G.Canvas().getContext('2d').fillStyle = "none";
-}
+// function NoColor() {
+// 	G.Canvas().getContext('2d').fillStyle = "none";
+// }
 
 /**
  * Set stroke color
@@ -144,9 +144,9 @@ function StrokeColor(r: number = 0, g: number = 0, b: number = 0, a: number = 1)
 /**
  * Set stroke to none
  */
-function NoStroke() {
-	G.Canvas().getContext('2d').strokeStyle = 'none';
-}
+// function NoStroke() {
+// 	G.Canvas().getContext('2d').strokeStyle = 'none';
+// }
 
 /**
  * Add Listener for certain event
@@ -158,11 +158,11 @@ function AddListener(type: string, f: () => void) {
 }
 
 /**
- * return the last keyboard event key
- * @returns {string}
+ * return the last keyboard event object
+ * @returns {KeyboardEvent}
  */
-function KeyboardKey(): string {
-	return Basik.Keyboard.key;
+function KeyboardEventObj(): KeyboardEvent {
+	return Basik.Keyboard.obj;
 }
 
 /**

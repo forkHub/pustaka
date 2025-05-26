@@ -121,6 +121,7 @@ namespace Basik {
 					let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
 					let key: number = e.button;
 
+					Input._obj.evt = e;
 					Input.event.down(Input._obj, key, pos);
 					sprInt.inputDown(pos, e.button);
 				});
@@ -132,6 +133,8 @@ namespace Basik {
 					e.preventDefault();
 
 					let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
+
+					Input._obj.evt = e;
 					Input.event.move(this.obj, buffer, e);
 					sprInt.inputMove(pos, e.button);
 				});
@@ -142,6 +145,7 @@ namespace Basik {
 					e.stopPropagation();
 					e.preventDefault();
 
+					Input._obj.evt = e;
 					Input.event.up(Input.obj, e.button);
 					Ip.daftar.forEach((img: ImgObj) => {
 						img.down = false;
@@ -156,6 +160,7 @@ namespace Basik {
 					e.stopPropagation();
 					e.preventDefault();
 
+					Input._obj.evt = e;
 					Input.event.up(this.obj, e.button);
 					Ip.daftar.forEach((img: ImgObj) => {
 						img.down = false;
@@ -182,6 +187,7 @@ namespace Basik {
 				y: 0,
 				yDrag: 0,
 				yStart: 0,
+				evt: null
 			}
 		}
 

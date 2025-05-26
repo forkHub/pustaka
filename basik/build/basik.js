@@ -1041,12 +1041,12 @@ var Basik;
         static SetPiksel(x = 0, y = 0) {
             Basik.G.Canvas().getContext('2d').fillRect(Math.floor(x), Math.floor(y), 1, 1);
         }
-        static Draw(img, frame = 0) {
+        static Draw(img) {
             if (img.tilable) {
-                Basik.Ip.gambarUbin(img, img.x, img.y, frame);
+                Basik.Ip.gambarUbin(img, img.x, img.y, img.frame);
             }
             else {
-                Basik.Ip.DrawSingle(img, img.x, img.y, frame);
+                Basik.Ip.DrawSingle(img, img.x, img.y, img.frame);
             }
         }
         static DrawSingle(gbr, x = 0, y = 0, frame = 0) {
@@ -1153,6 +1153,7 @@ var Basik;
             this._frameH = 32;
             this._dragged = false;
             this._down = false;
+            this._frame = 0;
             this.load = false;
             this._panjangDiSet = false;
             this._lebarDiSet = false;
@@ -1166,6 +1167,12 @@ var Basik;
             this._dragStartX = 0;
             this._sudutTekanAwal = 0;
             this._sudutAwal = 0;
+        }
+        get frame() {
+            return this._frame;
+        }
+        set frame(value) {
+            this._frame = value;
         }
         get canvas() {
             return this._canvas;
@@ -1532,18 +1539,12 @@ function FillColor(r = 0, g = 0, b = 0, a = 100) {
     G.blue = b;
     G.alpha = a;
 }
-function NoColor() {
-    G.Canvas().getContext('2d').fillStyle = "none";
-}
 function StrokeColor(r = 0, g = 0, b = 0, a = 1) {
     G.Canvas().getContext('2d').strokeStyle = `rgba( ${r}, ${g}, ${b}, ${a})`;
     G.red = r;
     G.green = g;
     G.blue = b;
     G.alpha = a;
-}
-function NoStroke() {
-    G.Canvas().getContext('2d').strokeStyle = 'none';
 }
 function AddListener(type, f) {
     Basik.Event.addListener(type, f);
@@ -1578,22 +1579,11 @@ function MouseDragStartX() {
 function MouseDragStartY() {
     return In.obj.yStart;
 }
-const DistMin = Basik.Transform.degDist;
-function Distance(x1, y1, x2, y2) {
-    return Math.hypot(x2 - x1, y2 - y1);
+function degDist(angleS = 0, angleT, min = true) {
+    return Basik.Transform.degDist(angleS, angleT, min);
 }
 function Angle(x, y) {
     return Basik.Tf.sudut(x, y);
-}
-function Sin(n) { return Math.sin(n * Math.PI / 180); }
-function Cos(n) { return Math.cos(n * Math.PI / 180); }
-function Tan(n) { return Math.tan(n * Math.PI / 180); }
-function Clamp(n, min, max) {
-    if (n < min)
-        return min;
-    if (n > max)
-        return max;
-    return n;
 }
 function LoadImage(url) {
     return Ip.Muat(url);

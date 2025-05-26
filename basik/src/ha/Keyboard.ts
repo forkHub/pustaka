@@ -1,12 +1,8 @@
 namespace Basik {
 	export class Keyboard {
-		private static _key: string;
-
-		public static get key(): string {
-			return Keyboard._key;
-		}
-		public static set key(value: string) {
-			Keyboard._key = value;
+		private static _obj: KeyboardEvent;
+		public static get obj(): KeyboardEvent {
+			return Keyboard._obj;
 		}
 
 		public static init() {
@@ -17,7 +13,7 @@ namespace Basik {
 				// }
 				// catch (e) { e; }
 
-				Keyboard.key = e.key;
+				Keyboard._obj = e;
 				Event.call("keydown");
 			})
 
@@ -27,7 +23,7 @@ namespace Basik {
 				// }
 				// catch (e) { e; }
 
-				Keyboard.key = e.key;
+				Keyboard._obj = e;
 				Event.call("keyup");
 			})
 		}
