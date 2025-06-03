@@ -1,6 +1,7 @@
 
 
 namespace Basik {
+
 	namespace input {
 		export class EventHandler {
 
@@ -8,30 +9,24 @@ namespace Basik {
 				let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
 				input.x = pos.x;
 				input.y = pos.y;
-				input.key = e.button;
+				input.button = e.button;
 
 				if (input.isDown) {
 					input.isDrag = true;
 					input.xDrag = input.x - input.xStart;
 					input.yDrag = input.y - input.yStart;
 
-					// try {
-					// 	let f = (window as any)["MouseDragEvent"];
-					// 	if (typeof f == "function") (window as any).MouseDragEvent();
-					// }
-					// catch (e) { e; }
 					Event.call("mousedrag");
 				}
 
-				// try {
-				// 	let f = (window as any)["MouseMoveEvent"];
-				// 	if (typeof f == "function") (window as any).MouseMoveEvent();
-				// }
-				// catch (e) { e; }
 				Event.call("mousemove");
 			}
 
 			down(input: IInput, key: number, pos: IV2D): void {
+				if (input.isDown == false) {
+					Event.call("mousedown");
+				}
+
 				input.xStart = pos.x
 				input.yStart = pos.y;
 				input.xDrag = 0;
@@ -41,21 +36,20 @@ namespace Basik {
 				input.isDown = true;
 				input.isTap = false;
 				input.isDrag = false;
-				input.key = key;
+				input.button = key;
 				input.timerStart = Date.now();
 
-				// try {
-				// 	(window as any).MouseDownEvent(key);
-				// }
-				// catch (e) { e; }
-				Event.call("mousedown");
 			}
 
-			up(input: IInput, key: number): void {
+			up(input: IInput): void {
+				if (input.isDown) {
+					Event.call("mouseup");
+				}
 				input.isDown = false;
 				input.isDrag = false;
 				input.timerEnd = Date.now();
-				input.key = key;
+				// input.button = e.button;
+				// input.pointerId = e.pointerId;
 
 				let isTap = this.checkTap(input);
 				input.isTap = (isTap == '');
@@ -72,7 +66,6 @@ namespace Basik {
 				// 	(window as any).MouseUpEvent(input.key);
 				// }
 				// catch (e) { e; }
-				Event.call("mouseup");
 			}
 
 			//check tap
@@ -91,6 +84,7 @@ namespace Basik {
 
 	export class Input {
 		private static _debug: boolean = false;
+		private static readonly lst: IInput[] = [];
 
 		public static get debug(): boolean {
 			return Input._debug;
@@ -99,95 +93,124 @@ namespace Basik {
 			Input._debug = value;
 		}
 
-		private static _obj: IInput;
+		// private static _obj: IInput;
 		private static _evt: input.EventHandler = new input.EventHandler();
 
 		constructor() {
 		}
 
+		static reg(e: PointerEvent): IInput {
+			let inp = Input.buatInput(e);
+			Input.lst.push(inp);
+			return inp;
+		}
+
+		static IsDown(btn: number): boolean {
+			let lst = Input.lst;
+			for (let i = 0; i < lst.length; i++) {
+				let o = lst[i];
+				if (o.button == btn) return o.isDown;
+			}
+
+			return false;
+		}
+
+		static getInput(e: PointerEvent): IInput {
+			let lst = Input.lst;
+
+			for (let i = 0; i < lst.length; i++) {
+				let o = lst[i];
+
+				if (e.pointerType == 'mouse') {
+					if (o.button == e.button) return o;
+				} else if (e.pointerType == 'touch') {
+					if (o.pointerId == e.pointerId) {
+						return o;
+					}
+				} else {
+					console.warn("pointer not supported; " + e.pointerType);
+					return null;
+				}
+			}
+
+			let inp: IInput = this.reg(e);
+			return inp;
+		}
+
+		//TODO: refaktor input
 		static init(buffer: HTMLCanvasElement): void {
 			console.log('Input init');
 
-			Input._obj = this.buatInputDefault();
+			// Input._obj = this.buatInputDefault();
 
 			buffer.style.touchAction = 'none';
 
 			buffer.addEventListener(
-				"mousedown",
-				(e: MouseEvent) => {
+				"pointerdown",
+				(e: PointerEvent) => {
 					e.stopPropagation();
 					e.preventDefault();
 
 					let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
-					let key: number = e.button;
+					let button: number = e.button;
 
-					Input._obj.evt = e;
-					Input.event.down(Input._obj, key, pos);
+					Input.event.down(Input.getInput(e), button, pos);
 					sprInt.inputDown(pos, e.button);
 				});
 
 			buffer.addEventListener(
-				"mousemove",
-				(e: MouseEvent) => {
+				"pointermove",
+				(e: PointerEvent) => {
 					e.stopPropagation();
 					e.preventDefault();
 
 					let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
 
-					Input._obj.evt = e;
-					Input.event.move(this.obj, buffer, e);
+					// Input._obj.evt = e;
+					Input.event.move(this.getInput(e), buffer, e);
 					sprInt.inputMove(pos, e.button);
 				});
 
 			buffer.addEventListener(
-				"mouseout",
-				(e: MouseEvent) => {
-					e.stopPropagation();
-					e.preventDefault();
-
-					Input._obj.evt = e;
-					Input.event.up(Input.obj, e.button);
-					Ip.daftar.forEach((img: ImgObj) => {
-						img.down = false;
-						img.dragged = false;
-					});
-					//gak ada event handler
+				"pointerout",
+				(e: PointerEvent) => {
+					pointerUp(e);
 				});
 
 			buffer.addEventListener(
-				"mouseup",
-				(e: MouseEvent) => {
-					e.stopPropagation();
-					e.preventDefault();
-
-					Input._obj.evt = e;
-					Input.event.up(this.obj, e.button);
-					Ip.daftar.forEach((img: ImgObj) => {
-						img.down = false;
-						img.dragged = false;
-					});
-
-
+				"pointerup",
+				(e: PointerEvent) => {
+					pointerUp(e);
 				})
+
+			function pointerUp(e: PointerEvent): void {
+				e.stopPropagation();
+				e.preventDefault();
+				Input.event.up(Input.getInput(e));
+				Ip.daftar.forEach((img: Image) => {
+					img.down = false;
+					img.dragged = false;
+				});
+			}
 		}
 
-		private static buatInputDefault(): IInput {
+		private static buatInput(e: PointerEvent): IInput {
 			return {
+				pointerType: e.pointerType,
 				isDown: false,
 				isDrag: false,
-				// isHit: false,
 				isTap: false,
-				key: 0,
+				button: e.button,
 				timerEnd: 0,
 				timerStart: 0,
-				// type: EInput.DEF,
 				x: 0,
 				xDrag: 0,
 				xStart: 0,
 				y: 0,
 				yDrag: 0,
 				yStart: 0,
-				evt: null
+				evt: null,
+				pointerId: e.button
 			}
 		}
 
@@ -210,9 +233,9 @@ namespace Basik {
 			return Input._evt;
 		}
 
-		public static get obj(): IInput {
-			return Input._obj;
-		}
+		// public static get obj(): IInput {
+		// 	return Input._obj;
+		// }
 
 	}
 	export const In = Input;

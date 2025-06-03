@@ -22,15 +22,22 @@ namespace Basik {
 		static addListener(type: string, f: () => void) {
 			let e = new Event(type.toLowerCase(), f);
 			Event.list.push(e);
+			console.log("add listener: type ", type);
 			return e;
 		}
 
 		static call(type: string): void {
+			// console.log("call event ", type);
+
 			Event.list.forEach((item) => {
 				if (item.type === type.toLowerCase()) {
+					// console.log("event found ", type);
 					item.f();
+					return;
 				}
-			})
+			});
+
+			// console.log("event not found, type ", type);
 		}
 
 

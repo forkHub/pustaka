@@ -3,15 +3,15 @@ namespace Basik {
 	/**
 	 * Image Object
 	 */
-	export class ImgObj {
+	export class Image {
 
 		/**
 		 * @property {number} x - x position
 		 * @property {number} y - y position
 		 * @property {number} rotation - rotation in degree
 		 * @property {number} alpha - alpha (0 - 100)
-		 * @property {number} width - 
-		 * @property {number} height - 
+		 * @property {number} width - preferred width
+		 * @property {number} height - preferred height
 		 * @property {number} handleX - handle x position
 		 * @property {number} handleY - handle y position
 		 * @property {boolean} tilable - image rendered as tile
@@ -19,7 +19,113 @@ namespace Basik {
 		 * @property {boolean} down - image is pressed
 		 */
 
-		constructor() {
+		/**
+		 * 
+		 * @param url {string}
+		 */
+		constructor(url: string = '') {
+			// console.log("create new image, url " + url);
+
+			let img: HTMLImageElement = document.createElement('img');
+			let canvas: HTMLCanvasElement = document.createElement('canvas');
+			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+
+			let gbr: Image;
+			gbr = this;
+			let rect = Ktk.buat(0, 0, img.naturalWidth, img.naturalHeight);
+
+			Ip.register(this, url, 0);
+
+			gbr.img = img;
+			gbr.canvas = canvas;
+			gbr.rect = rect;
+			gbr.load = false;
+
+			img.onload = () => {
+				imgOnLoad(img);
+			}
+
+			img.onerror = () => {
+				console.warn('gagal load image, url ' + url);
+				imgOnLoadDefault();
+			}
+
+			let img2: HTMLImageElement = ha.be.cache.getGbr(url);
+			if (img2) {
+				imgOnLoad(img2);
+			}
+			else {
+				img.src = url;
+			}
+
+			function imgOnLoad(imgP: HTMLImageElement): void {
+				// console.log("img on load");
+				canvas.width = imgP.naturalWidth;
+				canvas.height = imgP.naturalHeight;
+
+				ctx.drawImage(imgP, 0, 0);
+				gbr.rect = Ktk.buat(0, 0, imgP.naturalWidth, imgP.naturalHeight);
+
+				gbr.load = true;
+				gbr.img = imgP;
+
+				if (!gbr.width) {
+					// gbr.panjangDiSet = true;
+					gbr.width = imgP.naturalWidth;
+				}
+
+				if (!gbr.height) {
+					gbr.height = imgP.naturalHeight;
+					// gbr.lebarDiSet = true;
+				}
+
+				if (!gbr._frameH) gbr.frameH = imgP.naturalHeight;
+				if (!gbr._frameW) gbr.frameW = imgP.naturalWidth;
+
+				ha.be.cache.setFile(url, imgP);
+			}
+
+			function imgOnLoadDefault(): void {
+				// console.log("img on load default");
+
+				// canvas.width = 32;
+				// canvas.height = 32;
+
+				// // ctx = canvas.getContext('2d');
+				// gbr.img = document.createElement('img');
+				// // ctx.drawImage(gbr.img, 0, 0);
+
+				// gbr.rect = Ktk.buat(0, 0, 32, 32);
+				// ctx.fillStyle = 'rgba(255, 255, 255, 100)';
+				// ctx.strokeStyle = 'rgba(255, 0, 0, 100)';
+				// ctx.beginPath();
+				// ctx.rect(0, 0, 32, 32);
+				// ctx.moveTo(0, 0);
+				// ctx.lineTo(31, 31);
+				// ctx.moveTo(0, 31);
+				// ctx.lineTo(31, 0);
+				// ctx.stroke();
+
+				// // ctx.setf
+				// // ctx.fillRect(0, 0, 32, 32);
+
+				// gbr.load = true;
+
+				// if (!gbr.width) {
+				// 	// gbr.panjangDiSet = true;
+				// 	gbr.width = 32;
+				// }
+
+				// if (!gbr.height) {
+				// 	gbr.height = 32;
+				// 	// gbr.lebarDiSet = true;
+				// }
+
+				// gbr.frameH = 32;
+				// gbr.frameW = 32;
+
+				// ha.be.cache.setFile(url, gbr.img);
+			}
 		}
 
 		//
@@ -32,31 +138,25 @@ namespace Basik {
 		private _lebar: number = 0;
 		private _rotasi: number = 0;
 		private _tilable: boolean = false;
-		private _frameW: number = 32;
-		private _frameH: number = 32;
+		private _frameW: number = 0;
+		private _frameH: number = 0;
 		private _dragged: boolean = false;
 		private _down: boolean = false;
 		private _frame: number = 0;
 
 		//internal
 		load: boolean = false;
-		private _panjangDiSet: boolean = false;
-		private _lebarDiSet: boolean = false;
+		// private _panjangDiSet: boolean = false;
+		// private _lebarDiSet: boolean = false;
 		private _ctrIdx: number = 0;
 		private static _ctrDraw: number = 0;
 		private _url: string;
 		img: HTMLImageElement;
 		private _canvas: HTMLCanvasElement;
-		ctx: CanvasRenderingContext2D;
 		isAnim: boolean = false;
 		rect: Ktk = new Ktk();
-		ratioX?: number = 1;
-		ratioY?: number = 1;
 
-		//interaktif even
 		private _tipeDrag: number = 0;
-
-		//internal interatif
 		private _dragStartY: number = 0;
 		private _dragStartX: number = 0;
 		private _sudutTekanAwal: number = 0;
@@ -140,34 +240,39 @@ namespace Basik {
 		}
 
 		public get width(): number {
-			return this._panjang;
+			if (this._panjang) return this._panjang;
+			if (this.img) return this.img.naturalWidth;
+			return 0;
 		}
+
 		public set width(value: number) {
 			this._panjang = value;
-			this._panjangDiSet = true;
+			// this._panjangDiSet = true;
 		}
 
 		public get height(): number {
-			return this._lebar;
+			if (this._lebar) return this._lebar;
+			if (this.img) return this.img.naturalHeight;
+			return 0;
 		}
 		public set height(value: number) {
 			this._lebar = value;
-			this._lebarDiSet = true;
+			// this._lebarDiSet = true;
 		}
 
-		public get panjangDiSet(): boolean {
-			return this._panjangDiSet;
-		}
-		public set panjangDiSet(value: boolean) {
-			this._panjangDiSet = value;
-		}
+		// public get panjangDiSet(): boolean {
+		// 	return this._panjangDiSet;
+		// }
+		// public set panjangDiSet(value: boolean) {
+		// 	this._panjangDiSet = value;
+		// }
 
-		public get lebarDiSet(): boolean {
-			return this._lebarDiSet;
-		}
-		public set lebarDiSet(value: boolean) {
-			this._lebarDiSet = value;
-		}
+		// public get lebarDiSet(): boolean {
+		// 	return this._lebarDiSet;
+		// }
+		// public set lebarDiSet(value: boolean) {
+		// 	this._lebarDiSet = value;
+		// }
 
 		public get ctrIdx(): number {
 			return this._ctrIdx;
@@ -176,10 +281,10 @@ namespace Basik {
 			this._ctrIdx = value;
 		}
 
-		public get rotasi(): number {
+		public get rotation(): number {
 			return this._rotasi;
 		}
-		public set rotasi(value: number) {
+		public set rotation(value: number) {
 			this._rotasi = value;
 		}
 
@@ -234,10 +339,10 @@ namespace Basik {
 			this._url = value;
 		}
 		public static get ctrDraw(): number {
-			return ImgObj._ctrDraw;
+			return Image._ctrDraw;
 		}
 		public static set ctrDraw(value: number) {
-			ImgObj._ctrDraw = value;
+			Image._ctrDraw = value;
 		}
 
 		public get button(): number {

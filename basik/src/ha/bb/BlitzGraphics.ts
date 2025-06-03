@@ -165,11 +165,16 @@ function KeyboardEventObj(): KeyboardEvent {
 	return Basik.Keyboard.obj;
 }
 
+function KeyboardDown(key: string): boolean {
+	return Basik.Keyboard.IsDown(key);
+}
+
 /**
- * return the last mouse event button
- * @returns {number}
+ * return the last mouse event object by button
+ * @param btn {number} mouse button
+ * @returns {MouseEvent} 
  */
-function MouseButton(): number {
-	return Basik.Input.obj.key;
+function MouseEventObj(btn: number): MouseEvent {
+	return Basik.Input.getInput(btn).evt;
 }
 

@@ -2,69 +2,75 @@
 
 /**
  * muouse is down status
+ * @param btn {number}
  * @returns {boolean}
  */
-function MouseIsDown(): boolean {
-	return In.obj.isDown;
+function MouseIsDown(btn: number = 0): boolean {
+	return In.getInput(btn).isDown;
 }
 
 /**
  * mouse is dragged
+ * @param btn {number}
  * @returns {boolean}
  */
-function MouseIsDragged(): boolean {
-	return In.obj.isDrag;
+function MouseIsDragged(btn: number = 0): boolean {
+	return In.getInput(btn).isDrag;
 }
 
 
 /**
  * drag horizontal length
+ * @param btn {number}
  * @returns {number}
  */
-function MouseDragXAmount(): number {
-	return In.obj.xDrag
+function MouseDragXAmount(btn: number = 0): number {
+	return In.getInput(btn).xDrag
 }
 
 /**
- * drag vertical length
+ * drag vertical length * 
+ * @param btn {number}
  * @returns {number}
  */
-function MouseDragYAmount(): number {
-	return In.obj.yDrag
+function MouseDragYAmount(btn: number = 0): number {
+	return In.getInput(btn).yDrag
 }
 
 /**
  * mouse x position
+ * @param btn {number}
  * @returns {number}
  */
-function MouseX(): number {
-	return In.obj.x;
+function MouseX(btn: number = 0): number {
+	return In.getInput(btn).x;
 }
 
 /**
  * mouse y position
+ * @param btn {number}
  * @returns {number}
  */
-function MouseY(): number {
-	return In.obj.y;
+function MouseY(btn: number = 0): number {
+	return In.getInput(btn).y;
 }
-
 
 /**
  * drag start x position
+ * @param btn {number}
  * @returns {number}
- * 
- * */
-function MouseDragStartX(): number {
-	return In.obj.xStart;
+ */
+function MouseDragStartX(btn: number = 0): number {
+	return In.getInput(btn).xStart;
 }
 
 /**
  * drag start y position
+ * @param btn {number}
  * @returns {number}
  */
-function MouseDragStartY(): number {
-	return In.obj.yStart;
+function MouseDragStartY(btn: number = 0): number {
+	return In.getInput(btn).yStart;
 }
 
 

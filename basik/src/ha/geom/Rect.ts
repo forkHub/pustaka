@@ -25,6 +25,18 @@ namespace Basik {
 			return r;
 		}
 
+		static destroy(r: Ktk) {
+			while (r.vs.length > 0) {
+				r.vs.pop();
+			}
+
+			while (r.segs.length > 0) {
+				let s = r.segs.pop();
+				s.A = null;
+				s.B = null;
+			}
+		}
+
 		private static copy(r: Ktk): Ktk {
 			// console.log('copy:');
 			// console.log(r.vs);

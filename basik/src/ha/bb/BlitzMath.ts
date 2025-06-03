@@ -20,3 +20,9 @@ function degDist(angleS: number = 0, angleT: number, min: boolean = true): numbe
 function Angle(x: number, y: number): number {
 	return Basik.Tf.sudut(x, y);
 }
+
+function Clamp(n: number, min: number, max: number): number {
+	if (n < min) return min;
+	if (n > max) return max;
+	return n;
+}

@@ -1,5 +1,6 @@
 namespace Basik {
 	export interface IInput {
+		pointerType: string;
 		xStart: number;
 		yStart: number;
 		xDrag: number;
@@ -10,15 +11,10 @@ namespace Basik {
 		isDown: boolean;
 		isTap: boolean;
 		evt: MouseEvent;
-		// hit: number;
-		key: number;
-		// type: EInput;
+		button: number;
 		timerStart: number;
 		timerEnd: number;
-		// dragJml: number;
-		// dragSelesaiJml: number;
-		// tapJml: number;
-		// upJml: number;
+		pointerId: number;
 	}
 
 	// interface ISprImgObj {

@@ -3,7 +3,7 @@ window.onload = () => {
 	Graphics(320, 240);
 
 	//load brush
-	let brush: Basik.ImgObj;
+	let brush: Basik.Image;
 	brush = LoadImage("./imgs/brush.png");
 
 	//set handle to center

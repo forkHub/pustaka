@@ -90,6 +90,8 @@ namespace Basik {
 			G.setupMainCanvas(w, h, G.autoScale);
 
 			In.init(G.canvas);
+			Keyboard.init();
+			Camera.init();
 
 			// if (Graphic.skalaOtomatis) {
 			window.addEventListener("resize", (): void => {

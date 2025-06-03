@@ -7,14 +7,19 @@ namespace Basik {
 	//Sprite interactivity
 	class SprInt {
 
-		private spriteDown(img: ImgObj, pos: any, id: number) {
+		private spriteDown(img: Image, posCam: any, id: number) {
+			let posAbs = {
+				x: posCam.x - Camera.x,
+				y: posCam.y - Camera.y
+			}
+
 			img.down = true;
-			img.drgStartX = pos.x - img.x;
-			img.drgStartY = pos.y - img.y;
+			img.drgStartX = posAbs.x - img.x;
+			img.drgStartY = posAbs.y - img.y;
 			img.button = id;
 
-			img.sudutTekanAwal = Tf.sudut(pos.x - img.x, pos.y - img.y);
-			img.sudutAwal = img.rotasi;
+			img.sudutTekanAwal = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
+			img.sudutAwal = img.rotation;
 
 
 			// console.group('sprite down event handler');
@@ -23,18 +28,22 @@ namespace Basik {
 			// console.groupEnd();
 		}
 
-		inputDown(pos: any, button: number): void {
+		inputDown(posCam: any, button: number): void {
 			console.group('input down');
+			let posAbs = {
+				x: posCam.x - Camera.x,
+				y: posCam.y - Camera.y
+			}
 
 			let lastIdx: number = -1;
-			let lastSprite: ImgObj = null;
+			let lastSprite: Image = null;
 
 			for (let i: number = Ip.daftar.length - 1; i >= 0; i--) {
-				let img: ImgObj;
+				let img: Image;
 
 				img = Ip.daftar[i];
 
-				if (Ip.dotInsideImage(img, img.x, img.y, pos.x, pos.y)) {
+				if (Ip.dotInsideImage(img, img.x, img.y, posAbs.x, posAbs.y)) {
 					if (img.ctrIdx > lastIdx) {
 						lastIdx = img.ctrIdx;
 						lastSprite = img;
@@ -42,43 +51,41 @@ namespace Basik {
 				}
 				else {
 					if (img.tipeDrag == 3 || img.tipeDrag == 4) {
-						this.spriteDown(img, pos, button);
+						this.spriteDown(img, posCam, button);
 					}
 				}
 			}
 
 			//
 			if (lastSprite) {
-				this.spriteDown(lastSprite, pos, button);
+				this.spriteDown(lastSprite, posCam, button);
 			}
 
 			//
 			console.groupEnd();
 		}
 
-		inputMove(pos: any, button: number): void {
-			Ip.daftar.forEach((item: ImgObj) => {
+		inputMove(posCam: any, button: number): void {
+			let posAbs = {
+				x: posCam.x - Camera.x,
+				y: posCam.y - Camera.y
+			}
 
-				if (item.down && item.dragable && (item.button == button)) {
-					item.dragged = true;
+			Ip.daftar.forEach((img: Image) => {
 
-					if (item.tipeDrag == TypeDrag.drag || (item.tipeDrag == 3)) {
-						item.x = pos.x - item.drgStartX
-						item.y = pos.y - item.drgStartY
+				if (img.down && img.dragable && (img.button == button)) {
+					img.dragged = true;
+
+					if (img.tipeDrag == TypeDrag.drag || (img.tipeDrag == 3)) {
+						img.x = posAbs.x - img.drgStartX
+						img.y = posAbs.y - img.drgStartY
 						// console.debug('item drag move');
 					}
-					else if (item.tipeDrag == TypeDrag.rotasi || (item.tipeDrag == 4)) {
-						let sudut2: number = Tf.sudut(pos.x - item.x, pos.y - item.y);
-						let perbedaan: number = sudut2 - item.sudutTekanAwal;
-						item.rotasi = item.sudutAwal + perbedaan;
-						// console.group();
-						// console.log("sudut", sudut2);
-						// console.log("beda", perbedaan);
-						// console.log("sudut tekan awal", item.sudutTekanAwal);
-						// console.log("sudut awal", item.sudutAwal);
-						// console.log("rotasi", item.rotasi);
-						// console.log("posisi", item.x, item.y);
-						// console.groupEnd();
+					else if (img.tipeDrag == TypeDrag.rotasi || (img.tipeDrag == 4)) {
+						let sudut2: number = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
+						let perbedaan: number = sudut2 - img.sudutTekanAwal;
+						img.rotation = img.sudutAwal + perbedaan;
+
 					}
 					else {
 
