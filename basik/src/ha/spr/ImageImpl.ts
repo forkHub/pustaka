@@ -9,11 +9,8 @@ namespace Basik {
 			h.canvas = document.createElement('canvas')
 			h.canvas.width = width;
 			h.canvas.height = height;
-			// h.ctx = h.canvas.getContext('2d');
 			h.frameH = height;
 			h.frameW = width;
-			// h.panjangDiSet = true;
-			// h.lebarDiSet = true;
 			h.load = true;
 			h.img = document.createElement('img');
 			Ip.register(h, h.url, h.tipeDrag);
@@ -22,37 +19,24 @@ namespace Basik {
 
 		static MuatAnimasi(url: string, pf: number, lf: number, tipeDrag: number = 0): Image {
 			tipeDrag;
-			return Ip.muatAnimAsync(url, pf, lf);
+
+			let canvas: HTMLCanvasElement = document.createElement('canvas');
+
+			canvas;
+
+			let gbr: Image = new Image(url);
+			gbr.isAnim = true;
+			gbr.frameW = pf;
+			gbr.frameH = lf;
+			gbr.width = pf;
+			gbr.height = lf;
+			return gbr;
+
+			// return Ip.muatAnimAsyncCanvas(url, pf, lf, canvas);
+			// return Ip.muatAnimAsync(url, pf, lf);
 			// return Ip.register(img, url, tipeDrag);
 
 		}
-
-		static GambarSemua() {
-			for (let i: number = 0; i < Ip.daftar.length; i++) {
-				let item: Image = Ip.daftar[i];
-				Ip.Draw(item);
-			}
-		}
-
-		static muatAnimasiAsyncKanvas(
-			url: string,
-			pf: number,
-			lf: number,
-			canvas: HTMLCanvasElement,
-			tipeDrag: number): Image {
-
-			let img: Image = Ip.muatAnimAsyncCanvas(url, pf, lf, canvas);
-			return Ip.register(img, url, tipeDrag);
-		}
-
-		// static muatAsyncBerbagiKanvas(
-		// 	url: string,
-		// 	canvas: HTMLCanvasElement,
-		// 	tipeDrag: number): Image {
-
-		// 	let img: Image = Ip.muatAsyncKanvas(url, canvas, () => { });
-		// 	return Ip.register(img, url, tipeDrag);
-		// }
 
 		static register(
 			image: Image,
@@ -86,12 +70,8 @@ namespace Basik {
 			}
 		}
 
-		static Muat(url: string, tipeDrag: number = 0, onload?: () => void): Image {
-			if (!onload) onload = () => { };
-			let img: Image = Ip.muatAsync(url, onload);
-			tipeDrag;
-			// let spr: Image = Ip.register(img, url, tipeDrag);
-			return img;
+		static Muat(url: string): Image {
+			return new Image(url);
 		}
 
 		static tabrakan(gbr1: Image, x1: number, y1: number, gbr2: Image, x2: number, y2: number): boolean {
@@ -110,241 +90,6 @@ namespace Basik {
 
 			return Ktk.collideDot(gbr1.rect, x2, y2);
 		};
-
-		private static muatAnimAsync(url: string, fw: number, fh: number): Image {
-			let canvas: HTMLCanvasElement = document.createElement('canvas');
-
-			return Ip.muatAnimAsyncCanvas(url, fw, fh, canvas);
-		}
-
-		private static muatAnimAsyncCanvas(url: string, fw: number, fh: number, canvas: HTMLCanvasElement): Image {
-			// let img: HTMLImageElement = document.createElement('img'); //;
-			// let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
-			// let rect: Ktk;
-
-			// rect = Ktk.buat(0, 0, fw, fh);
-			canvas;
-
-			let gbr: Image = new Image(url);
-			gbr.isAnim = true;
-			gbr.frameW = fw;
-			gbr.frameH = fh;
-			gbr.width = fw;
-			gbr.height = fh;
-			return gbr;
-
-			// gbr.img = img;
-			// gbr.width = img.naturalWidth;
-			// gbr.height = img.naturalHeight;
-			// gbr.frameH = fh;
-			// gbr.frameW = fw;
-			// gbr.isAnim = true;
-			// gbr.handleX = 0;
-			// gbr.handleY = 0;
-			// gbr.rotasi = 0;
-			// gbr.alpha = 100;
-			// // gbr.ctx = ctx;
-			// gbr.canvas = canvas;
-			// gbr.rect = rect;
-			// gbr.load = false;
-			// // gbr.panjangDiSet = false;
-			// // gbr.lebarDiSet = false;
-
-			// // let gbr: IGambar = {
-			// // 	img: img,
-			// // 	panjang: img.naturalWidth,
-			// // 	lebar: img.naturalHeight,
-			// // 	frameH: fh,
-			// // 	frameW: fw,
-			// // 	isAnim: true,
-			// // 	handleX: 0,
-			// // 	handleY: 0,
-			// // 	rotasi: 0,
-			// // 	alpha: 1,
-			// // 	ctx: ctx,
-			// // 	canvas: canvas,
-			// // 	rect: rect,
-			// // 	load: false,
-			// // 	panjangDiSet: false,
-			// // 	lebarDiSet: false
-			// // }
-
-			// img.onload = () => {
-			// 	imgOnLoad(img);
-			// }
-
-			// img.onerror = () => {
-			// 	console.warn('gagal load image, url ' + url);
-			// }
-
-			// let img2: HTMLImageElement = ha.be.cache.getGbr(url);
-			// if (img2) {
-			// 	imgOnLoad(img2);
-			// }
-			// else {
-			// 	img.src = url;
-			// }
-
-			// function imgOnLoad(img: HTMLImageElement) {
-			// 	// console.log('img anim load ' + url);
-			// 	canvas.width = img.naturalWidth;
-			// 	canvas.height = img.naturalHeight;
-			// 	ctx.drawImage(img, 0, 0);
-			// 	gbr.load = true;
-
-			// 	if (!gbr.width) {
-			// 		gbr.width = fw;
-			// 		// gbr.panjangDiSet = true;
-			// 	}
-
-			// 	if (!gbr.height) {
-			// 		// gbr.lebarDiSet = true;
-			// 		gbr.height = fh;
-			// 	}
-
-			// 	ha.be.cache.setFile(url, img);
-			// }
-
-			// return gbr;
-		}
-
-		private static muatAsync(url: string, onload: () => void): Image {
-			let kanvas: HTMLCanvasElement = document.createElement('canvas');
-
-			return Ip.muatAsyncKanvas(url, kanvas, onload);
-		}
-
-
-		// private static def(img: HTMLImageElement, ctx: CanvasRenderingContext2D, canvas: HTMLCanvasElement): Image {
-		// 	let rect: Ktk;
-
-		// 	rect = Ktk.buat(0, 0, img.naturalWidth, img.naturalHeight);
-
-		// 	let gbr: Image;
-		// 	gbr = new Image();
-
-		// 	gbr.img = img;
-		// 	gbr.width = img.naturalWidth;
-		// 	gbr.height = img.naturalHeight;
-		// 	// gbr.panjangDiSet = false;
-		// 	// gbr.lebarDiSet = false;
-		// 	gbr.frameH = img.naturalHeight;
-		// 	gbr.frameW = img.naturalWidth;
-		// 	gbr.isAnim = false;
-		// 	gbr.handleX = 0;
-		// 	gbr.handleY = 0;
-		// 	gbr.rotasi = 0;
-		// 	gbr.alpha = 100;
-		// 	gbr.ctx = ctx;
-		// 	gbr.canvas = canvas;
-		// 	gbr.rect = rect;
-		// 	gbr.load = false;
-		// 	gbr.ctrIdx = 0
-
-		// 	return gbr;
-		// }
-
-		static muatAsyncKanvas(url: string, canvas: HTMLCanvasElement, onload?: () => void): Image {
-			// let img: HTMLImageElement = document.createElement('img');
-			// let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
-
-			canvas;
-			onload;
-			let gbr: Image;
-			gbr = new Image(url);
-			return gbr;
-
-			// gbr = Ip.def(img, ctx, canvas);
-
-			// img.onload = () => {
-			// 	onload();
-			// 	imgOnLoad(img);
-			// }
-
-			// img.onerror = () => {
-			// 	console.warn('gagal load image, url ' + url);
-			// 	imgOnLoadDefault();
-			// }
-
-			// let img2: HTMLImageElement = ha.be.cache.getGbr(url);
-			// if (img2) {
-			// 	imgOnLoad(img2);
-			// }
-			// else {
-			// 	img.src = url;
-			// }
-
-			// function imgOnLoad(imgP: HTMLImageElement): void {
-			// 	canvas.width = imgP.naturalWidth;
-			// 	canvas.height = imgP.naturalHeight;
-
-			// 	ctx.drawImage(imgP, 0, 0);
-			// 	gbr.rect = Ktk.buat(0, 0, imgP.naturalWidth, imgP.naturalHeight);
-
-			// 	gbr.load = true;
-			// 	gbr.img = imgP;
-
-			// 	if (!gbr.width) {
-			// 		// gbr.panjangDiSet = true;
-			// 		gbr.width = imgP.naturalWidth;
-			// 	}
-
-			// 	if (!gbr.height) {
-			// 		gbr.height = imgP.naturalHeight;
-			// 		// gbr.lebarDiSet = true;
-			// 	}
-
-			// 	gbr.frameH = imgP.naturalHeight;
-			// 	gbr.frameW = imgP.naturalWidth;
-
-			// 	ha.be.cache.setFile(url, imgP);
-			// }
-
-			// function imgOnLoadDefault(): void {
-			// 	// console.log("img on load default");
-
-			// 	// canvas.width = 32;
-			// 	// canvas.height = 32;
-
-			// 	// // ctx = canvas.getContext('2d');
-			// 	// gbr.img = document.createElement('img');
-			// 	// // ctx.drawImage(gbr.img, 0, 0);
-
-			// 	// gbr.rect = Ktk.buat(0, 0, 32, 32);
-			// 	// ctx.fillStyle = 'rgba(255, 255, 255, 100)';
-			// 	// ctx.strokeStyle = 'rgba(255, 0, 0, 100)';
-			// 	// ctx.beginPath();
-			// 	// ctx.rect(0, 0, 32, 32);
-			// 	// ctx.moveTo(0, 0);
-			// 	// ctx.lineTo(31, 31);
-			// 	// ctx.moveTo(0, 31);
-			// 	// ctx.lineTo(31, 0);
-			// 	// ctx.stroke();
-
-			// 	// // ctx.setf
-			// 	// // ctx.fillRect(0, 0, 32, 32);
-
-			// 	// gbr.load = true;
-
-			// 	// if (!gbr.panjangDiSet) {
-			// 	// 	gbr.panjangDiSet = true;
-			// 	// 	gbr.width = 32;
-			// 	// }
-
-			// 	// if (!gbr.lebarDiSet) {
-			// 	// 	gbr.height = 32;
-			// 	// 	gbr.lebarDiSet = true;
-			// 	// }
-
-			// 	// gbr.frameH = 32;
-			// 	// gbr.frameW = 32;
-
-			// 	// ha.be.cache.setFile(url, gbr.img);
-			// }
-
-			// // console.log(gbr);
-			// return gbr;
-		}
 
 		private static gambarUbin(gbr: Image, x: number = 0, y: number = 0, frame: number = 0) {
 			let jmlH: number = 0;
@@ -428,11 +173,9 @@ namespace Basik {
 		private static DrawSingle(gbr: Image, x: number = 0, y: number = 0, frame: number = 0) {
 			let ctx: CanvasRenderingContext2D = G.Canvas().getContext('2d');
 			let jmlH: number = 0;
-			// let jmlV: number = 0;
 			let frameX: number = 0;
 			let frameY: number = 0;
 
-			// let rect: IRect = img.rect;
 
 			if (gbr.load == false) return;
 
@@ -440,12 +183,6 @@ namespace Basik {
 			frame = Math.floor(frame);
 
 			jmlH = Math.floor(gbr.img.naturalWidth / gbr.frameW);
-			// jmlV = Math.floor(gbr.img.naturalHeight / gbr.frameH);
-
-			// console.log('jmlH ' + jmlH);
-			// console.log('nw: ' + gbr.img.naturalWidth);
-			// console.log('fw: ' + gbr.frameW);
-			// debugger;
 
 			frameX = (frame % jmlH);
 			frameY = Math.floor(frame / jmlH);
@@ -470,8 +207,6 @@ namespace Basik {
 				ctx.translate(x, y);
 				ctx.rotate(gbr.rotation * (Math.PI / 180));
 
-				// ctx.globalAlpha = gbr.alpha / 100;
-				// ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, -gbr.handleX, -gbr.handleY, w2, h2);
 				drawImpl(-gbr.handleX, -gbr.handleY)
 
 				ctx.restore();
@@ -479,8 +214,6 @@ namespace Basik {
 			else {
 				ctx.save();
 
-				// ctx.globalAlpha = gbr.alpha / 100;
-				// ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, x2, y2, w2, h2);
 				drawImpl(x2, y2);
 
 				ctx.restore();
@@ -488,25 +221,15 @@ namespace Basik {
 
 			function drawImpl(dx: number, dy: number) {
 
+				//TODO: pindahin ke depan
 				dx -= Camera.x;
 				dy -= Camera.y;
 
 				ctx.globalAlpha = gbr.alpha / 100;
 				ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, Math.floor(dx), Math.floor(dy), w2, h2);
-				// console.group('draw image');
-				// console.log("x:", x, "y:", y, "x2:", x2, "y2:", y2);
-				// console.groupEnd();
 			}
 
-			// debugger;
 		}
-
-		// static ukuran(gbr: ImgObj, w: number = 32, h: number = 32): void {
-		// 	gbr.panjang = w;
-		// 	gbr.lebar = h;
-		// 	gbr.panjangDiSet = true;
-		// 	gbr.lebarDiSet = true;
-		// }
 
 		private static resetRect(img: Image): void {
 			let rect: Ktk = img.rect;
@@ -556,7 +279,6 @@ namespace Basik {
 			//rotate
 			Ktk.rotate(rect, image.rotation, x, y, false);
 		}
-
 
 		static AllImageLoaded(): boolean {
 			for (let i = 0; i < Ip.daftar.length; i++) {

@@ -56,26 +56,15 @@ namespace Basik {
 		public static init() {
 
 			window.addEventListener("keydown", (e: KeyboardEvent) => {
-				// try {
-				// 	(window as any).KeyDownEvent(e.key);
-				// }
-				// catch (e) { e; }
-
 				Keyboard._obj = e;
 				Keyboard.setDown(e.key, true);
-				// console.log(e);
-				Event.call("keydown");
+				Event.dispatchEvent(Evt.KEYB_DOWN);
 			})
 
 			window.addEventListener("keyup", (e: KeyboardEvent) => {
-				// try {
-				// 	(window as any).KeyUpEvent(e.key);
-				// }
-				// catch (e) { e; }
-
 				Keyboard._obj = e;
 				Keyboard.setDown(e.key, false);
-				Event.call("keyup");
+				Event.dispatchEvent(Evt.KEYB_UP);
 			})
 		}
 	}

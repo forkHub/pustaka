@@ -1,16 +1,19 @@
 namespace Basik {
 	export interface IInput {
+		id: string;
 		pointerType: string;
 		xStart: number;
 		yStart: number;
 		xDrag: number;
 		yDrag: number;
+		moveX: number;
+		moveY: number;
 		x: number;
 		y: number;
 		isDrag: boolean;
 		isDown: boolean;
 		isTap: boolean;
-		evt: MouseEvent;
+		evt: PointerEvent;
 		button: number;
 		timerStart: number;
 		timerEnd: number;

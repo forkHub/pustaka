@@ -92,6 +92,7 @@ namespace Basik {
 			In.init(G.canvas);
 			Keyboard.init();
 			Camera.init();
+			sprInt.init();
 
 			// if (Graphic.skalaOtomatis) {
 			window.addEventListener("resize", (): void => {
@@ -103,7 +104,7 @@ namespace Basik {
 				// if (typeof updater === "function") {
 				// 	updater();
 				// }
-				Event.call("update");
+				Event.dispatchEvent("update");
 				window.requestAnimationFrame(update);
 			}
 			window.requestAnimationFrame(update);

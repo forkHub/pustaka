@@ -1,4 +1,17 @@
 namespace Basik {
+	export enum Evt {
+		MOUSE_DOWN = "mousedown",
+		MOUSE_UP = "mouseup",
+		MOUSE_MOVE = "mousemove",
+		MOUSE_TAP = "mousetap",
+
+		MOUSE_START_DRAG = "mousestartdrag",
+		MOUSE_END_DRAG = "mouseenddrag",
+
+		KEYB_DOWN = "keybdown",
+		KEYB_UP = "keybup",
+	}
+
 	export class Event {
 		private static readonly list: Event[] = [];
 
@@ -19,25 +32,20 @@ namespace Basik {
 			//todo: filter
 		}
 
-		static addListener(type: string, f: () => void) {
+		static addEventListener(type: string, f: () => void) {
 			let e = new Event(type.toLowerCase(), f);
 			Event.list.push(e);
 			console.log("add listener: type ", type);
 			return e;
 		}
 
-		static call(type: string): void {
-			// console.log("call event ", type);
+		static dispatchEvent(type: string): void {
 
 			Event.list.forEach((item) => {
 				if (item.type === type.toLowerCase()) {
-					// console.log("event found ", type);
 					item.f();
-					return;
 				}
 			});
-
-			// console.log("event not found, type ", type);
 		}
 
 

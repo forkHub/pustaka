@@ -120,13 +120,6 @@ function FillColor(r: number = 0, g: number = 0, b: number = 0, a: number = 100)
 }
 
 /**
- * Set fill color to none
- */
-// function NoColor() {
-// 	G.Canvas().getContext('2d').fillStyle = "none";
-// }
-
-/**
  * Set stroke color
  * @param r {number} - the red color (0 - 255)
  * @param g {number} - the green color (0 - 255)
@@ -142,39 +135,20 @@ function StrokeColor(r: number = 0, g: number = 0, b: number = 0, a: number = 1)
 }
 
 /**
- * Set stroke to none
- */
-// function NoStroke() {
-// 	G.Canvas().getContext('2d').strokeStyle = 'none';
-// }
-
-/**
  * Add Listener for certain event
  * @param type {string} the event type, available are: mousedown, mouseup, mousemove, mousedrag, keydown, keyup, update
  * @param f {callback}
  */
-function AddListener(type: string, f: () => void) {
-	Basik.Event.addListener(type, f);
+function AddEventListener(type: string, f: () => void) {
+	Basik.Event.addEventListener(type, f);
 }
 
 /**
- * return the last keyboard event object
- * @returns {KeyboardEvent}
+ * Dispatch an event
+ * @param evt {string} the string to dispatch
  */
-function KeyboardEventObj(): KeyboardEvent {
-	return Basik.Keyboard.obj;
+function DispatchEvent(evt: string): void {
+	Basik.Event.dispatchEvent(evt);
 }
 
-function KeyboardDown(key: string): boolean {
-	return Basik.Keyboard.IsDown(key);
-}
-
-/**
- * return the last mouse event object by button
- * @param btn {number} mouse button
- * @returns {MouseEvent} 
- */
-function MouseEventObj(btn: number): MouseEvent {
-	return Basik.Input.getInput(btn).evt;
-}
 

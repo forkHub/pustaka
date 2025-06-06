@@ -146,8 +146,6 @@ namespace Basik {
 
 		//internal
 		load: boolean = false;
-		// private _panjangDiSet: boolean = false;
-		// private _lebarDiSet: boolean = false;
 		private _ctrIdx: number = 0;
 		private static _ctrDraw: number = 0;
 		private _url: string;
@@ -160,8 +158,16 @@ namespace Basik {
 		private _dragStartY: number = 0;
 		private _dragStartX: number = 0;
 		private _sudutTekanAwal: number = 0;
-		private _button: number;
+		// private _button: number;
 		private _sudutAwal: number = 0;
+		private _inputId: string;
+
+		public get inputId(): string {
+			return this._inputId;
+		}
+		public set inputId(value: string) {
+			this._inputId = value;
+		}
 
 		public get frame(): number {
 			return this._frame;
@@ -345,12 +351,12 @@ namespace Basik {
 			Image._ctrDraw = value;
 		}
 
-		public get button(): number {
-			return this._button;
-		}
-		public set button(value: number) {
-			this._button = value;
-		}
+		// public get button(): number {
+		// 	return this._button;
+		// }
+		// public set button(value: number) {
+		// 	this._button = value;
+		// }
 
 
 	}
