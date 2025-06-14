@@ -1,125 +1,131 @@
-///<reference path="./Char.ts"/>
-///<reference path="./Map.ts"/>
+window.onload = () => {
+	Graphics(320, 240);
 
-Graphics(320, 240);
+	char = LoadAnimImage("./imgs/box.png", 32, 32);
+	char.frame = 3;
+	char.x = 32;
+	char.y = 32;
 
-const char = new Char("./imgs/bulan.png");
-char.width = 32;
-char.height = 32;
+	// FillColor(0, 0, 0, 100);
+	let data: string[] = [
+		"111111111111111111111111111111111111",
+		"1            1                     1",
+		"1           41                     1",
+		"1      1111111          11111     11",
+		"1     1      1         1        1111",
+		"1            1      1111        1111",
+		"1111111      1                     1",
+		"1      11    1   11111             1",
+		"14       1   1        1           11",
+		"141         11           111       1",
+		"14                                 1",
+		"14   1131111111111   11131111111   1",
+		"111111111111111111111111111111111111",
+	]
 
-const gMap = new GameMap();
-let txtLn: number = 10;
-
-FillColor(0, 0, 0, 100);
-let data: string[] = [
-	"111111111111111111111111111111111111",
-	"1         4441                     1",
-	"1         4441                     1",
-	"1      1111111          11111     11",
-	"1            1         1        1111",
-	"1            1         1        1111",
-	"1111111      1                     1",
-	"1      111   1   11111             1",
-	"14           1                     1",
-	"14          11                     1",
-	"14          11                     1",
-	"14   1131111111111   11131111111   1",
-	"14     2                2          1",
-	"14     2                2          1",
-	"14     2113111          2 111111  11",
-	"14        2      444    2 1        1",
-	"14        2             2 1        1",
-	"1         2   1111111111111    11111",
-	"11111111  2              44444444441",
-	"1         2   44444                1",
-	"1         2   44444                1",
-	"1         2   44444     111111111111",
-	"1         2                        1",
-	"1         2                        1",
-	"1    11111111111111111111111111    1",
-	"1                  4444            1",
-	"1                  4444            1",
-	"111111111111111111111111111111111111",
-]
-gMap.fromArray2(data);
-
-
-AddListener("keydown", () => {
-	// char.keyDown();
-	char.onKeyPress(KeyboardEventObj().key);
-})
-
-AddListener("keyup", () => {
-
-})
-
-AddListener("update", () => {
-	char.update();
-	coin();
-
-
-	//render
-	Cls();
-	gMap.render();
-	DrawImage(char);
-	debug();
-});
-
-function coin() {
-	gMap.tiles.forEach((item: Tile) => {
-		if (item.active && (item.type == Tile.TY_COIN)) {
-			if (collideDot2(item, char.x + 16, char.y + 16)) {
-				item.active = false;
+	for (let row = 0; row < data.length; row++) {
+		for (let col: number = 0; col < data[row].length; col++) {
+			if (data[row].charAt(col) != ' ') {
+				let t = LoadAnimImage("./imgs/Box.png", 32, 32);
+				t.x = col * 32;
+				t.y = row * 32;
+				tiles.push(t);
 			}
 		}
-	})
-}
+	}
 
-function debug() {
-	txtLn = 10;
-	write("char.grid x " + gridPos(char.x) + "/char x " + char.x);
-	write("char.grid y " + gridPos(char.y) + "/char y " + char.y);
-	write("char ladder: " + char.ladder);
-	write("char on floor: " + char.onFloor);
-}
+	AddListener("update", () => {
+		velY += accY;
+		char.y += Clamp(velY, -31, 31);
 
-function write(str: string) {
-	let ctx = MainCanvas().getContext('2d');
-	txtLn += 12;
-	ctx.fillText(str, 10, txtLn);
-}
-
-function gridPos(x: number): number {
-	return Math.floor(x / 32);
-}
-
-// function collideDot(img: Basik.Image, x: number, y: number): boolean {
-// 	if (gridPos(img.x) != gridPos(x)) return false;
-// 	if (gridPos(img.y) != gridPos(y)) return false;
-// 	return true;
-// }
-
-function collideDot2(img: Basik.Image, x: number, y: number): boolean {
-	if (x >= img.width + img.x) return false;
-	if (y >= img.height + img.y) return false;
-	if (x < img.x) return false;
-	if (y < img.y) return false;
-
-	return true;
-}
-
-// function collide(img: Basik.Image, img2: Basik.Image): boolean {
-// 	if (gridPos(img.x) != gridPos(img2.x)) return false;
-// 	if (gridPos(img.y) != gridPos(img2.y)) return false;
-// 	return true;
-// }
-
-function getCollidedTile(): Basik.Image[] {
-	let t: Basik.Image[] = [];
-	gMap.tiles.forEach((tile) => {
-		if (ImageCollide(char, tile)) {
-			t.push(tile);
+		if (velY > 0) {
+			onFloor = false;
+			CollideMap();
+			if (collidedTile) {
+				char.y = collidedTile.y - 32;
+				velY = 1;
+				onFloor = true;
+			}
 		}
-	})
-	return t;
+		else {
+			resolveUp();
+		}
+		if (KeyboardDown("ArrowRight")) {
+			char.x += velX;
+			if (CollideMap()) {
+				// debugger;
+				char.x = collidedTile.x - 32;
+				// console.log("collided tile ", collidedTile);
+			}
+		}
+
+		if (KeyboardDown("ArrowLeft")) {
+			char.x -= velX;
+			if (CollideMap()) char.x = collidedTile.x + 32;
+		}
+
+		if (KeyboardDown('ArrowUp')) {
+			if (onFloor) {
+				velY = -4;
+				char.y += velY;
+				resolveUp();
+				onFloor = false;
+			}
+		}
+		Basik.Camera.x = char.x - 32 * 4;
+		Basik.Camera.y = char.y - 32 * 2;
+		Cls();
+		tiles.forEach((item) => {
+			DrawImage(item);
+		})
+		DrawImage(char);
+		// debug();
+	});
+
 }
+
+let char: Basik.Image;
+let velY: number = 0;
+let velX: number = 2;
+let onFloor: boolean = false;
+let accY: number = .1;
+let tiles: Basik.Image[] = [];
+let collidedTile: Basik.Image;
+
+
+function resolveUp() {
+	if (CollideMap()) {
+		char.y = collidedTile.y + 32;
+		velY = 1;
+	}
+}
+
+function CollideMap(): boolean {
+	collidedTile = null;
+	for (let i = 0; i < tiles.length; i++) {
+		if (ImageCollide(char, tiles[i])) {
+			collidedTile = tiles[i];
+			return true;
+		}
+	}
+	return false;
+}
+
+// let txtLn: number = 10;
+// function debug() {
+// 	txtLn = 10;
+// 	write("char.grid x " + gridPos(char.x) + "/char x " + char.x);
+// 	write("char.grid y " + gridPos(char.y) + "/char y " + char.y);
+// 	write("char on floor: " + onFloor);
+// 	if (collidedTile) write("collided tile " + collidedTile.x + "/" + collidedTile.y);
+// }
+
+// function gridPos(x: number): number {
+// 	return Math.floor(x / 32);
+// }
+
+// function write(str: string) {
+// 	let ctx = MainCanvas().getContext('2d');
+// 	txtLn += 12;
+// 	ctx.fillText(str, 10, txtLn);
+// }
