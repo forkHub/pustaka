@@ -7,7 +7,7 @@ namespace ha.be {
 
 			for (let i: number = 0; i < this.files.length; i++) {
 				if (this.files[i].url == url) {
-					console.log('ambil dari cache: ' + url);
+					// console.log('ambil dari cache: ' + url);
 					return this.files[i].img;
 				}
 			}
@@ -23,7 +23,7 @@ namespace ha.be {
 				return;
 			}
 
-			console.log('cache: ' + url);
+			// console.log('cache: ' + url);
 			this.files.push({
 				url: url,
 				img: img

@@ -1,36 +1,26 @@
 ///<reference path="./Route.ts"/>
 
-const DistMin = Basik.Transform.degDist;
-
 /**
- * 
- * @param x1 
- * @param y1 
- * @param x2 
- * @param y2 
- * @returns 
+ * calculate distance between two angle
+ * @param angleS {number} the first angle
+ * @param angleT {number} the second angle
+ * @param min {boolean} take the minimum or maximum distance
+ * @returns {number}
  */
-function Distance(x1: number, y1: number, x2: number, y2: number): number {
-	return Math.hypot(x2 - x1, y2 - y1);
-}
-
-function Dist(x1: number, y1: number, x2: number, y2: number): number {
-	return Math.hypot(x2 - x1, y2 - y1);
+function degDist(angleS: number = 0, angleT: number, min: boolean = true): number {
+	return Basik.Transform.degDist(angleS, angleT, min);
 }
 
 /**
- * Menghitung sudut dari posisi relative ke posisi 0,0
- * @param x posisi x
- * @param y posisi y
- * @returns sudut relative ke posisi 0,0
+ * Calculae the angle of a point relative to the horizontal line
+ * @param x {number} the x position
+ * @param y {number} the y position
+ * @returns {number} the angle in degrees
  */
 function Angle(x: number, y: number): number {
 	return Basik.Tf.sudut(x, y);
 }
 
-function Sin(n: number) { return Math.sin(n * Math.PI / 180) }
-function Cos(n: number) { return Math.cos(n * Math.PI / 180) }
-function Tan(n: number) { return Math.tan(n * Math.PI / 180) }
 function Clamp(n: number, min: number, max: number): number {
 	if (n < min) return min;
 	if (n > max) return max;

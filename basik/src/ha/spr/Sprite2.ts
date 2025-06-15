@@ -1,84 +1,109 @@
 namespace Basik {
 	enum TypeDrag {
 		drag = 1,
-		rotasi = 2
+		rotasi = 2,
+		remoteDrag = 3,
+		remoteRotation = 4
 	}
 
 	//Sprite interactivity
-	class SprInt {
+	class ImgIntHandler {
 
-		private spriteDown(img: ImgObj, pos: any, id: number) {
-			img.down = true;
-			img.drgStartX = pos.x - img.x;
-			img.drgStartY = pos.y - img.y;
-			img.button = id;
+		init() {
+			Event.addEventListener(Evt.MOUSE_DOWN, () => {
+				// this.down();
+				this.inputDown({
+					x: Input.global.x,
+					y: Input.global.y
+				},
+					Input.global.id
+				)
+			});
 
-			img.sudutTekanAwal = Tf.sudut(pos.x - img.x, pos.y - img.y);
-			img.sudutAwal = img.rotasi;
-
-
-			// console.group('sprite down event handler');
-			// console.log("sudut tekan awal", s.sudutTekanAwal);
-			// console.log("sudut awal", s.sudutAwal);
-			// console.groupEnd();
+			Event.addEventListener(Evt.MOUSE_MOVE, () => {
+				this.inputMove({
+					x: Input.global.x,
+					y: Input.global.y
+				},
+					Input.global.id)
+			})
 		}
 
-		inputDown(pos: any, button: number): void {
+		private down(img: Image, posCam: any, id: string) {
+			let posAbs = {
+				x: posCam.x - Camera.x,
+				y: posCam.y - Camera.y
+			}
+
+			img.down = true;
+			img.drgStartX = posAbs.x - img.x;
+			img.drgStartY = posAbs.y - img.y;
+			img.inputId = id;
+
+			img.sudutTekanAwal = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
+			img.sudutAwal = img.rotation;
+		}
+
+
+		//TODO: call event
+		private inputDown(posCam: any, id: string): void {
 			console.group('input down');
+			let posAbs = {
+				x: posCam.x - Camera.x,
+				y: posCam.y - Camera.y
+			}
 
 			let lastIdx: number = -1;
-			let lastSprite: ImgObj = null;
+			let lastSprite: Image = null;
 
 			for (let i: number = Ip.daftar.length - 1; i >= 0; i--) {
-				let img: ImgObj;
+				let img: Image;
 
 				img = Ip.daftar[i];
 
-				if (Ip.dotInsideImage(img, img.x, img.y, pos.x, pos.y)) {
+				if (Ip.dotInsideImage(img, img.x, img.y, posAbs.x, posAbs.y)) {
 					if (img.ctrIdx > lastIdx) {
 						lastIdx = img.ctrIdx;
 						lastSprite = img;
 					}
 				}
 				else {
+					//remote drag
 					if (img.tipeDrag == 3 || img.tipeDrag == 4) {
-						this.spriteDown(img, pos, button);
+						this.down(img, posCam, id);
 					}
 				}
 			}
 
 			//
 			if (lastSprite) {
-				this.spriteDown(lastSprite, pos, button);
+				this.down(lastSprite, posCam, id);
 			}
 
 			//
 			console.groupEnd();
 		}
 
-		inputMove(pos: any, button: number): void {
-			Ip.daftar.forEach((item: ImgObj) => {
+		private inputMove(posCam: any, inputId: string): void {
+			let posAbs = {
+				x: posCam.x - Camera.x,
+				y: posCam.y - Camera.y
+			}
 
-				if (item.down && item.dragable && (item.button == button)) {
-					item.dragged = true;
+			Ip.daftar.forEach((img: Image) => {
 
-					if (item.tipeDrag == TypeDrag.drag || (item.tipeDrag == 3)) {
-						item.x = pos.x - item.drgStartX
-						item.y = pos.y - item.drgStartY
+				if (img.down && img.dragable && (img.inputId == inputId)) {
+					img.dragged = true;
+
+					if (img.tipeDrag == TypeDrag.drag || (img.tipeDrag == TypeDrag.remoteDrag)) {
+						img.x = posAbs.x - img.drgStartX
+						img.y = posAbs.y - img.drgStartY
 						// console.debug('item drag move');
 					}
-					else if (item.tipeDrag == TypeDrag.rotasi || (item.tipeDrag == 4)) {
-						let sudut2: number = Tf.sudut(pos.x - item.x, pos.y - item.y);
-						let perbedaan: number = sudut2 - item.sudutTekanAwal;
-						item.rotasi = item.sudutAwal + perbedaan;
-						// console.group();
-						// console.log("sudut", sudut2);
-						// console.log("beda", perbedaan);
-						// console.log("sudut tekan awal", item.sudutTekanAwal);
-						// console.log("sudut awal", item.sudutAwal);
-						// console.log("rotasi", item.rotasi);
-						// console.log("posisi", item.x, item.y);
-						// console.groupEnd();
+					else if (img.tipeDrag == TypeDrag.rotasi || (img.tipeDrag == TypeDrag.remoteRotation)) {
+						let sudut2: number = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
+						let perbedaan: number = sudut2 - img.sudutTekanAwal;
+						img.rotation = img.sudutAwal + perbedaan;
 					}
 					else {
 
@@ -89,5 +114,5 @@ namespace Basik {
 		}
 	}
 
-	export const sprInt: SprInt = new SprInt();
+	export const sprInt: ImgIntHandler = new ImgIntHandler();
 }

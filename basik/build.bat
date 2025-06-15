@@ -1,5 +1,6 @@
 echo ("build")
-tsc -p .\src\tsconfig.json
+call tsc -p .\src\tsconfig.json
 echo  ("minify")
-minify .\build\basik.js > .\doc\basik.min.js
+minify .\build\basik.js > .\build\basik.min.js
+pause
 pause

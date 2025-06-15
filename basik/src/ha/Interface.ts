@@ -1,23 +1,23 @@
 namespace Basik {
 	export interface IInput {
+		id: string;
+		pointerType: string;
 		xStart: number;
 		yStart: number;
 		xDrag: number;
 		yDrag: number;
+		moveX: number;
+		moveY: number;
 		x: number;
 		y: number;
 		isDrag: boolean;
 		isDown: boolean;
 		isTap: boolean;
-		// hit: number;
-		key: number;
-		// type: EInput;
+		evt: PointerEvent;
+		button: number;
 		timerStart: number;
 		timerEnd: number;
-		// dragJml: number;
-		// dragSelesaiJml: number;
-		// tapJml: number;
-		// upJml: number;
+		pointerId: number;
 	}
 
 	// interface ISprImgObj {

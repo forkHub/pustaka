@@ -1,20 +1,31 @@
+//init app
 window.onload = () => {
 	Graphics(320, 240);
-	let brush = LoadImage("./imgs/brush.png");
+
+	//load brush
+	let brush: Basik.Image;
+	brush = LoadImage("./imgs/brush.png");
+
+	//set handle to center
 	brush.handleX = 8;
 	brush.handleY = 8;
-	Cls(0, 0, 0);
 
-	function update() {
+	//clear the screen
+	Cls();
 
-		if (InputIsDown()) {
-			brush.x = InputX();
-			brush.y = InputY();
-			DrawAllImage();
-		}
+	AddListener("mousedrag", () => {
+		draw();
+	})
 
-		window.requestAnimationFrame(update);
+	AddListener("mousedown", () => {
+		draw();
+	})
+
+	//draw brush at mouse position
+	function draw() {
+		brush.x = MouseX();
+		brush.y = MouseY();
+		DrawImage(brush);
 	}
-	update();
-
 }
+
