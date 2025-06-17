@@ -27,12 +27,20 @@ namespace Basik {
 				},
 					Input.global.id)
 			})
+
+			Event.addEventListener(Evt.MOUSE_UP, () => {
+				console.log("clear image mouse status")
+				Ip.daftar.forEach((img: Image) => {
+					img.down = false;
+					img.dragged = false;
+				});
+			})
 		}
 
-		private down(img: Image, posCam: any, id: string) {
+		private down(img: Image, posCanvas: any, id: string) {
 			let posAbs = {
-				x: posCam.x - Camera.x,
-				y: posCam.y - Camera.y
+				x: posCanvas.x - Camera.x,
+				y: posCanvas.y - Camera.y
 			}
 
 			img.down = true;
@@ -46,11 +54,11 @@ namespace Basik {
 
 
 		//TODO: call event
-		private inputDown(posCam: any, id: string): void {
+		private inputDown(posCanvas: any, id: string): void {
 			console.group('input down');
 			let posAbs = {
-				x: posCam.x - Camera.x,
-				y: posCam.y - Camera.y
+				x: posCanvas.x - Camera.x,
+				y: posCanvas.y - Camera.y
 			}
 
 			let lastIdx: number = -1;
@@ -70,35 +78,36 @@ namespace Basik {
 				else {
 					//remote drag
 					if (img.tipeDrag == 3 || img.tipeDrag == 4) {
-						this.down(img, posCam, id);
+						this.down(img, posCanvas, id);
 					}
 				}
 			}
 
 			//
 			if (lastSprite) {
-				this.down(lastSprite, posCam, id);
+				console.log("img pressed, id: " + id);
+				this.down(lastSprite, posCanvas, id);
 			}
 
 			//
 			console.groupEnd();
 		}
 
-		private inputMove(posCam: any, inputId: string): void {
+		private inputMove(posCanvas: any, inputId: string): void {
 			let posAbs = {
-				x: posCam.x - Camera.x,
-				y: posCam.y - Camera.y
+				x: posCanvas.x - Camera.x,
+				y: posCanvas.y - Camera.y
 			}
 
 			Ip.daftar.forEach((img: Image) => {
 
-				if (img.down && img.dragable && (img.inputId == inputId)) {
+				if (img.down && (img.tipeDrag != 0) && (img.inputId == inputId)) {
 					img.dragged = true;
 
 					if (img.tipeDrag == TypeDrag.drag || (img.tipeDrag == TypeDrag.remoteDrag)) {
 						img.x = posAbs.x - img.drgStartX
 						img.y = posAbs.y - img.drgStartY
-						// console.debug('item drag move');
+						console.debug('item drag move');
 					}
 					else if (img.tipeDrag == TypeDrag.rotasi || (img.tipeDrag == TypeDrag.remoteRotation)) {
 						let sudut2: number = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);

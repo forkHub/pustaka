@@ -47,11 +47,6 @@ namespace Basik {
 			hasil = image;
 			hasil.tipeDrag = tipeDrag;
 			hasil.url = url;
-			if (hasil.dragable) {
-				if (hasil.tipeDrag == 0) {
-					hasil.tipeDrag = 1;
-				}
-			}
 
 			Ip.daftar.push(hasil);
 

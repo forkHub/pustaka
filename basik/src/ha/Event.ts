@@ -36,6 +36,7 @@ namespace Basik {
 			let e = new Event(type.toLowerCase(), f);
 			Event.list.push(e);
 			console.log("add listener: type ", type);
+			// console.log(f);
 			return e;
 		}
 

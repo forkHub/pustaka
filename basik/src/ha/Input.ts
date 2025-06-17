@@ -100,6 +100,17 @@ namespace Basik {
 			return Input.global;
 		}
 
+		static getById(id: string): IInput {
+			for (let i = 0; i < Input.lst.length; i++) {
+				let inp = Input.lst[i];
+				if (inp.id == id) {
+					return inp;
+				}
+			}
+
+			return null;
+		}
+
 		private static getId(e: PointerEvent): string {
 			return e.pointerType == "mouse" ? e.pointerType + e.button : e.pointerType + e.pointerId;
 		}
@@ -145,12 +156,13 @@ namespace Basik {
 					let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
 
 					let inp = Input.getInput(e)
+					let downState = inp.isDown
 					Input.evt.down(inp, pos);
 					Input.evt.down(Input.global, pos);
 					Input.global.id = Input.getId(e);
-
 					Input._pointerEvent = e;
-					if (inp.isDown == false) {
+					if (downState == false) {
+						console.log("dispatch mouse down event, id " + inp.id);
 						Event.dispatchEvent(Evt.MOUSE_DOWN);
 					}
 
@@ -165,28 +177,32 @@ namespace Basik {
 					e.stopPropagation();
 					e.preventDefault();
 
-					// let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
+					// existing down input 
+					if (Input.global && Input.global.isDown) {
+						let input = Input.global;
+						Input.evt.move(input, buffer, e);
+						Input._pointerEvent = e;
 
-					let input = this.getInput(e);
-					Input.evt.move(this.getInput(e), buffer, e);
-					Input.evt.move(Input.global, buffer, e);
-					Input._pointerEvent = e;
-					Input.global.id = Input.getId(e);
-
-					if (input.isDown) {
 						if (!input.isDrag) {
+							console.log("dispatch mouse drag, id " + input.id);
 							Event.dispatchEvent(Evt.MOUSE_START_DRAG);
 						}
 
 						input.isDrag = true;
 						input.xDrag = input.x - input.xStart;
 						input.yDrag = input.y - input.yStart;
+
+						Event.dispatchEvent(Evt.MOUSE_MOVE);
+
 					}
-
-					Event.dispatchEvent(Evt.MOUSE_MOVE);
-
-					//TODO: listener
-					// sprInt.inputMove(pos, input.id);
+					else {
+						// let input = this.getInput(e);
+						Input.evt.move(this.getInput(e), buffer, e);
+						Input.evt.move(Input.global, buffer, e);
+						Input._pointerEvent = e;
+						Input.global.id = Input.getId(e);
+						Event.dispatchEvent(Evt.MOUSE_MOVE);
+					}
 				});
 
 			buffer.addEventListener(
@@ -205,9 +221,11 @@ namespace Basik {
 				e.stopPropagation();
 				e.preventDefault();
 
+				console.log("pointer up " + Input.getId(e));
 
 				let input = Input.getInput(e);
-				if (input.isDrag == false) {
+				if (input.isDrag == true) {
+					console.log("dispatch mouse drag end id " + input.id);
 					Event.dispatchEvent(Evt.MOUSE_END_DRAG);
 				}
 
@@ -223,14 +241,12 @@ namespace Basik {
 					Event.dispatchEvent(Evt.MOUSE_TAP);
 				}
 
+
+				//clear up all input status
+				//TODO:
+
+
 				Event.dispatchEvent(Evt.MOUSE_UP);
-
-
-				//TODO: call event from sprite class for better coupling
-				Ip.daftar.forEach((img: Image) => {
-					img.down = false;
-					img.dragged = false;
-				});
 			}
 		}
 

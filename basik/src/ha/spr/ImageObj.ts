@@ -319,9 +319,9 @@ namespace Basik {
 		public set down(value: boolean) {
 			this._down = value;
 		}
-		public get dragable(): boolean {
-			return this._tipeDrag > 0 ? true : false;
-		}
+		// public get dragable(): boolean {
+		// 	return this._tipeDrag > 0 ? true : false;
+		// }
 
 		public get sudutTekanAwal(): number {
 			return this._sudutTekanAwal;
