@@ -6,7 +6,7 @@ window.onload = () => {
 	let brush: Basik.Image = LoadAnimImage("./imgs/exp2_0.png", 64, 64);
 	// brush.width = 20;
 
-	AddListener("update", () => {
+	AddEventListener("update", () => {
 		Cls();
 		// brush.frame++;
 		// if (brush.frame > 15) brush.frame = 0;

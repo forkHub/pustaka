@@ -13,11 +13,11 @@ window.onload = () => {
 	//clear the screen
 	Cls();
 
-	AddListener("mousedrag", () => {
+	AddEventListener("mousedrag", () => {
 		draw();
 	})
 
-	AddListener("mousedown", () => {
+	AddEventListener("mousedown", () => {
 		draw();
 	})
 

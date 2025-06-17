@@ -1,2 +1,2 @@
-call tsc -p .\tsconfig.jsonc --watch
+call tsc -p .\tsconfig.json --watch
 pause
