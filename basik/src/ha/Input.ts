@@ -221,13 +221,13 @@ namespace Basik {
 				e.stopPropagation();
 				e.preventDefault();
 
-				console.log("pointer up " + Input.getId(e));
+				console.group("pointer up " + Input.getId(e));
 
 				let input = Input.getInput(e);
-				if (input.isDrag == true) {
-					console.log("dispatch mouse drag end id " + input.id);
-					Event.dispatchEvent(Evt.MOUSE_END_DRAG);
-				}
+				// if (input.isDrag == true) {
+				// 	console.log("dispatch mouse drag end id " + input.id);
+				// 	Event.dispatchEvent(Evt.MOUSE_END_DRAG);
+				// }
 
 				Input.evt.up(input);
 				Input.evt.up(Input.global);
@@ -243,10 +243,17 @@ namespace Basik {
 
 
 				//clear up all input status
-				//TODO:
+				Input.lst.forEach((item) => {
+					if (item.isDrag) {
+						console.log("dispatch mouse drag end id " + input.id);
+						Event.dispatchEvent(Evt.MOUSE_END_DRAG);
+					}
+					Input.evt.up(item);
+				})
 
 
 				Event.dispatchEvent(Evt.MOUSE_UP);
+				console.groupEnd();
 			}
 		}
 

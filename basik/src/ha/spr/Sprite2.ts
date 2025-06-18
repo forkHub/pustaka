@@ -87,6 +87,8 @@ namespace Basik {
 			if (lastSprite) {
 				console.log("img pressed, id: " + id);
 				this.down(lastSprite, posCanvas, id);
+			} else {
+				console.log("no image pressed")
 			}
 
 			//
