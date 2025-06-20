@@ -1,4 +1,5 @@
 window.onload = () => {
+	//TODO:
 
 	//set graphics. We are working with 320x240 resolution
 	Graphics(320, 240);

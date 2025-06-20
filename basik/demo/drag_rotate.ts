@@ -24,23 +24,6 @@ window.onload = () => {
 		StrokeColor(0, 0, 0, 0);
 		TextPos(0, 10);
 		Write("Drag the box to rotate the box")
-		debugMouse();
 	})
-
-	function debugMouse() {
-		TextSize(10);
-		TextPos(0, 50);
-		WriteLn("Input Id " + In.global.id);
-		WriteLn("Input drag x " + In.global.xDrag + "/y " + In.global.yDrag);
-		WriteLn("Input dragged " + In.global.isDrag);
-		WriteLn("Input down " + In.global.isDown);
-		WriteLn("");
-		WriteLn("Image id " + box.inputId);
-		WriteLn("Image pressed " + box.down);
-		WriteLn("Image dragged " + box.dragged);
-		WriteLn("Image drag x " + box.drgStartX + "/y " + box.drgStartY);
-		WriteLn("Image x " + box.x);
-		WriteLn("Image y " + box.y);
-	}
 }
 

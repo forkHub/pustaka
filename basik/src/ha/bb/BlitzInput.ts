@@ -20,19 +20,19 @@ function MouseIsDragged(btn: number = 0): boolean {
 
 /**
  * drag horizontal length calculated from the drag start position
- * @param btn {number} the button to check, default to 0, for touch event this will be ignored
+ * @param btn {number} the button to check, default to 0, for touch event this param is ignored
  * @returns {number} 
  */
-function MouseDragXAmount(btn: number = 0): number {
+function MouseDraggedX(btn: number = 0): number {
 	return In.getByButton(btn).xDrag
 }
 
 /**
  * drag vertical length calculated from the drag end position
- * @param btn {number} the button to check, default to 0, for touch event this will be ignored
+ * @param btn {number} the button to check, default to 0, for touch event this param is ignored
  * @returns {number}
  */
-function MouseDragYAmount(btn: number = 0): number {
+function MouseDraggedY(btn: number = 0): number {
 	return In.getByButton(btn).yDrag
 }
 
@@ -71,7 +71,7 @@ function MouseDragStartY(btn: number = 0): number {
 }
 
 /**
- * return last button pressed for mouseevent. For mobile device this will always return 0
+ * return last button pressed for mouseevent. For mobile device this can return any number
  * @returns {number}
  */
 function MouseButton(): number {
@@ -99,7 +99,6 @@ function MouseMoveY(): number {
 
 // // //extended
 // const FlushInput = Basik.Input.FlushInput;
-
 // const InputTapCount = Basik.Input.InputTapCount;
 // const InputDragStartCount = Basik.Input.InputDragStartCount;
 // const InputDragEndCount = Basik.Input.InputDragEndCount;

@@ -38,12 +38,12 @@ function ClearArea(x: number, y: number, w: number, h: number) {
  * @param h {number} prefered height of the canvas.
  * @param canvas {HTMLCanvasElement} (optional) the canvas element.<br/>
  *   If canvas is not available, a new one will be created and the size will follow the preferred size
- * @param fullScreen {boolean} (default to true) Use full screen
+ * @param mode {boolean} (default to true) Use full screen
  * When in full screen mode, the canvas will automatically fill the screen and maintain the aspect ratio.
  * 
  */
-function Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true) {
-	G.Graphics(w, h, canvas, fullScreen);
+function Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, mode: number = 1) {
+	G.Graphics(w, h, canvas, mode);
 }
 
 /**
@@ -151,12 +151,8 @@ function DispatchEvent(evt: string): void {
 	Basik.Event.dispatchEvent(evt);
 }
 
-function SetPiksel(x: number = 0, y: number = 0) {
-	return Ip.AmbilPiksel(x, y); //TODO: implement
-}
 
-
-function Garis(Ax: number, Ay: number, Bx: number, By: number) {
+function Line(Ax: number, Ay: number, Bx: number, By: number) {
 	let ctx: CanvasRenderingContext2D = MainCanvas().getContext('2d');
 
 	Ax = Math.floor(Ax);
@@ -170,22 +166,22 @@ function Garis(Ax: number, Ay: number, Bx: number, By: number) {
 	ctx.stroke();
 }
 
-function Kotak(x1: number, y1: number, x2: number, y2: number, isi: boolean = false, garis: boolean = true, rotasi: number = 0) {
+function Rect(x1: number, y1: number, x2: number, y2: number) {
 	let ctx: CanvasRenderingContext2D = MainCanvas().getContext('2d');
 
 	//TODO: rotasi
-	rotasi;
+	// rotasi;
 
-	if (isi) {
-		ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
-	}
+	// if (isi) {
+	ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
+	// }
 
-	if (garis) {
-		ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
-	}
+	// if (garis) {
+	ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+	// }
 }
 
-function Oval(x: number = 0, y: number = 0, radius: number, skalaX: number = 1, skalaY = .5, rotasi: number = 0) {
+function Circle(x: number = 0, y: number = 0, radius: number, scaleX: number = 1, scaleY = .5, rotation: number = 0) {
 	let ctx: CanvasRenderingContext2D = MainCanvas().getContext('2d');
 
 	// save state
@@ -194,10 +190,10 @@ function Oval(x: number = 0, y: number = 0, radius: number, skalaX: number = 1, 
 	// translate context
 	ctx.translate(x, y);
 
-	ctx.rotate(rotasi * (Math.PI / 180));
+	ctx.rotate(rotation * (Math.PI / 180));
 
 	// scale context horizontally
-	ctx.scale(skalaX, skalaY);
+	ctx.scale(scaleX, scaleY);
 
 	// draw circle which will be stretched into an oval
 	ctx.beginPath();

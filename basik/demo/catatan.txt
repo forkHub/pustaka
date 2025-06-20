@@ -1,0 +1,37 @@
+basic demo:
+===========
+demo keyboard
+demo sound
+demo 
+	creteImage, setCanvas, MainCanvas, anim
+	alpha
+
+intermediate:
+=============
+demo ellipse path
+fx alpha
+getpixel, setpixel
+paralax
+shump
+	drag auto shoot
+	rotate follow mouse
+
+arkanoid
+flappy bird
+bomb with mouse to direct
+jumper - avoid cactus
+jumper - avoid hole
+homing
+
+puzzle split ball
+puzzle unblock
+puzzle tetris
+puzzle slide puzzle
+jigsaw
+
+bitmap font
+
+
+next:
+=====
+integration with matter js

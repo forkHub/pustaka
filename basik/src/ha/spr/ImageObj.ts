@@ -266,20 +266,6 @@ namespace Basik {
 			// this._lebarDiSet = true;
 		}
 
-		// public get panjangDiSet(): boolean {
-		// 	return this._panjangDiSet;
-		// }
-		// public set panjangDiSet(value: boolean) {
-		// 	this._panjangDiSet = value;
-		// }
-
-		// public get lebarDiSet(): boolean {
-		// 	return this._lebarDiSet;
-		// }
-		// public set lebarDiSet(value: boolean) {
-		// 	this._lebarDiSet = value;
-		// }
-
 		public get ctrIdx(): number {
 			return this._ctrIdx;
 		}
