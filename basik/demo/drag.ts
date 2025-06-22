@@ -24,15 +24,10 @@ window.onload = () => {
 
 	function debugMouse() {
 		TextPos(0, 10);
-		WriteLn("Input Id " + In.global.id);
-		WriteLn("Input drag x " + In.global.xDrag + "/y " + In.global.yDrag);
-		WriteLn("Input dragged " + In.global.isDrag);
-		WriteLn("Input down " + In.global.isDown);
-		WriteLn("");
-		WriteLn("Image id " + box.inputId);
+		WriteLn("Image mouse id " + box.inputId);
 		WriteLn("Image pressed " + box.down);
-		WriteLn("Image dragged " + box.dragged);
-		WriteLn("Image drag x " + box.drgStartX + "/y " + box.drgStartY);
+		WriteLn("Image is dragged " + box.dragged);
+		WriteLn("Image dragged x " + box.drgStartX + "/dragged y " + box.drgStartY);
 		WriteLn("Image x " + box.x);
 		WriteLn("Image y " + box.y);
 	}

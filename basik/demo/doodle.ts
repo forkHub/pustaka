@@ -13,12 +13,10 @@ window.onload = () => {
 	//clear the screen
 	Cls();
 
-	AddEventListener("mousedrag", () => {
-		draw();
-	})
-
-	AddEventListener("mousedown", () => {
-		draw();
+	AddEventListener("update", () => {
+		if (MouseIsDown(0)) {
+			draw();
+		}
 	})
 
 	//draw brush at mouse position

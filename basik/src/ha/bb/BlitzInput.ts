@@ -6,7 +6,7 @@
  * @returns {boolean}
  */
 function MouseIsDown(btn: number = 0): boolean {
-	return In.getByButton(btn).isDown;
+	return In.getByButton(btn)?.isDown;
 }
 
 /**
@@ -15,7 +15,7 @@ function MouseIsDown(btn: number = 0): boolean {
  * @returns {boolean}
  */
 function MouseIsDragged(btn: number = 0): boolean {
-	return In.getByButton(btn).isDrag;
+	return In.getByButton(btn)?.isDrag;
 }
 
 /**
@@ -24,7 +24,7 @@ function MouseIsDragged(btn: number = 0): boolean {
  * @returns {number} 
  */
 function MouseDraggedX(btn: number = 0): number {
-	return In.getByButton(btn).xDrag
+	return In.getByDraggedStatus(btn)?.xDrag
 }
 
 /**
@@ -33,7 +33,7 @@ function MouseDraggedX(btn: number = 0): number {
  * @returns {number}
  */
 function MouseDraggedY(btn: number = 0): number {
-	return In.getByButton(btn).yDrag
+	return In.getByDraggedStatus(btn)?.yDrag
 }
 
 /**
@@ -41,7 +41,7 @@ function MouseDraggedY(btn: number = 0): number {
  * @returns {number}
  */
 function MouseX(): number {
-	return In.getByButton().x;
+	return In.global?.x;
 }
 
 /**
@@ -49,7 +49,7 @@ function MouseX(): number {
  * @returns {number}
  */
 function MouseY(): number {
-	return In.getByButton().y;
+	return In.global?.y;
 }
 
 /**
@@ -58,7 +58,7 @@ function MouseY(): number {
  * @returns {number}
  */
 function MouseDragStartX(btn: number = 0): number {
-	return In.getByButton(btn).xStart;
+	return In.getByButton(btn)?.xStart;
 }
 
 /**
@@ -67,7 +67,7 @@ function MouseDragStartX(btn: number = 0): number {
  * @returns {number}
  */
 function MouseDragStartY(btn: number = 0): number {
-	return In.getByButton(btn).yStart;
+	return In.getByButton(btn)?.yStart;
 }
 
 /**
@@ -75,7 +75,7 @@ function MouseDragStartY(btn: number = 0): number {
  * @returns {number}
  */
 function MouseButton(): number {
-	return In.global.button;
+	return In.lastButton;
 }
 
 /**
