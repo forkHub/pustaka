@@ -11,6 +11,8 @@ namespace Basik {
 			h.canvas.height = height;
 			h.frameH = height;
 			h.frameW = width;
+			h.width = width;
+			h.height = height;
 			h.load = true;
 			h.img = document.createElement('img');
 			Ip.register(h, h.url, h.tipeDrag);
@@ -170,14 +172,23 @@ namespace Basik {
 			let jmlH: number = 0;
 			let frameX: number = 0;
 			let frameY: number = 0;
-
+			let imgW: number = 0;
+			// let imgH: number = 0;
 
 			if (gbr.load == false) return;
+			if (!gbr.url) {
+				imgW = gbr.width;
+				// imgH = gbr.height;
+			}
+			else {
+				imgW = gbr.img.naturalWidth;
+				// imgH = gbr.img.naturalHeight;
+			}
 
 			gbr.ctrIdx = Image.ctrDraw++;
 			frame = Math.floor(frame);
 
-			jmlH = Math.floor(gbr.img.naturalWidth / gbr.frameW);
+			jmlH = Math.floor(imgW / gbr.frameW);
 
 			frameX = (frame % jmlH);
 			frameY = Math.floor(frame / jmlH);

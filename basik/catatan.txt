@@ -1,3 +1,4 @@
-frame handling
-bug: error drawing
-draw all image bikin bingung
+Demo Functionality:
+Doc:
+
+Next:

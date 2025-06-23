@@ -6,6 +6,7 @@ namespace Basik {
 	export class Image {
 
 		/**
+		 * @typedef {Object} Image
 		 * @property {number} x - x position
 		 * @property {number} y - y position
 		 * @property {number} rotation - rotation in degree
@@ -20,7 +21,7 @@ namespace Basik {
 		 */
 
 		/**
-		 * 
+		 * Create image from URL
 		 * @param url {string}
 		 */
 		constructor(url: string = '') {
@@ -40,6 +41,9 @@ namespace Basik {
 			gbr.canvas = canvas;
 			gbr.rect = rect;
 			gbr.load = false;
+			if (!gbr.url) {
+				gbr.load = true;
+			}
 
 			img.onload = () => {
 				imgOnLoad(img);
@@ -55,7 +59,7 @@ namespace Basik {
 				imgOnLoad(img2);
 			}
 			else {
-				img.src = url;
+				if (url) img.src = url;
 			}
 
 			function imgOnLoad(imgP: HTMLImageElement): void {

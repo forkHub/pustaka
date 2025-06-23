@@ -229,11 +229,15 @@ declare namespace Basik {
 declare namespace Basik {
     class Keyboard {
         private static readonly list;
+        private static anyKey;
+        private static _lastKey;
+        static get lastKey(): string;
         private static _obj;
         static get obj(): KeyboardEvent;
+        private static getByKey;
         private static reg;
         private static setDown;
-        static IsDown(key: string): boolean;
+        static IsDown(key?: string): boolean;
         static init(): void;
     }
 }
@@ -343,7 +347,6 @@ declare function DrawImage(img: Basik.Image): void;
 declare function ImageCollide(img1: Basik.Image, img2: Basik.Image): boolean;
 declare function ImageCollidePoint(img: Basik.Image, x: number, y: number): boolean;
 declare function CreateImage(width: number, height: number): Basik.Image;
-declare const ImageCanvas: (img: Basik.Image) => HTMLCanvasElement;
 declare function AllImageLoaded(): boolean;
 declare function FreeImage(img: Basik.Image): void;
 declare const TextPos: typeof Basik.Teks.Goto;
@@ -351,7 +354,8 @@ declare const Write: typeof Basik.Teks.Write;
 declare const WriteLn: typeof Basik.Teks.WriteLn;
 declare const TextFont: typeof Basik.Teks.Name;
 declare const TextSize: typeof Basik.Teks.Size;
-declare function KeyboardIsDown(key: string): boolean;
+declare function KeyboardIsDown(key?: string): boolean;
+declare function LastKey(): string;
 declare namespace Basik {
     class Image {
         constructor(url?: string);

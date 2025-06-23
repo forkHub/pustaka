@@ -10,7 +10,7 @@ var ha;
             getGbr(url) {
                 for (let i = 0; i < this.files.length; i++) {
                     if (this.files[i].url == url) {
-                        console.log('ambil dari cache: ' + url);
+                        // console.log('ambil dari cache: ' + url);
                         return this.files[i].img;
                     }
                 }
@@ -22,7 +22,7 @@ var ha;
                 if (img2) {
                     return;
                 }
-                console.log('cache: ' + url);
+                // console.log('cache: ' + url);
                 this.files.push({
                     url: url,
                     img: img

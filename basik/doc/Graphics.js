@@ -2,23 +2,12 @@
 var Basik;
 (function (Basik) {
     class Graphic {
-        static get autoScale() {
-            return Basik.G._autoScale;
-        }
-        static set autoScale(value) {
-            Basik.G._autoScale = value;
-        }
-        // static Pause() {
-        // 	debugger;
-        // 	// this.canvasAktif.canvas.getcon
-        // }
         static handleWindowResize() {
             if (!Basik.G._autoScale)
                 return;
-            // console.debug('window on resize');
-            let canvas = Basik.G.canvas;
-            let cp = Basik.G.canvas.width;
-            let cl = Basik.G.canvas.height;
+            let canvas = Basik.G.drawCanvas;
+            let cp = Basik.G.drawCanvas.width;
+            let cl = Basik.G.drawCanvas.height;
             let wp = window.innerWidth;
             let wl = window.innerHeight;
             let ratio = Math.min((wp / cp), (wl / cl));
@@ -30,7 +19,6 @@ var Basik;
             canvas.style.height = cl2 + 'px';
             canvas.style.top = ((wl - cl2) / 2) + 'px';
             canvas.style.left = ((wp - cp2) / 2) + 'px';
-            // console.debug('canvas w: ' + canvas.style.width + '/ratio: ' + ratio);
         }
         static buildCanvas(w, h) {
             let canvas;
@@ -38,39 +26,43 @@ var Basik;
             if (!canvas) {
                 canvas = document.createElement('canvas');
                 document.body.appendChild(canvas);
-                canvas.width = w;
-                canvas.height = h;
+                if (w)
+                    canvas.width = w;
+                if (h)
+                    canvas.height = h;
             }
             return canvas;
         }
         static Canvas() {
-            return Basik.G.canvas;
+            return Basik.G.drawCanvas;
         }
         static MainCanvas() {
             return Basik.G.mainCanvas;
         }
         static SetCanvas(canvas) {
-            Basik.G.mainCanvas = canvas;
+            Basik.G.drawCanvas = canvas;
         }
-        static Graphics(w = 320, h = 240, canvas = null, fullScreen = true) {
+        static initComp() {
+            Basik.In.init(Basik.G.drawCanvas);
+            Basik.Keyboard.init();
+            Basik.Camera.init();
+            Basik.sprInt.init();
+        }
+        static Graphics(w, h, canvas = null, mode = 1) {
+            console.log('init');
             if (!canvas)
                 canvas = Basik.G.buildCanvas(w, h);
             Basik.G.mainCanvas = canvas;
-            Basik.G.canvas = canvas;
-            Basik.G.autoScale = fullScreen;
-            console.log('inisialisasi');
-            Basik.G.setupMainCanvas(w, h, Basik.G.autoScale);
-            Basik.In.init(Basik.G.canvas);
-            // if (Graphic.skalaOtomatis) {
-            window.addEventListener("resize", () => {
-                Basik.G.handleWindowResize();
-            });
+            Basik.G.drawCanvas = canvas;
+            Basik.G._autoScale = (mode == 1);
+            Basik.G.setupMainCanvas(w, h, mode);
+            Basik.G.initComp();
             function update() {
                 // let updater = (window as any)["UpdateEvent"];
                 // if (typeof updater === "function") {
                 // 	updater();
                 // }
-                Basik.Event.call("update");
+                Basik.Event.dispatchEvent("update");
                 window.requestAnimationFrame(update);
             }
             window.requestAnimationFrame(update);
@@ -78,39 +70,43 @@ var Basik;
                 Basik.G.handleWindowResize();
             }, 100);
             Basik.G.handleWindowResize();
-            NoStroke();
+            // NoStroke();
             Cls();
         }
-        static setupMainCanvas(p = 320, l = 240, fullScreen) {
+        static setupMainCanvas(p, l, mode = 1) {
             Basik.G.mainCanvas.width = p;
             Basik.G.mainCanvas.height = l;
-            if (fullScreen) {
+            if (mode == 1) {
                 Basik.G.mainCanvas.style.width = p + 'px';
                 Basik.G.mainCanvas.style.padding = '0px';
                 Basik.G.mainCanvas.style.margin = '0px';
             }
+            // if (Graphic.skalaOtomatis) {
+            window.addEventListener("resize", () => {
+                Basik.G.handleWindowResize();
+            });
         }
         static Cls() {
-            let ctx = Basik.G.canvas.getContext('2d');
-            ctx.clearRect(0, 0, (Basik.G.canvas.width), (Basik.G.canvas.height));
+            let ctx = Basik.G.drawCanvas.getContext('2d');
+            ctx.clearRect(0, 0, (Basik.G.drawCanvas.width), (Basik.G.drawCanvas.height));
         }
         static get red() {
-            return Basik.G._merah;
+            return Basik.G._red;
         }
         static set red(value) {
-            Basik.G._merah = value;
+            Basik.G._red = value;
         }
         static get green() {
-            return Basik.G._hijau;
+            return Basik.G._green;
         }
         static set green(value) {
-            Basik.G._hijau = value;
+            Basik.G._green = value;
         }
         static get blue() {
-            return Basik.G._biru;
+            return Basik.G._blue;
         }
         static set blue(value) {
-            Basik.G._biru = value;
+            Basik.G._blue = value;
         }
         static get alpha() {
             return Basik.G._transparan;
@@ -120,9 +116,9 @@ var Basik;
         }
     }
     Graphic._autoScale = true;
-    Graphic._merah = 0;
-    Graphic._hijau = 0;
-    Graphic._biru = 0;
+    Graphic._red = 0;
+    Graphic._green = 0;
+    Graphic._blue = 0;
     Graphic._transparan = 0;
     Basik.Graphic = Graphic;
     Basik.G = Graphic;

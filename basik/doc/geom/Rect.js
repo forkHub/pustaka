@@ -20,6 +20,16 @@ var Basik;
             r.segs.push(Basik.Seg.create(r.vs[3], r.vs[0]));
             return r;
         }
+        static destroy(r) {
+            while (r.vs.length > 0) {
+                r.vs.pop();
+            }
+            while (r.segs.length > 0) {
+                let s = r.segs.pop();
+                s.A = null;
+                s.B = null;
+            }
+        }
         static copy(r) {
             // console.log('copy:');
             // console.log(r.vs);

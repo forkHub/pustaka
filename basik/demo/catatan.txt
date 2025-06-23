@@ -1,11 +1,7 @@
-basic demo:
-===========
-demo keyboard
+basic demo functionality:
+=========================
 demo sound
 demo 
-	creteImage, 
-	setCanvas, 
-	MainCanvas, 
 	anim
 
 intermediate:
@@ -30,9 +26,7 @@ puzzle unblock
 puzzle tetris
 puzzle slide puzzle
 jigsaw
-
 bitmap font
-
 
 next:
 =====

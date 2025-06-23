@@ -7,6 +7,8 @@ window.onload = () => {
 		if (MouseButton() == 0) tapCtr++;
 	})
 
+	//TODO: more mouse event demo
+
 	//game loop
 	AddEventListener("update", () => {
 

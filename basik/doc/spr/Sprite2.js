@@ -5,68 +5,98 @@ var Basik;
     (function (TypeDrag) {
         TypeDrag[TypeDrag["drag"] = 1] = "drag";
         TypeDrag[TypeDrag["rotasi"] = 2] = "rotasi";
+        TypeDrag[TypeDrag["remoteDrag"] = 3] = "remoteDrag";
+        TypeDrag[TypeDrag["remoteRotation"] = 4] = "remoteRotation";
     })(TypeDrag || (TypeDrag = {}));
     //Sprite interactivity
-    class SprInt {
-        spriteDown(img, pos, id) {
-            img.down = true;
-            img.drgStartX = pos.x - img.x;
-            img.drgStartY = pos.y - img.y;
-            img.button = id;
-            img.sudutTekanAwal = Basik.Tf.sudut(pos.x - img.x, pos.y - img.y);
-            img.sudutAwal = img.rotasi;
-            // console.group('sprite down event handler');
-            // console.log("sudut tekan awal", s.sudutTekanAwal);
-            // console.log("sudut awal", s.sudutAwal);
-            // console.groupEnd();
+    class ImgIntHandler {
+        init() {
+            Basik.Event.addEventListener(Basik.Evt.MOUSE_DOWN, () => {
+                // this.down();
+                this.inputDown({
+                    x: Basik.Input.global.x,
+                    y: Basik.Input.global.y
+                }, Basik.Input.global.id);
+            });
+            Basik.Event.addEventListener(Basik.Evt.MOUSE_MOVE, () => {
+                this.inputMove({
+                    x: Basik.Input.global.x,
+                    y: Basik.Input.global.y
+                }, Basik.Input.global.id);
+            });
+            Basik.Event.addEventListener(Basik.Evt.MOUSE_UP, () => {
+                console.log("clear image mouse status");
+                Basik.Ip.daftar.forEach((img) => {
+                    img.down = false;
+                    img.dragged = false;
+                });
+            });
         }
-        inputDown(pos, button) {
+        down(img, posCanvas, id) {
+            let posAbs = {
+                x: posCanvas.x - Basik.Camera.x,
+                y: posCanvas.y - Basik.Camera.y
+            };
+            img.down = true;
+            img.drgStartX = posAbs.x - img.x;
+            img.drgStartY = posAbs.y - img.y;
+            img.inputId = id;
+            img.sudutTekanAwal = Basik.Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
+            img.sudutAwal = img.rotation;
+        }
+        //TODO: call event
+        inputDown(posCanvas, id) {
             console.group('input down');
+            let posAbs = {
+                x: posCanvas.x - Basik.Camera.x,
+                y: posCanvas.y - Basik.Camera.y
+            };
             let lastIdx = -1;
             let lastSprite = null;
             for (let i = Basik.Ip.daftar.length - 1; i >= 0; i--) {
                 let img;
                 img = Basik.Ip.daftar[i];
-                if (Basik.Ip.dotInsideImage(img, img.x, img.y, pos.x, pos.y)) {
+                if (Basik.Ip.dotInsideImage(img, img.x, img.y, posAbs.x, posAbs.y)) {
                     if (img.ctrIdx > lastIdx) {
                         lastIdx = img.ctrIdx;
                         lastSprite = img;
                     }
                 }
                 else {
+                    //remote drag
                     if (img.tipeDrag == 3 || img.tipeDrag == 4) {
-                        this.spriteDown(img, pos, button);
+                        this.down(img, posCanvas, id);
                     }
                 }
             }
             //
             if (lastSprite) {
-                this.spriteDown(lastSprite, pos, button);
+                console.log("img pressed, id: " + id);
+                this.down(lastSprite, posCanvas, id);
+            }
+            else {
+                console.log("no image pressed");
             }
             //
             console.groupEnd();
         }
-        inputMove(pos, button) {
-            Basik.Ip.daftar.forEach((item) => {
-                if (item.down && item.dragable && (item.button == button)) {
-                    item.dragged = true;
-                    if (item.tipeDrag == TypeDrag.drag || (item.tipeDrag == 3)) {
-                        item.x = pos.x - item.drgStartX;
-                        item.y = pos.y - item.drgStartY;
-                        // console.debug('item drag move');
+        inputMove(posCanvas, inputId) {
+            let posAbs = {
+                x: posCanvas.x - Basik.Camera.x,
+                y: posCanvas.y - Basik.Camera.y
+            };
+            Basik.Ip.daftar.forEach((img) => {
+                if (img.down && (img.tipeDrag != 0) && (img.inputId == inputId)) {
+                    img.dragged = true;
+                    if (img.tipeDrag == TypeDrag.drag || (img.tipeDrag == TypeDrag.remoteDrag)) {
+                        img.x = posAbs.x - img.drgStartX;
+                        img.y = posAbs.y - img.drgStartY;
+                        console.debug('item drag move');
                     }
-                    else if (item.tipeDrag == TypeDrag.rotasi || (item.tipeDrag == 4)) {
-                        let sudut2 = Basik.Tf.sudut(pos.x - item.x, pos.y - item.y);
-                        let perbedaan = sudut2 - item.sudutTekanAwal;
-                        item.rotasi = item.sudutAwal + perbedaan;
-                        // console.group();
-                        // console.log("sudut", sudut2);
-                        // console.log("beda", perbedaan);
-                        // console.log("sudut tekan awal", item.sudutTekanAwal);
-                        // console.log("sudut awal", item.sudutAwal);
-                        // console.log("rotasi", item.rotasi);
-                        // console.log("posisi", item.x, item.y);
-                        // console.groupEnd();
+                    else if (img.tipeDrag == TypeDrag.rotasi || (img.tipeDrag == TypeDrag.remoteRotation)) {
+                        let sudut2 = Basik.Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
+                        let perbedaan = sudut2 - img.sudutTekanAwal;
+                        img.rotation = img.sudutAwal + perbedaan;
                     }
                     else {
                     }
@@ -74,5 +104,5 @@ var Basik;
             });
         }
     }
-    Basik.sprInt = new SprInt();
+    Basik.sprInt = new ImgIntHandler();
 })(Basik || (Basik = {}));

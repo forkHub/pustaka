@@ -1,7 +1,7 @@
 "use strict";
 ///<reference path="./Route.ts"/>
 const G = Basik.G;
-const T = Basik.Tk;
+// const T = Basik.Tk;
 const Ip = Basik.Ip;
 const In = Basik.In;
 /**
@@ -34,12 +34,12 @@ function ClearArea(x, y, w, h) {
  * @param h {number} prefered height of the canvas.
  * @param canvas {HTMLCanvasElement} (optional) the canvas element.<br/>
  *   If canvas is not available, a new one will be created and the size will follow the preferred size
- * @param fullScreen {boolean} (default to true) Use full screen
+ * @param mode {boolean} (default to true) Use full screen
  * When in full screen mode, the canvas will automatically fill the screen and maintain the aspect ratio.
  *
  */
-function Graphics(w = 320, h = 240, canvas = null, fullScreen = true) {
-    G.Graphics(w, h, canvas, fullScreen);
+function Graphics(w = 320, h = 240, canvas = null, mode = 1) {
+    G.Graphics(w, h, canvas, mode);
 }
 /**
  * Clear the canvas
@@ -107,12 +107,6 @@ function FillColor(r = 0, g = 0, b = 0, a = 100) {
     G.alpha = a;
 }
 /**
- * Set fill color to none
- */
-function NoColor() {
-    G.Canvas().getContext('2d').fillStyle = "none";
-}
-/**
  * Set stroke color
  * @param r {number} - the red color (0 - 255)
  * @param g {number} - the green color (0 - 255)
@@ -127,30 +121,55 @@ function StrokeColor(r = 0, g = 0, b = 0, a = 1) {
     G.alpha = a;
 }
 /**
- * Set stroke to none
- */
-function NoStroke() {
-    G.Canvas().getContext('2d').strokeStyle = 'none';
-}
-/**
  * Add Listener for certain event
- * @param type {string} the event type, available are: mousedown, mouseup, mousemove, mousedrag, keydown, keyup
+ * @param type {string} the event type, available are: mousedown, mouseup, mousemove, mousedrag, keydown, keyup, update
  * @param f {callback}
  */
-function AddListener(type, f) {
-    Basik.Event.addListener(type, f);
+function AddEventListener(type, f) {
+    Basik.Event.addEventListener(type, f);
 }
 /**
- * return the last keyboard event key
- * @returns {string}
+ * Dispatch an event
+ * @param evt {string} the string to dispatch
  */
-function KeyboardKey() {
-    return Basik.Keyboard.key;
+function DispatchEvent(evt) {
+    Basik.Event.dispatchEvent(evt);
 }
-/**
- * return the last mouse event button
- * @returns {number}
- */
-function MouseButton() {
-    return Basik.Input.obj.key;
+function Line(Ax, Ay, Bx, By) {
+    let ctx = MainCanvas().getContext('2d');
+    Ax = Math.floor(Ax);
+    Ay = Math.floor(Ay);
+    Bx = Math.floor(Bx);
+    By = Math.floor(By);
+    ctx.beginPath();
+    ctx.moveTo(Ax, Ay);
+    ctx.lineTo(Bx, By);
+    ctx.stroke();
+}
+function Rect(x1, y1, x2, y2) {
+    let ctx = MainCanvas().getContext('2d');
+    //TODO: rotasi
+    // rotasi;
+    // if (isi) {
+    ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
+    // }
+    // if (garis) {
+    ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+    // }
+}
+function Circle(x = 0, y = 0, radius, scaleX = 1, scaleY = .5, rotation = 0) {
+    let ctx = MainCanvas().getContext('2d');
+    // save state
+    ctx.save();
+    // translate context
+    ctx.translate(x, y);
+    ctx.rotate(rotation * (Math.PI / 180));
+    // scale context horizontally
+    ctx.scale(scaleX, scaleY);
+    // draw circle which will be stretched into an oval
+    ctx.beginPath();
+    ctx.arc(0, 0, radius, 0, 2 * Math.PI, false);
+    // restore to original state
+    ctx.restore();
+    ctx.stroke();
 }

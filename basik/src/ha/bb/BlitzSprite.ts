@@ -62,15 +62,6 @@ function CreateImage(width: number, height: number): Basik.Image {
 }
 
 /**
- * return the canvas of an image
- * @param img {Basik.Image} the image
- * @returns {HTMLCanvasElement}
- */
-const ImageCanvas = (img: Basik.Image): HTMLCanvasElement => {
-	return img.canvas;
-}
-
-/**
  * Check if all images have been loaded
  * @returns {boolean} 
  */

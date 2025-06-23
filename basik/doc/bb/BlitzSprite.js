@@ -4,7 +4,7 @@
 /**
  * Load an image from url
  * @param url {string} the url of image to load
- * @returns {Basik.ImgObj}
+ * @returns {Basik.Image}
  */
 function LoadImage(url) {
     return Ip.Muat(url);
@@ -14,14 +14,14 @@ function LoadImage(url) {
  * @param url {string} image url
  * @param frameWidth {number} preferred frame width
  * @param frameHeight {number} preferred frame height
- * @returns {Basik.ImgObj}
+ * @returns {Basik.Image}
  */
 function LoadAnimImage(url, frameWidth, frameHeight) {
     return Ip.MuatAnimasi(url, frameWidth, frameHeight);
 }
 /**
  * Draw an image
- * @param img {Basik.ImgObj} Image to draw
+ * @param img {Basik.Image} Image to draw
  */
 function DrawImage(img) {
     Ip.Draw(img);
@@ -29,8 +29,8 @@ function DrawImage(img) {
 /**
  * Check if two images collide. Use box for collision detection. Also Take account the rotation
  *
- * @param img1 {Basik.ImgObj} the first image
- * @param img2 {Basik.ImgObj} the second image
+ * @param img1 {Basik.Image} the first image
+ * @param img2 {Basik.Image} the second image
  * @returns {boolean}
  */
 function ImageCollide(img1, img2) {
@@ -38,7 +38,7 @@ function ImageCollide(img1, img2) {
 }
 /**
  * Check if an image collides a point
- * @param img {Basik.ImgObj}
+ * @param img {Basik.Image}
  * @param x {number}
  * @param y {number}
  * @returns {boolean}
@@ -50,19 +50,11 @@ function ImageCollidePoint(img, x, y) {
  * Create a blank image
  * @param width {number} width
  * @param height {number} height
- * @returns {Basik.ImgObj}
+ * @returns {Basik.Image}
  */
 function CreateImage(width, height) {
     return Ip.CreateImage(width, height);
 }
-/**
- * return the canvas of an image
- * @param img {Basik.ImgObj} the image
- * @returns {HTMLCanvasElement}
- */
-const ImageCanvas = (img) => {
-    return img.canvas;
-};
 /**
  * Check if all images have been loaded
  * @returns {boolean}
@@ -71,20 +63,9 @@ function AllImageLoaded() {
     return Ip.AllImageLoaded();
 }
 /**
- * Copy image
- * @param img {Basik.ImgObj} the image to copy
- * @returns {Basik.ImgObj}
+ *
+ * @param img
  */
-function CopyImage(img) {
-    if (!onload) {
-        onload = () => { };
-    }
-    if (img.isAnim) {
-        console.debug('copy sprite anim');
-        console.debug(img);
-        return Ip.muatAnimasiAsyncKanvas(img.url, img.frameW, img.frameH, img.canvas, img.tipeDrag);
-    }
-    else {
-        return Ip.muatAsyncBerbagiKanvas(img.url, img.canvas, img.tipeDrag);
-    }
+function FreeImage(img) {
+    Ip.free(img);
 }

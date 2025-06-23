@@ -4,21 +4,27 @@ var Basik;
     /**
      * Image Object
      */
-    class ImgObj {
+    class Image {
         /**
+         * @typedef {Object} Image
          * @property {number} x - x position
          * @property {number} y - y position
          * @property {number} rotation - rotation in degree
          * @property {number} alpha - alpha (0 - 100)
-         * @property {number} width -
-         * @property {number} height -
+         * @property {number} width - preferred width
+         * @property {number} height - preferred height
          * @property {number} handleX - handle x position
          * @property {number} handleY - handle y position
          * @property {boolean} tilable - image rendered as tile
          * @property {boolean} dragged - image is dragged
          * @property {boolean} down - image is pressed
          */
-        constructor() {
+        /**
+         * Create image from URL
+         * @param url {string}
+         */
+        constructor(url = '') {
+            // console.log("create new image, url " + url);
             //
             this._x = 0;
             this._y = 0;
@@ -29,26 +35,117 @@ var Basik;
             this._lebar = 0;
             this._rotasi = 0;
             this._tilable = false;
-            this._frameW = 32;
-            this._frameH = 32;
+            this._frameW = 0;
+            this._frameH = 0;
             this._dragged = false;
             this._down = false;
+            this._frame = 0;
             //internal
             this.load = false;
-            this._panjangDiSet = false;
-            this._lebarDiSet = false;
             this._ctrIdx = 0;
             this.isAnim = false;
             this.rect = new Basik.Ktk();
-            this.ratioX = 1;
-            this.ratioY = 1;
-            //interaktif even
             this._tipeDrag = 0;
-            //internal interatif
             this._dragStartY = 0;
             this._dragStartX = 0;
             this._sudutTekanAwal = 0;
+            // private _button: number;
             this._sudutAwal = 0;
+            let img = document.createElement('img');
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
+            let gbr;
+            gbr = this;
+            let rect = Basik.Ktk.buat(0, 0, img.naturalWidth, img.naturalHeight);
+            Basik.Ip.register(this, url, 0);
+            gbr.img = img;
+            gbr.canvas = canvas;
+            gbr.rect = rect;
+            gbr.load = false;
+            if (!gbr.url) {
+                gbr.load = true;
+            }
+            img.onload = () => {
+                imgOnLoad(img);
+            };
+            img.onerror = () => {
+                console.warn('gagal load image, url ' + url);
+                imgOnLoadDefault();
+            };
+            let img2 = ha.be.cache.getGbr(url);
+            if (img2) {
+                imgOnLoad(img2);
+            }
+            else {
+                if (url)
+                    img.src = url;
+            }
+            function imgOnLoad(imgP) {
+                // console.log("img on load");
+                canvas.width = imgP.naturalWidth;
+                canvas.height = imgP.naturalHeight;
+                ctx.drawImage(imgP, 0, 0);
+                gbr.rect = Basik.Ktk.buat(0, 0, imgP.naturalWidth, imgP.naturalHeight);
+                gbr.load = true;
+                gbr.img = imgP;
+                if (!gbr.width) {
+                    // gbr.panjangDiSet = true;
+                    gbr.width = imgP.naturalWidth;
+                }
+                if (!gbr.height) {
+                    gbr.height = imgP.naturalHeight;
+                    // gbr.lebarDiSet = true;
+                }
+                if (!gbr._frameH)
+                    gbr.frameH = imgP.naturalHeight;
+                if (!gbr._frameW)
+                    gbr.frameW = imgP.naturalWidth;
+                ha.be.cache.setFile(url, imgP);
+            }
+            function imgOnLoadDefault() {
+                // console.log("img on load default");
+                // canvas.width = 32;
+                // canvas.height = 32;
+                // // ctx = canvas.getContext('2d');
+                // gbr.img = document.createElement('img');
+                // // ctx.drawImage(gbr.img, 0, 0);
+                // gbr.rect = Ktk.buat(0, 0, 32, 32);
+                // ctx.fillStyle = 'rgba(255, 255, 255, 100)';
+                // ctx.strokeStyle = 'rgba(255, 0, 0, 100)';
+                // ctx.beginPath();
+                // ctx.rect(0, 0, 32, 32);
+                // ctx.moveTo(0, 0);
+                // ctx.lineTo(31, 31);
+                // ctx.moveTo(0, 31);
+                // ctx.lineTo(31, 0);
+                // ctx.stroke();
+                // // ctx.setf
+                // // ctx.fillRect(0, 0, 32, 32);
+                // gbr.load = true;
+                // if (!gbr.width) {
+                // 	// gbr.panjangDiSet = true;
+                // 	gbr.width = 32;
+                // }
+                // if (!gbr.height) {
+                // 	gbr.height = 32;
+                // 	// gbr.lebarDiSet = true;
+                // }
+                // gbr.frameH = 32;
+                // gbr.frameW = 32;
+                // ha.be.cache.setFile(url, gbr.img);
+            }
+        }
+        get inputId() {
+            return this._inputId;
+        }
+        set inputId(value) {
+            this._inputId = value;
+        }
+        get frame() {
+            return this._frame;
+        }
+        set frame(value) {
+            this._frame = value;
         }
         get canvas() {
             return this._canvas;
@@ -111,30 +208,26 @@ var Basik;
             this._handleX = value;
         }
         get width() {
-            return this._panjang;
+            if (this._panjang)
+                return this._panjang;
+            if (this.img)
+                return this.img.naturalWidth;
+            return 0;
         }
         set width(value) {
             this._panjang = value;
-            this._panjangDiSet = true;
+            // this._panjangDiSet = true;
         }
         get height() {
-            return this._lebar;
+            if (this._lebar)
+                return this._lebar;
+            if (this.img)
+                return this.img.naturalHeight;
+            return 0;
         }
         set height(value) {
             this._lebar = value;
-            this._lebarDiSet = true;
-        }
-        get panjangDiSet() {
-            return this._panjangDiSet;
-        }
-        set panjangDiSet(value) {
-            this._panjangDiSet = value;
-        }
-        get lebarDiSet() {
-            return this._lebarDiSet;
-        }
-        set lebarDiSet(value) {
-            this._lebarDiSet = value;
+            // this._lebarDiSet = true;
         }
         get ctrIdx() {
             return this._ctrIdx;
@@ -142,10 +235,10 @@ var Basik;
         set ctrIdx(value) {
             this._ctrIdx = value;
         }
-        get rotasi() {
+        get rotation() {
             return this._rotasi;
         }
-        set rotasi(value) {
+        set rotation(value) {
             this._rotasi = value;
         }
         get drgStartX() {
@@ -172,9 +265,9 @@ var Basik;
         set down(value) {
             this._down = value;
         }
-        get dragable() {
-            return this._tipeDrag > 0 ? true : false;
-        }
+        // public get dragable(): boolean {
+        // 	return this._tipeDrag > 0 ? true : false;
+        // }
         get sudutTekanAwal() {
             return this._sudutTekanAwal;
         }
@@ -194,18 +287,12 @@ var Basik;
             this._url = value;
         }
         static get ctrDraw() {
-            return ImgObj._ctrDraw;
+            return Image._ctrDraw;
         }
         static set ctrDraw(value) {
-            ImgObj._ctrDraw = value;
-        }
-        get button() {
-            return this._button;
-        }
-        set button(value) {
-            this._button = value;
+            Image._ctrDraw = value;
         }
     }
-    ImgObj._ctrDraw = 0;
-    Basik.ImgObj = ImgObj;
+    Image._ctrDraw = 0;
+    Basik.Image = Image;
 })(Basik || (Basik = {}));

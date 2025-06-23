@@ -1,2 +1,2 @@
 "use strict";
-///<reference path="../Route.ts"/>
+///<reference path="../RouteImg.ts"/>

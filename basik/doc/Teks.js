@@ -18,6 +18,12 @@ var Basik;
         static Size(n = 12) {
             Teks.size = n;
         }
+        static WriteLn(teks) {
+            Basik.G.Canvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
+            Basik.G.Canvas().getContext('2d').fillText(teks, Teks._x, Teks._y);
+            Basik.G.Canvas().getContext('2d').strokeText(teks, Teks._x, Teks._y);
+            Teks._y += Teks.size + 2; // Move down for the next line
+        }
         static Write(teks) {
             Basik.G.Canvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
             Basik.G.Canvas().getContext('2d').fillText(teks, Teks._x, Teks._y);

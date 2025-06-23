@@ -151,7 +151,6 @@ function DispatchEvent(evt: string): void {
 	Basik.Event.dispatchEvent(evt);
 }
 
-
 function Line(Ax: number, Ay: number, Bx: number, By: number) {
 	let ctx: CanvasRenderingContext2D = MainCanvas().getContext('2d');
 

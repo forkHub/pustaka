@@ -88,7 +88,7 @@ function MouseMoveX(): number {
 
 /**
  * return last mouse vertical movement
- * @returns 
+ * @returns {number}
  */
 function MouseMoveY(): number {
 	return In.global.moveY;
