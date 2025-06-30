@@ -7,7 +7,7 @@
  * @param min {boolean} take the minimum or maximum distance
  * @returns {number}
  */
-function degDist(angleS: number = 0, angleT: number, min: boolean = true): number {
+function AngleDist(angleS: number = 0, angleT: number, min: boolean = true): number {
 	return Basik.Transform.degDist(angleS, angleT, min);
 }
 
@@ -26,3 +26,26 @@ function Clamp(n: number, min: number, max: number): number {
 	if (n > max) return max;
 	return n;
 }
+
+//TODO:
+/**
+ * polar posx
+ * polar posy
+ * 
+ * DRAWING:
+ * circle
+ * rect
+ * triangle
+ * drawingconnected
+ * arc
+ * ellipse
+ * polygon
+ * star
+ * crescent
+ * line
+ * quad
+ * bezier
+ * lastX
+ * lastY
+ * rotation
+ */

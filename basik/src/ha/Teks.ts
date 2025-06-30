@@ -27,6 +27,10 @@ namespace Basik {
 			Teks.size = n;
 		}
 
+		static Align(s: CanvasTextAlign = "left") {
+			G.Canvas().getContext('2d').textAlign = s;
+		}
+
 		static WriteLn(teks: string): void {
 			G.Canvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
 			G.Canvas().getContext('2d').fillText(teks, Teks._x, Teks._y);

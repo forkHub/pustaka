@@ -2,17 +2,17 @@ namespace Basik {
 
 	export class Sound implements IAudio {
 		static readonly list: IAudio[] = [];
-		private static _lastSound: Sound;
+		private static _lastSound: HTMLAudioElement;
 
 		private _src: string = '';
 		private _loaded: boolean = false;
 		private _sound: HTMLAudioElement;
 		private _playedCount: number;
 
-		public static get lastSound(): Sound {
+		public static get lastSound(): HTMLAudioElement {
 			return Sound._lastSound;
 		}
-		public static set lastSound(value: Sound) {
+		public static set lastSound(value: HTMLAudioElement) {
 			Sound._lastSound = value;
 		}
 

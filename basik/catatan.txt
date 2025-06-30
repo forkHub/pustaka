@@ -1,4 +1,15 @@
+beginner oriented
+no duplicate Functionality
+clean code
+
 Demo Functionality:
 Doc:
 
+v 1
+text ikutin canvas
+
 Next:
+Camera remove
+math => ikutin p5.js
+drawing => advanced
+stroke and fill advanced

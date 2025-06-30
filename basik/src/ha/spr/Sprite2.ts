@@ -38,18 +38,19 @@ namespace Basik {
 		}
 
 		private down(img: Image, posCanvas: any, id: string) {
+			//TODO: depecrated
 			let posAbs = {
 				x: posCanvas.x - Camera.x,
 				y: posCanvas.y - Camera.y
 			}
 
 			img.down = true;
-			img.drgStartX = posAbs.x - img.x;
-			img.drgStartY = posAbs.y - img.y;
+			img.dragStartX = posAbs.x - img.x;
+			img.dragStartY = posAbs.y - img.y;
 			img.inputId = id;
 
-			img.sudutTekanAwal = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
-			img.sudutAwal = img.rotation;
+			img.initialMouseAngle = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
+			img.initialAngle = img.rotation;
 		}
 
 
@@ -77,7 +78,7 @@ namespace Basik {
 				}
 				else {
 					//remote drag
-					if (img.tipeDrag == 3 || img.tipeDrag == 4) {
+					if (img.dragType == 3 || img.dragType == 4) {
 						this.down(img, posCanvas, id);
 					}
 				}
@@ -103,18 +104,18 @@ namespace Basik {
 
 			Ip.daftar.forEach((img: Image) => {
 
-				if (img.down && (img.tipeDrag != 0) && (img.inputId == inputId)) {
+				if (img.down && (img.dragType != 0) && (img.inputId == inputId)) {
 					img.dragged = true;
 
-					if (img.tipeDrag == TypeDrag.drag || (img.tipeDrag == TypeDrag.remoteDrag)) {
-						img.x = posAbs.x - img.drgStartX
-						img.y = posAbs.y - img.drgStartY
+					if (img.dragType == TypeDrag.drag || (img.dragType == TypeDrag.remoteDrag)) {
+						img.x = posAbs.x - img.dragStartX
+						img.y = posAbs.y - img.dragStartY
 						console.debug('item drag move');
 					}
-					else if (img.tipeDrag == TypeDrag.rotasi || (img.tipeDrag == TypeDrag.remoteRotation)) {
+					else if (img.dragType == TypeDrag.rotasi || (img.dragType == TypeDrag.remoteRotation)) {
 						let sudut2: number = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
-						let perbedaan: number = sudut2 - img.sudutTekanAwal;
-						img.rotation = img.sudutAwal + perbedaan;
+						let perbedaan: number = sudut2 - img.initialMouseAngle;
+						img.rotation = img.initialAngle + perbedaan;
 					}
 					else {
 

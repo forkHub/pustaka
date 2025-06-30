@@ -293,7 +293,7 @@ namespace Basik {
 				input.isTap = (isTap == '');
 
 				if (input.isTap) {
-					Event.dispatchEvent(Evt.MOUSE_TAP);
+					Event.dispatchEvent(Evt.MOUSE_CLICK);
 				}
 
 				//clear up all input status

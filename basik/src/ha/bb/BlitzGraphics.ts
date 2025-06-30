@@ -6,19 +6,15 @@ const Ip = Basik.Ip;
 const In = Basik.In;
 
 /**
- * return the main canvas. Main canvas is the one defined when application starts
- * @returns {HTMLCanvasElement} the main canvas object
- */
-function MainCanvas(): HTMLCanvasElement {
-	return G.MainCanvas();
-}
-
-/**
  * Set the active canvas. 
  * @param c {HTMLCanvasElement} the new active canvas
  */
 function SetCanvas(c: HTMLCanvasElement) {
 	G.SetCanvas(c);
+}
+
+function Canvas(): HTMLCanvasElement {
+	return G.Canvas();
 }
 
 /**
@@ -49,8 +45,8 @@ function Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = 
 /**
  * Clear the canvas
  */
-function Cls() {
-	G.Cls();
+function Cls(x: number = 0, y: number = 0, w: number = 0, h: number = 0) {
+	G.Cls(x, y, w, h);
 }
 
 /**
@@ -134,25 +130,25 @@ function StrokeColor(r: number = 0, g: number = 0, b: number = 0, a: number = 1)
 	G.alpha = a;
 }
 
-/**
- * Add Listener for certain event
- * @param type {string} the event type, available are: mousedown, mouseup, mousemove, mousedrag, keydown, keyup, update
- * @param f {callback}
- */
-function AddEventListener(type: string, f: () => void) {
-	Basik.Event.addEventListener(type, f);
-}
+// /**
+//  * Add Listener for certain event
+//  * @param type {string} the event type, available are: mousedown, mouseup, mousemove, mousedrag, keydown, keyup, update
+//  * @param f {callback}
+//  */
+// function AddEventListener(type: string, f: () => void) {
+// 	Basik.Event.addEventListener(type, f);
+// }
 
-/**
- * Dispatch an event
- * @param evt {string} the string to dispatch
- */
-function DispatchEvent(evt: string): void {
-	Basik.Event.dispatchEvent(evt);
-}
+// /**
+//  * Dispatch an event
+//  * @param evt {string} the string to dispatch
+//  */
+// function DispatchEvent(evt: string): void {
+// 	Basik.Event.dispatchEvent(evt);
+// }
 
 function Line(Ax: number, Ay: number, Bx: number, By: number) {
-	let ctx: CanvasRenderingContext2D = MainCanvas().getContext('2d');
+	let ctx: CanvasRenderingContext2D = Canvas().getContext('2d');
 
 	Ax = Math.floor(Ax);
 	Ay = Math.floor(Ay);
@@ -166,7 +162,7 @@ function Line(Ax: number, Ay: number, Bx: number, By: number) {
 }
 
 function Rect(x1: number, y1: number, x2: number, y2: number) {
-	let ctx: CanvasRenderingContext2D = MainCanvas().getContext('2d');
+	let ctx: CanvasRenderingContext2D = Canvas().getContext('2d');
 
 	//TODO: rotasi
 	// rotasi;
@@ -180,8 +176,8 @@ function Rect(x1: number, y1: number, x2: number, y2: number) {
 	// }
 }
 
-function Circle(x: number = 0, y: number = 0, radius: number, scaleX: number = 1, scaleY = .5, rotation: number = 0) {
-	let ctx: CanvasRenderingContext2D = MainCanvas().getContext('2d');
+function Circle(x: number = 0, y: number = 0, radius: number) {
+	let ctx: CanvasRenderingContext2D = Canvas().getContext('2d');
 
 	// save state
 	ctx.save();
@@ -189,10 +185,10 @@ function Circle(x: number = 0, y: number = 0, radius: number, scaleX: number = 1
 	// translate context
 	ctx.translate(x, y);
 
-	ctx.rotate(rotation * (Math.PI / 180));
+	// ctx.rotate(rotation * (Math.PI / 180));
 
 	// scale context horizontally
-	ctx.scale(scaleX, scaleY);
+	// ctx.scale(scaleX, scaleY);
 
 	// draw circle which will be stretched into an oval
 	ctx.beginPath();
@@ -202,3 +198,14 @@ function Circle(x: number = 0, y: number = 0, radius: number, scaleX: number = 1
 	ctx.restore();
 	ctx.stroke();
 }
+
+//init app
+window.addEventListener("load", () => {
+	let w = window as any;
+	if (w["Start"] && (typeof w["Start"] == 'function')) {
+		w["Start"]();
+	}
+	else {
+		console.log("Start not found");
+	}
+})

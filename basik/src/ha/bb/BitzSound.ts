@@ -7,43 +7,37 @@ const S = Basik.Sn;
  * @param url {string} the url
  * @returns {Basik.Sound} 
  */
-function LoadSound(url: string): Basik.Sound {
+function LoadSound(url: string): HTMLAudioElement {
 	let sound: HTMLAudioElement = document.createElement("audio");
 
-	let s = new S();
-	s.src = url;
-	s.loaded = false;
-	s.sound = sound;
-
 	sound.onload = () => {
-		s.loaded = true;
+		Basik.Sound.lastSound = sound;
+		Basik.Event.dispatchEvent(Basik.Evt.SOUND_LOADED);
+		console.log("sound loaded");
 	}
 
 	sound.onended = () => {
-		s.playedCount++;
 		try {
-			(window as any).SoundEnded(s);
-		} catch (e) { }
+			Basik.Sound.lastSound = sound;
+			Basik.Event.dispatchEvent(Basik.Evt.SOUND_ENDED);
+			console.log("sound ended");
+		} catch (e) {
+
+		}
 	}
 	sound.src = url;
 
-	S.list.push(s);
-	return s;
+	return sound;
 }
 
 /**
  * Play Sound
  * @param s {Basic.Sound}
  */
-function PlaySound(s: Basik.Sound): void {
-	s.sound.play();
+function PlaySound(s: HTMLAudioElement): void {
+	s.play();
 }
 
-/**
- * Check if a sound has been loaded
- * @param s {Basik.Sound} the sound object
- * @returns {boolean}
- */
-function SoundLoaded(s: Basik.Sound): boolean {
-	return s.loaded;
+function LastSound() {
+	return Basik.Sound.lastSound;
 }
