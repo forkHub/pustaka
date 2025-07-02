@@ -9,7 +9,7 @@ function Start() {
 }
 
 function Update() {
-	if (MouseIsDown(0)) {
+	if (MouseIsDown()) {
 		brush.x = MouseX();
 		brush.y = MouseY();
 		DrawImage(brush);

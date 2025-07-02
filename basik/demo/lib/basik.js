@@ -363,26 +363,19 @@ var Basik;
             }
             return null;
         }
-        static getByDraggedStatus(btn) {
+        static getDraggedInput() {
             for (let i = 0; i < Input.lst.length; i++) {
                 let inp = Input.lst[i];
-                if (inp.isDrag && (inp.pointerType == 'mouse') && inp.button == btn) {
+                if (inp.isDrag)
                     return inp;
-                }
-                if (inp.isDrag && (inp.pointerType == 'touch')) {
-                    return inp;
-                }
             }
             return null;
         }
-        static getByButton(btn) {
+        static getDownInput() {
             for (let i = 0; i < Input.lst.length; i++) {
                 let inp = Input.lst[i];
-                if (inp.pointerType == 'mouse') {
-                    if (inp.button == btn) {
-                        return inp;
-                    }
-                }
+                if (inp.isDown)
+                    return inp;
             }
             return null;
         }
@@ -440,7 +433,6 @@ var Basik;
             buffer.addEventListener("pointermove", (e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                Basik.Event.dispatchEvent(Basik.Evt.MOUSE_MOVE);
                 move(Input.global);
                 Input.lst.forEach((input) => {
                     move(input);
@@ -462,6 +454,7 @@ var Basik;
                         input.yDrag = input.y - input.yStart;
                     }
                 }
+                Basik.Event.dispatchEvent(Basik.Evt.MOUSE_MOVE);
             });
             buffer.addEventListener("pointerout", (e) => {
                 pointerUp(e);
@@ -1565,17 +1558,17 @@ window.addEventListener("load", () => {
         console.log("Start not found");
     }
 });
-function MouseIsDown(btn = 0) {
-    return In.getByButton(btn)?.isDown;
+function MouseIsDown() {
+    return In.getDownInput() != null;
 }
-function MouseIsDragged(btn = 0) {
-    return In.getByButton(btn)?.isDrag;
+function MouseIsDragged() {
+    return In.getDraggedInput() != null;
 }
-function MouseDraggedX(btn = 0) {
-    return In.getByDraggedStatus(btn)?.xDrag;
+function MouseDraggedX() {
+    return In.getDraggedInput()?.xDrag;
 }
-function MouseDraggedY(btn = 0) {
-    return In.getByDraggedStatus(btn)?.yDrag;
+function MouseDraggedY() {
+    return In.getDraggedInput()?.yDrag;
 }
 function MouseX() {
     return In.global?.x;
@@ -1583,11 +1576,11 @@ function MouseX() {
 function MouseY() {
     return In.global?.y;
 }
-function MouseDragStartX(btn = 0) {
-    return In.getByButton(btn)?.xStart;
+function MouseDragStartX() {
+    return In.getDraggedInput()?.xStart;
 }
-function MouseDragStartY(btn = 0) {
-    return In.getByButton(btn)?.yStart;
+function MouseDragStartY() {
+    return In.getDraggedInput()?.yStart;
 }
 function MouseButton() {
     return In.lastButton;

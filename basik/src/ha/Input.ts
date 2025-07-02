@@ -131,34 +131,52 @@ namespace Basik {
 			return null;
 		}
 
-		static getByDraggedStatus(btn: number): IInput {
+		// static getByDraggedStatus(btn: number): IInput {
+		// 	for (let i = 0; i < Input.lst.length; i++) {
+		// 		let inp = Input.lst[i];
+		// 		if (inp.isDrag && (inp.pointerType == 'mouse') && inp.button == btn) {
+		// 			return inp;
+		// 		}
+		// 		if (inp.isDrag && (inp.pointerType == 'touch')) {
+		// 			return inp;
+		// 		}
+		// 	}
+
+		// 	return null;
+		// }
+
+		static getDraggedInput(): IInput {
 			for (let i = 0; i < Input.lst.length; i++) {
 				let inp = Input.lst[i];
-				if (inp.isDrag && (inp.pointerType == 'mouse') && inp.button == btn) {
-					return inp;
-				}
-				if (inp.isDrag && (inp.pointerType == 'touch')) {
-					return inp;
-				}
+				if (inp.isDrag) return inp;
 			}
 
 			return null;
 		}
 
-		static getByButton(btn?: number): IInput {
+		static getDownInput(): IInput {
 			for (let i = 0; i < Input.lst.length; i++) {
 				let inp = Input.lst[i];
-				if (inp.pointerType == 'mouse') {
-					if (inp.button == btn) {
-						return inp;
-					}
-				}
+				if (inp.isDown) return inp;
 			}
-
-			// if (Input.global.pointerType == 'touch') return Input.global;
 
 			return null;
 		}
+
+		// static getByButton(btn?: number): IInput {
+		// 	for (let i = 0; i < Input.lst.length; i++) {
+		// 		let inp = Input.lst[i];
+		// 		if (inp.pointerType == 'mouse') {
+		// 			if (inp.button == btn) {
+		// 				return inp;
+		// 			}
+		// 		}
+		// 	}
+
+		// 	// if (Input.global.pointerType == 'touch') return Input.global;
+
+		// 	return null;
+		// }
 
 		static getById(id: string): IInput {
 			for (let i = 0; i < Input.lst.length; i++) {
@@ -232,7 +250,6 @@ namespace Basik {
 				(e: PointerEvent) => {
 					e.stopPropagation();
 					e.preventDefault();
-					Event.dispatchEvent(Evt.MOUSE_MOVE);
 
 					move(Input.global);
 
@@ -261,6 +278,8 @@ namespace Basik {
 							input.yDrag = input.y - input.yStart;
 						}
 					}
+
+					Event.dispatchEvent(Evt.MOUSE_MOVE);
 				});
 
 			buffer.addEventListener(

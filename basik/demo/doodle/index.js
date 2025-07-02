@@ -1,5 +1,4 @@
 "use strict";
-
 let brush;
 
 function Start() {
@@ -10,13 +9,11 @@ function Start() {
 }
 
 function Update() {
-
-	if (MouseIsDown(0)) {
+	if (MouseIsDown()) {
 		brush.x = MouseX();
 		brush.y = MouseY();
 		DrawImage(brush);
 	}
-
 	Cls(0, 200, 320, 240);
 	TextPos(0, 210);
 	Write("Drag to draw");

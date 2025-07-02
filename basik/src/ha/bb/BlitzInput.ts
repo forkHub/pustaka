@@ -2,38 +2,34 @@
 
 /**
  * muouse is down status
- * @param btn {number} the button to check, for touch event this will be ignored
  * @returns {boolean}
  */
-function MouseIsDown(btn: number = 0): boolean {
-	return In.getByButton(btn)?.isDown;
+function MouseIsDown(): boolean {
+	return In.getDownInput() != null;
 }
 
 /**
  * mouse is dragged
- * @param btn {number} the button to check, for touch event this will be ignored
  * @returns {boolean}
  */
-function MouseIsDragged(btn: number = 0): boolean {
-	return In.getByButton(btn)?.isDrag;
+function MouseIsDragged(): boolean {
+	return In.getDraggedInput() != null;
 }
 
 /**
  * drag horizontal length calculated from the drag start position
- * @param btn {number} the button to check, default to 0, for touch event this param is ignored
  * @returns {number} 
  */
-function MouseDraggedX(btn: number = 0): number {
-	return In.getByDraggedStatus(btn)?.xDrag
+function MouseDraggedX(): number {
+	return In.getDraggedInput()?.xDrag
 }
 
 /**
  * drag vertical length calculated from the drag end position
- * @param btn {number} the button to check, default to 0, for touch event this param is ignored
  * @returns {number}
  */
-function MouseDraggedY(btn: number = 0): number {
-	return In.getByDraggedStatus(btn)?.yDrag
+function MouseDraggedY(): number {
+	return In.getDraggedInput()?.yDrag
 }
 
 /**
@@ -54,20 +50,18 @@ function MouseY(): number {
 
 /**
  * drag start x position
- * @param btn {number} the button to check, for touch event this will be ignored
  * @returns {number}
  */
-function MouseDragStartX(btn: number = 0): number {
-	return In.getByButton(btn)?.xStart;
+function MouseDragStartX(): number {
+	return In.getDraggedInput()?.xStart;
 }
 
 /**
  * drag start y position
- * @param btn {number} the button to check, for touch event this will be ignored
  * @returns {number}
  */
-function MouseDragStartY(btn: number = 0): number {
-	return In.getByButton(btn)?.yStart;
+function MouseDragStartY(): number {
+	return In.getDraggedInput()?.yStart;
 }
 
 /**
