@@ -21,13 +21,13 @@
 </head>
 
 <body>
+
 	<div id="main">
 		<section>
 			<article>
 
 				<!-- <h4 class="name" id="AddEventListener"> -->
-
-				<div>
+				<!-- <div>
 					<h4 class="name" id="AddEventListener">
 						<span class="type-signature"></span>AddEventListener<span class="signature">(type,
 							f)</span><span class="type-signature"></span>
@@ -63,7 +63,7 @@
 							</tr>
 						</tbody>
 					</table>
-				</div>
+				</div> -->
 
 				<!-- <h4 class="name" id="AllImageLoaded"> -->
 				<hr />
@@ -112,7 +112,7 @@
 				</div>
 
 				<!-- <h4 class="name" id="Angle"> -->
-				<hr />
+				<!-- <hr />
 				<div>
 					<h4 class="name" id="Angle">
 						<span class="type-signature"></span>Angle<span class="signature">(x,
@@ -160,7 +160,7 @@
 							<span class="param-type">number</span>
 						</dd>
 					</dl>
-				</div>
+				</div> -->
 
 				<!-- <h4 class="name" id="Blue"> -->
 				<hr />
@@ -188,7 +188,7 @@
 				</div>
 
 				<!-- <h4 class="name" id="ClearArea"> -->
-				<hr />
+				<!-- <hr />
 				<div>
 					<h4 class="name" id="ClearArea">
 						<span class="type-signature"></span>ClearArea<span class="signature">(x,
@@ -238,28 +238,83 @@
 						</tbody>
 					</table>
 
-				</div>
+				</div> -->
 
 				<!-- <h4 class="name" id="Cls"> -->
 				<hr />
 				<div>
 					<h4 class="name" id="Cls">
-						<span class="type-signature"></span>Cls<span class="signature">()</span><span
-							class="type-signature"></span>
+						<span class="type-signature"></span>
+						Cls
+						<span class="signature">(x, y, x2, y2)</span>
+						<span class="type-signature"></span>
 					</h4>
 					<div class="description">
 						Clear the canvas
 					</div>
-
+					<h5>Parameters:</h5>
+					<table class="params">
+						<thead>
+							<tr>
+								<th>Name</th>
+								<th>Type</th>
+								<th>Default</th>
+								<th class="last">Description</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="name"><code>x</code></td>
+								<td class="type">
+									<span class="param-type">number</span>
+								</td>
+								<td class="default">
+									0
+								</td>
+								<td class="description last">first x position</td>
+							</tr>
+							<tr>
+								<td class="name"><code>y</code></td>
+								<td class="type">
+									<span class="param-type">number</span>
+								</td>
+								<td class="default">
+									0
+								</td>
+								<td class="description last">first y position</td>
+							</tr>
+							<tr>
+								<td class="name"><code>x2</code></td>
+								<td class="type">
+									<span class="param-type">number</span>
+								</td>
+								<td class="default">
+									canvas-width
+								</td>
+								<td class="description last">second x position</td>
+							</tr>
+							<tr>
+								<td class="name"><code>y2</code></td>
+								<td class="type">
+									<span class="param-type">number</span>
+								</td>
+								<td class="default">
+									canvas height
+								</td>
+								<td class="description last">second y position</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 
 				<!-- <h4 class="name" id="CreateImage"> -->
 				<hr />
 				<div>
 					<h4 class="name" id="CreateImage">
-						<span class="type-signature"></span>CreateImage<span class="signature">(width,
-							height)</span><span class="type-signature"> &rarr;
-							{Basik.Image}</span>
+						<span class="type-signature"></span>
+						CreateImage
+						<span class="signature">(width, height)</span>
+						<span class="type-signature"> &rarr; {Image}</span>
 					</h4>
 					<div class="description">
 						Create a blank image
@@ -297,14 +352,14 @@
 							Type
 						</dt>
 						<dd>
-							<span class="param-type">Basik.Image</span>
+							<span class="param-type">Image</span>
 						</dd>
 					</dl>
 
 				</div>
 
 				<!-- <h4 class="name" id="DispatchEvent"> -->
-				<hr />
+				<!-- <hr />
 				<div>
 					<h4 class="name" id="DispatchEvent">
 						<span class="type-signature"></span>DispatchEvent<span class="signature">(evt)</span><span
@@ -334,7 +389,7 @@
 					</table>
 
 
-				</div>
+				</div> -->
 
 				<!-- <h4 class="name" id="DrawImage"> -->
 				<hr />
@@ -359,7 +414,7 @@
 							<tr>
 								<td class="name"><code>img</code></td>
 								<td class="type">
-									<span class="param-type">Basik.Image</span>
+									<span class="param-type">Image</span>
 								</td>
 								<td class="description last">Image to draw</td>
 							</tr>
@@ -435,10 +490,13 @@
 
 				</div>
 
+				<!-- <h4 class="name" id="FreeImage"> -->
 				<hr />
 				<div>
-					<h4 class="name" id="FreeImage"><span class="type-signature"></span>FreeImage<span
-							class="signature">(img)</span><span class="type-signature"></span></h4>
+					<h4 class="name" id="FreeImage">
+						<span class="type-signature"></span>FreeImage<span class="signature">(img)</span><span
+							class="type-signature"></span>
+					</h4>
 					<h5>Parameters:</h5>
 					<table class="params">
 						<thead>
@@ -451,19 +509,20 @@
 						<tbody>
 							<tr>
 								<td class="name"><code>img</code></td>
-								<td class="type">
-								</td>
-								<td class="description last"></td>
+								<td class="type"><span class="param-type">Image</span></td>
+								<td class="description last">image to free</td>
 							</tr>
 						</tbody>
 					</table>
 				</div>
 
+				<!-- <h4 class="name" id="GetPixel"> -->
 				<hr />
 				<div>
-					<h4 class="name" id="GetPixel"><span class="type-signature"></span>GetPixel<span
-							class="signature">(x,
-							y)</span><span class="type-signature"></span></h4>
+					<h4 class="name" id="GetPixel">
+						<span class="type-signature"></span>GetPixel<span class="signature">(x,
+							y)</span><span class="type-signature"></span>
+					</h4>
 					<div class="description">
 						Get color information at the specific position.<br />
 						You can read the red, green, blue, alpha component of the color by calling Red(), Green(),
@@ -505,11 +564,13 @@
 					</table>
 				</div>
 
+				<!-- <h4 class="name" id="Graphics"> -->
 				<hr />
 				<div>
-					<h4 class="name" id="Graphics"><span class="type-signature"></span>Graphics<span
-							class="signature">(w,
-							h, canvas, mode)</span><span class="type-signature"></span></h4>
+					<h4 class="name" id="Graphics">
+						<span class="type-signature"></span>Graphics<span class="signature">(w,
+							h, canvas, mode)</span><span class="type-signature"></span>
+					</h4>
 					<div class="description">
 						Start the application. You have to call this method before other method.
 					</div>
@@ -532,7 +593,7 @@
 								<td class="default">
 									320
 								</td>
-								<td class="description last">prefered width of the canvas.</td>
+								<td class="description last">prefered width of the canvas. value 0 will be ignored</td>
 							</tr>
 							<tr>
 								<td class="name"><code>h</code></td>
@@ -542,7 +603,7 @@
 								<td class="default">
 									240
 								</td>
-								<td class="description last">prefered height of the canvas.</td>
+								<td class="description last">prefered height of the canvas. Value 0 will be ignored</td>
 							</tr>
 							<tr>
 								<td class="name"><code>canvas</code></td>
@@ -553,7 +614,8 @@
 									null
 								</td>
 								<td class="description last">(optional) the canvas element.<br />
-									If canvas is not available, a new one will be created and the size will follow the
+									If canvas is not available, a new one will be created and the size will follow
+									the
 									preferred size</td>
 							</tr>
 							<tr>
@@ -565,7 +627,8 @@
 									1
 								</td>
 								<td class="description last">(default to true) Use full screen
-									When in full screen mode, the canvas will automatically fill the screen and maintain
+									When in full screen mode, the canvas will automatically fill the screen and
+									maintain
 									the
 									aspect ratio.</td>
 							</tr>
@@ -580,7 +643,8 @@
 					<h4 class="name" id="Green"><span class="type-signature"></span>Green<span
 							class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
 					<div class="description">
-						Return the green color component of the last color command. eg: GetPixel, FillColor, StrokeColor
+						Return the green color component of the last color command. eg: GetPixel, FillColor,
+						StrokeColor
 					</div>
 
 					<h5>Returns:</h5>
@@ -598,10 +662,13 @@
 
 				</div>
 
+				<!-- <h4 class="name" id="ImageCollide"> -->
 				<hr />
 				<div>
-					<h4 class="name" id="ImageCollide"><span class="type-signature"></span>ImageCollide<span
-							class="signature">(img1, img2)</span><span class="type-signature"> &rarr; {boolean}</span>
+					<h4 class="name" id="ImageCollide">
+						<span class="type-signature"></span>ImageCollide<span class="signature">(img1, img2)</span><span
+							class="type-signature"> &rarr;
+							{boolean}</span>
 					</h4>
 					<div class="description">
 						Check if two images collide. Use box for collision detection. Also Take account the rotation
@@ -619,14 +686,14 @@
 							<tr>
 								<td class="name"><code>img1</code></td>
 								<td class="type">
-									<span class="param-type">Basik.Image</span>
+									<span class="param-type">Image</span>
 								</td>
 								<td class="description last">the first image</td>
 							</tr>
 							<tr>
 								<td class="name"><code>img2</code></td>
 								<td class="type">
-									<span class="param-type">Basik.Image</span>
+									<span class="param-type">Image</span>
 								</td>
 								<td class="description last">the second image</td>
 							</tr>
@@ -645,10 +712,12 @@
 
 				</div>
 
+				<!-- <h4 class="name" id="ImageCollidePoint"> -->
 				<hr />
 				<div>
-					<h4 class="name" id="ImageCollidePoint"><span class="type-signature"></span>ImageCollidePoint<span
-							class="signature">(img, x, y)</span><span class="type-signature"> &rarr; {boolean}</span>
+					<h4 class="name" id="ImageCollidePoint">
+						<span class="type-signature"></span>ImageCollidePoint<span class="signature">(img, x,
+							y)</span><span class="type-signature"> &rarr; {boolean}</span>
 					</h4>
 					<div class="description">
 						Check if an image collides a point
@@ -666,23 +735,25 @@
 							<tr>
 								<td class="name"><code>img</code></td>
 								<td class="type">
-									<span class="param-type">Basik.Image</span>
+									<span class="param-type">Image</span>
 								</td>
-								<td class="description last"></td>
+								<td class="description last">
+									the image
+								</td>
 							</tr>
 							<tr>
 								<td class="name"><code>x</code></td>
 								<td class="type">
 									<span class="param-type">number</span>
 								</td>
-								<td class="description last"></td>
+								<td class="description last">x test position</td>
 							</tr>
 							<tr>
 								<td class="name"><code>y</code></td>
 								<td class="type">
 									<span class="param-type">number</span>
 								</td>
-								<td class="description last"></td>
+								<td class="description last">y test position</td>
 							</tr>
 						</tbody>
 					</table>
@@ -720,7 +791,7 @@
 								<td class="name"><code>key</code></td>
 								<td class="type">
 								</td>
-								<td class="description last">key to check, empty for any key</td>
+								<td class="description last">key to check</td>
 							</tr>
 						</tbody>
 					</table>
@@ -757,11 +828,13 @@
 
 				</div>
 
+				<!-- 
 				<hr />
 				<div>
 					<h4 class="name" id="LoadAnimImage"><span class="type-signature"></span>LoadAnimImage<span
-							class="signature">(url, frameWidth, frameHeight)</span><span class="type-signature"> &rarr;
-							{Basik.Image}</span></h4>
+							class="signature">(url, frameWidth, frameHeight)</span><span class="type-signature">
+							&rarr;
+							{Image}</span></h4>
 					<div class="description">
 						Load a sprite-sheet as an animated image
 					</div>
@@ -805,16 +878,18 @@
 							Type
 						</dt>
 						<dd>
-							<span class="param-type">Basik.Image</span>
+							<span class="param-type">Image</span>
 						</dd>
 					</dl>
 
-				</div>
+				</div> 
+				-->
 
 				<hr />
 				<div>
 					<h4 class="name" id="LoadImage"><span class="type-signature"></span>LoadImage<span
-							class="signature">(url)</span><span class="type-signature"> &rarr; {Basik.Image}</span></h4>
+							class="signature">(url)</span><span class="type-signature"> &rarr; {Image}</span>
+					</h4>
 					<div class="description">
 						Load an image from url
 					</div>
@@ -844,7 +919,7 @@
 							Type
 						</dt>
 						<dd>
-							<span class="param-type">Basik.Image</span>
+							<span class="param-type">Image</span>
 						</dd>
 					</dl>
 
@@ -853,7 +928,8 @@
 				<hr />
 				<div>
 					<h4 class="name" id="LoadSound"><span class="type-signature"></span>LoadSound<span
-							class="signature">(url)</span><span class="type-signature"> &rarr; {Basik.Sound}</span></h4>
+							class="signature">(url)</span><span class="type-signature"> &rarr; {Basik.Sound}</span>
+					</h4>
 					<div class="description">
 						Load sound
 					</div>
@@ -891,17 +967,15 @@
 
 				<hr />
 				<div>
-					<h4 class="name" id="MainCanvas"><span class="type-signature"></span>MainCanvas<span
-							class="signature">()</span><span class="type-signature"> &rarr; {HTMLCanvasElement}</span>
+					<h4 class="name" id="MainCanvas"><span class="type-signature"></span>Canvas<span
+							class="signature">()</span><span class="type-signature"> &rarr;
+							{HTMLCanvasElement}</span>
 					</h4>
 					<div class="description">
-						return the main canvas. Main canvas is the one defined when application starts
+						return the reference to canvas.
 					</div>
 
 					<h5>Returns:</h5>
-					<div class="param-desc">
-						the main canvas object
-					</div>
 					<dl>
 						<dt>
 							Type
@@ -913,7 +987,7 @@
 
 				</div>
 
-				<hr />
+				<!-- <hr />
 				<div>
 					<h4 class="name" id="MouseButton"><span class="type-signature"></span>MouseButton<span
 							class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
@@ -933,40 +1007,18 @@
 
 
 
-				</div>
+				</div> -->
 
+				<!-- <h4 class="name" id="MouseDragStartX"> -->
 				<hr />
 				<div>
-					<h4 class="name" id="MouseDragStartX"><span class="type-signature"></span>MouseDragStartX<span
-							class="signature">(btn)</span><span class="type-signature"> &rarr; {number}</span></h4>
+					<h4 class="name" id="MouseDragStartX">
+						<span class="type-signature"></span>MouseDragStartX<span class="signature">()</span><span
+							class="type-signature"> &rarr; {number}</span>
+					</h4>
 					<div class="description">
 						drag start x position
 					</div>
-					<h5>Parameters:</h5>
-					<table class="params">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Type</th>
-								<th>Default</th>
-								<th class="last">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="name"><code>btn</code></td>
-								<td class="type">
-									<span class="param-type">number</span>
-								</td>
-								<td class="default">
-									0
-								</td>
-								<td class="description last">the button to check, for touch event this will be ignored
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
 					<h5>Returns:</h5>
 					<dl>
 						<dt>
@@ -983,35 +1035,10 @@
 				<hr />
 				<div>
 					<h4 class="name" id="MouseDragStartY"><span class="type-signature"></span>MouseDragStartY<span
-							class="signature">(btn)</span><span class="type-signature"> &rarr; {number}</span></h4>
+							class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
 					<div class="description">
 						drag start y position
 					</div>
-					<h5>Parameters:</h5>
-					<table class="params">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Type</th>
-								<th>Default</th>
-								<th class="last">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="name"><code>btn</code></td>
-								<td class="type">
-									<span class="param-type">number</span>
-								</td>
-								<td class="default">
-									0
-								</td>
-								<td class="description last">the button to check, for touch event this will be ignored
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
 					<h5>Returns:</h5>
 					<dl>
 						<dt>
@@ -1028,36 +1055,10 @@
 				<hr />
 				<div>
 					<h4 class="name" id="MouseDraggedX"><span class="type-signature"></span>MouseDraggedX<span
-							class="signature">(btn)</span><span class="type-signature"> &rarr; {number}</span></h4>
+							class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
 					<div class="description">
 						drag horizontal length calculated from the drag start position
 					</div>
-					<h5>Parameters:</h5>
-					<table class="params">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Type</th>
-								<th>Default</th>
-								<th class="last">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="name"><code>btn</code></td>
-								<td class="type">
-									<span class="param-type">number</span>
-								</td>
-								<td class="default">
-									0
-								</td>
-								<td class="description last">the button to check, default to 0, for touch event this
-									param
-									is ignored</td>
-							</tr>
-						</tbody>
-					</table>
-
 					<h5>Returns:</h5>
 					<dl>
 						<dt>
@@ -1074,35 +1075,10 @@
 				<hr />
 				<div>
 					<h4 class="name" id="MouseDraggedY"><span class="type-signature"></span>MouseDraggedY<span
-							class="signature">(btn)</span><span class="type-signature"> &rarr; {number}</span></h4>
+							class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
 					<div class="description">
 						drag vertical length calculated from the drag end position
 					</div>
-					<h5>Parameters:</h5>
-					<table class="params">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Type</th>
-								<th>Default</th>
-								<th class="last">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="name"><code>btn</code></td>
-								<td class="type">
-									<span class="param-type">number</span>
-								</td>
-								<td class="default">
-									0
-								</td>
-								<td class="description last">the button to check, default to 0, for touch event this
-									param
-									is ignored</td>
-							</tr>
-						</tbody>
-					</table>
 
 					<h5>Returns:</h5>
 					<dl>
@@ -1119,35 +1095,10 @@
 				<hr />
 				<div>
 					<h4 class="name" id="MouseIsDown"><span class="type-signature"></span>MouseIsDown<span
-							class="signature">(btn)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+							class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 					<div class="description">
 						muouse is down status
 					</div>
-					<h5>Parameters:</h5>
-					<table class="params">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Type</th>
-								<th>Default</th>
-								<th class="last">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="name"><code>btn</code></td>
-								<td class="type">
-									<span class="param-type">number</span>
-								</td>
-								<td class="default">
-									0
-								</td>
-								<td class="description last">the button to check, for touch event this will be ignored
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
 					<h5>Returns:</h5>
 					<dl>
 						<dt>
@@ -1163,35 +1114,10 @@
 				<hr />
 				<div>
 					<h4 class="name" id="MouseIsDragged"><span class="type-signature"></span>MouseIsDragged<span
-							class="signature">(btn)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+							class="signature">()</span><span class="type-signature"> &rarr; {boolean}</span></h4>
 					<div class="description">
 						mouse is dragged
 					</div>
-					<h5>Parameters:</h5>
-					<table class="params">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Type</th>
-								<th>Default</th>
-								<th class="last">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="name"><code>btn</code></td>
-								<td class="type">
-									<span class="param-type">number</span>
-								</td>
-								<td class="default">
-									0
-								</td>
-								<td class="description last">the button to check, for touch event this will be ignored
-								</td>
-							</tr>
-						</tbody>
-					</table>
-
 					<h5>Returns:</h5>
 					<dl>
 						<dt>
@@ -1304,9 +1230,9 @@
 							<tr>
 								<td class="name"><code>s</code></td>
 								<td class="type">
-									<span class="param-type">Basic.Sound</span>
+									<span class="param-type">Sound</span>
 								</td>
-								<td class="description last"></td>
+								<td class="description last">sound object</td>
 							</tr>
 						</tbody>
 					</table>
@@ -1319,7 +1245,8 @@
 					<h4 class="name" id="Red"><span class="type-signature"></span>Red<span
 							class="signature">()</span><span class="type-signature"> &rarr; {number}</span></h4>
 					<div class="description">
-						Return the red color component of the last color command. eg: GetPixel, FillColor, StrokeColor
+						Return the red color component of the last color command. eg: GetPixel, FillColor,
+						StrokeColor
 					</div>
 
 					<h5>Returns:</h5>
@@ -1412,7 +1339,8 @@
 
 				</div>
 
-				<hr />
+				<!-- <h4 class="name" id="SoundLoaded"> -->
+				<!-- <hr />
 				<div>
 					<h4 class="name" id="SoundLoaded"><span class="type-signature"></span>SoundLoaded<span
 							class="signature">(s)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
@@ -1449,7 +1377,7 @@
 						</dd>
 					</dl>
 
-				</div>
+				</div> -->
 
 				<hr />
 				<div>
@@ -1516,71 +1444,7 @@
 
 				</div>
 
-				<hr />
-				<div>
-					<h4 class="name" id="degDist"><span class="type-signature"></span>degDist<span
-							class="signature">(angleS,
-							angleT, min)</span><span class="type-signature"> &rarr;
-							{number}</span></h4>
-					<div class="description">
-						calculate distance between two angle
-					</div>
-					<h5>Parameters:</h5>
-					<table class="params">
-						<thead>
-							<tr>
-								<th>Name</th>
-								<th>Type</th>
-								<th>Default</th>
-								<th class="last">Description</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td class="name"><code>angleS</code></td>
-								<td class="type">
-									<span class="param-type">number</span>
-								</td>
-								<td class="default">
-									0
-								</td>
-								<td class="description last">the first angle</td>
-							</tr>
-							<tr>
-								<td class="name"><code>angleT</code></td>
-								<td class="type">
-									<span class="param-type">number</span>
-								</td>
-								<td class="default">
-								</td>
-								<td class="description last">the second angle</td>
-							</tr>
-							<tr>
-								<td class="name"><code>min</code></td>
-								<td class="type">
-									<span class="param-type">boolean</span>
-								</td>
-								<td class="default">
-									true
-								</td>
-								<td class="description last">take the minimum or maximum distance</td>
-							</tr>
-						</tbody>
-					</table>
-
-					<h5>Returns:</h5>
-					<dl>
-						<dt>
-							Type
-						</dt>
-						<dd>
-							<span class="param-type">number</span>
-						</dd>
-					</dl>
-				</div>
-
 				<h3 class="subsection-title">Object</h3>
-
 				<hr />
 				<div>
 					<h4 class="name" id="Image">Image</h4>
@@ -1671,6 +1535,13 @@
 								</td>
 								<td class="description last">image is pressed</td>
 							</tr>
+							<tr>
+								<td class="name"><code>loaded</code></td>
+								<td class="type">
+									<span class="param-type">boolean</span>
+								</td>
+								<td class="description last">image is loaded</td>
+							</tr>
 						</tbody>
 					</table>
 
@@ -1690,9 +1561,9 @@
 		<h4>General</h4>
 		<ul>
 			<li><a href="index.html#Graphics">Graphics</a></li>
-			<li><a href="index.html#MainCanvas">MainCanvas</a></li>
+			<li><a href="index.html#MainCanvas">Canvas</a></li>
 			<li><a href="index.html#SetCanvas">SetCanvas</a></li>
-			<li><a href="index.html#ClearArea">ClearArea</a></li> <!-- delete -->
+			<!-- <li><a href="index.html#ClearArea">ClearArea</a></li> delete -->
 			<li><a href="index.html#Cls">Cls</a></li>
 			<li><a href="index.html#StrokeColor">StrokeColor</a></li>
 			<li><a href="index.html#FillColor">FillColor</a></li>
@@ -1704,17 +1575,16 @@
 			<li><a href="index.html#Green">Green</a></li>
 		</ul>
 
-		<h4>Event</h4>
+		<!-- <h4>Event</h4>
 		<ul>
 			<li><a href="index.html#AddEventListener">AddEventListener</a></li>
 			<li><a href="index.html#DispatchEvent">DispatchEvent</a></li>
-
-		</ul>
+		</ul> -->
 
 		<h4>Image</h4>
 		<ul>
 			<li><a href="index.html#LoadImage">LoadImage</a></li>
-			<li><a href="index.html#LoadAnimImage">LoadAnimImage</a></li> <!-- to be deleted  -->
+			<!-- <li><a href="index.html#LoadAnimImage">LoadAnimImage</a></li> to be deleted  -->
 			<li><a href="index.html#AllImageLoaded">AllImageLoaded</a></li>
 			<li><a href="index.html#DrawImage">DrawImage</a></li>
 			<li><a href="index.html#CreateImage">CreateImage</a></li>
@@ -1723,11 +1593,11 @@
 			<li><a href="index.html#ImageCollidePoint">ImageCollidePoint</a></li>
 		</ul>
 
-		<h4>Math</h4>
+		<!-- <h4>Math</h4>
 		<ul>
 			<li><a href="index.html#Angle">Angle</a></li>
 			<li><a href="index.html#degDist">degDist</a></li>
-		</ul>
+		</ul> -->
 
 		<h4>Input</h4>
 		<ul>
@@ -1736,7 +1606,7 @@
 			<li><a href="index.html#MouseX">MouseX</a></li>
 			<li><a href="index.html#MouseY">MouseY</a></li>
 			<li><a href="index.html#MouseIsDown">MouseIsDown</a></li>
-			<li><a href="index.html#MouseButton">MouseButton</a></li>
+			<!-- <li><a href="index.html#MouseButton">MouseButton</a></li> -->
 			<li><a href="index.html#MouseDragStartX">MouseDragStartX</a></li>
 			<li><a href="index.html#MouseDragStartY">MouseDragStartY</a></li>
 			<li><a href="index.html#MouseDraggedX">MouseDraggedX</a></li>
@@ -1750,14 +1620,17 @@
 		<ul>
 			<li><a href="index.html#LoadSound">LoadSound</a></li>
 			<li><a href="index.html#PlaySound">PlaySound</a></li>
-			<li><a href="index.html#SoundLoaded">SoundLoaded</a></li> <!-- delete diganti event -->
+			<!-- <li><a href="index.html#SoundLoaded">SoundLoaded</a></li>  -->
 		</ul>
 	</nav>
+
 	<br class="clear">
+
 	<footer>
 		Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.4</a> on Tue Jun 24 2025 04:16:12
 		GMT+0700 (Western Indonesia Time)
 	</footer>
+
 	<script> prettyPrint(); </script>
 	<script src="scripts/linenumber.js"> </script>
 </body>

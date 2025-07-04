@@ -1,12 +1,16 @@
 beginner oriented
-no duplicate Functionality
+no duplicate Functionality per scope
 clean code
 
 Demo Functionality:
-Doc:
+	image collide point
 
-v 1
-text ikutin canvas
+Doc:
+txt
+built in function
+mouse
+
+v1 release
 
 Next:
 Camera remove
