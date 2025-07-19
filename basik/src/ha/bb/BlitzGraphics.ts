@@ -92,7 +92,7 @@ function Alpha(): number {
  * @param y {number} the y position
  */
 function GetPixel(x: number = 0, y: number = 0): void {
-	Ip.AmbilPiksel(x, y);
+	Ip.GetPixel(x, y);
 }
 
 /**
@@ -238,38 +238,6 @@ function DispatchEvent(evt: string): void {
 // 	G.context.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
 // }
 
-//TODO:
-/**
- * Mengembalikan warna merah dari perintah AmbilPixel terakhir
- * @returns (number) warna merah
- */
-// function Hijau(): number {
-// 	return G.hijau;
-// }
-
-//TODO:
-// function Merah(): number {
-// 	return G.merah;
-// }
-
-//TODO:
-/**
- * Mengembalikan warna biru dari perintah AmbilPixel terakhir
- * @returns (number) warna biru
- */
-// function Biru(): number {
-// 	return G.biru;
-// }
-
-//TODO:
-/**
- * 
- * @returns 
- */
-// function Transparan(): number {
-// 	return Math.floor(G.transparan * 100);
-// }
-
 /**
  * 
  * @param x 
@@ -281,7 +249,7 @@ function DispatchEvent(evt: string): void {
 // }
 
 function SetPiksel(x: number = 0, y: number = 0) {
-	return Ip.AmbilPiksel(x, y); //TODO: implement
+	return Ip.GetPixel(x, y); //TODO: implement
 }
 
 

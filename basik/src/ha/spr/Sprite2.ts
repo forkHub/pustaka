@@ -44,8 +44,6 @@ namespace Basik {
 			img.sudutAwal = img.rotation;
 		}
 
-
-		//TODO: call event
 		private inputDown(posCam: any, id: string): void {
 			console.group('input down');
 			let posAbs = {

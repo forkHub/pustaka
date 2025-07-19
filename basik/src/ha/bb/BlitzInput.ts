@@ -93,13 +93,3 @@ function MouseMoveX(): number {
 function MouseMoveY(): number {
 	return In.global.moveY;
 }
-
-//TODO:
-// const InputHit = Basik.Input.InputHit;
-
-// // //extended
-// const FlushInput = Basik.Input.FlushInput;
-
-// const InputTapCount = Basik.Input.InputTapCount;
-// const InputDragStartCount = Basik.Input.InputDragStartCount;
-// const InputDragEndCount = Basik.Input.InputDragEndCount;

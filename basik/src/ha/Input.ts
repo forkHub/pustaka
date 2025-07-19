@@ -154,9 +154,6 @@ namespace Basik {
 						Event.dispatchEvent(Evt.MOUSE_DOWN);
 					}
 
-					//TODO: use listener
-					// Event.call(Evt.MOUSE_DOWN);
-					// sprInt.inputDown(pos, inp.id);
 				});
 
 			buffer.addEventListener(
@@ -184,9 +181,6 @@ namespace Basik {
 					}
 
 					Event.dispatchEvent(Evt.MOUSE_MOVE);
-
-					//TODO: listener
-					// sprInt.inputMove(pos, input.id);
 				});
 
 			buffer.addEventListener(
@@ -224,13 +218,6 @@ namespace Basik {
 				}
 
 				Event.dispatchEvent(Evt.MOUSE_UP);
-
-
-				//TODO: call event from sprite class for better coupling
-				Ip.daftar.forEach((img: Image) => {
-					img.down = false;
-					img.dragged = false;
-				});
 			}
 		}
 

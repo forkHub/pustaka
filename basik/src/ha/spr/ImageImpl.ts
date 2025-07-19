@@ -4,6 +4,15 @@ namespace Basik {
 		static readonly props: string[] = [];
 		static readonly daftar: Image[] = [];
 
+		static init() {
+			Event.addEventListener(Evt.MOUSE_UP, () => {
+				Ip.daftar.forEach((img: Image) => {
+					img.down = false;
+					img.dragged = false;
+				});
+			})
+		}
+
 		static CreateImage(width: number, height: number): Image {
 			let h: Image = new Image();
 			h.canvas = document.createElement('canvas')
@@ -91,14 +100,14 @@ namespace Basik {
 			return Ktk.collideDot(gbr1.rect, x2, y2);
 		};
 
-		private static gambarUbin(gbr: Image, x: number = 0, y: number = 0, frame: number = 0) {
+		private static gambarUbin(img: Image, x: number = 0, y: number = 0, frame: number = 0) {
 			let jmlH: number = 0;
 			let jmlV: number = 0;
 
-			if (gbr.load == false) return;
+			if (img.load == false) return;
 
-			let w2: number = Math.floor(gbr.width);
-			let h2: number = Math.floor(gbr.height);
+			let w2: number = Math.floor(img.width);
+			let h2: number = Math.floor(img.height);
 
 			while (x < 0) {
 				x += w2;
@@ -127,12 +136,12 @@ namespace Basik {
 
 			for (let i: number = 0; i < jmlH; i++) {
 				for (let j: number = 0; j < jmlV; j++) {
-					Ip.DrawSingle(gbr, x + (i * w2), y + (j * h2), frame);
+					Ip.DrawSingle(img, x + (i * w2), y + (j * h2), frame);
 				}
 			}
 		}
 
-		static AmbilPiksel(x: number = 0, y: number = 0): void {
+		static GetPixel(x: number = 0, y: number = 0): void {
 			try {
 				let data: Uint8ClampedArray = G.Canvas().getContext('2d').getImageData(x, y, 1, 1).data;
 
@@ -147,7 +156,6 @@ namespace Basik {
 				G.green = data[1];
 				G.blue = data[2];
 				G.alpha = data[3];
-				// G.FillColor(G.merah, G.hijau, G.biru, G.alpha);
 
 			}
 			catch (e) {
@@ -162,33 +170,33 @@ namespace Basik {
 		}
 
 		static Draw(img: Image) {
+			let dx = img.x - Camera.x;
+			let dy = img.y - Camera.y;
+			if (img.load == false) return;
+			img.ctrIdx = Image.ctrDraw++;
+
 			if (img.tilable) {
-				Ip.gambarUbin(img, img.x, img.y, img.frame);
+				Ip.gambarUbin(img, dx, dy, img.frame);
 			}
 			else {
-				Ip.DrawSingle(img, img.x, img.y, img.frame);
+				Ip.DrawSingle(img, dx, dy, img.frame);
 			}
 		}
 
-		private static DrawSingle(gbr: Image, x: number = 0, y: number = 0, frame: number = 0) {
+		private static DrawSingle(img: Image, x: number = 0, y: number = 0, frame: number = 0) {
 			let ctx: CanvasRenderingContext2D = G.Canvas().getContext('2d');
 			let jmlH: number = 0;
 			let frameX: number = 0;
 			let frameY: number = 0;
 
-
-			if (gbr.load == false) return;
-
-			gbr.ctrIdx = Image.ctrDraw++;
 			frame = Math.floor(frame);
-
-			jmlH = Math.floor(gbr.img.naturalWidth / gbr.frameW);
+			jmlH = Math.floor(img.img.naturalWidth / img.frameW);
 
 			frameX = (frame % jmlH);
 			frameY = Math.floor(frame / jmlH);
 
-			frameX *= gbr.frameW;
-			frameY *= gbr.frameH;
+			frameX *= img.frameW;
+			frameY *= img.frameH;
 
 			frameX = Math.floor(frameX);
 			frameY = Math.floor(frameY);
@@ -196,18 +204,18 @@ namespace Basik {
 			let x2: number = Math.floor(x);
 			let y2: number = Math.floor(y);
 
-			let w2: number = Math.floor(gbr.width);
-			let h2: number = Math.floor(gbr.height);
+			let w2: number = Math.floor(img.width);
+			let h2: number = Math.floor(img.height);
 
-			x2 -= (gbr.handleX);
-			y2 -= (gbr.handleY);
+			x2 -= (img.handleX);
+			y2 -= (img.handleY);
 
-			if (gbr.rotation != 0) {
+			if (img.rotation != 0) {
 				ctx.save();
 				ctx.translate(x, y);
-				ctx.rotate(gbr.rotation * (Math.PI / 180));
+				ctx.rotate(img.rotation * (Math.PI / 180));
 
-				drawImpl(-gbr.handleX, -gbr.handleY)
+				drawImpl(-img.handleX, -img.handleY)
 
 				ctx.restore();
 			}
@@ -220,15 +228,9 @@ namespace Basik {
 			}
 
 			function drawImpl(dx: number, dy: number) {
-
-				//TODO: pindahin ke depan
-				dx -= Camera.x;
-				dy -= Camera.y;
-
-				ctx.globalAlpha = gbr.alpha / 100;
-				ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, Math.floor(dx), Math.floor(dy), w2, h2);
+				ctx.globalAlpha = img.alpha / 100;
+				ctx.drawImage(img.canvas, frameX, frameY, img.frameW, img.frameH, Math.floor(dx), Math.floor(dy), w2, h2);
 			}
-
 		}
 
 		private static resetRect(img: Image): void {
