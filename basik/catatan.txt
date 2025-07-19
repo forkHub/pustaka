@@ -1,3 +1,19 @@
-frame handling
-bug: error drawing
-draw all image bikin bingung
+beginner oriented
+no duplicate Functionality per scope
+clean code
+
+Demo Functionality:
+	image collide point
+
+Doc:
+txt
+built in function
+mouse
+
+v1 release
+
+Next:
+Camera remove
+math => ikutin p5.js
+drawing => advanced
+stroke and fill advanced

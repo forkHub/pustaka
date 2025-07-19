@@ -3,13 +3,16 @@ namespace Basik {
 		MOUSE_DOWN = "mousedown",
 		MOUSE_UP = "mouseup",
 		MOUSE_MOVE = "mousemove",
-		MOUSE_TAP = "mousetap",
+		MOUSE_CLICK = "mouseclick",
 
 		MOUSE_START_DRAG = "mousestartdrag",
 		MOUSE_END_DRAG = "mouseenddrag",
 
 		KEYB_DOWN = "keybdown",
 		KEYB_UP = "keybup",
+
+		SOUND_LOADED = "soundloaded",
+		SOUND_ENDED = "soundended"
 	}
 
 	export class Event {
@@ -36,6 +39,7 @@ namespace Basik {
 			let e = new Event(type.toLowerCase(), f);
 			Event.list.push(e);
 			console.log("add listener: type ", type);
+			// console.log(f);
 			return e;
 		}
 

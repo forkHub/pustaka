@@ -20,7 +20,7 @@ namespace Basik {
 		}
 		public static set img(value: Basik.Image) {
 			Camera._img = value;
-		}
+		} 
 
 		static init() {
 			function update() {

@@ -2,34 +2,20 @@ namespace Basik {
 
 	export class Graphic {
 		private static _autoScale: boolean = true;
-		private static canvas: HTMLCanvasElement;
-		private static mainCanvas: HTMLCanvasElement;
+		private static drawCanvas: HTMLCanvasElement;
+		// private static mainCanvas: HTMLCanvasElement;	//original canvas should never change
 
-		public static get autoScale(): boolean {
-			return G._autoScale;
-		}
-
-		public static set autoScale(value: boolean) {
-			G._autoScale = value;
-		}
-
-		private static _merah: number = 0;
-		private static _hijau: number = 0;
-		private static _biru: number = 0;
+		private static _red: number = 0;
+		private static _green: number = 0;
+		private static _blue: number = 0;
 		private static _transparan: number = 0;
 
-		// static Pause() {
-		// 	debugger;
-		// 	// this.canvasAktif.canvas.getcon
-		// }
-
-		static handleWindowResize(): void {
+		private static handleWindowResize(): void {
 			if (!G._autoScale) return;
-			// console.debug('window on resize');
-			let canvas: HTMLCanvasElement = G.canvas;
+			let canvas: HTMLCanvasElement = G.drawCanvas;
 
-			let cp = G.canvas.width;
-			let cl = G.canvas.height;
+			let cp = G.drawCanvas.width;
+			let cl = G.drawCanvas.height;
 
 			let wp = window.innerWidth;
 			let wl = window.innerHeight;
@@ -46,11 +32,9 @@ namespace Basik {
 
 			canvas.style.top = ((wl - cl2) / 2) + 'px';
 			canvas.style.left = ((wp - cp2) / 2) + 'px';
-
-			// console.debug('canvas w: ' + canvas.style.width + '/ratio: ' + ratio);
 		}
 
-		private static buildCanvas(w: number, h: number): HTMLCanvasElement {
+		private static buildCanvas(w?: number, h?: number): HTMLCanvasElement {
 			let canvas: HTMLCanvasElement;
 
 			canvas = document.body.querySelector('canvas') as HTMLCanvasElement;
@@ -58,46 +42,94 @@ namespace Basik {
 			if (!canvas) {
 				canvas = document.createElement('canvas') as HTMLCanvasElement;
 				document.body.appendChild(canvas);
-				canvas.width = w;
-				canvas.height = h;
+				if (w) canvas.width = w;
+				if (h) canvas.height = h;
 			}
+
 			return canvas;
 		}
 
 		static Canvas(): HTMLCanvasElement {
-			return G.canvas;
+			return G.drawCanvas;
 		}
 
-		static MainCanvas(): HTMLCanvasElement {
-			return G.mainCanvas;
-		}
+		// static MainCanvas(): HTMLCanvasElement {
+		// 	return G.mainCanvas;
+		// }
 
 		static SetCanvas(canvas: HTMLCanvasElement): void {
-			G.mainCanvas = canvas;
+			G.drawCanvas = canvas;
 		}
 
-		static Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true) {
-
-			if (!canvas) canvas = G.buildCanvas(w, h);
-
-			G.mainCanvas = canvas;
-			G.canvas = canvas;
-
-			G.autoScale = fullScreen;
-
-			console.log('inisialisasi');
-
-			G.setupMainCanvas(w, h, G.autoScale);
-
-			In.init(G.canvas);
+		private static initComp() {
+			In.init(G.drawCanvas);
 			Keyboard.init();
 			Camera.init();
 			sprInt.init();
+		}
 
-			// if (Graphic.skalaOtomatis) {
-			window.addEventListener("resize", (): void => {
-				G.handleWindowResize();
+		private static initEvent() {
+			function callFunc(str: string) {
+				let w = window as any;
+				if (w[str] && (typeof w[str] == 'function')) {
+					w[str]();
+				}
+			}
+			Event.addEventListener(Evt.KEYB_DOWN, () => {
+				callFunc("KeyboardDown");
+			});
+
+			Event.addEventListener(Evt.KEYB_UP, () => {
+				callFunc("KeyboardUp");
+			});
+
+			Event.addEventListener(Evt.MOUSE_DOWN, () => {
+				callFunc("MouseDown");
+			});
+			Event.addEventListener(Evt.MOUSE_END_DRAG, () => {
+				callFunc("MouseEndDrag");
+			});
+			Event.addEventListener(Evt.MOUSE_MOVE, () => {
+				callFunc("MouseMove");
+			});
+			Event.addEventListener(Evt.MOUSE_START_DRAG, () => {
+				callFunc("MouseStartDrag");
+			});
+			Event.addEventListener(Evt.MOUSE_CLICK, () => {
+				callFunc("MouseClick");
+			});
+			Event.addEventListener(Evt.MOUSE_UP, () => {
+				callFunc("MouseUp");
+			});
+			Event.addEventListener("update", () => {
+				callFunc("Update");
 			})
+
+			Event.addEventListener(Evt.SOUND_ENDED, () => {
+				callFunc("SoundEnded");
+			})
+
+			Event.addEventListener(Evt.SOUND_LOADED, () => {
+				callFunc("SoundLoaded");
+			})
+
+		}
+
+		static Start(canvas: HTMLCanvasElement): void {
+			G.Graphics(0, 0, canvas, 0);
+		}
+
+		static Graphics(w?: number, h?: number, canvas: HTMLCanvasElement = null, mode: number = 1) {
+			console.log('init');
+
+			if (!canvas) canvas = G.buildCanvas(w, h);
+			// G.mainCanvas = canvas;
+			G.drawCanvas = canvas;
+
+			G._autoScale = (mode == 1);
+			G.setupMainCanvas(w, h, mode);
+			G.initComp();
+			G.initEvent();
 
 			function update() {
 				// let updater = (window as any)["UpdateEvent"];
@@ -116,46 +148,54 @@ namespace Basik {
 
 			// NoStroke();
 			Cls();
+			StrokeColor(0, 0, 0, 0);
+			TextPos(0, 10);
+			TextSize(10);
 		}
 
-		private static setupMainCanvas(p: number = 320, l: number = 240, fullScreen: boolean): void {
-			G.mainCanvas.width = p;
-			G.mainCanvas.height = l;
+		private static setupMainCanvas(p?: number, l?: number, mode: number = 1): void {
+			if (p) G.drawCanvas.width = p;
+			if (l) G.drawCanvas.height = l;
 
-			if (fullScreen) {
-				G.mainCanvas.style.width = p + 'px';
-				G.mainCanvas.style.padding = '0px';
-				G.mainCanvas.style.margin = '0px';
+			if (mode == 1) {
+				G.drawCanvas.style.width = p + 'px';
+				G.drawCanvas.style.padding = '0px';
+				G.drawCanvas.style.margin = '0px';
+				window.addEventListener("resize", (): void => {
+					G.handleWindowResize();
+				})
 			}
 		}
 
-		static Cls() {
-			let ctx: CanvasRenderingContext2D = G.canvas.getContext('2d');
-			ctx.clearRect(0, 0, (G.canvas.width), (G.canvas.height));
+		static Cls(x: number = 0, y: number = 0, w: number = 0, h: number = 0) {
+			let ctx: CanvasRenderingContext2D = G.drawCanvas.getContext('2d');
+			w = w || G.drawCanvas.width;
+			h = h || G.drawCanvas.height;
+			ctx.clearRect(x, y, w, h);
 		}
 
 		public static get red(): number {
-			return G._merah;
+			return G._red;
 		}
 
 		public static set red(value: number) {
-			G._merah = value;
+			G._red = value;
 		}
 
 		public static get green(): number {
-			return G._hijau;
+			return G._green;
 		}
 
 		public static set green(value: number) {
-			G._hijau = value;
+			G._green = value;
 		}
 
 		public static get blue(): number {
-			return G._biru;
+			return G._blue;
 		}
 
 		public static set blue(value: number) {
-			G._biru = value;
+			G._blue = value;
 		}
 
 		public static get alpha(): number {

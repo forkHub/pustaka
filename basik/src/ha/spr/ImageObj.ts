@@ -5,7 +5,9 @@ namespace Basik {
 	 */
 	export class Image {
 
+		//TODO: proofread
 		/**
+		 * @typedef {Object} Image
 		 * @property {number} x - x position
 		 * @property {number} y - y position
 		 * @property {number} rotation - rotation in degree
@@ -20,7 +22,7 @@ namespace Basik {
 		 */
 
 		/**
-		 * 
+		 * Create image from URL
 		 * @param url {string}
 		 */
 		constructor(url: string = '') {
@@ -40,6 +42,9 @@ namespace Basik {
 			gbr.canvas = canvas;
 			gbr.rect = rect;
 			gbr.load = false;
+			if (!gbr.url) {
+				gbr.load = true;
+			}
 
 			img.onload = () => {
 				imgOnLoad(img);
@@ -55,7 +60,7 @@ namespace Basik {
 				imgOnLoad(img2);
 			}
 			else {
-				img.src = url;
+				if (url) img.src = url;
 			}
 
 			function imgOnLoad(imgP: HTMLImageElement): void {
@@ -158,7 +163,6 @@ namespace Basik {
 		private _dragStartY: number = 0;
 		private _dragStartX: number = 0;
 		private _sudutTekanAwal: number = 0;
-		// private _button: number;
 		private _sudutAwal: number = 0;
 		private _inputId: string;
 
@@ -190,12 +194,6 @@ namespace Basik {
 			this._tilable = value;
 		}
 
-		public get sudutAwal(): number {
-			return this._sudutAwal;
-		}
-		public set sudutAwal(value: number) {
-			this._sudutAwal = value;
-		}
 
 		public get frameW(): number {
 			return this._frameW;
@@ -263,22 +261,7 @@ namespace Basik {
 		}
 		public set height(value: number) {
 			this._lebar = value;
-			// this._lebarDiSet = true;
 		}
-
-		// public get panjangDiSet(): boolean {
-		// 	return this._panjangDiSet;
-		// }
-		// public set panjangDiSet(value: boolean) {
-		// 	this._panjangDiSet = value;
-		// }
-
-		// public get lebarDiSet(): boolean {
-		// 	return this._lebarDiSet;
-		// }
-		// public set lebarDiSet(value: boolean) {
-		// 	this._lebarDiSet = value;
-		// }
 
 		public get ctrIdx(): number {
 			return this._ctrIdx;
@@ -294,16 +277,16 @@ namespace Basik {
 			this._rotasi = value;
 		}
 
-		public get drgStartX(): number {
+		public get dragStartX(): number {
 			return this._dragStartX;
 		}
-		public set drgStartX(value: number) {
+		public set dragStartX(value: number) {
 			this._dragStartX = value;
 		}
-		public get drgStartY(): number {
+		public get dragStartY(): number {
 			return this._dragStartY;
 		}
-		public set drgStartY(value: number) {
+		public set dragStartY(value: number) {
 			this._dragStartY = value;
 		}
 
@@ -319,22 +302,12 @@ namespace Basik {
 		public set down(value: boolean) {
 			this._down = value;
 		}
-		public get dragable(): boolean {
-			return this._tipeDrag > 0 ? true : false;
-		}
 
-		public get sudutTekanAwal(): number {
-			return this._sudutTekanAwal;
-		}
-		public set sudutTekanAwal(value: number) {
-			this._sudutTekanAwal = value;
-		}
-
-		public get tipeDrag(): number {
+		public get dragType(): number {
 			return this._tipeDrag;
 		}
 
-		public set tipeDrag(value: number) {
+		public set dragType(value: number) {
 			this._tipeDrag = value;
 		}
 
@@ -344,12 +317,27 @@ namespace Basik {
 		public set url(value: string) {
 			this._url = value;
 		}
+
 		public static get ctrDraw(): number {
 			return Image._ctrDraw;
 		}
 		public static set ctrDraw(value: number) {
 			Image._ctrDraw = value;
 		}
+
+		public get initialMouseAngle(): number {
+			return this._sudutTekanAwal;
+		}
+		public set initialMouseAngle(value: number) {
+			this._sudutTekanAwal = value;
+		}
+		public get initialAngle(): number {
+			return this._sudutAwal;
+		}
+		public set initialAngle(value: number) {
+			this._sudutAwal = value;
+		}
+
 
 		// public get button(): number {
 		// 	return this._button;

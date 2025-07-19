@@ -11,17 +11,6 @@ function LoadImage(url: string): Basik.Image {
 }
 
 /**
- * Load a sprite-sheet as an animated image
- * @param url {string} image url
- * @param frameWidth {number} preferred frame width
- * @param frameHeight {number} preferred frame height
- * @returns {Basik.Image}
- */
-function LoadAnimImage(url: string, frameWidth: number, frameHeight: number): Basik.Image {
-	return Ip.MuatAnimasi(url, frameWidth, frameHeight);
-}
-
-/**
  * Draw an image
  * @param img {Basik.Image} Image to draw
  */
@@ -62,15 +51,6 @@ function CreateImage(width: number, height: number): Basik.Image {
 }
 
 /**
- * return the canvas of an image
- * @param img {Basik.Image} the image
- * @returns {HTMLCanvasElement}
- */
-const ImageCanvas = (img: Basik.Image): HTMLCanvasElement => {
-	return img.canvas;
-}
-
-/**
  * Check if all images have been loaded
  * @returns {boolean} 
  */
@@ -84,4 +64,11 @@ function AllImageLoaded(): boolean {
  */
 function FreeImage(img: Basik.Image): void {
 	Ip.free(img);
+}
+
+//TODO: refactor to not return Image
+function CopyFromCanvas(img: Basik.Image, x: number, y: number): void {
+	let ctx = img.canvas.getContext('2d');
+	ctx.clearRect(0, 0, img.canvas.width, img.canvas.height);
+	ctx.drawImage(Canvas(), -x, -y);
 }

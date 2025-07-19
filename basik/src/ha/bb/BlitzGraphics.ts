@@ -6,19 +6,15 @@ const Ip = Basik.Ip;
 const In = Basik.In;
 
 /**
- * return the main canvas. Main canvas is the one defined when application starts
- * @returns {HTMLCanvasElement} the main canvas object
- */
-function MainCanvas(): HTMLCanvasElement {
-	return G.MainCanvas();
-}
-
-/**
  * Set the active canvas. 
  * @param c {HTMLCanvasElement} the new active canvas
  */
 function SetCanvas(c: HTMLCanvasElement) {
 	G.SetCanvas(c);
+}
+
+function Canvas(): HTMLCanvasElement {
+	return G.Canvas();
 }
 
 /**
@@ -38,19 +34,19 @@ function ClearArea(x: number, y: number, w: number, h: number) {
  * @param h {number} prefered height of the canvas.
  * @param canvas {HTMLCanvasElement} (optional) the canvas element.<br/>
  *   If canvas is not available, a new one will be created and the size will follow the preferred size
- * @param fullScreen {boolean} (default to true) Use full screen
+ * @param mode {boolean} (default to true) Use full screen
  * When in full screen mode, the canvas will automatically fill the screen and maintain the aspect ratio.
  * 
  */
-function Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true) {
-	G.Graphics(w, h, canvas, fullScreen);
+function Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, mode: number = 1) {
+	G.Graphics(w, h, canvas, mode);
 }
 
 /**
  * Clear the canvas
  */
-function Cls() {
-	G.Cls();
+function Cls(x: number = 0, y: number = 0, w: number = 0, h: number = 0) {
+	G.Cls(x, y, w, h);
 }
 
 /**
@@ -134,127 +130,25 @@ function StrokeColor(r: number = 0, g: number = 0, b: number = 0, a: number = 1)
 	G.alpha = a;
 }
 
-/**
- * Add Listener for certain event
- * @param type {string} the event type, available are: mousedown, mouseup, mousemove, mousedrag, keydown, keyup, update
- * @param f {callback}
- */
-function AddEventListener(type: string, f: () => void) {
-	Basik.Event.addEventListener(type, f);
-}
-
-/**
- * Dispatch an event
- * @param evt {string} the string to dispatch
- */
-function DispatchEvent(evt: string): void {
-	Basik.Event.dispatchEvent(evt);
-}
-
-
-///<reference path="./Route.ts"/>
-
-// const G = Basik.G;
-// const T = Basik.Tk;
-// const Im = Basik.Im;
-// const Ip = Basik.Ip;
-// const In = Basik.In;
-
-/**
- * 
- * @param w 
- * @param h 
- * @param canvas 
- * @param fullScreen 
- * @param input 
- */
-// function Graphics(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, fullScreen: boolean = true, input: boolean = true) {
-
-// 	if (canvas) {
-// 		G.canvas = canvas;
-// 	}
-// 	G.skalaOtomatis = fullScreen;
-
-// 	console.log('inisialisasi');
-
-// 	G.init(w, h, G.skalaOtomatis);
-
-// 	if (input) {
-// 		In.init(G.canvas);
-// 	}
-
-// 	// if (Graphic.skalaOtomatis) {
-// 	window.addEventListener("resize", (): void => {
-// 		G.handleWindowResize();
-// 	})
-
-// 	function update() {
-// 		let updater = (window as any)["Update"];
-// 		if (typeof updater === "function") {
-// 			updater();
-// 		}
-// 		window.requestAnimationFrame(update);
-// 	}
-// 	update();
-
-// 	setTimeout(() => {
-// 		G.handleWindowResize();
-// 	}, 100);
-
-// 	//font default
-// 	// Teks.Font("12px cursive");
-// 	T.Rata("center");
-// 	T.Goto(169, 10);
-// 	G.FillColor(255, 255, 255, 100);
-// 	G.context.strokeStyle = "#ffffff";
-// 	Cls(0, 0, 0);
+// /**
+//  * Add Listener for certain event
+//  * @param type {string} the event type, available are: mousedown, mouseup, mousemove, mousedrag, keydown, keyup, update
+//  * @param f {callback}
+//  */
+// function AddEventListener(type: string, f: () => void) {
+// 	Basik.Event.addEventListener(type, f);
 // }
 
-/**
- * 
- * @param r 
- * @param g 
- * @param b 
- * @param a 
- */
-// function Cls(r?: number, g?: number, b?: number, a?: number) {
-// 	let ctx: CanvasRenderingContext2D = G.context;
-// 	// window.getComputedStyle()
-// 	G.backupWarna();
-// 	ctx.clearRect(0, 0, parseInt(G.canvas.style.width), parseInt(G.canvas.style.height));
-// 	ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${a / 100})`;
-// 	ctx.fillRect(0, 0, parseInt(G.canvas.style.width), parseInt(G.canvas.style.height));
-// 	G.restoreColor();
+// /**
+//  * Dispatch an event
+//  * @param evt {string} the string to dispatch
+//  */
+// function DispatchEvent(evt: string): void {
+// 	Basik.Event.dispatchEvent(evt);
 // }
 
-/**
- * 
- * @param r 
- * @param g 
- * @param b 
- * @param a 
- */
-// function StrokeColor(r: number = 0, g: number = 0, b: number = 0, a: number = 100): void {
-// 	G.context.strokeStyle = `rgba(${r}, ${g}, ${b}, ${a})`;
-// }
-
-/**
- * 
- * @param x 
- * @param y 
- * @returns 
- */
-// function GetPixel(x: number = 0, y: number = 0): number[] {
-// 	return Ip.AmbilPiksel(x, y);
-// }
-
-function SetPiksel(x: number = 0, y: number = 0) {
-	return Ip.GetPixel(x, y); //TODO: implement
-}
-
-
-function Garis(Ax: number, Ay: number, Bx: number, By: number) {
-	let ctx: CanvasRenderingContext2D = MainCanvas().getContext('2d');
+function Line(Ax: number, Ay: number, Bx: number, By: number) {
+	let ctx: CanvasRenderingContext2D = Canvas().getContext('2d');
 
 	Ax = Math.floor(Ax);
 	Ay = Math.floor(Ay);
@@ -267,23 +161,23 @@ function Garis(Ax: number, Ay: number, Bx: number, By: number) {
 	ctx.stroke();
 }
 
-function Kotak(x1: number, y1: number, x2: number, y2: number, isi: boolean = false, garis: boolean = true, rotasi: number = 0) {
-	let ctx: CanvasRenderingContext2D = MainCanvas().getContext('2d');
+function Rect(x1: number, y1: number, x2: number, y2: number) {
+	let ctx: CanvasRenderingContext2D = Canvas().getContext('2d');
 
 	//TODO: rotasi
-	rotasi;
+	// rotasi;
 
-	if (isi) {
-		ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
-	}
+	// if (isi) {
+	ctx.fillRect(x1, y1, x2 - x1, y2 - y1);
+	// }
 
-	if (garis) {
-		ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
-	}
+	// if (garis) {
+	ctx.strokeRect(x1, y1, x2 - x1, y2 - y1);
+	// }
 }
 
-function Oval(x: number = 0, y: number = 0, radius: number, skalaX: number = 1, skalaY = .5, rotasi: number = 0) {
-	let ctx: CanvasRenderingContext2D = MainCanvas().getContext('2d');
+function Circle(x: number = 0, y: number = 0, radius: number) {
+	let ctx: CanvasRenderingContext2D = Canvas().getContext('2d');
 
 	// save state
 	ctx.save();
@@ -291,10 +185,10 @@ function Oval(x: number = 0, y: number = 0, radius: number, skalaX: number = 1, 
 	// translate context
 	ctx.translate(x, y);
 
-	ctx.rotate(rotasi * (Math.PI / 180));
+	// ctx.rotate(rotation * (Math.PI / 180));
 
 	// scale context horizontally
-	ctx.scale(skalaX, skalaY);
+	// ctx.scale(scaleX, scaleY);
 
 	// draw circle which will be stretched into an oval
 	ctx.beginPath();
@@ -305,9 +199,13 @@ function Oval(x: number = 0, y: number = 0, radius: number, skalaX: number = 1, 
 	ctx.stroke();
 }
 
-//TODO:
-// const CreateDict = Dict.create;
-// const DictGetValue = Dict.GetValue;
-// const DictAddAttr = Dict.AddAttr;
-// const DictGetKeyList = Dict.GetKeyList;
-// const DictGetValueList = Dict.GetValueList;   
+//init app
+window.addEventListener("load", () => {
+	let w = window as any;
+	if (w["Start"] && (typeof w["Start"] == 'function')) {
+		w["Start"]();
+	}
+	else {
+		console.log("Start not found");
+	}
+})

@@ -2,38 +2,34 @@
 
 /**
  * muouse is down status
- * @param btn {number} the button to check, for touch event this will be ignored
  * @returns {boolean}
  */
-function MouseIsDown(btn: number = 0): boolean {
-	return In.getByButton(btn).isDown;
+function MouseIsDown(): boolean {
+	return In.getDownInput() != null;
 }
 
 /**
  * mouse is dragged
- * @param btn {number} the button to check, for touch event this will be ignored
  * @returns {boolean}
  */
-function MouseIsDragged(btn: number = 0): boolean {
-	return In.getByButton(btn).isDrag;
+function MouseIsDragged(): boolean {
+	return In.getDraggedInput() != null;
 }
 
 /**
  * drag horizontal length calculated from the drag start position
- * @param btn {number} the button to check, default to 0, for touch event this will be ignored
  * @returns {number} 
  */
-function MouseDragXAmount(btn: number = 0): number {
-	return In.getByButton(btn).xDrag
+function MouseDraggedX(): number {
+	return In.getDraggedInput()?.xDrag
 }
 
 /**
  * drag vertical length calculated from the drag end position
- * @param btn {number} the button to check, default to 0, for touch event this will be ignored
  * @returns {number}
  */
-function MouseDragYAmount(btn: number = 0): number {
-	return In.getByButton(btn).yDrag
+function MouseDraggedY(): number {
+	return In.getDraggedInput()?.yDrag
 }
 
 /**
@@ -41,7 +37,7 @@ function MouseDragYAmount(btn: number = 0): number {
  * @returns {number}
  */
 function MouseX(): number {
-	return In.getByButton().x;
+	return In.global?.x;
 }
 
 /**
@@ -49,33 +45,31 @@ function MouseX(): number {
  * @returns {number}
  */
 function MouseY(): number {
-	return In.getByButton().y;
+	return In.global?.y;
 }
 
 /**
  * drag start x position
- * @param btn {number} the button to check, for touch event this will be ignored
  * @returns {number}
  */
-function MouseDragStartX(btn: number = 0): number {
-	return In.getByButton(btn).xStart;
+function MouseDragStartX(): number {
+	return In.getDraggedInput()?.xStart;
 }
 
 /**
  * drag start y position
- * @param btn {number} the button to check, for touch event this will be ignored
  * @returns {number}
  */
-function MouseDragStartY(btn: number = 0): number {
-	return In.getByButton(btn).yStart;
+function MouseDragStartY(): number {
+	return In.getDraggedInput()?.yStart;
 }
 
 /**
- * return last button pressed for mouseevent. For mobile device this will always return 0
+ * return last button pressed for mouseevent. For mobile device this can return any number
  * @returns {number}
  */
 function MouseButton(): number {
-	return In.global.button;
+	return In.lastButton;
 }
 
 /**
@@ -88,8 +82,17 @@ function MouseMoveX(): number {
 
 /**
  * return last mouse vertical movement
- * @returns 
+ * @returns {number}
  */
 function MouseMoveY(): number {
 	return In.global.moveY;
 }
+
+//TODO:
+// const InputHit = Basik.Input.InputHit;
+
+// // //extended
+// const FlushInput = Basik.Input.FlushInput;
+// const InputTapCount = Basik.Input.InputTapCount;
+// const InputDragStartCount = Basik.Input.InputDragStartCount;
+// const InputDragEndCount = Basik.Input.InputDragEndCount;

@@ -1,6 +1,5 @@
 ///<reference path="./geom/Route.ts"/>
 ///<reference path="./spr/ImageImpl.ts"/>
-///<reference path="./spr/ImageObj.ts"/>
 ///<reference path="./spr/Sprite2.ts"/>
 
 ///<reference path="./Input.ts"/>

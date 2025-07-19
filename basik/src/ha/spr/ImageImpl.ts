@@ -20,9 +20,11 @@ namespace Basik {
 			h.canvas.height = height;
 			h.frameH = height;
 			h.frameW = width;
+			h.width = width;
+			h.height = height;
 			h.load = true;
 			h.img = document.createElement('img');
-			Ip.register(h, h.url, h.tipeDrag);
+			Ip.register(h, h.url, h.dragType);
 			return h;
 		}
 
@@ -54,13 +56,8 @@ namespace Basik {
 
 			let hasil: Image;
 			hasil = image;
-			hasil.tipeDrag = tipeDrag;
+			hasil.dragType = tipeDrag;
 			hasil.url = url;
-			if (hasil.dragable) {
-				if (hasil.tipeDrag == 0) {
-					hasil.tipeDrag = 1;
-				}
-			}
 
 			Ip.daftar.push(hasil);
 
@@ -131,8 +128,8 @@ namespace Basik {
 
 			frame = Math.floor(frame);
 
-			jmlH = Math.ceil((G.MainCanvas().width + Math.abs(x)) / w2);
-			jmlV = Math.ceil((G.MainCanvas().height + Math.abs(y)) / h2);
+			jmlH = Math.ceil((G.Canvas().width + Math.abs(x)) / w2);
+			jmlV = Math.ceil((G.Canvas().height + Math.abs(y)) / h2);
 
 			for (let i: number = 0; i < jmlH; i++) {
 				for (let j: number = 0; j < jmlV; j++) {
