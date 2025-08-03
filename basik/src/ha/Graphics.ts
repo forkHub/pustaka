@@ -3,6 +3,20 @@ namespace Basik {
 	export class Graphic {
 		private static _autoScale: boolean = true;
 		private static drawCanvas: HTMLCanvasElement;
+		private static _lastX: number = 0;
+		public static get lastX(): number {
+			return Graphic._lastX;
+		}
+		public static set lastX(value: number) {
+			Graphic._lastX = value;
+		}
+		private static _lastY: number = 0;
+		public static get lastY(): number {
+			return Graphic._lastY;
+		}
+		public static set lastY(value: number) {
+			Graphic._lastY = value;
+		}
 		// private static mainCanvas: HTMLCanvasElement;	//original canvas should never change
 
 		private static _red: number = 0;
@@ -53,10 +67,6 @@ namespace Basik {
 			return G.drawCanvas;
 		}
 
-		// static MainCanvas(): HTMLCanvasElement {
-		// 	return G.mainCanvas;
-		// }
-
 		static SetCanvas(canvas: HTMLCanvasElement): void {
 			G.drawCanvas = canvas;
 		}
@@ -76,43 +86,38 @@ namespace Basik {
 				}
 			}
 			Event.addEventListener(Evt.KEYB_DOWN, () => {
-				callFunc("KeyboardDown");
+				callFunc(Evt.KEYB_DOWN);
 			});
 
 			Event.addEventListener(Evt.KEYB_UP, () => {
-				callFunc("KeyboardUp");
+				callFunc(Evt.KEYB_UP);
 			});
 
 			Event.addEventListener(Evt.MOUSE_DOWN, () => {
-				callFunc("MouseDown");
+				callFunc(Evt.MOUSE_DOWN);
 			});
 			Event.addEventListener(Evt.MOUSE_END_DRAG, () => {
-				callFunc("MouseEndDrag");
+				callFunc(Evt.MOUSE_END_DRAG);
 			});
 			Event.addEventListener(Evt.MOUSE_MOVE, () => {
-				callFunc("MouseMove");
+				callFunc(Evt.MOUSE_MOVE);
 			});
 			Event.addEventListener(Evt.MOUSE_START_DRAG, () => {
-				callFunc("MouseStartDrag");
+				callFunc(Evt.MOUSE_START_DRAG);
 			});
 			Event.addEventListener(Evt.MOUSE_CLICK, () => {
-				callFunc("MouseClick");
+				callFunc(Evt.MOUSE_CLICK);
 			});
 			Event.addEventListener(Evt.MOUSE_UP, () => {
-				callFunc("MouseUp");
+				callFunc(Evt.MOUSE_UP);
 			});
-			Event.addEventListener("update", () => {
-				callFunc("Update");
+			Event.addEventListener(Evt.UPDATE, () => {
+				callFunc(Evt.UPDATE);
 			})
 
 			Event.addEventListener(Evt.SOUND_ENDED, () => {
-				callFunc("SoundEnded");
+				callFunc(Evt.SOUND_ENDED);
 			})
-
-			Event.addEventListener(Evt.SOUND_LOADED, () => {
-				callFunc("SoundLoaded");
-			})
-
 		}
 
 		static Start(canvas: HTMLCanvasElement): void {
@@ -136,7 +141,7 @@ namespace Basik {
 				// if (typeof updater === "function") {
 				// 	updater();
 				// }
-				Event.dispatchEvent("update");
+				Event.dispatchEvent(Evt.UPDATE);
 				window.requestAnimationFrame(update);
 			}
 			window.requestAnimationFrame(update);
@@ -147,10 +152,10 @@ namespace Basik {
 			G.handleWindowResize();
 
 			// NoStroke();
-			Cls();
-			StrokeColor(0, 0, 0, 0);
-			TextPos(0, 10);
-			TextSize(10);
+			bersihkanLayar();
+			warnaGaris(0, 0, 0, 0);
+			posisiTeks(0, 10);
+			ukuranTeks(10);
 		}
 
 		private static setupMainCanvas(p?: number, l?: number, mode: number = 1): void {

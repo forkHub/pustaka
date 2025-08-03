@@ -1,18 +1,20 @@
 namespace Basik {
 	export enum Evt {
-		MOUSE_DOWN = "mousedown",
-		MOUSE_UP = "mouseup",
-		MOUSE_MOVE = "mousemove",
-		MOUSE_CLICK = "mouseclick",
+		MOUSE_DOWN = "mouseDitekan",
+		MOUSE_UP = "mouseDilepas",
+		MOUSE_MOVE = "mouseGerak",
+		MOUSE_CLICK = "mouseKlik",
 
-		MOUSE_START_DRAG = "mousestartdrag",
-		MOUSE_END_DRAG = "mouseenddrag",
+		MOUSE_START_DRAG = "mouseMulaiDrag",	//demo belum ada
+		MOUSE_END_DRAG = "mouseSelesaiDrag",	//demo belum ada
 
-		KEYB_DOWN = "keybdown",
-		KEYB_UP = "keybup",
+		KEYB_DOWN = "keyboardDitekan",
+		KEYB_UP = "keyboardDilepas",
 
-		SOUND_LOADED = "soundloaded",
-		SOUND_ENDED = "soundended"
+		// SOUND_LOADED = "Sound",
+		SOUND_ENDED = "suaraSelesai",
+
+		UPDATE = "update"
 	}
 
 	export class Event {

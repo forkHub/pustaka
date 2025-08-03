@@ -1,8 +1,8 @@
 ///<reference path="./Route.ts"/>
 
-const TextPos = Basik.Teks.Goto;
-const Write = Basik.Teks.Write;
-const WriteLn = Basik.Teks.WriteLn;
-const TextFont = Basik.Teks.Name;
-const TextSize = Basik.Teks.Size;
-const Align = Basik.Teks.Align;
+const posisiTeks = Basik.Teks.Goto;
+// const tulis = Basik.Teks.Write;
+const tulis = Basik.Teks.WriteLn;
+const fontTeks = Basik.Teks.Name;
+const ukuranTeks = Basik.Teks.Size;
+const perataanTeks = Basik.Teks.Align;

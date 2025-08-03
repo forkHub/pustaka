@@ -6,16 +6,16 @@ namespace Basik {
 
 		static CreateImage(width: number, height: number): Image {
 			let h: Image = new Image();
-			h.canvas = document.createElement('canvas')
-			h.canvas.width = width;
-			h.canvas.height = height;
-			h.frameH = height;
-			h.frameW = width;
-			h.width = width;
-			h.height = height;
+			h.kanvas = document.createElement('canvas')
+			h.kanvas.width = width;
+			h.kanvas.height = height;
+			h.lebarFrame = height;
+			h.panjangFrame = width;
+			h.panjang = width;
+			h.lebar = height;
 			h.load = true;
 			h.img = document.createElement('img');
-			Ip.register(h, h.url, h.dragType);
+			Ip.register(h, h.url, h.tipeDrag);
 			return h;
 		}
 
@@ -28,10 +28,10 @@ namespace Basik {
 
 			let gbr: Image = new Image(url);
 			gbr.isAnim = true;
-			gbr.frameW = pf;
-			gbr.frameH = lf;
-			gbr.width = pf;
-			gbr.height = lf;
+			gbr.panjangFrame = pf;
+			gbr.lebarFrame = lf;
+			gbr.panjang = pf;
+			gbr.lebar = lf;
 			return gbr;
 
 			// return Ip.muatAnimAsyncCanvas(url, pf, lf, canvas);
@@ -47,7 +47,7 @@ namespace Basik {
 
 			let hasil: Image;
 			hasil = image;
-			hasil.dragType = tipeDrag;
+			hasil.tipeDrag = tipeDrag;
 			hasil.url = url;
 
 			Ip.daftar.push(hasil);
@@ -58,7 +58,7 @@ namespace Basik {
 		static free(img: Basik.Image) {
 			for (let i = 0; i < this.daftar.length; i++) {
 				if (this.daftar[i] == img) {
-					img.canvas = null;
+					img.kanvas = null;
 					img.img = null;
 					Basik.Ktk.destroy(img.rect);
 					this.daftar.splice(i, 1);
@@ -94,8 +94,8 @@ namespace Basik {
 
 			if (gbr.load == false) return;
 
-			let w2: number = Math.floor(gbr.width);
-			let h2: number = Math.floor(gbr.height);
+			let w2: number = Math.floor(gbr.panjang);
+			let h2: number = Math.floor(gbr.lebar);
 
 			while (x < 0) {
 				x += w2;
@@ -159,7 +159,7 @@ namespace Basik {
 		}
 
 		static Draw(img: Image) {
-			if (img.tilable) {
+			if (img.ubin) {
 				Ip.gambarUbin(img, img.x, img.y, img.frame);
 			}
 			else {
@@ -177,7 +177,7 @@ namespace Basik {
 
 			if (gbr.load == false) return;
 			if (!gbr.url) {
-				imgW = gbr.width;
+				imgW = gbr.panjang;
 				// imgH = gbr.height;
 			}
 			else {
@@ -188,13 +188,13 @@ namespace Basik {
 			gbr.ctrIdx = Image.ctrDraw++;
 			frame = Math.floor(frame);
 
-			jmlH = Math.floor(imgW / gbr.frameW);
+			jmlH = Math.floor(imgW / gbr.panjangFrame);
 
 			frameX = (frame % jmlH);
 			frameY = Math.floor(frame / jmlH);
 
-			frameX *= gbr.frameW;
-			frameY *= gbr.frameH;
+			frameX *= gbr.panjangFrame;
+			frameY *= gbr.lebarFrame;
 
 			frameX = Math.floor(frameX);
 			frameY = Math.floor(frameY);
@@ -202,18 +202,18 @@ namespace Basik {
 			let x2: number = Math.floor(x);
 			let y2: number = Math.floor(y);
 
-			let w2: number = Math.floor(gbr.width);
-			let h2: number = Math.floor(gbr.height);
+			let w2: number = Math.floor(gbr.panjang);
+			let h2: number = Math.floor(gbr.lebar);
 
-			x2 -= (gbr.handleX);
-			y2 -= (gbr.handleY);
+			x2 -= (gbr.pusatX);
+			y2 -= (gbr.pusatY);
 
-			if (gbr.rotation != 0) {
+			if (gbr.rotasi != 0) {
 				ctx.save();
 				ctx.translate(x, y);
-				ctx.rotate(gbr.rotation * (Math.PI / 180));
+				ctx.rotate(gbr.rotasi * (Math.PI / 180));
 
-				drawImpl(-gbr.handleX, -gbr.handleY)
+				drawImpl(-gbr.pusatX, -gbr.pusatY)
 
 				ctx.restore();
 			}
@@ -232,7 +232,7 @@ namespace Basik {
 				dy -= Camera.y;
 
 				ctx.globalAlpha = gbr.alpha / 100;
-				ctx.drawImage(gbr.canvas, frameX, frameY, gbr.frameW, gbr.frameH, Math.floor(dx), Math.floor(dy), w2, h2);
+				ctx.drawImage(gbr.kanvas, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(dx), Math.floor(dy), w2, h2);
 			}
 
 		}
@@ -246,24 +246,24 @@ namespace Basik {
 			p.y = 0;
 
 			p = rect.vs[1];
-			p.x = img.frameW - 1;
+			p.x = img.panjangFrame - 1;
 			p.y = 0;
 
 			p = rect.vs[2];
-			p.x = img.frameW - 1;
-			p.y = img.frameH - 1;
+			p.x = img.panjangFrame - 1;
+			p.y = img.lebarFrame - 1;
 
 			p = rect.vs[3];
 			p.x = 0;
-			p.y = img.frameH - 1;
+			p.y = img.lebarFrame - 1;
 
 		}
 
 		private static rectToImageTf(image: Image, x: number, y: number): void {
 			let rect: Ktk = image.rect;
 			let p: IV2D;
-			let x2: number = image.width - 1;
-			let y2: number = image.height - 1;
+			let x2: number = image.panjang - 1;
+			let y2: number = image.lebar - 1;
 
 			//scale
 			p = rect.vs[1];
@@ -280,10 +280,10 @@ namespace Basik {
 
 			//translate
 			Ktk.translate(rect, x, y);
-			Ktk.translate(rect, -image.handleX, -image.handleY);
+			Ktk.translate(rect, -image.pusatX, -image.pusatY);
 
 			//rotate
-			Ktk.rotate(rect, image.rotation, x, y, false);
+			Ktk.rotate(rect, image.rotasi, x, y, false);
 		}
 
 		static AllImageLoaded(): boolean {

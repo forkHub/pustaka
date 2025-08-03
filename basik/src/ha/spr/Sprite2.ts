@@ -31,8 +31,8 @@ namespace Basik {
 			Event.addEventListener(Evt.MOUSE_UP, () => {
 				console.log("clear image mouse status")
 				Ip.daftar.forEach((img: Image) => {
-					img.down = false;
-					img.dragged = false;
+					img.ditekan = false;
+					img.didrag = false;
 				});
 			})
 		}
@@ -44,13 +44,13 @@ namespace Basik {
 				y: posCanvas.y - Camera.y
 			}
 
-			img.down = true;
-			img.dragStartX = posAbs.x - img.x;
-			img.dragStartY = posAbs.y - img.y;
+			img.ditekan = true;
+			img.dragAwalX = posAbs.x - img.x;
+			img.dragAwalY = posAbs.y - img.y;
 			img.inputId = id;
 
 			img.initialMouseAngle = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
-			img.initialAngle = img.rotation;
+			img.initialAngle = img.rotasi;
 		}
 
 
@@ -78,7 +78,7 @@ namespace Basik {
 				}
 				else {
 					//remote drag
-					if (img.dragType == 3 || img.dragType == 4) {
+					if (img.tipeDrag == 3 || img.tipeDrag == 4) {
 						this.down(img, posCanvas, id);
 					}
 				}
@@ -104,18 +104,18 @@ namespace Basik {
 
 			Ip.daftar.forEach((img: Image) => {
 
-				if (img.down && (img.dragType != 0) && (img.inputId == inputId)) {
-					img.dragged = true;
+				if (img.ditekan && (img.tipeDrag != 0) && (img.inputId == inputId)) {
+					img.didrag = true;
 
-					if (img.dragType == TypeDrag.drag || (img.dragType == TypeDrag.remoteDrag)) {
-						img.x = posAbs.x - img.dragStartX
-						img.y = posAbs.y - img.dragStartY
+					if (img.tipeDrag == TypeDrag.drag || (img.tipeDrag == TypeDrag.remoteDrag)) {
+						img.x = posAbs.x - img.dragAwalX
+						img.y = posAbs.y - img.dragAwalY
 						console.debug('item drag move');
 					}
-					else if (img.dragType == TypeDrag.rotasi || (img.dragType == TypeDrag.remoteRotation)) {
+					else if (img.tipeDrag == TypeDrag.rotasi || (img.tipeDrag == TypeDrag.remoteRotation)) {
 						let sudut2: number = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
 						let perbedaan: number = sudut2 - img.initialMouseAngle;
-						img.rotation = img.initialAngle + perbedaan;
+						img.rotasi = img.initialAngle + perbedaan;
 					}
 					else {
 

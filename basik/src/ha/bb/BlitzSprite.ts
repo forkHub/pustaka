@@ -6,15 +6,15 @@
  * @param url {string} the url of image to load
  * @returns {Basik.Image}
  */
-function LoadImage(url: string): Basik.Image {
-	return Ip.Muat(url);
+function muatImage(url: string): Basik.Image {
+	return Ip.Muat("asset/" + url);
 }
 
 /**
  * Draw an image
  * @param img {Basik.Image} Image to draw
  */
-function DrawImage(img: Basik.Image) {
+function gambarImage(img: Basik.Image) {
 	Ip.Draw(img);
 }
 
@@ -25,7 +25,7 @@ function DrawImage(img: Basik.Image) {
  * @param img2 {Basik.Image} the second image
  * @returns {boolean}
  */
-function ImageCollide(img1: Basik.Image, img2: Basik.Image): boolean {
+function imageTabrakan(img1: Basik.Image, img2: Basik.Image): boolean {
 	return Ip.tabrakan(img1, img1.x, img1.y, img2, img2.x, img2.y);
 }
 
@@ -36,7 +36,7 @@ function ImageCollide(img1: Basik.Image, img2: Basik.Image): boolean {
  * @param y {number}
  * @returns {boolean}
  */
-function ImageCollidePoint(img: Basik.Image, x: number, y: number): boolean {
+function poinDiDalamImage(img: Basik.Image, x: number, y: number): boolean {
 	return Ip.dotInsideImage(img, img.x, img.y, x, y);
 }
 
@@ -46,7 +46,7 @@ function ImageCollidePoint(img: Basik.Image, x: number, y: number): boolean {
  * @param height {number} height
  * @returns {Basik.Image}
  */
-function CreateImage(width: number, height: number): Basik.Image {
+function buatImage(width: number, height: number): Basik.Image {
 	return Ip.CreateImage(width, height);
 }
 
@@ -54,21 +54,22 @@ function CreateImage(width: number, height: number): Basik.Image {
  * Check if all images have been loaded
  * @returns {boolean} 
  */
-function AllImageLoaded(): boolean {
+function semuaImageSelesaiDiMuat(): boolean {
 	return Ip.AllImageLoaded();
 }
+//TODO: event
 
 /**
  * 
  * @param img 
  */
-function FreeImage(img: Basik.Image): void {
+function hapusImage(img: Basik.Image): void {
 	Ip.free(img);
 }
 
 //TODO: refactor to not return Image
-function CopyFromCanvas(img: Basik.Image, x: number, y: number): void {
-	let ctx = img.canvas.getContext('2d');
-	ctx.clearRect(0, 0, img.canvas.width, img.canvas.height);
-	ctx.drawImage(Canvas(), -x, -y);
-}
+// function CopyFromCanvas(img: Basik.Image, x: number, y: number): void {
+// 	let ctx = img.canvas.getContext('2d');
+// 	ctx.clearRect(0, 0, img.canvas.width, img.canvas.height);
+// 	ctx.drawImage(Kanvas(), -x, -y);
+// }

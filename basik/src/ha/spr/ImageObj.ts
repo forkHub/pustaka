@@ -39,7 +39,7 @@ namespace Basik {
 			Ip.register(this, url, 0);
 
 			gbr.img = img;
-			gbr.canvas = canvas;
+			gbr.kanvas = canvas;
 			gbr.rect = rect;
 			gbr.load = false;
 			if (!gbr.url) {
@@ -74,18 +74,18 @@ namespace Basik {
 				gbr.load = true;
 				gbr.img = imgP;
 
-				if (!gbr.width) {
+				if (!gbr.panjang) {
 					// gbr.panjangDiSet = true;
-					gbr.width = imgP.naturalWidth;
+					gbr.panjang = imgP.naturalWidth;
 				}
 
-				if (!gbr.height) {
-					gbr.height = imgP.naturalHeight;
+				if (!gbr.lebar) {
+					gbr.lebar = imgP.naturalHeight;
 					// gbr.lebarDiSet = true;
 				}
 
-				if (!gbr._frameH) gbr.frameH = imgP.naturalHeight;
-				if (!gbr._frameW) gbr.frameW = imgP.naturalWidth;
+				if (!gbr._frameH) gbr.lebarFrame = imgP.naturalHeight;
+				if (!gbr._frameW) gbr.panjangFrame = imgP.naturalWidth;
 
 				ha.be.cache.setFile(url, imgP);
 			}
@@ -180,31 +180,30 @@ namespace Basik {
 			this._frame = value;
 		}
 
-		public get canvas(): HTMLCanvasElement {
+		public get kanvas(): HTMLCanvasElement {
 			return this._canvas;
 		}
-		public set canvas(value: HTMLCanvasElement) {
+		public set kanvas(value: HTMLCanvasElement) {
 			this._canvas = value;
 		}
 
-		public get tilable(): boolean {
+		public get ubin(): boolean {
 			return this._tilable;
 		}
-		public set tilable(value: boolean) {
+		public set ubin(value: boolean) {
 			this._tilable = value;
 		}
 
-
-		public get frameW(): number {
+		public get panjangFrame(): number {
 			return this._frameW;
 		}
-		public set frameW(value: number) {
+		public set panjangFrame(value: number) {
 			this._frameW = value;
 		}
-		public get frameH(): number {
+		public get lebarFrame(): number {
 			return this._frameH;
 		}
-		public set frameH(value: number) {
+		public set lebarFrame(value: number) {
 			this._frameH = value;
 		}
 
@@ -229,37 +228,37 @@ namespace Basik {
 			this._alpha = value;
 		}
 
-		public get handleY(): number {
+		public get pusatY(): number {
 			return this._handleY;
 		}
-		public set handleY(value: number) {
+		public set pusatY(value: number) {
 			this._handleY = value;
 		}
 
-		public get handleX(): number {
+		public get pusatX(): number {
 			return this._handleX;
 		}
-		public set handleX(value: number) {
+		public set pusatX(value: number) {
 			this._handleX = value;
 		}
 
-		public get width(): number {
+		public get panjang(): number {
 			if (this._panjang) return this._panjang;
 			if (this.img) return this.img.naturalWidth;
 			return 0;
 		}
 
-		public set width(value: number) {
+		public set panjang(value: number) {
 			this._panjang = value;
 			// this._panjangDiSet = true;
 		}
 
-		public get height(): number {
+		public get lebar(): number {
 			if (this._lebar) return this._lebar;
 			if (this.img) return this.img.naturalHeight;
 			return 0;
 		}
-		public set height(value: number) {
+		public set lebar(value: number) {
 			this._lebar = value;
 		}
 
@@ -270,44 +269,44 @@ namespace Basik {
 			this._ctrIdx = value;
 		}
 
-		public get rotation(): number {
+		public get rotasi(): number {
 			return this._rotasi;
 		}
-		public set rotation(value: number) {
+		public set rotasi(value: number) {
 			this._rotasi = value;
 		}
 
-		public get dragStartX(): number {
+		public get dragAwalX(): number {
 			return this._dragStartX;
 		}
-		public set dragStartX(value: number) {
+		public set dragAwalX(value: number) {
 			this._dragStartX = value;
 		}
-		public get dragStartY(): number {
+		public get dragAwalY(): number {
 			return this._dragStartY;
 		}
-		public set dragStartY(value: number) {
+		public set dragAwalY(value: number) {
 			this._dragStartY = value;
 		}
 
-		public get dragged(): boolean {
+		public get didrag(): boolean {
 			return this._dragged;
 		}
-		public set dragged(value: boolean) {
+		public set didrag(value: boolean) {
 			this._dragged = value;
 		}
-		public get down(): boolean {
+		public get ditekan(): boolean {
 			return this._down;
 		}
-		public set down(value: boolean) {
+		public set ditekan(value: boolean) {
 			this._down = value;
 		}
 
-		public get dragType(): number {
+		public get tipeDrag(): number {
 			return this._tipeDrag;
 		}
 
-		public set dragType(value: number) {
+		public set tipeDrag(value: number) {
 			this._tipeDrag = value;
 		}
 
@@ -337,14 +336,6 @@ namespace Basik {
 		public set initialAngle(value: number) {
 			this._sudutAwal = value;
 		}
-
-
-		// public get button(): number {
-		// 	return this._button;
-		// }
-		// public set button(value: number) {
-		// 	this._button = value;
-		// }
 
 
 	}

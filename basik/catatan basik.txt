@@ -1,0 +1,11 @@
+Demo Functionality:
+	image collide point
+
+
+Image:
+	
+
+
+Next:
+Camera remove
+drawing => advanced => path

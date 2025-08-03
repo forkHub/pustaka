@@ -1,0 +1,14 @@
+struktur latihan
+	tulis
+	perintah tulis
+		membuat ijasah
+	variable, prompt
+		contoh penggunaan variable dalam bentuk table
+		membuat daftar perkalian
+		membuat ijazah pakai prompt buat nama dan nilai
+	for
+		membuat daftar perkalian dengan for
+	if
+		ijazah dengan prompt nilai dan nilai-teks
+
+	

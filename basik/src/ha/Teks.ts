@@ -35,7 +35,7 @@ namespace Basik {
 			G.Canvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
 			G.Canvas().getContext('2d').fillText(teks, Teks._x, Teks._y);
 			G.Canvas().getContext('2d').strokeText(teks, Teks._x, Teks._y);
-			Teks._y += Teks.size + 2; // Move down for the next line
+			Teks._y += Teks.size + (Teks.size * .4); // Move down for the next line
 		}
 
 		static Write(teks: string): void {

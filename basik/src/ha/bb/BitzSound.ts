@@ -7,12 +7,12 @@ const S = Basik.Sn;
  * @param url {string} the url
  * @returns {Basik.Sound} 
  */
-function LoadSound(url: string): HTMLAudioElement {
+function muatSuara(url: string): HTMLAudioElement {
 	let sound: HTMLAudioElement = document.createElement("audio");
 
 	sound.onload = () => {
 		Basik.Sound.lastSound = sound;
-		Basik.Event.dispatchEvent(Basik.Evt.SOUND_LOADED);
+		// Basik.Event.dispatchEvent(Basik.Evt.SOUND_LOADED);
 		console.log("sound loaded");
 	}
 
@@ -25,7 +25,7 @@ function LoadSound(url: string): HTMLAudioElement {
 
 		}
 	}
-	sound.src = url;
+	sound.src = "asset/" + url;
 
 	return sound;
 }
@@ -34,10 +34,10 @@ function LoadSound(url: string): HTMLAudioElement {
  * Play Sound
  * @param s {Basic.Sound}
  */
-function PlaySound(s: HTMLAudioElement): void {
+function mainkanSuara(s: HTMLAudioElement): void {
 	s.play();
 }
 
-function LastSound() {
+function suaraEvent() {
 	return Basik.Sound.lastSound;
 }

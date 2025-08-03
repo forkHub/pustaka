@@ -1,0 +1,38 @@
+apa itu pemrograman
+
+modul 1:
+	buat kanvas
+	hello world
+	tulis
+	posisi tulisan
+	ukuran tulisan
+	perataan tulisan
+	warna rgb
+	warna stroke
+	warna fill
+
+modul 2:
+	variable
+		declarasi
+		isi variable
+		operator
+		
+	perulangan
+	percabangan
+	function
+
+modul 3:
+	event
+	keyboard
+	mouse
+
+modul 3:
+	image
+
+modul 3: 
+	bentuk dasar
+
+modul 4:
+	project:
+
+

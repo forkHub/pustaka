@@ -5,7 +5,7 @@
  * @param key key to check, empty for any key
  * @returns {boolean}
  */
-function KeyboardIsDown(key: string = ''): boolean {
+function tombolDitahan(key: string = ''): boolean {
 	return Basik.Keyboard.IsDown(key);
 }
 
@@ -13,6 +13,6 @@ function KeyboardIsDown(key: string = ''): boolean {
  * Return the last key for KeyboardEvent
  * @returns {string}
  */
-function LastKey(): string {
+function tombolEvent(): string {
 	return Basik.Keyboard.lastKey;
 }
