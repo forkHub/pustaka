@@ -243,6 +243,10 @@ namespace Basik {
 						console.log("dispatch mouse down event, id " + inp.id);
 						Event.dispatchEvent(Evt.MOUSE_DOWN);
 					}
+<<<<<<< HEAD
+
+=======
+>>>>>>> 70ef678fc3cf1a0ccbe3807682164c47d40614ec
 				});
 
 			buffer.addEventListener(

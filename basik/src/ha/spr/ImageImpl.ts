@@ -4,6 +4,15 @@ namespace Basik {
 		static readonly props: string[] = [];
 		static readonly daftar: Image[] = [];
 
+		static init() {
+			Event.addEventListener(Evt.MOUSE_UP, () => {
+				Ip.daftar.forEach((img: Image) => {
+					img.down = false;
+					img.dragged = false;
+				});
+			})
+		}
+
 		static CreateImage(width: number, height: number): Image {
 			let h: Image = new Image();
 			h.kanvas = document.createElement('canvas')
@@ -88,14 +97,19 @@ namespace Basik {
 			return Ktk.collideDot(gbr1.rect, x2, y2);
 		};
 
-		private static gambarUbin(gbr: Image, x: number = 0, y: number = 0, frame: number = 0) {
+		private static gambarUbin(img: Image, x: number = 0, y: number = 0, frame: number = 0) {
 			let jmlH: number = 0;
 			let jmlV: number = 0;
 
-			if (gbr.load == false) return;
+			if (img.load == false) return;
 
+<<<<<<< HEAD
 			let w2: number = Math.floor(gbr.panjang);
 			let h2: number = Math.floor(gbr.lebar);
+=======
+			let w2: number = Math.floor(img.width);
+			let h2: number = Math.floor(img.height);
+>>>>>>> 2a718a1e781faadf9e66c653543f4e55f331d2c7
 
 			while (x < 0) {
 				x += w2;
@@ -124,12 +138,12 @@ namespace Basik {
 
 			for (let i: number = 0; i < jmlH; i++) {
 				for (let j: number = 0; j < jmlV; j++) {
-					Ip.DrawSingle(gbr, x + (i * w2), y + (j * h2), frame);
+					Ip.DrawSingle(img, x + (i * w2), y + (j * h2), frame);
 				}
 			}
 		}
 
-		static AmbilPiksel(x: number = 0, y: number = 0): void {
+		static GetPixel(x: number = 0, y: number = 0): void {
 			try {
 				let data: Uint8ClampedArray = G.Canvas().getContext('2d').getImageData(x, y, 1, 1).data;
 
@@ -144,7 +158,6 @@ namespace Basik {
 				G.green = data[1];
 				G.blue = data[2];
 				G.alpha = data[3];
-				// G.FillColor(G.merah, G.hijau, G.biru, G.alpha);
 
 			}
 			catch (e) {
@@ -159,22 +172,31 @@ namespace Basik {
 		}
 
 		static Draw(img: Image) {
+<<<<<<< HEAD
 			if (img.ubin) {
 				Ip.gambarUbin(img, img.x, img.y, img.frame);
+=======
+			let dx = img.x - Camera.x;
+			let dy = img.y - Camera.y;
+			if (img.load == false) return;
+			img.ctrIdx = Image.ctrDraw++;
+
+			if (img.tilable) {
+				Ip.gambarUbin(img, dx, dy, img.frame);
+>>>>>>> 2a718a1e781faadf9e66c653543f4e55f331d2c7
 			}
 			else {
-				Ip.DrawSingle(img, img.x, img.y, img.frame);
+				Ip.DrawSingle(img, dx, dy, img.frame);
 			}
 		}
 
-		private static DrawSingle(gbr: Image, x: number = 0, y: number = 0, frame: number = 0) {
+		private static DrawSingle(img: Image, x: number = 0, y: number = 0, frame: number = 0) {
 			let ctx: CanvasRenderingContext2D = G.Canvas().getContext('2d');
 			let jmlH: number = 0;
 			let frameX: number = 0;
 			let frameY: number = 0;
-			let imgW: number = 0;
-			// let imgH: number = 0;
 
+<<<<<<< HEAD
 			if (gbr.load == false) return;
 			if (!gbr.url) {
 				imgW = gbr.panjang;
@@ -189,12 +211,21 @@ namespace Basik {
 			frame = Math.floor(frame);
 
 			jmlH = Math.floor(imgW / gbr.panjangFrame);
+=======
+			frame = Math.floor(frame);
+			jmlH = Math.floor(img.img.naturalWidth / img.frameW);
+>>>>>>> 2a718a1e781faadf9e66c653543f4e55f331d2c7
 
 			frameX = (frame % jmlH);
 			frameY = Math.floor(frame / jmlH);
 
+<<<<<<< HEAD
 			frameX *= gbr.panjangFrame;
 			frameY *= gbr.lebarFrame;
+=======
+			frameX *= img.frameW;
+			frameY *= img.frameH;
+>>>>>>> 2a718a1e781faadf9e66c653543f4e55f331d2c7
 
 			frameX = Math.floor(frameX);
 			frameY = Math.floor(frameY);
@@ -202,6 +233,7 @@ namespace Basik {
 			let x2: number = Math.floor(x);
 			let y2: number = Math.floor(y);
 
+<<<<<<< HEAD
 			let w2: number = Math.floor(gbr.panjang);
 			let h2: number = Math.floor(gbr.lebar);
 
@@ -214,6 +246,20 @@ namespace Basik {
 				ctx.rotate(gbr.rotasi * (Math.PI / 180));
 
 				drawImpl(-gbr.pusatX, -gbr.pusatY)
+=======
+			let w2: number = Math.floor(img.width);
+			let h2: number = Math.floor(img.height);
+
+			x2 -= (img.handleX);
+			y2 -= (img.handleY);
+
+			if (img.rotation != 0) {
+				ctx.save();
+				ctx.translate(x, y);
+				ctx.rotate(img.rotation * (Math.PI / 180));
+
+				drawImpl(-img.handleX, -img.handleY)
+>>>>>>> 2a718a1e781faadf9e66c653543f4e55f331d2c7
 
 				ctx.restore();
 			}
@@ -226,6 +272,7 @@ namespace Basik {
 			}
 
 			function drawImpl(dx: number, dy: number) {
+<<<<<<< HEAD
 
 				//TODO: pindahin ke depan
 				dx -= Camera.x;
@@ -233,8 +280,11 @@ namespace Basik {
 
 				ctx.globalAlpha = gbr.alpha / 100;
 				ctx.drawImage(gbr.kanvas, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(dx), Math.floor(dy), w2, h2);
+=======
+				ctx.globalAlpha = img.alpha / 100;
+				ctx.drawImage(img.canvas, frameX, frameY, img.frameW, img.frameH, Math.floor(dx), Math.floor(dy), w2, h2);
+>>>>>>> 2a718a1e781faadf9e66c653543f4e55f331d2c7
 			}
-
 		}
 
 		private static resetRect(img: Image): void {

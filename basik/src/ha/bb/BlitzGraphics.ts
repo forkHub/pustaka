@@ -88,8 +88,13 @@ function alpha(): number {
  * @param x {number} the x position
  * @param y {number} the y position
  */
+<<<<<<< HEAD
 function ambilPiksel(x: number = 0, y: number = 0): void {
 	Ip.AmbilPiksel(x, y);
+=======
+function GetPixel(x: number = 0, y: number = 0): void {
+	Ip.GetPixel(x, y);
+>>>>>>> 2a718a1e781faadf9e66c653543f4e55f331d2c7
 }
 
 /**
