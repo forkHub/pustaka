@@ -1,7 +1,0 @@
-
-perintah:
-MuatAnimasi
-tiap folder demo struktur mengikuti
-perlu debugging di setiap demo dasar (prioritas)/menengah (standard)
-pustaka tambahan mandiri
-

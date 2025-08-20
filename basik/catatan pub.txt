@@ -1,14 +1,27 @@
 struktur latihan
 	tulis
-	perintah tulis
-		membuat ijasah
+		latihan: membuat cerita
+	perintah tulis lanjutan
+		latihan: membuat ijasah
+	warna
+		latihan: ijasah diberi warnan
 	variable, prompt
 		contoh penggunaan variable dalam bentuk table
-		membuat daftar perkalian
-		membuat ijazah pakai prompt buat nama dan nilai
+		latihan: membuat daftar perkalian
+		latihan: membuat ijazah interaktif pakai prompt buat nama dan nilai
 	for
-		membuat daftar perkalian dengan for
+		latihan: membuat daftar perkalian dengan for
 	if
-		ijazah dengan prompt nilai dan nilai-teks
+		latihan: ijazah dengan prompt nilai dan nilai-teks
+	basik shape
+		kotak, lingkaran, elipse, garis, dll
+	array:
+		poligon, kurva
+	event:
+		latihan: klik di layar muncul teks
+	image:
+		gambar sederhana dengan event update
+		fungsi2 image
+		n
+proyek:
 
-	
