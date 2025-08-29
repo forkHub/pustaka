@@ -8,7 +8,7 @@ function update() {
 		brush.y = mouseY();
 		stempel(brush);
 	}
-	bersihkanLayar(0, 200, 320, 240);
-	posisiTeks(0, 210);
+	bersihkanLayar(0, 600, 800, 600);
+	posisiTeks(0, 550);
 	tulis("Drag to draw");
 }
