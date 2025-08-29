@@ -6,7 +6,7 @@
  * @param url {string} the url of image to load
  * @returns {Basik.Image}
  */
-function muatImage(url: string): Basik.Image {
+function muatGambar(url: string): Basik.Image {
 	return Ip.Muat("asset/" + url);
 }
 
@@ -14,7 +14,7 @@ function muatImage(url: string): Basik.Image {
  * Draw an image
  * @param img {Basik.Image} Image to draw
  */
-function gambarImage(img: Basik.Image) {
+function stempel(img: Basik.Image) {
 	Ip.Draw(img);
 }
 
@@ -25,7 +25,7 @@ function gambarImage(img: Basik.Image) {
  * @param img2 {Basik.Image} the second image
  * @returns {boolean}
  */
-function imageTabrakan(img1: Basik.Image, img2: Basik.Image): boolean {
+function gambarTabrakan(img1: Basik.Image, img2: Basik.Image): boolean {
 	return Ip.tabrakan(img1, img1.x, img1.y, img2, img2.x, img2.y);
 }
 
@@ -36,7 +36,7 @@ function imageTabrakan(img1: Basik.Image, img2: Basik.Image): boolean {
  * @param y {number}
  * @returns {boolean}
  */
-function poinDiDalamImage(img: Basik.Image, x: number, y: number): boolean {
+function poinDidalamGambar(img: Basik.Image, x: number, y: number): boolean {
 	return Ip.dotInsideImage(img, img.x, img.y, x, y);
 }
 
@@ -46,7 +46,7 @@ function poinDiDalamImage(img: Basik.Image, x: number, y: number): boolean {
  * @param height {number} height
  * @returns {Basik.Image}
  */
-function buatImage(width: number, height: number): Basik.Image {
+function buatGambar(width: number, height: number): Basik.Image {
 	return Ip.CreateImage(width, height);
 }
 
@@ -54,7 +54,7 @@ function buatImage(width: number, height: number): Basik.Image {
  * Check if all images have been loaded
  * @returns {boolean} 
  */
-function semuaImageSelesaiDiMuat(): boolean {
+function semuaGambarSelesaiDimuat(): boolean {
 	return Ip.AllImageLoaded();
 }
 //TODO: event
@@ -63,7 +63,7 @@ function semuaImageSelesaiDiMuat(): boolean {
  * 
  * @param img 
  */
-function hapusImage(img: Basik.Image): void {
+function hapusGAmbar(img: Basik.Image): void {
 	Ip.free(img);
 }
 

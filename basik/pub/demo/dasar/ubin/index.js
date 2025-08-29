@@ -1,7 +1,7 @@
-let kotak = muatImage("kotak.png");
+let kotak = muatGambar("kotak.png");
 kotak.ubin = true;
 
 function update() {
 	bersihkanLayar();
-	gambarImage(kotak);
+	stempel(kotak);
 }

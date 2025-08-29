@@ -1597,25 +1597,25 @@ function mouseGerakX() {
 function mouseGerakY() {
     return In.global.moveY;
 }
-function muatImage(url) {
+function muatGambar(url) {
     return Ip.Muat("asset/" + url);
 }
-function gambarImage(img) {
+function stempel(img) {
     Ip.Draw(img);
 }
-function imageTabrakan(img1, img2) {
+function gambarTabrakan(img1, img2) {
     return Ip.tabrakan(img1, img1.x, img1.y, img2, img2.x, img2.y);
 }
-function poinDiDalamImage(img, x, y) {
+function poinDidalamGambar(img, x, y) {
     return Ip.dotInsideImage(img, img.x, img.y, x, y);
 }
-function buatImage(width, height) {
+function buatGambar(width, height) {
     return Ip.CreateImage(width, height);
 }
-function semuaImageSelesaiDiMuat() {
+function semuaGambarSelesaiDimuat() {
     return Ip.AllImageLoaded();
 }
-function hapusImage(img) {
+function hapusGAmbar(img) {
     Ip.free(img);
 }
 const posisiTeks = Basik.Teks.Goto;

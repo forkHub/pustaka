@@ -1,4 +1,4 @@
-let kotak = muatImage("kotak.png");
+let kotak = muatGambar("kotak.png");
 kotak.panjang = 92;
 kotak.lebar = 92;
 kotak.rotasi = 45;
@@ -9,5 +9,5 @@ kotak.pusatY = 46;
 
 function update() {
 	bersihkanLayar();
-	gambarImage(kotak);
+	stempel(kotak);
 }

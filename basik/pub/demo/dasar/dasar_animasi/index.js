@@ -1,5 +1,4 @@
-//TODO: ganti pakai fungsi
-let brush = muatImage("fx.png");
+let brush = muatGambar("fx.png");
 brush.panjangFrame = 32;
 brush.lebarFrame = 100;
 brush.panjang = 32;
@@ -11,5 +10,5 @@ function update() {
 	if (brush.frame >= 8) {
 		brush.frame = 0;
 	}
-	gambarImage(brush);
+	stempel(brush);
 }

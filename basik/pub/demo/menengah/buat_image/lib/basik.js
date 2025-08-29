@@ -1402,7 +1402,7 @@ var Basik;
             Basik.G.Canvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
             Basik.G.Canvas().getContext('2d').fillText(teks, Teks._x, Teks._y);
             Basik.G.Canvas().getContext('2d').strokeText(teks, Teks._x, Teks._y);
-            Teks._y += Teks.size + 2;
+            Teks._y += Teks.size + (Teks.size * .4);
         }
         static Write(teks) {
             Basik.G.Canvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
@@ -1510,7 +1510,7 @@ function muatSuara(url) {
         catch (e) {
         }
     };
-    sound.src = url;
+    sound.src = "asset/" + url;
     return sound;
 }
 function mainkanSuara(s) {
@@ -1529,6 +1529,7 @@ function kanvas() {
     return G.Canvas();
 }
 function buatKanvas(w = 320, h = 240, canvas = null, mode = 1) {
+    console.log("buat kanvas");
     G.Graphics(w, h, canvas, mode);
 }
 function bersihkanLayar(x = 0, y = 0, w = 0, h = 0) {
@@ -1596,25 +1597,25 @@ function mouseGerakX() {
 function mouseGerakY() {
     return In.global.moveY;
 }
-function muatImage(url) {
-    return Ip.Muat(url);
+function muatGambar(url) {
+    return Ip.Muat("asset/" + url);
 }
-function gambarImage(img) {
+function stempel(img) {
     Ip.Draw(img);
 }
-function imageTabrakan(img1, img2) {
+function gambarTabrakan(img1, img2) {
     return Ip.tabrakan(img1, img1.x, img1.y, img2, img2.x, img2.y);
 }
-function poinDiDalamImage(img, x, y) {
+function poinDidalamGambar(img, x, y) {
     return Ip.dotInsideImage(img, img.x, img.y, x, y);
 }
-function buatImage(width, height) {
+function buatGambar(width, height) {
     return Ip.CreateImage(width, height);
 }
-function semuaImageSelesaiDiMuat() {
+function semuaGambarSelesaiDimuat() {
     return Ip.AllImageLoaded();
 }
-function hapusImage(img) {
+function hapusGAmbar(img) {
     Ip.free(img);
 }
 const posisiTeks = Basik.Teks.Goto;
@@ -1625,7 +1626,7 @@ const perataanTeks = Basik.Teks.Align;
 function tombolDitahan(key = '') {
     return Basik.Keyboard.IsDown(key);
 }
-function tombol() {
+function tombolEvent() {
     return Basik.Keyboard.lastKey;
 }
 var Basik;

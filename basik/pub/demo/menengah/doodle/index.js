@@ -1,4 +1,4 @@
-let brush = muatImage("../../asset/brush.png");
+let brush = muatGambar("brush.png");
 brush.handleX = 8;
 brush.handleY = 8;
 
@@ -6,7 +6,7 @@ function update() {
 	if (mouseDitahan()) {
 		brush.x = mouseX();
 		brush.y = mouseY();
-		gambarImage(brush);
+		stempel(brush);
 	}
 	bersihkanLayar(0, 200, 320, 240);
 	posisiTeks(0, 210);

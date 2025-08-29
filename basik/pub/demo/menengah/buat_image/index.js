@@ -1,4 +1,4 @@
-let img = buatImage(48, 48);
+let img = buatGambar(48, 48);
 img.x = 160;
 img.y = 120;
 let ctx1 = img.canvas.getContext('2d');
@@ -11,5 +11,5 @@ ctx1.stroke();
 
 function update() {
     bersihkanLayar();
-    gambarImage(img);
+    stempel(img);
 }

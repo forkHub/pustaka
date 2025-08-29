@@ -1,5 +1,3 @@
-@REM copy ..\build\basik.js .\demo\lib
-copy ..\build\basik.js .\template\lib
 copy ..\build\basik.js demo\dasar\dasar_animasi\lib
 copy ..\build\basik.js demo\dasar\drag\lib
 copy ..\build\basik.js demo\dasar\drag_remote\lib
@@ -11,5 +9,17 @@ copy ..\build\basik.js demo\dasar\rotate_remote\lib
 copy ..\build\basik.js demo\dasar\sound\lib
 copy ..\build\basik.js demo\dasar\tabrakan\lib
 copy ..\build\basik.js demo\dasar\ubin\lib
+
+
+
+
+
+
+
+
+
+copy ..\build\basik.js demo\menengah\buat_image\lib
+copy ..\build\basik.js demo\menengah\doodle\lib
+copy ..\build\basik.js demo\menengah\platformer\lib
 
 pause

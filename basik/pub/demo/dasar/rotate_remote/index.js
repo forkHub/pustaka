@@ -1,4 +1,4 @@
-let kotak = muatImage("kotak.png");
+let kotak = muatGambar("kotak.png");
 kotak.tipeDrag = 4;
 kotak.x = 320;
 kotak.y = 240;
@@ -7,7 +7,7 @@ kotak.pusatY = 16;
 
 function update() {
 	bersihkanLayar();
-	gambarImage(kotak);
+	stempel(kotak);
 	posisiTeks(0, 20);
 	tulis("Drag dimana saja untuk memutar kotak");
 }

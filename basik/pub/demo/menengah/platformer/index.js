@@ -7,7 +7,7 @@ let ubinAr = [];
 let ubinTertabrak;
 let data;
 
-char = muatImage("../../asset/moon.png");
+char = muatGambar("moon.png");
 char.x = 32;
 char.y = 32;
 char.height = 32;
@@ -24,7 +24,7 @@ data = [
 for (let baris = 0; baris < data.length; baris++) {
 	for (let kolom = 0; kolom < data[baris].length; kolom++) {
 		if (data[baris].charAt(kolom) != ' ') {
-			let t = muatImage("../imgs/Box.png");
+			let t = muatGambar("box.png");
 			t.frameW = 32;
 			t.frameH = 32;
 			t.width = 32;
@@ -76,9 +76,9 @@ function update() {
 	}
 	Cls();
 	ubinAr.forEach((tile) => {
-		gambarImage(tile);
+		stempel(tile);
 	});
-	gambarImage(char);
+	stempel(char);
 	debug();
 }
 
@@ -92,7 +92,7 @@ function checkAtas() {
 function checkUbin() {
 	ubinTertabrak = null;
 	for (let i = 0; i < ubinAr.length; i++) {
-		if (imageTabrakan(char, ubinAr[i])) {
+		if (gambarTabrakan(char, ubinAr[i])) {
 			ubinTertabrak = ubinAr[i];
 			return true;
 		}
