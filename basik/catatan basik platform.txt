@@ -1,0 +1,26 @@
+Demo Functionality:
+	image collide point
+
+Playground:
+	simpan ke local storage
+	muat dari local storage
+		dialog sudah ada
+		cara load
+		check apakah ada file yang masih aktif belum disimpan
+	demo integrasi 
+		(load pakai insert javascript seperti di basik blok)
+		perlu grouping?
+		
+Library:
+	Ada flag untuk memasuki looping dan keluar looping
+	Saat gambar di stempel di luar looping, maka ada listener sebelum menggambar
+	Saat gambar di stempel di loop, maka akan digambar tanpa listener
+	Saat gambar gagal di load akan ada popup modal
+
+Next:
+Camera remove
+drawing => advanced => path
+textObject
+semut (draw with animation)
+masking
+bentuk Object
