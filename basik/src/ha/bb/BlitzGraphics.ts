@@ -101,6 +101,7 @@ function setPiksel(x: number = 0, y: number = 0): void {
 	Ip.SetPiksel(x, y);
 }
 
+//TODO: warna pakai idx
 /**
  * Set fill-color for the next graphics command
  * @param r {number} - the red color (0 - 255)
@@ -116,6 +117,7 @@ function warna(r: number = 0, g: number = 0, b: number = 0, a: number = 100) {
 	G.alpha = a;
 }
 
+//TODO: warna pakai index
 /**
  * Set stroke color
  * @param r {number} - the red color (0 - 255)

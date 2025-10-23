@@ -69,38 +69,46 @@ async function check() {
 	console.log(btoa(lsGroup[lsGroup.length - 1][0]));
 }
 
-
 async function expandLs(ls: string[]): Promise<string[]> {
 	let nextLs: string[] = [];
 
-	ls.forEach((char) => {
-		expand(char, nextLs);
+	ls.forEach(async (char) => {
+		await expand(char, nextLs);
 	})
 	return nextLs;
 }
 
-function expand(char: string, lst: string[]): void {
+async function expand(char: string, lst: string[]): Promise<void> {
+	// console.group("expand " + char);
 	for (let i = min; i <= max; i++) {
 		let char2 = char + String.fromCharCode(i);
 		if (char2 == "aa") {
 			// debugger;
 		}
-		if (jmlAda2(char2, str) > 1) {
+		if (jmlAda(char2, str) > 1) {
 			// console.log("expand sukses " + char2)
 			lst.push(char2);
 		}
+		// if ((i % 100) == 0) {
+		// 	console.log("i " + i);
+		// }
 	}
+	// console.groupEnd();
 }
 
-// function jmlAda(char: string, str: string, idx: number = 0, depth = 0): number {
-// 	if (depth > 10) return 0
-// 	let idx2 = str.indexOf(char, idx);
-// 	if (idx2 < 0) {
-// 		return 0;
-// 	}
+function jmlAda(char: string, str: string, idx: number = 0, depth = 0): number {
+	if (depth > 2) {
+		// debugger;
+		return 0
+	}
 
-// 	return jmlAda(char, str, idx2 + char.length, depth + 1) + 1;
-// }
+	let idx2 = str.indexOf(char, idx);
+	if (idx2 < 0) {
+		return 0;
+	}
+
+	return jmlAda(char, str, idx2 + char.length, depth + 1) + 1;
+}
 
 function jmlAda2(char: string, str: string): number {
 	let idx = 0;

@@ -1,10 +1,10 @@
 namespace Basik {
 
 	class Config {
-
 		readonly stroke = new Stroke();
 		readonly fill = new Stroke();
-
+		consumeInput: boolean = false;
+		onUpdate: boolean = false;
 	}
 
 	class RGB {

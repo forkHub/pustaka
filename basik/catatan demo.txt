@@ -1,9 +1,14 @@
 intermediate:
 =============
 fx bendera sin
-slider color 
+slider color buat bikin rgb 
 water fx
 diagram cartesius
+jam simple bisa di drag, tanpa info jam/menit
+jam di drag auto fix jam/menit, dengan info jam/menits
+jam animasi tanpa interaksi
+traktor interaktif
+tata surya
 
 demo ellipse path
 fx alpha
@@ -26,6 +31,8 @@ puzzle tetris
 puzzle slide puzzle
 jigsaw
 bitmap font
+color sort
+trafic jam
 
 next:
 =====

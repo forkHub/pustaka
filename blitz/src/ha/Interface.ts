@@ -13,12 +13,12 @@ interface IInput {
 	isDrag: boolean;
 	isDown: boolean;
 	isTap: boolean;
-	hit: number;
 	key: string;
 	type: EInput;
 	timerStart: number;
 	timerEnd: number;
 	id: number;	//TODO: mungkin bisa dihapus
+	hitJml: number;
 	dragJml: number;
 	dragSelesaiJml: number;
 	tapJml: number;

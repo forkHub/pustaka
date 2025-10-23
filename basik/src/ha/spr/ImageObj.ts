@@ -41,9 +41,9 @@ namespace Basik {
 			gbr.img = img;
 			gbr.kanvas = canvas;
 			gbr.rect = rect;
-			gbr.load = false;
+			gbr.dimuat = false;
 			if (!gbr.url) {
-				gbr.load = true;
+				gbr.dimuat = true;
 			}
 
 			img.onload = () => {
@@ -71,7 +71,7 @@ namespace Basik {
 				ctx.drawImage(imgP, 0, 0);
 				gbr.rect = Ktk.buat(0, 0, imgP.naturalWidth, imgP.naturalHeight);
 
-				gbr.load = true;
+				gbr.dimuat = true;
 				gbr.img = imgP;
 
 				if (!gbr.panjang) {
@@ -137,8 +137,8 @@ namespace Basik {
 		private _x: number = 0;
 		private _y: number = 0;
 		private _alpha: number = 100;
-		private _handleX: number = 0;
-		private _handleY: number = 0;
+		private _pusatX: number = 0;
+		private _pusatY: number = 0;
 		private _panjang: number = 0;
 		private _lebar: number = 0;
 		private _rotasi: number = 0;
@@ -150,7 +150,13 @@ namespace Basik {
 		private _frame: number = 0;
 
 		//internal
-		load: boolean = false;
+		private _dimuat: boolean = false;
+		public get dimuat(): boolean {
+			return this._dimuat;
+		}
+		public set dimuat(value: boolean) {
+			this._dimuat = value;
+		}
 		private _ctrIdx: number = 0;
 		private static _ctrDraw: number = 0;
 		private _url: string;
@@ -229,17 +235,17 @@ namespace Basik {
 		}
 
 		public get pusatY(): number {
-			return this._handleY;
+			return this._pusatY;
 		}
 		public set pusatY(value: number) {
-			this._handleY = value;
+			this._pusatY = value;
 		}
 
 		public get pusatX(): number {
-			return this._handleX;
+			return this._pusatX;
 		}
 		public set pusatX(value: number) {
-			this._handleX = value;
+			this._pusatX = value;
 		}
 
 		public get panjang(): number {

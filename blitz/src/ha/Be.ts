@@ -166,6 +166,8 @@ namespace Basik {
 				canvas.style.margin = '0px';
 			}
 
+			// window.
+
 			// canvas.panjang = p;
 			// canvas.lebar = l;
 

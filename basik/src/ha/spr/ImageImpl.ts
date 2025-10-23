@@ -13,7 +13,7 @@ namespace Basik {
 			h.panjangFrame = width;
 			h.panjang = width;
 			h.lebar = height;
-			h.load = true;
+			h.dimuat = true;
 			h.img = document.createElement('img');
 			Ip.register(h, h.url, h.tipeDrag);
 			return h;
@@ -92,7 +92,7 @@ namespace Basik {
 			let jmlH: number = 0;
 			let jmlV: number = 0;
 
-			if (gbr.load == false) return;
+			if (gbr.dimuat == false) return;
 
 			let w2: number = Math.floor(gbr.panjang);
 			let h2: number = Math.floor(gbr.lebar);
@@ -175,7 +175,7 @@ namespace Basik {
 			let imgW: number = 0;
 			// let imgH: number = 0;
 
-			if (gbr.load == false) return;
+			if (gbr.dimuat == false) return;
 			if (!gbr.url) {
 				imgW = gbr.panjang;
 				// imgH = gbr.height;
@@ -289,7 +289,7 @@ namespace Basik {
 		static AllImageLoaded(): boolean {
 			for (let i = 0; i < Ip.daftar.length; i++) {
 				let img = Ip.daftar[i];
-				if (!img.load) return false;
+				if (!img.dimuat) return false;
 			}
 
 			return true;

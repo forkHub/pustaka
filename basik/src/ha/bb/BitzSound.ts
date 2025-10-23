@@ -2,6 +2,7 @@
 
 const S = Basik.Sn;
 
+//TODO: load dari nama file, url resolve otomatis
 /**
  * Load sound
  * @param url {string} the url

@@ -32,7 +32,7 @@ namespace Basik {
 		down(input: IInput, key: string, type: EInput, pos: IV2D): void {
 
 			if (!input.isDown) {
-				input.hit++;
+				input.hitJml++;
 			}
 
 			input.xStart = pos.x
@@ -115,7 +115,7 @@ namespace Basik {
 		 */
 		static InputTapCount(): number {
 			let tap = Input.global.tapJml;
-			Input.global.tapJml = 0;
+			// Input.global.tapJml = 0;
 			return tap;
 		}
 
@@ -125,7 +125,7 @@ namespace Basik {
 		 */
 		static JmlUp(): number {
 			let up = Input.global.upJml;
-			Input.global.tapJml = 0;
+			// Input.global.tapJml = 0;
 			return up;
 		}
 
@@ -135,7 +135,7 @@ namespace Basik {
 		 */
 		static InputDragEndCount(): number {
 			let s = Input.global.dragSelesaiJml;
-			Input.global.dragSelesaiJml = 0;
+			// Input.global.dragSelesaiJml = 0;
 			return s;
 		}
 
@@ -152,8 +152,8 @@ namespace Basik {
 		 * @returns (number)
 		 */
 		static InputHit(): number {
-			let hit: number = Input.global.hit;
-			Input.global.hit = 0;
+			let hit: number = Input.global.hitJml;
+			// Input.global.hitJml = 0;
 
 			return hit;
 		}
@@ -220,7 +220,7 @@ namespace Basik {
 		 */
 		static InputDragStartCount(): number {
 			let hasil = Input.global.dragJml;
-			Input.global.dragJml = 0;
+			// Input.global.dragJml = 0;
 
 			return hasil;
 		}
@@ -350,7 +350,7 @@ namespace Basik {
 				y: 0,
 				yDrag: 0,
 				yStart: 0,
-				hit: 0,
+				hitJml: 0,
 				dragJml: 0,
 				dragSelesaiJml: 0,
 				tapJml: 0,
@@ -358,7 +358,7 @@ namespace Basik {
 			}
 		}
 
-		private static flush(): void {
+		static flush(): void {
 			while (Input.inputs.length > 0) {
 				Input.inputs.pop();
 			}
@@ -369,7 +369,7 @@ namespace Basik {
 			input.isDown = false;
 			input.isDrag = false;
 			input.isTap = false;
-			input.hit = 0;
+			input.hitJml = 0;
 			input.tapJml = 0;
 			input.dragJml = 0;
 			input.dragSelesaiJml = 0;
@@ -408,7 +408,7 @@ namespace Basik {
 					yDrag: 0,
 					yStart: 0,
 					id: 0,
-					hit: 0,
+					hitJml: 0,
 					dragJml: 0,
 					dragSelesaiJml: 0,
 					tapJml: 0,
