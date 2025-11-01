@@ -18,20 +18,22 @@ class Edit2 {
 	init(): void {
 
 		this.tblSimpan.onclick = () => {
-			let item: Item = {
-				id: Date.now() + '',
-				name: ''
-			}
+			// let item: Item = {
+			// 	id: Date.now() + '',
+			// 	name: ''
+			// }
 
-			//TODO:
-			item;
+			// //TODO:
+			// item;
 
-			localStorage.set("");
-			CodeMirror.getValue();
-
+			// localStorage.set("");
+			// CodeMirror.getValue();
+			dlgBelumSelesai();
 		}
 
 		this.tblMuat.onclick = () => {
+			dlgBelumSelesai();
+			/*
 			let item: Item[] = [];
 
 			//load from db
@@ -51,14 +53,15 @@ class Edit2 {
 			}, () => {
 				console.log("closed");
 			})
+				*/
 		}
 
 		this.tblUnduh.onclick = () => {
-
+			dlgBelumSelesai();
 		}
 
 		this.tblUnggah.onclick = () => {
-
+			dlgBelumSelesai();
 		}
 
 		this.tblRun.onclick = () => {
@@ -369,6 +372,10 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 	// Append and show
 	document.body.appendChild(dialog);
 	dialog.showModal();
+}
+
+function dlgBelumSelesai() {
+	alert("Maaf fungsi masih belum tersedia");
 }
 
 

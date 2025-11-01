@@ -13,17 +13,21 @@ class Edit2 {
     }
     init() {
         this.tblSimpan.onclick = () => {
-            let item = {
-                id: Date.now() + '',
-                name: ''
-            };
-            //TODO:
-            item;
-            localStorage.set("");
-            CodeMirror.getValue();
+            // let item: Item = {
+            // 	id: Date.now() + '',
+            // 	name: ''
+            // }
+            // //TODO:
+            // item;
+            // localStorage.set("");
+            // CodeMirror.getValue();
+            dlgBelumSelesai();
         };
         this.tblMuat.onclick = () => {
-            let item = [];
+            dlgBelumSelesai();
+            /*
+            let item: Item[] = [];
+
             //load from db
             try {
                 let itemStr = localStorage.getItem("basik_save");
@@ -33,16 +37,21 @@ class Edit2 {
                 console.error(e);
                 item = [];
             }
+
             console.log(item);
-            dialogListFile(item, (selectedItem) => {
+
+            dialogListFile(item, (selectedItem: Item | null) => {
                 console.log(selectedItem);
             }, () => {
                 console.log("closed");
-            });
+            })
+                */
         };
         this.tblUnduh.onclick = () => {
+            dlgBelumSelesai();
         };
         this.tblUnggah.onclick = () => {
+            dlgBelumSelesai();
         };
         this.tblRun.onclick = () => {
             console.debug('run');
@@ -307,4 +316,7 @@ function showErrorDialog(errors, okHandle, cancelHandle) {
     // Append and show
     document.body.appendChild(dialog);
     dialog.showModal();
+}
+function dlgBelumSelesai() {
+    alert("Maaf fungsi masih belum tersedia");
 }
