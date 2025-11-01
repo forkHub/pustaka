@@ -46,57 +46,34 @@ Hasilnya adalah tulisan angka 14, yaitu hasil dari roti + coklat. 9 + 5 = 14.
 - Object: Kita akan bahas nanti
 
 ## Tabel Contoh Penggunaan Variable
+```
+let nama;
+```
+Membuat kotak (variable) bernama nama, belum diisi
 
-<table>
-	<tr>
-		<th>Perintah</th>
-		<th>Penjelasan</th>
-	</tr>
-	<tr>
-		<td>
-<pre>let nama;</pre> 
-		</td>
-		<td>
-			Membuat kotak (variable) bernama nama, belum diisi
-		</td>
-	</tr>
-	<tr>
-		<td>
-<pre>
+```
 let nama;
 nama = "Umar"
-</pre>
-		</td>
-		<td></td>
-	</tr>
-</table>
+```
+Membuat kotak (variable) nama, lalu diisi dengan teks "Umar"
 
-|     |                                                              |
-| --- | ------------------------------------------------------------ |
-|     |                                                              |
-|     | Membuat kotak (variable) nama, lalu diisi dengan teks "Umar" |
-|     | ;                                                            |
-
+```
 let nama = "Umar";
-
+```
 Membuat dan mengisi variable nama sekaligus
 
+```
 let roti = 9;
-
 let coklat = 5;
-
 let total = roti + coklat
-
+```
 Menghitung total makanan dan menyimpannya di kotak total
 
+```
 let donat = 10;
-
 donat = donat + 10;
-
+```
 Membuat variable donat dan mengisinya dengan angka 10
-
-Menambahkan isi dari kotak donat dengan 10 dan memasukkan ke dalam kotak donat.
-
-Sekarang isinya jadi 20.
-
-�� Ini adalah salah satu pola yang sering digunakan dalam pemrograman
+Menambahkan isi dari kotak donat dengan 10 dan memasukkan lagi ke dalam variable donat.
+Sekarang isi variable donat jadi 20.
+✏ Ini adalah salah satu pola yang sering digunakan dalam pemrograman
