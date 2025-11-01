@@ -1,1 +1,0 @@
-A simplied version for this library for basik-blok
