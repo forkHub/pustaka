@@ -31,6 +31,7 @@ namespace Basik {
 			let img: HTMLImageElement = document.createElement('img');
 			let canvas: HTMLCanvasElement = document.createElement('canvas');
 			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+			let self = this;
 
 			let gbr: Image;
 			gbr = this;
@@ -96,6 +97,9 @@ namespace Basik {
 				if (!gbr._frameW) gbr.panjangFrame = imgP.naturalWidth;
 
 				// ha.be.cache.setFile(url, imgP);
+
+				ImgImpl.lastImg = self;
+				Event.dispatchEvent(Evt.GAMBAR_DILOAD);
 			}
 
 			function imgOnLoadDefault(): void {

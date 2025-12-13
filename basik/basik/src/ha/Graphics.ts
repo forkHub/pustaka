@@ -5,6 +5,8 @@ namespace Basik {
 		private static drawCanvas: HTMLCanvasElement;
 		private static _lastX: number = 0;
 		private static _isUpdating: boolean = false;
+
+
 		public static get isUpdating(): boolean {
 			return Graphic._isUpdating;
 		}

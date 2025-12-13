@@ -1,0 +1,14 @@
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\dasar_animasi\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\drag\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\drag_remote\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\drag_rotasi\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\keyboard\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\mouse\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\muat_image\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\rotate_remote\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\sound\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\tabrakan\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\dasar\ubin\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\menengah\buat_image\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\menengah\doodle\index.html
+D:\xampp4\htdocs\pustaka\basik\contoh\menengah\platformer\index.html

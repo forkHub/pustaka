@@ -3,6 +3,14 @@ namespace Basik {
 	export class ImgImpl {
 		static readonly props: string[] = [];
 		static readonly daftar: Image[] = [];
+		private static _lastImg: Image;
+
+		public static get lastImg(): Image {
+			return ImgImpl._lastImg;
+		}
+		public static set lastImg(value: Image) {
+			ImgImpl._lastImg = value;
+		}
 
 		static CreateImage(width: number, height: number): Image {
 			let h: Image = new Image();
