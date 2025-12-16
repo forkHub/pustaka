@@ -9,6 +9,6 @@ function update() {
 	bersihkanLayar();
 
 	stempel(kotak);
-	posisiTeks(0, 20);
+	posisiTeks(10, 20);
 	tulis("Drag dimana saja untuk menggerakkan kotak");
 }

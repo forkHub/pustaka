@@ -7,7 +7,7 @@ function mouseKlik() {
 function update() {
 	//clear screen
 	bersihkanLayar();
-	posisiTeks(0, 20);
+	posisiTeks(10, 20);
 	tulis("Pencet Mouse dan gerakkan: ");
 	tulis("");
 	tulis("ditahan: " + mouseDitahan());
