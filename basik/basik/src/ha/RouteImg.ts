@@ -1,2 +1,2 @@
-///<reference path="./Route"/>
+///<reference path="./Route.ts"/>
 

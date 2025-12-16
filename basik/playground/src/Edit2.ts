@@ -286,7 +286,7 @@ function render(script: string) {
 
 	// Example usage:
 	loadScriptsSequentially([
-		'./editor/lib/basik.js',
+		'./editor/lib/basik.min.js',
 		'./editor/lib/mulai.js'
 	], () => {
 		const script = document.createElement('script');

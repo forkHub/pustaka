@@ -143,6 +143,8 @@ namespace Basik {
 
 				// ha.be.cache.setFile(url, gbr.img);
 			}
+
+			this.nama = url;
 		}
 
 		//
@@ -161,6 +163,14 @@ namespace Basik {
 		private _down: boolean = false;
 		private _frame: number = 0;
 		private _pendingStempel: boolean = false;
+		private _nama: string;
+
+		public get nama(): string {
+			return this._nama;
+		}
+		public set nama(value: string) {
+			this._nama = value;
+		}
 
 		public get pendingStempel(): boolean {
 			return this._pendingStempel;

@@ -7,11 +7,47 @@
  * @returns {Basik.Image}
  */
 function muatGambar(url: string): Basik.Image {
-	return Ip.Muat("asset/" + url);
+	let imgUrl: string = url;
+
+	//auto extension
+	if (imgUrl.indexOf(".") >= 0) {
+		//nothing
+	}
+	else {
+		imgUrl = imgUrl + ".png";
+	}
+
+	//auto asset
+	if (imgUrl.indexOf("/") >= 0) {
+		//nothing
+	}
+	else {
+		imgUrl = "asset/" + url;
+	}
+
+	return Ip.Muat(imgUrl);
 }
 
-function stempel(img: Basik.Image) {
-	Ip.Draw(img);
+function stempel(img: Basik.Image | string, x: number = 0, y: number = 0) {
+	if (typeof img == "string") {
+		let img2 = Ip.getByName(img, true);
+		posisi(img2, x, y);
+		Ip.Draw(img2);
+	}
+	else {
+		posisi(img, x, y);
+		Ip.Draw(img);
+	}
+
+	function posisi(img: Basik.Image, x: number, y: number) {
+		if (x != undefined) {
+			img.x = x;
+		}
+
+		if (y != undefined) {
+			img.y = y;
+		}
+	}
 }
 
 /**

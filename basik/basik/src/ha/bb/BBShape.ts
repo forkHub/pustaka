@@ -1,6 +1,6 @@
 ///<reference path="./Route.ts"/>
 
-function penaDitekan(x: number = 0, y: number = 0, rotasi: number = 0): void {
+function bukaPath(x: number = 0, y: number = 0, rotasi: number = 0): void {
 	let ctx = G.Canvas().getContext('2d');
 	rotasi; //TODO:
 	ctx.beginPath();
@@ -9,28 +9,14 @@ function penaDitekan(x: number = 0, y: number = 0, rotasi: number = 0): void {
 	G.lastY = y;
 }
 
-function garis(x: number, y: number): void {
+function garisKe(x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
 	ctx.lineTo(G.lastX + x, G.lastY + y);
 }
 
-function lingkaran(x: number, y: number, radius: number, awal: number, akhir: number): void {
+function kurvaKe(cx: number, cy: number, x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
-	awal *= (Math.PI / 180);
-	akhir *= Math.PI / 180;
-	ctx.arc(x + G.lastX, y + G.lastY, radius, awal, akhir);
-}
-
-function elips(x: number, y: number, radiusX: number, radiusY: number, awal: number, akhir: number): void {
-	let ctx = G.Canvas().getContext('2d');
-	awal *= (Math.PI / 180);
-	akhir *= Math.PI / 180;
-	ctx.ellipse(G.lastX + x, G.lastY + y, radiusX, radiusY, 0, awal, akhir);
-}
-
-function quad(cx: number, cy: number, x: number, y: number): void {
-	let ctx = G.Canvas().getContext('2d');
-	ctx.quadraticCurveTo(G.lastX + cx, G.lastY + cy, G.lastX + x, G.lastY + y);
+	ctx.quadraticCurveTo(cx, cy, x, y);
 	//TODO: dibuat bezier
 }
 
@@ -38,9 +24,30 @@ function bezier(): void {
 
 }
 
-
-function penaDiangkat() {
+function tutupPath() {
 	let ctx = G.Canvas().getContext('2d');
 	ctx.stroke();
 	ctx.fill();
+}
+
+function garis(x1: number = 0, y1: number = 0, x2: number = 0, y2: number = 0) {
+	let ctx = G.Canvas().getContext('2d');
+	ctx.beginPath();
+	ctx.moveTo(x1, y1);
+	ctx.lineTo(x2, y2);
+	ctx.stroke();
+}
+
+function lingkaran(x: number = 0, y: number = 0, radius: number = 20, awal: number = 0, akhir: number = 360): void {
+	let ctx = G.Canvas().getContext('2d');
+	awal *= (Math.PI / 180);
+	akhir *= Math.PI / 180;
+	ctx.arc(x, y, radius, awal, akhir);
+}
+
+function elip(x: number = 0, y: number = 0, radiusX: number = 0, radiusY: number = 0, awal: number = 0, akhir: number = 360): void {
+	let ctx = G.Canvas().getContext('2d');
+	awal *= (Math.PI / 180);
+	akhir *= Math.PI / 180;
+	ctx.ellipse(x, y, radiusX, radiusY, 0, awal, akhir);
 }

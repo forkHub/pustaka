@@ -6,4 +6,5 @@
 ///<reference path="./Teks.ts"/>
 ///<reference path="./Sound.ts"/>
 ///<reference path="./Keyboard.ts"/>
+///<reference path="./Warna.ts"/>
 

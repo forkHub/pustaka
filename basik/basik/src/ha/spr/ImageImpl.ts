@@ -27,7 +27,7 @@ namespace Basik {
 			return h;
 		}
 
-		//TODO: belum ada perintah basik
+		//TODO: belum ada perintah basik, masih bug
 		static MuatAnimasi(url: string, pf: number, lf: number): Image {
 			// tipeDrag;
 
@@ -62,6 +62,19 @@ namespace Basik {
 
 			return Ktk.collide(gbr1.rect, gbr2.rect);
 		};
+
+		static getByName(nama: string, buat: boolean): Image {
+			for (let i = 0; i < Ip.daftar.length; i++) {
+				let item = Ip.daftar[i];
+				if (item.nama == nama) return item;
+			}
+
+			if (buat) {
+				return Ip.Muat(nama);
+			}
+
+			return null;
+		}
 
 		static register(
 			image: Image,

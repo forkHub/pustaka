@@ -1,6 +1,12 @@
 @echo off
 echo off
 
+echo minify
+echo ======
+cd basik
+call min.bat || goto error
+cd ..
+
 echo =================================
 echo update library 
 echo =================================
@@ -14,9 +20,9 @@ echo ===============
 xcopy template stg\template /s /y /i || goto error
 echo.
 
-echo =============
+echo =================
 echo update contoh lib
-echo =============
+echo =================
 echo.
 echo dasar:
 copy build\*.* contoh\dasar\dasar_animasi\lib || goto error

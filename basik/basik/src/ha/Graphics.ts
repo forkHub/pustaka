@@ -88,7 +88,7 @@ namespace Basik {
 		}
 
 		static Graphics(w?: number, h?: number, canvas: HTMLCanvasElement = null, mode: number = 1) {
-			console.log('init');
+			console.group('init');
 
 			if (!canvas) canvas = G.buildCanvas(w, h);
 			// G.mainCanvas = canvas;
@@ -99,6 +99,7 @@ namespace Basik {
 			// G.initComp();
 			In.init(G.drawCanvas);
 			Keyboard.init();
+			Warna.init();
 			// Camera.init();
 			sprInt.init();
 			G.initEvent();
@@ -124,9 +125,10 @@ namespace Basik {
 
 			// NoStroke();
 			bersihkanLayar();
-			warnaGaris(0, 0, 0, 0);
-			posisiTeks(0, 10);
+			warnaGaris(0);
+			posisiTeks(10, 10);
 			ukuranTeks(10);
+			console.groupEnd();
 		}
 
 		static Cls(x: number = 0, y: number = 0, w: number = 0, h: number = 0) {

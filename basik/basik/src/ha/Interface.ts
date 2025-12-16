@@ -20,6 +20,13 @@ namespace Basik {
 		pointerId: number;
 	}
 
+	export interface IWarna {
+		r: number;
+		g: number;
+		b: number;
+	}
+
+
 	// interface ISprImgObj {
 	// 	//share-ble
 	// 	img: HTMLImageElement;
