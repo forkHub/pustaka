@@ -88,7 +88,7 @@ namespace Basik {
 		}
 
 		static Graphics(w?: number, h?: number, canvas: HTMLCanvasElement = null, mode: number = 1) {
-			console.group('init');
+			console.groupCollapsed("init");
 
 			if (!canvas) canvas = G.buildCanvas(w, h);
 			// G.mainCanvas = canvas;

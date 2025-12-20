@@ -72,7 +72,7 @@ echo.
 xcopy web\*.* stg /y || goto error
 
 echo update pg
-copy build\*.* playground\web\editor\js || goto error
+copy build\*.* playground\web\editor\lib || goto error
 echo.
 
 echo publikasi pg
