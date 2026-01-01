@@ -30,7 +30,7 @@ function tutupPath() {
 	ctx.fill();
 }
 
-function garis(x1: number = 0, y1: number = 0, x2: number = 0, y2: number = 0) {
+function garis(x1: number = 100, y1: number = 100, x2: number = 200, y2: number = 100) {
 	let ctx = G.Canvas().getContext('2d');
 	ctx.beginPath();
 	ctx.moveTo(x1, y1);
@@ -38,11 +38,14 @@ function garis(x1: number = 0, y1: number = 0, x2: number = 0, y2: number = 0) {
 	ctx.stroke();
 }
 
-function lingkaran(x: number = 0, y: number = 0, radius: number = 20, awal: number = 0, akhir: number = 360): void {
+function lingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: number = 0, akhir: number = 360): void {
 	let ctx = G.Canvas().getContext('2d');
+	ctx.beginPath();
 	awal *= (Math.PI / 180);
 	akhir *= Math.PI / 180;
 	ctx.arc(x, y, radius, awal, akhir);
+	ctx.stroke();
+	ctx.fill();
 }
 
 function elip(x: number = 0, y: number = 0, radiusX: number = 0, radiusY: number = 0, awal: number = 0, akhir: number = 360): void {
@@ -50,4 +53,12 @@ function elip(x: number = 0, y: number = 0, radiusX: number = 0, radiusY: number
 	awal *= (Math.PI / 180);
 	akhir *= Math.PI / 180;
 	ctx.ellipse(x, y, radiusX, radiusY, 0, awal, akhir);
+	ctx.stroke();
+	ctx.fill();
+}
+
+function kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 100) {
+	let ctx = G.Canvas().getContext('2d');
+	ctx.fillRect(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
+	ctx.strokeRect(x1, y1, x2 - x1 + 1, y2 - y1 + 1);
 }

@@ -14,15 +14,15 @@ namespace Basik {
 
 		static init() {
 			let s3 = Math.floor(256 / 6);
-			let colM = 36;
+			let colM = 40;
 
 			for (let r = 0; r <= 5; r++) {
 				for (let g = 0; g <= 5; g++) {
 					for (let b = 0; b <= 5; b++) {
 						Warna.warnaAr.push({
-							r: Math.floor(r * s3),
-							g: Math.floor(g * s3),
-							b: Math.floor(b * s3)
+							r: Math.floor(r / 5 * 255),
+							g: Math.floor(g / 5 * 255),
+							b: Math.floor(b / 5 * 255)
 						})
 					}
 				}
@@ -36,6 +36,8 @@ namespace Basik {
 					b: Math.floor(s3)
 				})
 			}
+
+			console.log("jumlah warna " + Warna.warnaAr.length);
 		}
 	}
 }

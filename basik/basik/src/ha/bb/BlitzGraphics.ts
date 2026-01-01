@@ -108,3 +108,7 @@ function warna(idx: number = 0) {
 function warnaGaris(idx: number) {
 	Basik.Warna.warnaGaris(idx);
 }
+
+function tebalGaris(n: number) {
+	kanvas().getContext('2d').lineWidth = n;
+}

@@ -126,8 +126,10 @@ namespace Basik {
 			// NoStroke();
 			bersihkanLayar();
 			warnaGaris(0);
+			warna(25);
 			posisiTeks(10, 10);
 			ukuranTeks(10);
+			kanvas().getContext('2d').lineWidth = 1;
 			console.groupEnd();
 		}
 
