@@ -1,0 +1,7 @@
+Tampilan dibuat dua kolom, bagian kiri untuk kode bagian kanan untuk hasil
+
+tombol simpan sebagai
+
+fungsi rename
+
+menu tombol untuk tampilan demo

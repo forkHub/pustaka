@@ -1,121 +1,121 @@
 declare var CodeMirror: any;
-// declare var ESLint: any;
 declare var JSHINT: any;
+
+enum EState {
+	awal,
+	edit,
+	dialogSimpan,
+	jalankan
+}
+
+interface file {
+	namaFile: string,
+	data: string
+}
+
+//globa state
+let fileDiedit = false;
+let fileHash = '';
+let fileNama = "latihan_" + (Math.floor(Math.random() * 1000) + 1000);
+let fileList: file[] = [];
+let fileBaru = true;
+let fileAktif: file = {
+	namaFile: fileNama,
+	data: ""
+}
+
+let appState = EState.edit;
+const storageNama = "io.github.forkhub.basik.data";
 
 class Edit2 {
 	private myCodeMirror: any;
 	private editArea: HTMLTextAreaElement = document.querySelector('textarea.edit-area');
 	private webCont: HTMLDivElement = document.querySelector('div.kontainer-2 div.web');
 	private editCont: HTMLDivElement = document.querySelector('div.kontainer-2 div.edit-text');
+	private fileInfo: HTMLSpanElement;
 
-	private tblRun: HTMLButtonElement = document.querySelector('button.jalan');
-	private tblEdit: HTMLButtonElement = document.querySelector('button.edit');
-	private tblSimpan: HTMLButtonElement = document.querySelector('button.simpan');
-	private tblMuat: HTMLButtonElement = document.querySelector('button.muat');
-	private tblUnduh: HTMLButtonElement = document.querySelector('button.unduh');
-	private tblUnggah: HTMLButtonElement = document.querySelector('button.unggah');
+	private tblEditGroup = ["simpan", "muat", "jalan"];
+	private tblJalanGroup = ["edit",];
+
+	constructor() {
+		this.webCont;
+		this.editCont;
+		this.fileInfo = document.querySelector("div.file-info span.nama");
+	}
+
+	getTbl(nama: string): HTMLButtonElement {
+		return document.querySelector(`button.${nama}`);
+	}
+
+	showTbl(tbl: HTMLButtonElement | string[] | string): void {
+		if (Array.isArray(tbl)) {
+			tbl.forEach((item) => {
+				this.showTbl(item);
+			})
+		}
+		else if (typeof tbl === "string") {
+			this.showTbl(this.getTbl(tbl));
+		}
+		else {
+			tbl.classList.add('disp-inline');
+			tbl.classList.remove('disp-none');
+		}
+	}
+
+	hideTbl(tbl: HTMLButtonElement | string[] | string): void {
+		if (Array.isArray(tbl)) {
+			tbl.forEach((item) => {
+				this.hideTbl(item);
+			})
+		}
+		else if (typeof tbl == "string") {
+			this.hideTbl(this.getTbl(tbl));
+		}
+		else {
+			tbl.classList.remove('active');
+			tbl.classList.remove('disp-inline');
+			tbl.classList.add('disp-none');
+		}
+	}
 
 	init(): void {
 
-		this.tblSimpan.onclick = () => {
-			// let item: Item = {
-			// 	id: Date.now() + '',
-			// 	name: ''
-			// }
-
-			// //TODO:
-			// item;
-
-			// localStorage.set("");
-			// CodeMirror.getValue();
-			dlgBelumSelesai();
+		this.getTbl("simpan").onclick = () => {
+			this.simpanKlik();
 		}
 
-		this.tblMuat.onclick = () => {
-			dlgBelumSelesai();
-			/*
-			let item: Item[] = [];
-
-			//load from db
-			try {
-				let itemStr = localStorage.getItem("basik_save");
-				item = JSON.parse(itemStr) || [];
-			}
-			catch (e) {
-				console.error(e);
-				item = [];
-			}
-
-			console.log(item);
-
-			dialogListFile(item, (selectedItem: Item | null) => {
-				console.log(selectedItem);
-			}, () => {
-				console.log("closed");
-			})
-				*/
+		this.getTbl("muat").onclick = () => {
+			this.muatKlik();
 		}
 
-		this.tblUnduh.onclick = () => {
-			dlgBelumSelesai();
-		}
-
-		this.tblUnggah.onclick = () => {
-			dlgBelumSelesai();
-		}
-
-		this.tblRun.onclick = () => {
+		this.getTbl("jalan").onclick = () => {
+			// this.gantiState(EState.jalankan);
 			console.debug('run');
+
 			this.editCont.classList.remove('active');
-
-			this.tblEdit.classList.remove('active');
-			this.tblEdit.classList.add('disp-inline');
-			this.tblMuat.classList.add('disp-none');
-			this.tblSimpan.classList.add('disp-none');
-			this.tblUnduh.classList.add('disp-none');
-			this.tblUnggah.classList.add('disp-none');
-
-			this.tblMuat.classList.remove('disp-inline');
-			this.tblSimpan.classList.remove('disp-inline');
-			this.tblUnduh.classList.remove('disp-inline');
-			this.tblUnggah.classList.remove('disp-inline');
-
-			this.tblRun.classList.add('active');
-			this.tblRun.classList.add('disp-none');
-			this.tblRun.classList.remove('disp-inline');
 			this.webCont.classList.add('active');
+
+			this.hideTbl(this.tblEditGroup);
+			this.showTbl(this.tblJalanGroup);
+
+			// this.tblEdit.classList.remove('active');
+			// this.tblEdit.classList.add('disp-inline');
+			// this.tblMuat.classList.add('disp-none');
+			// this.tblSimpan.classList.add('disp-none');
+
+			// this.tblMuat.classList.remove('disp-inline');
+			// this.tblSimpan.classList.remove('disp-inline');
+
+			// this.tblRun.classList.add('active');
+			// this.tblRun.classList.add('disp-none');
+			// this.tblRun.classList.remove('disp-inline');
 
 			this.compile();
 		}
 
-		this.tblEdit.onclick = () => {
+		this.getTbl("edit").onclick = () => {
 			this.editClick();
 		}
-
-		// const eslintConfig = {
-		// 	parserOptions: {
-		// 		ecmaVersion: 2015,
-		// 		sourceType: "module"
-		// 	},
-		// 	env: {
-		// 		es6: true,
-		// 		browser: true
-		// 	},
-		// 	rules: {
-		// 		semi: ["error", "always"],
-		// 		"no-unused-vars": "warn"
-		// 	}
-		// };
-
-		// CodeMirror.registerHelper("lint", "javascript", function (text: any) {
-		// 	const results = ESLint.verify(text, eslintConfig);
-		// 	return results.map((result: any) => ({
-		// 		from: CodeMirror.Pos(result.line - 1, result.column - 1),
-		// 		to: CodeMirror.Pos(result.line - 1, result.column),
-		// 		message: result.message,
-		// 		severity: result.severity === 2 ? "error" : "warning"
-		// 	}));
-		// });
 
 		this.myCodeMirror = CodeMirror.fromTextArea(this.editArea, {
 			lineNumbers: true,
@@ -124,66 +124,157 @@ class Edit2 {
 			lint: false
 		});
 
-		// console.log(CodeMirror);
-		// console.log(this.myCodeMirror);
-
 		this.myCodeMirror.on("change", () => {
 			// console.log('change');
+			this.updateNama();
 		});
 
-		// this.loadFromQuery();
+		this.hideTbl("edit");
+		this.muatFileAwal();
+		this.fileInfo.innerText = fileNama;
 	}
 
-	// loadFromQuery(): void {
-	// 	try {
-	// 		//loading
-	// 		let s: string = window.top.location.search.slice(1);
-	// 		console.log('url: ' + s);
-	// 		let ar: string[] = s.split('&');
-	// 		console.log(ar);
-	// 		ar = ar[0].split('=');
-	// 		console.log(ar);
+	muatKlik(): void {
+		dialogDaftarFile(
+			(item: file) => {
+				console.log("muat data");
+				console.log(item.data);
+				fileBaru = false;
+				fileNama = item.namaFile;
+				fileAktif = item;
+				this.myCodeMirror.setValue(item.data);
+				this.updateNama();
+			},
+			() => {
+				//nothing
+			}
+		)
+	}
 
-	// 		console.log('loading: ' + ha.comp.loading);
-	// 		ha.comp.Util.Ajax2('get', "./data/" + ar[1] + ".js", '').then((value: string) => {
-	// 			this.myCodeMirror.setValue(value);
-	// 			// this.compile();
-	// 		}).catch((e) => {
-	// 			console.error(e);
-	// 			ha.comp.dialog.tampil('Colud not load data');
-	// 		});
-
-	// 		//load query
-	// 		console.log(ar);
-	// 	}
-	// 	catch (e) {
-	// 		console.error(e);
-	// 	}
-	// }
-
-	// klikRun(): void {
-	// 	this.compile();
-	// }
+	muatFileAwal() {
+		console.log("muat file awal:");
+		try {
+			let s = window.localStorage.getItem(storageNama);
+			fileList = JSON.parse(s);
+			if (!fileList) fileList = [];
+			console.log(fileList);
+		}
+		catch (e) {
+			console.warn(e);
+			fileList = [];
+		}
+	}
 
 	editClick(): void {
+		// this.gantiState(EState.edit);
+
 		this.editCont.classList.add('active');
 		this.editArea.classList.add('active');
 
-		this.tblRun.classList.remove('active');
-		this.tblRun.classList.add('disp-inline');
-		this.tblRun.classList.remove('disp-none');
+		// this.tblRun.classList.remove('active');
+		// this.showTbl(this.getTbl("jalan"));
+		// this.tblRun.classList.add('disp-inline');
+		// this.tblRun.classList.remove('disp-none');
+
 		this.webCont.classList.remove('active');
 		this.webCont.innerHTML = '';
 
-		this.tblEdit.classList.add('active');
-		this.tblEdit.classList.add('disp-none');
-		this.tblEdit.classList.remove('disp-inline');
-		this.tblSimpan.classList.add('disp-inline');
-		this.tblMuat.classList.add('disp-inline');
-		this.tblUnduh.classList.add('disp-inline');
-		this.tblUnggah.classList.add('disp-inline');
+		// this.tblEdit.classList.add('active');
+		// this.tblEdit.classList.add('disp-none');
+		// this.tblEdit.classList.remove('disp-inline');
+		// this.tblSimpan.classList.add('disp-inline');
+		// this.tblMuat.classList.add('disp-inline');
+		// this.tblEditGroup.forEach((item) => {
+		// 	this.showTbl(this.getTbl(item));
+		// })
+
+		this.showTbl(this.tblEditGroup);
+		this.hideTbl(this.tblJalanGroup);
 
 		console.log('edit click');
+	}
+
+	simpanKlik(): void {
+		let dataKode: string = this.myCodeMirror.getValue();
+
+		if (!dataKode) {
+			alert("Tidak ada data yang disimpan, Anda belum menulis apa-apa.");
+			return;
+		}
+
+		let nama = prompt("Nama file:", fileNama);
+		if (!nama) {
+			return;
+		}
+
+		let self = this;
+		let gantiNama = (nama != fileNama);
+
+		if (fileBaru) {
+			resolveKonflik();
+		}
+		else {
+			if (gantiNama) {
+				resolveKonflik();
+			}
+			else {
+				timpa();
+			}
+		}
+
+		this.updateNama();
+
+		function resolveKonflik() {
+			if (checkKonflik()) {
+				if (confirm("Nama file sudah ada, apakah mau di timpa?")) {
+					timpa();
+					fileBaru = false;
+					fileNama = nama;
+				}
+				else {
+					//batal simpan
+				}
+			}
+			else {
+				simpanBaru();
+			}
+		}
+
+		function checkKonflik(): boolean {
+			let konflik = false;
+			for (let i = 0; i < fileList.length; i++) {
+				if (fileList[i].namaFile === nama) {
+					konflik = true;
+				}
+			}
+			return konflik;
+		}
+
+		function timpa() {
+			fileList.forEach((item) => {
+				if (item.namaFile == nama) {
+					item.data = dataKode;
+					fileAktif = item;
+				}
+			});
+
+			window.localStorage.setItem(storageNama, JSON.stringify(fileList));
+			fileBaru = false;
+			fileNama = nama;
+		}
+
+		function simpanBaru() {
+			fileAktif = {
+				namaFile: nama,
+				data: self.myCodeMirror.getValue()
+			}
+
+			fileList.push(fileAktif);
+			fileBaru = false;
+			fileNama = nama;
+
+			window.localStorage.setItem(storageNama, JSON.stringify(fileList));
+		}
 	}
 
 	compile(): void {
@@ -206,6 +297,8 @@ class Edit2 {
 			},
 				() => {
 					this.editClick();
+					// this.gantiState(EState.edit);
+
 				});
 		}
 		else {
@@ -231,6 +324,22 @@ class Edit2 {
 			iframe.contentWindow.document.write(hal2);
 			iframe.contentWindow.document.close();
 		}, 0);
+	}
+
+	checkFileUpdated(): boolean {
+		let data = this.myCodeMirror.getValue();
+		let fData = fileAktif.data;
+
+		return (data != fData);
+	}
+
+	updateNama(): void {
+		if (this.checkFileUpdated()) {
+			this.fileInfo.innerText = fileNama + "(*)";
+		}
+		else {
+			this.fileInfo.innerText = fileNama;
+		}
 	}
 }
 
@@ -286,8 +395,8 @@ function render(script: string) {
 
 	// Example usage:
 	loadScriptsSequentially([
-		'./editor/lib/basik.min.js',
-		'./editor/lib/mulai.js'
+		'./editor/lib/basik.min.js?r=324',
+		'./editor/lib/mulai.js?r=123'
 	], () => {
 		const script = document.createElement('script');
 		script.textContent = \`${script}\`
