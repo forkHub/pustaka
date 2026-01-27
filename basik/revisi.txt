@@ -1,6 +1,0 @@
-file start.js yang membuat kanvas dan ukuran font.
-ada keterangan di tiap demo
-semua latihan di buatkan satu demo
-
-perintah pakai huruf kecil
-event pakai huruf kecil

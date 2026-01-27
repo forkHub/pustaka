@@ -1,0 +1,45 @@
+Demo Functionality:
+	image collide point
+
+Perintah Adv (kemungkinan langsung ke contex):
+	warnaRgba
+	warnaGarisRgba
+	gradient
+
+Playground:
+	simpan ke local storage
+	muat dari local storage
+		dialog sudah ada
+		cara load
+		check apakah ada file yang masih aktif belum disimpan
+	demo integrasi 
+		dibuat dalam bentuk dokumentasi yang bisa di copy paste
+		[x] (load pakai insert javascript seperti di basik blok)
+		[x] perlu grouping?
+		
+Library:
+	Ada flag untuk memasuki looping dan keluar looping
+	gambar support simplified url:
+		gambar tanpa extensi dan url (local, auto extensi png)
+		gambar ada extensi 
+	Saat gambar di stempel di luar looping, maka ada listener sebelum menggambar
+	Saat gambar di stempel di loop, maka akan digambar tanpa listener
+	Saat gambar gagal di load akan ada popup modal
+
+Next:
+Camera dipakai lagi
+	ada konsep layarX dan layarY
+	layarX dan layarY hanya berlaku bila camera tidak di posisi 0
+	perlu perubahan logic dalam gambar dan collision
+perintah gambar sederhana
+	mulaiGambar
+	posisiPen
+	garisKe
+	kurvaKe 
+	linkaranKe(disederhanakan)
+	selesaiGambar
+drawing => advanced => path
+textObject
+semut (draw with animation)
+masking
+bentuk Object dasar

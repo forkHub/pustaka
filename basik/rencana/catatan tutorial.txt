@@ -1,0 +1,14 @@
+struktur latihan
+	perintah tulis lanjutan
+	warna
+	prompt
+	for nested
+	komplek logical operator
+	basik shape: kotak, lingkaran, elipse, garis, quad
+	array
+	for decrement
+
+proyek:
+	doodle
+	doodle advanced
+

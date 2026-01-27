@@ -1,0 +1,27 @@
+saat di halaman utama:
+	user klik tombol simpan :
+		bila file sudah dinamai maka file langsung disimpan:
+		bila file belum dinamai maka muncul dialog nama (1):
+			bila tombol ok ditekan maka check file:
+				- bila file sudah ada muncul alert, balik ke-1
+				- bila file belum ada maka simpan
+			bila tombol cancel ditekan maka batal simpan:
+	klik tombol muat maka tampilkan halaman muat:
+
+halaman muat:
+	bila belum ada file maka tampilkan warning
+	bila sudah ada file maka tampilkan list file:
+		bila user select item, maka highlighit item
+		bila user klik tombol buka maka buka file
+		bila user klik tombol rename maka tampilkan dialog rename:
+			bila user klik ok maka check file sudah ada:
+				bila sudah ada maka muncul alert
+				bila belum ada maka:
+					- lanjutkan rename file
+					- update UI
+		bila user klik tombol hapus maka munculkan dialog confirm:
+			bila user setuju maka:
+				hapus file
+				update UI
+			bila user tidak setuju maka tidak terjadi apa-apa
+		bila user klik tombol 
