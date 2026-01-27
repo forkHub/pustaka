@@ -1,3 +1,5 @@
+///<reference path="./pattern.ts"/>
+
 let str = "ASCII printable characters are the 95 characters in the ASCII character set that can be displayed on screen or printed on paper. They include letters, numbers, symbols, and punctuation marks, and are represented by codes 32 to 126. These characters are used to create written text and other visual content.";
 let ls: string[] = [];
 let ls2: string[] = [];
@@ -9,20 +11,28 @@ let expandCtr = 0;
 const fileInput = document.createElement('input');
 fileInput.type = 'file';
 document.body.appendChild(fileInput);
+test2();
 
-for (let i = min; i <= max; i++) {
-	ls.push(String.fromCharCode(i));
+function test2() {
+	let mp = new MPattern();
+
+	str = "aaaaa";
+
+	for (let i = 0; i < str.length; i++) {
+		let p = new PolledChar();
+		p.char = str.charAt(i);
+		p.idx = i;
+		mp.poll(p);
+	}
+	console.log(mp.ls);
 }
-lsGroup.push(ls);
 
-//test
-// str = "aaaabbbb";
-// console.log(jmlAda2("bbbb", str));
-
-// check().then(() => {
-// 	console.log("ok");
-// })
-// console.log(lsGroup);
+function test() {
+	for (let i = min; i <= max; i++) {
+		ls.push(String.fromCharCode(i));
+	}
+	lsGroup.push(ls);
+}
 
 fileInput.addEventListener('change', function () {
 	const file = fileInput.files[0];
@@ -68,7 +78,6 @@ async function check() {
 	console.log(lsGroup);
 	console.log(btoa(lsGroup[lsGroup.length - 1][0]));
 }
-
 
 async function expandLs(ls: string[]): Promise<string[]> {
 	let nextLs: string[] = [];
