@@ -37,7 +37,7 @@ Ini adalah bentuk lengkap perintah `lingkaran()`. Bila dijalankan, kita akan mel
 Kita menggambar lingkaran dari sudut 0 derajat ke sudut 180.
 
 Sudut di javascript berjalan searah jarum jam,
-berkebalikan dengan sudut yang kita pelajari di pelajaran matematika.
+berkebalikan dengan sudut yang kita pelajari di pelajaran matematika di sekolah.
 Itulah sebabnya lingkaran yang dihasilkan adalah bagian bawah.
 
 Awalnya mungkin agak bingung, tapi kita harus membiasakannya.
@@ -54,3 +54,6 @@ Javascript adalah bahasa pemrograman yang fleksibel.
 ## Latihan:
 
 Cobalah untuk membuat gambar sebuah masjid. Gunakan perintah `kotak()` dan `lingkaran()`.
+
+hasilnya adalah seperti ini:
+[gambar masjid]
