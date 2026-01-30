@@ -50,7 +50,25 @@ namespace Basik {
 		}
 
 		static Muat(url: string): Image {
-			return new Image(url);
+			let imgUrl: string = url;
+
+			//auto asset
+			if (imgUrl.indexOf("/") >= 0) {
+				//nothing
+			}
+			else {
+				imgUrl = "asset/" + url;
+
+				//auto extension
+				if (imgUrl.indexOf(".") >= 0) {
+					//nothing
+				}
+				else {
+					imgUrl = imgUrl + ".png";
+				}
+			}
+
+			return new Image(imgUrl);
 		}
 
 		static tabrakan(gbr1: Image, x1: number, y1: number, gbr2: Image, x2: number, y2: number): boolean {

@@ -7,25 +7,7 @@
  * @returns {Basik.Image}
  */
 function muatGambar(url: string): Basik.Image {
-	let imgUrl: string = url;
-
-	//auto extension
-	if (imgUrl.indexOf(".") >= 0) {
-		//nothing
-	}
-	else {
-		imgUrl = imgUrl + ".png";
-	}
-
-	//auto asset
-	if (imgUrl.indexOf("/") >= 0) {
-		//nothing
-	}
-	else {
-		imgUrl = "asset/" + url;
-	}
-
-	return Ip.Muat(imgUrl);
+	return Ip.Muat(url);
 }
 
 function stempel(img: Basik.Image | string, x: number = 0, y: number = 0) {

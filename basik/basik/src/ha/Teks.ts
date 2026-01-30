@@ -28,8 +28,19 @@ namespace Basik {
 		}
 
 		//TODO: pakai angka
-		static Align(s: CanvasTextAlign = "left") {
-			G.Canvas().getContext('2d').textAlign = s;
+		static Align(s: number = 1) {
+			let align: CanvasTextAlign = "left";
+
+			if (s == 1) {
+				align = "left";
+			} else if (s == 2) {
+				align = "center";
+			}
+			else if (s == 3) {
+				align = "right";
+			}
+
+			G.Canvas().getContext('2d').textAlign = align;
 		}
 
 		static WriteLn(teks: string): void {
