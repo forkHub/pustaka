@@ -10,7 +10,7 @@ function muatGambar(url: string): Basik.Image {
 	return Ip.Muat(url);
 }
 
-function stempel(img: Basik.Image | string, x: number = 0, y: number = 0) {
+function stempel(img: Basik.Image | string, x: number, y: number) {
 	if (typeof img == "string") {
 		let img2 = Ip.getByName(img, true);
 		posisi(img2, x, y);

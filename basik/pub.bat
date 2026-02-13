@@ -35,6 +35,7 @@ echo.
 xcopy web\*.* stg /y || goto error
 
 echo update pg
+copy assets\*.* playground\web\asset || goto error
 copy build\*.* playground\web\editor\lib || goto error
 echo.
 

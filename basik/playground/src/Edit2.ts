@@ -354,6 +354,7 @@ window.onload = () => {
 }
 
 function render(script: string) {
+	let rand: number = Math.floor(Math.random() * 1000);
 	let hal: string = `
 <html>
 <meta charset="utf-8" />
@@ -395,8 +396,8 @@ function render(script: string) {
 
 	// Example usage:
 	loadScriptsSequentially([
-		'./editor/lib/basik.min.js?r=324',
-		'./editor/lib/mulai.js?r=123'
+		'./editor/lib/basik.min.js?r=${rand}',
+		'./editor/lib/mulai.js?r=${rand}'
 	], () => {
 		const script = document.createElement('script');
 		script.textContent = \`${script}\`

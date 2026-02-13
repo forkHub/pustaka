@@ -113,6 +113,9 @@ namespace Basik {
 				}
 				catch (e) {
 					console.error(e);
+					console.log(e);
+					console.warn(e);
+					console.log("error !!!");
 					//TODO: error on update
 				}
 			}
@@ -156,6 +159,7 @@ namespace Basik {
 				}
 				return false;
 			} catch (e) {
+				throw (e);
 				return false;
 			}
 		}
