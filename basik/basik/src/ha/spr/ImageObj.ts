@@ -306,7 +306,7 @@ namespace Basik {
 		}
 
 		public get rotasi(): number {
-			return this._rotasi;
+			return normalisasiSudut(this._rotasi);
 		}
 		public set rotasi(value: number) {
 			this._rotasi = value;

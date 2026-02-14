@@ -12,7 +12,7 @@
 // }
 
 // /**
-//  * Calculae the angle of a point relative to the horizontal line
+//  * Calculate the angle of a point relative to the horizontal line
 //  * @param x {number} the x position
 //  * @param y {number} the y position
 //  * @returns {number} the angle in degrees
@@ -49,3 +49,16 @@
 //  * lastY
 //  * rotation
 //  */
+
+
+function normalisasiSudut(sdt: number = 0): number {
+	// gunakan modulus agar tetap dalam rentang -360 sampai 360
+	let n = sdt % 360;
+
+	// jika hasil negatif, tambahkan 360 agar masuk ke rentang 0-360
+	if (n < 0) {
+		n += 360;
+	}
+
+	return n;
+}

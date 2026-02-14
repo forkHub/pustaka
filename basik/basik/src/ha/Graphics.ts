@@ -159,8 +159,8 @@ namespace Basik {
 				}
 				return false;
 			} catch (e) {
+				dialog(`Ada kesalahan di fungsi ${str}. Silahkan check codenya.<hr/>${e.message}<hr/>${e.stack}`);
 				throw (e);
-				return false;
 			}
 		}
 
@@ -222,6 +222,37 @@ namespace Basik {
 			}
 		}
 
+		public static alert(msg: string): void {
+			// cek apakah overlay sudah ada
+			let overlay = document.getElementById("customAlertOverlay");
+			if (!overlay) {
+				overlay = document.createElement("div");
+				overlay.id = "customAlertOverlay";
+				overlay.className = "custom-alert-overlay";
+
+				const box = document.createElement("div");
+				box.className = "custom-alert-box";
+
+				const msg = document.createElement("div");
+				msg.id = "customAlertMessage";
+
+				const btn = document.createElement("button");
+				btn.textContent = "OK";
+				btn.onclick = () => {
+					overlay.style.display = "none";
+				};
+
+				box.appendChild(msg);
+				box.appendChild(btn);
+				overlay.appendChild(box);
+				document.body.appendChild(overlay);
+			}
+
+			// set pesan dan tampilkan
+			document.getElementById("customAlertMessage").innerHTML = msg;
+			overlay.style.display = "flex";
+		}
+
 		public static get red(): number {
 			return G._red;
 		}
@@ -253,6 +284,8 @@ namespace Basik {
 		public static set alpha(value: number) {
 			G._transparan = value;
 		}
+
+
 	}
 	export const G = Graphic;
 }

@@ -18,12 +18,6 @@ Playground:
 		[x] perlu grouping?
 		
 Library:
-	Ada flag untuk memasuki looping dan keluar looping
-	gambar support simplified url:
-		gambar tanpa extensi dan url (local, auto extensi png)
-		gambar ada extensi 
-	Saat gambar di stempel di luar looping, maka ada listener sebelum menggambar
-	Saat gambar di stempel di loop, maka akan digambar tanpa listener
 	Saat gambar gagal di load akan ada popup modal
 
 Next:

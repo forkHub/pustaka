@@ -112,3 +112,5 @@ function warnaGaris(idx: number) {
 function tebalGaris(n: number) {
 	kanvas().getContext('2d').lineWidth = n;
 }
+
+const dialog = G.alert;
