@@ -62,3 +62,13 @@ function normalisasiSudut(sdt: number = 0): number {
 
 	return n;
 }
+
+function pembulatan(n: number, b: number = 1, type: number = 0) {
+	if (type == 1) {
+		return Math.ceil(n / b) * b;
+	}
+	else if (type == 2) {
+		return Math.floor(n / b) * b;
+	}
+	return Math.round(n / b) * b;
+}

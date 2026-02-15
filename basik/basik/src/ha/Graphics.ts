@@ -185,8 +185,8 @@ namespace Basik {
 			Event.addEventListener(Evt.MOUSE_START_DRAG, () => {
 				G.callFunc(Evt.MOUSE_START_DRAG);
 			});
-			Event.addEventListener(Evt.MOUSE_CLICK, () => {
-				G.callFunc(Evt.MOUSE_CLICK);
+			Event.addEventListener(Evt.MOUSE_TAP, () => {
+				G.callFunc(Evt.MOUSE_TAP);
 			});
 			Event.addEventListener(Evt.MOUSE_UP, () => {
 				G.callFunc(Evt.MOUSE_UP);

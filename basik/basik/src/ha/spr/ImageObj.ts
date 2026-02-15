@@ -325,10 +325,10 @@ namespace Basik {
 			this._dragStartY = value;
 		}
 
-		public get didrag(): boolean {
+		public get diDrag(): boolean {
 			return this._dragged;
 		}
-		public set didrag(value: boolean) {
+		public set diDrag(value: boolean) {
 			this._dragged = value;
 		}
 		public get ditekan(): boolean {

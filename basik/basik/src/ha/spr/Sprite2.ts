@@ -32,7 +32,7 @@ namespace Basik {
 				console.log("clear image mouse status")
 				Ip.daftar.forEach((img: Image) => {
 					img.ditekan = false;
-					img.didrag = false;
+					img.diDrag = false;
 				});
 			})
 		}
@@ -105,7 +105,7 @@ namespace Basik {
 			Ip.daftar.forEach((img: Image) => {
 
 				if (img.ditekan && (img.tipeDrag != 0) && (img.inputId == inputId)) {
-					img.didrag = true;
+					img.diDrag = true;
 
 					if (img.tipeDrag == TypeDrag.drag || (img.tipeDrag == TypeDrag.remoteDrag)) {
 						img.x = posAbs.x - img.dragAwalX

@@ -81,9 +81,17 @@ function hapusGAmbar(img: Basik.Image): void {
 	Ip.free(img);
 }
 
-//TODO: refactor to not return Image
-// function CopyFromCanvas(img: Basik.Image, x: number, y: number): void {
-// 	let ctx = img.canvas.getContext('2d');
-// 	ctx.clearRect(0, 0, img.canvas.width, img.canvas.height);
-// 	ctx.drawImage(Kanvas(), -x, -y);
-// }
+function posisiGambar(img: Basik.Image, x = 0, y = 0) {
+	img.x = x;
+	img.y = y;
+}
+
+function ukuranGambar(img: Basik.Image, p = 32, l = 32) {
+	img.panjang = p;
+	img.lebar = l;
+}
+
+function pusatGambar(img: Basik.Image, x = 0, y = 0) {
+	img.pusatX = x;
+	img.pusatY = y;
+}
