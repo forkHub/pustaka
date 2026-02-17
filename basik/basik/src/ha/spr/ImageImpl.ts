@@ -35,7 +35,7 @@ namespace Basik {
 
 			// canvas;
 
-			let gbr: Image = new Image(url);
+			let gbr: Image = Ip.Muat(url);
 			gbr.isAnim = true;
 			gbr.panjangFrame = pf;
 			gbr.lebarFrame = lf;
@@ -235,14 +235,7 @@ namespace Basik {
 				return;
 			}
 
-			// if (!gbr.url) {
-			imgW = gbr.panjang;
-			// imgH = gbr.height;
-			// }
-			// else {
-			// 	imgW = gbr.img.naturalWidth;
-			// 	// imgH = gbr.img.naturalHeight;
-			// }
+			imgW = gbr.img.naturalWidth;
 
 			gbr.ctrIdx = Image.ctrDraw++;
 			frame = Math.floor(frame);
@@ -251,10 +244,8 @@ namespace Basik {
 
 			frameX = (frame % jmlH);
 			frameY = Math.floor(frame / jmlH);
-
 			frameX *= gbr.panjangFrame;
 			frameY *= gbr.lebarFrame;
-
 			frameX = Math.floor(frameX);
 			frameY = Math.floor(frameY);
 
@@ -292,6 +283,9 @@ namespace Basik {
 
 				ctx.globalAlpha = gbr.alpha / 100;
 				ctx.drawImage(gbr.kanvas, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(dx), Math.floor(dy), w2, h2);
+				ctx.globalAlpha = 1;
+				//console.log("draw image, frame x: " + frameX + "/frame y: " + frameY + "/jml H " + jmlH);
+				// debugger;
 			}
 
 		}

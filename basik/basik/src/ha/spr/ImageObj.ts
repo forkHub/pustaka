@@ -93,8 +93,8 @@ namespace Basik {
 					// gbr.lebarDiSet = true;
 				}
 
-				if (!gbr._frameH) gbr.lebarFrame = imgP.naturalHeight;
-				if (!gbr._frameW) gbr.panjangFrame = imgP.naturalWidth;
+				if (!gbr.lebarFrame) gbr.lebarFrame = imgP.naturalHeight;
+				if (!gbr.panjangFrame) gbr.panjangFrame = imgP.naturalWidth;
 
 				// ha.be.cache.setFile(url, imgP);
 
@@ -157,8 +157,8 @@ namespace Basik {
 		private _lebar: number = 0;
 		private _rotasi: number = 0;
 		private _tilable: boolean = false;
-		private _frameW: number = 0;
-		private _frameH: number = 0;
+		private _panjangFrame: number = 0;
+		private _lebarFrame: number = 0;
 		private _dragged: boolean = false;
 		private _down: boolean = false;
 		private _frame: number = 0;
@@ -231,16 +231,16 @@ namespace Basik {
 		}
 
 		public get panjangFrame(): number {
-			return this._frameW;
+			return this._panjangFrame;
 		}
 		public set panjangFrame(value: number) {
-			this._frameW = value;
+			this._panjangFrame = value;
 		}
 		public get lebarFrame(): number {
-			return this._frameH;
+			return this._lebarFrame;
 		}
 		public set lebarFrame(value: number) {
-			this._frameH = value;
+			this._lebarFrame = value;
 		}
 
 		public get x(): number {

@@ -1,8 +1,5 @@
-let brush = muatGambar("fx.png");
-brush.panjangFrame = 32;
-brush.lebarFrame = 100;
-brush.panjang = 32;
-brush.lebar = 100;
+let brush = muatAnimasi("fx.png", 32, 100);
+stempel(brush);
 
 function update() {
 	bersihkanLayar();

@@ -10,6 +10,10 @@ function muatGambar(url: string): Basik.Image {
 	return Ip.Muat(url);
 }
 
+function muatAnimasi(url: string, fw: number = 32, fh: number = 32) {
+	return Ip.MuatAnimasi(url, fw, fh);
+}
+
 function stempel(img: Basik.Image | string, x: number, y: number) {
 	if (typeof img == "string") {
 		let img2 = Ip.getByName(img, true);
