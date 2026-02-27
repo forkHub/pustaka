@@ -1,26 +1,27 @@
 # Dokumentasi
 
+[Pendahuluan](pendahuluan.md)  
+
 ## Dasar-dasar pemrograman
 
-[Pendahuluan](pendahuluan.md)
-[komentar](komentar.md)
-[kotak](kotak.md)
-[lingkaran](lingkaran.md)
-elipse (di hold)
-[teks](teks.md)
-[stempel](stempel.md)
+[perintah pertama](garis_01.md)  
+[kotak](kotak.md)  
+[lingkaran](lingkaran.md)  
+[komentar](komentar.md)  
+[teks](teks.md)  
+[stempel](stempel.md)  
 
 ## Pemrograman dinamis
 
 variable
+prompt()
+operator
 acak()
-matematika
 percabangan
 perulangan
 fungsi
 
 object image
-kurva kompleks
 event (builtin function)
 
 ## Pembelajaran berbasik projek

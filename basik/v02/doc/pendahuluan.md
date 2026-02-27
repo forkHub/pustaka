@@ -1,4 +1,4 @@
-[<-- Beranda](index.md) | [Bab 1 --> ](bab01.md)
+[<-- Beranda](index.md) | [Perintah Pertama --> ](garis_01.md)
 
 ---
 

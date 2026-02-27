@@ -1,3 +1,5 @@
+fase 2
+======
 struktur latihan
 	perintah tulis lanjutan
 	warna
