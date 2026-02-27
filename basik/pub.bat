@@ -5,12 +5,12 @@ call pub_lib.bat || goto error
 
 echo publikasi template
 echo ===================
-xcopy template stg\template /s /y /i || goto error
+xcopy template stg\pg\template /s /y /i || goto error
 echo.
 
 echo publikasi contoh
 echo ================
-xcopy contoh\*.* stg\contoh\ /s /i /y
+xcopy contoh\*.* stg\pg\contoh\ /s /i /y
 
 echo publikasi web
 echo.
