@@ -101,12 +101,12 @@ function setPiksel(x: number = 0, y: number = 0): void {
 	Ip.SetPiksel(x, y);
 }
 
-function warna(idx: number = 0) {
-	Basik.Warna.warna(idx);
+function warna(idx: number = 0, trans = 100) {
+	Basik.Warna.warna(idx, trans);
 }
 
-function warnaGaris(idx: number) {
-	Basik.Warna.warnaGaris(idx);
+function warnaGaris(idx: number, trans = 100) {
+	Basik.Warna.warnaGaris(idx, trans);
 }
 
 function tebalGaris(n: number) {

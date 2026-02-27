@@ -79,6 +79,10 @@ namespace Basik {
 			return G.drawCanvas;
 		}
 
+		static Context(): CanvasRenderingContext2D {
+			return Graphic.Canvas().getContext('2d')
+		}
+
 		static SetCanvas(canvas: HTMLCanvasElement): void {
 			G.drawCanvas = canvas;
 		}
