@@ -1,3 +1,5 @@
+<- [Pendahuluan](pendahuluan.md) | [Beranda](index.md) | [Garis 02 --> ](garis_02.md)
+
 # Menengal bentuk perintah di javascript
 
 Secara umum, perintah di JavaScript punya bentuk seperti ini:

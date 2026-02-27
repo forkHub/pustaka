@@ -1,3 +1,4 @@
+<- [Pendahuluan](pendahuluan.md) | [Beranda](index.md) | [Garis 02 --> ](garis_02.md)
 # Apa itu Pemrograman?
 
 Pemrograman itu seperti memberi tahu komputer langkah demi langkah dari apa yang harus dilakukan. Kita menulis “perintah” dalam bentuk kode, dan komputer akan mengikuti perintah itu. Kodenya ditulis dengan cara khusus agar komputer bisa mengerti.
