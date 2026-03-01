@@ -2,14 +2,15 @@ namespace Basik {
 	export class Warna {
 		private static warnaAr: IWarna[] = [];
 
-		static warna(idx: number = 0) {
+		static warna(idx: number = 0, trans: number = 100) {
 			let item = Warna.warnaAr[idx];
-			kanvas().getContext('2d').fillStyle = `rgba(${item.r}, ${item.g}, ${item.b}, 1)`;
+			let t2 = trans / 100;
+			kanvas().getContext('2d').fillStyle = `rgba(${item.r}, ${item.g}, ${item.b}, ${t2})`;
 		}
 
-		static warnaGaris(idx: number = 0) {
+		static warnaGaris(idx: number = 0, trans = 100) {
 			let item = Warna.warnaAr[idx];
-			kanvas().getContext('2d').strokeStyle = `rgba(${item.r}, ${item.g}, ${item.b}, 1)`;
+			kanvas().getContext('2d').strokeStyle = `rgba(${item.r}, ${item.g}, ${item.b}, ${trans / 100})`;
 		}
 
 		static init() {

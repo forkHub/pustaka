@@ -14,13 +14,13 @@ namespace Basik {
 		public static set y(value: number) {
 			Camera._y = value;
 		}
-		private static _img: Basik.Image;
-		public static get img(): Basik.Image {
+		private static _img: Basik.GbrObj;
+		public static get img(): Basik.GbrObj {
 			return Camera._img;
 		}
-		public static set img(value: Basik.Image) {
+		public static set img(value: Basik.GbrObj) {
 			Camera._img = value;
-		} 
+		}
 
 	}
 }

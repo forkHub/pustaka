@@ -1,19 +1,21 @@
+///<reference path="./ImageObj.ts"/>
+
 namespace Basik {
 
 	export class ImgImpl {
 		static readonly props: string[] = [];
-		static readonly daftar: Image[] = [];
-		private static _lastImg: Image;
+		static readonly daftar: GbrObj[] = [];
+		private static _lastImg: GbrObj;
 
-		public static get lastImg(): Image {
+		public static get lastImg(): GbrObj {
 			return ImgImpl._lastImg;
 		}
-		public static set lastImg(value: Image) {
+		public static set lastImg(value: GbrObj) {
 			ImgImpl._lastImg = value;
 		}
 
-		static CreateImage(width: number, height: number): Image {
-			let h: Image = new Image();
+		static CreateImage(width: number, height: number): GbrObj {
+			let h: GbrObj = new GbrObj();
 			h.kanvas = document.createElement('canvas')
 			h.kanvas.width = width;
 			h.kanvas.height = height;
@@ -27,29 +29,17 @@ namespace Basik {
 			return h;
 		}
 
-		//TODO: belum ada perintah basik, masih bug
-		static MuatAnimasi(url: string, pf: number, lf: number): Image {
-			// tipeDrag;
-
-			// let canvas: HTMLCanvasElement = document.createElement('canvas');
-
-			// canvas;
-
-			let gbr: Image = Ip.Muat(url);
+		static MuatAnimasi(url: string, pf: number, lf: number): GbrObj {
+			let gbr: GbrObj = Ip.Muat(url);
 			gbr.isAnim = true;
 			gbr.panjangFrame = pf;
 			gbr.lebarFrame = lf;
 			gbr.panjang = pf;
 			gbr.lebar = lf;
 			return gbr;
-
-			// return Ip.muatAnimAsyncCanvas(url, pf, lf, canvas);
-			// return Ip.muatAnimAsync(url, pf, lf);
-			// return Ip.register(img, url, tipeDrag);
-
 		}
 
-		static Muat(url: string): Image {
+		static Muat(url: string): GbrObj {
 			let imgUrl: string = url;
 
 			//auto asset
@@ -68,10 +58,10 @@ namespace Basik {
 				}
 			}
 
-			return new Image(imgUrl);
+			return new GbrObj(imgUrl);
 		}
 
-		static tabrakan(gbr1: Image, x1: number, y1: number, gbr2: Image, x2: number, y2: number): boolean {
+		static tabrakan(gbr1: GbrObj, x1: number, y1: number, gbr2: GbrObj, x2: number, y2: number): boolean {
 			Ip.resetRect(gbr1);
 			Ip.rectToImageTf(gbr1, x1, y1);
 
@@ -81,7 +71,7 @@ namespace Basik {
 			return Ktk.collide(gbr1.rect, gbr2.rect);
 		};
 
-		static getByName(nama: string, buat: boolean): Image {
+		static getByName(nama: string, buat: boolean): GbrObj {
 			for (let i = 0; i < Ip.daftar.length; i++) {
 				let item = Ip.daftar[i];
 				if (item.nama == nama) return item;
@@ -95,11 +85,11 @@ namespace Basik {
 		}
 
 		static register(
-			image: Image,
+			image: GbrObj,
 			url: string,
-			tipeDrag: number): Image {
+			tipeDrag: number): GbrObj {
 
-			let hasil: Image;
+			let hasil: GbrObj;
 			hasil = image;
 			hasil.tipeDrag = tipeDrag;
 			hasil.url = url;
@@ -109,7 +99,7 @@ namespace Basik {
 			return hasil;
 		}
 
-		static free(img: Basik.Image) {
+		static free(img: Basik.GbrObj) {
 			for (let i = 0; i < this.daftar.length; i++) {
 				if (this.daftar[i] == img) {
 					img.kanvas = null;
@@ -121,14 +111,14 @@ namespace Basik {
 			}
 		}
 
-		static dotInsideImage(gbr1: Image, x1: number, y1: number, x2: number, y2: number): boolean {
+		static dotInsideImage(gbr1: GbrObj, x1: number, y1: number, x2: number, y2: number): boolean {
 			Ip.resetRect(gbr1);
 			Ip.rectToImageTf(gbr1, x1, y1);
 
 			return Ktk.collideDot(gbr1.rect, x2, y2);
 		};
 
-		private static gambarUbin(gbr: Image, x: number = 0, y: number = 0, frame: number = 0) {
+		private static gambarUbin(gbr: GbrObj, x: number = 0, y: number = 0, frame: number = 0) {
 			let jmlH: number = 0;
 			let jmlV: number = 0;
 
@@ -198,7 +188,7 @@ namespace Basik {
 			G.Canvas().getContext('2d').fillRect(Math.floor(x), Math.floor(y), 1, 1);
 		}
 
-		static Draw(img: Image) {
+		static Draw(img: GbrObj) {
 			if (img.dimuat) {
 				gambarSetelahDimuat();
 			}
@@ -221,7 +211,7 @@ namespace Basik {
 			}
 		}
 
-		private static DrawSingle(gbr: Image, x: number = 0, y: number = 0, frame: number = 0) {
+		private static DrawSingle(gbr: GbrObj, x: number = 0, y: number = 0, frame: number = 0) {
 			let ctx: CanvasRenderingContext2D = G.Canvas().getContext('2d');
 			let jmlH: number = 0;
 			let frameX: number = 0;
@@ -237,7 +227,7 @@ namespace Basik {
 
 			imgW = gbr.img.naturalWidth;
 
-			gbr.ctrIdx = Image.ctrDraw++;
+			gbr.ctrIdx = GbrObj.ctrDraw++;
 			frame = Math.floor(frame);
 
 			jmlH = Math.floor(imgW / gbr.panjangFrame);
@@ -290,7 +280,7 @@ namespace Basik {
 
 		}
 
-		private static resetRect(img: Image): void {
+		private static resetRect(img: GbrObj): void {
 			let rect: Ktk = img.rect;
 			let p: IV2D;
 
@@ -312,7 +302,7 @@ namespace Basik {
 
 		}
 
-		private static rectToImageTf(image: Image, x: number, y: number): void {
+		private static rectToImageTf(image: GbrObj, x: number, y: number): void {
 			let rect: Ktk = image.rect;
 			let p: IV2D;
 			let x2: number = image.panjang - 1;
@@ -349,5 +339,6 @@ namespace Basik {
 		}
 
 	}
-	export const Ip = ImgImpl;
+	// export const Ip = ImgImpl;
+
 }
