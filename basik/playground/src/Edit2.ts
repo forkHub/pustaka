@@ -457,7 +457,7 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 	// Remove existing dialog if any
 	const existing = document.getElementById('error-dialog') as HTMLDialogElement | null;
 	if (existing) {
-		existing.close();
+		(existing as any).close();
 		existing.remove();
 	}
 
@@ -496,7 +496,7 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 	continueBtn.textContent = 'Continue';
 	continueBtn.onclick = () => {
 		// Empty handler
-		dialog.close();
+		(dialog as any).close();
 		okHandle();
 	};
 
@@ -505,7 +505,7 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 	abortBtn.textContent = 'Abort';
 	abortBtn.onclick = () => {
 		// Empty handler
-		dialog.close();
+		(dialog as any).close();
 		cancelHandle();
 	};
 
@@ -515,7 +515,7 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 
 	// Append and show
 	document.body.appendChild(dialog);
-	dialog.showModal();
+	(dialog as any).showModal();
 }
 
 function dlgBelumSelesai() {

@@ -124,7 +124,7 @@ function dialogDaftarFile(
 
 	// Cleanup
 	function closeAndDestroy() {
-		dialog.close();
+		(dialog as any).close();
 		dialog.remove();
 	}
 
@@ -135,7 +135,7 @@ function dialogDaftarFile(
 	});
 	refresh();
 
-	document.body.appendChild(dialog);
-	dialog.showModal();
+	document.body.appendChild(dialog); 
+	(dialog as any).showModal();
 }
 

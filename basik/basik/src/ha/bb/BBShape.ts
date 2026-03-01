@@ -1,27 +1,52 @@
 ///<reference path="./Route.ts"/>
 
-function bukaPath(x: number = 0, y: number = 0, rotasi: number = 0): void {
+function bukaPath(x: number = 0, y: number = 0, rel:boolean=true): void {
 	let ctx = G.Canvas().getContext('2d');
-	rotasi; //TODO:
 	ctx.beginPath();
 	ctx.moveTo(x, y);
 	G.lastX = x;
 	G.lastY = y;
+	G.relPos = rel;
 }
 
 function garisKe(x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
-	ctx.lineTo(G.lastX + x, G.lastY + y);
+
+	if (G.relPos) {
+		x += G.lastX;
+		y += G.lastY;
+	}
+
+	ctx.lineTo(x, y);
+	G.lastX = x;
+	G.lastY = y;
 }
 
 function kurvaKe(cx: number, cy: number, x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
-	ctx.quadraticCurveTo(cx, cy, x, y);
-	//TODO: dibuat bezier
+
+	if (G.relPos) {
+		cx += G.lastX;
+		cy += G.lastY;
+		x += G.lastX;
+		y += G.lastY;
+	}
+
+	let cp1x = (cx - G.lastX) / 2 + G.lastX;
+	let cp1y = (cy - G.lastY) / 2 + G.lastY;
+
+	let cp2x = (x - cx) / 2 + cx;
+	let cp2y = (y - cy) / 2 + cy;
+
+	ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, x, y);
+
+	G.lastX = x;
+	G.lastY = y;
+	// debugger;
 }
 
-function bezier(): void {
-
+function lingkarantKe() {
+	
 }
 
 function tutupPath() {

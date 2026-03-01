@@ -5,7 +5,14 @@ namespace Basik {
 		private static drawCanvas: HTMLCanvasElement;
 		private static _lastX: number = 0;
 		private static _isUpdating: boolean = false;
+		private static _relPos: boolean = true;	//relative position untuk path
 
+		public static get relPos(): boolean {
+			return Graphic._relPos;
+		}
+		public static set relPos(value: boolean) {
+			Graphic._relPos = value;
+		}
 
 		public static get isUpdating(): boolean {
 			return Graphic._isUpdating;
