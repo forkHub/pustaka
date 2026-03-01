@@ -2,7 +2,7 @@
 
 const G = Basik.G;
 // const T = Basik.Tk;
-const Ip = Basik.Ip;
+const Ip = Basik.ImgImpl;
 const In = Basik.In;
 
 /**

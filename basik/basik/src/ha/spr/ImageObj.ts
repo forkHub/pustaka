@@ -3,29 +3,15 @@ namespace Basik {
 	/**
 	 * Image Object
 	 */
-	export class Image {
-
-		//TODO: proofread
-		/**
-		 * @typedef {Object} Image
-		 * @property {number} x - x position
-		 * @property {number} y - y position
-		 * @property {number} rotation - rotation in degree
-		 * @property {number} alpha - alpha (0 - 100)
-		 * @property {number} width - preferred width
-		 * @property {number} height - preferred height
-		 * @property {number} handleX - handle x position
-		 * @property {number} handleY - handle y position
-		 * @property {boolean} tilable - image rendered as tile
-		 * @property {boolean} dragged - image is dragged
-		 * @property {boolean} down - image is pressed
-		 */
+	export class GbrObj {
 
 		/**
-		 * Create image from URL
-		 * @param url {string}
+		 * 
+		 * @param url 
+		 * @param pf 
+		 * @param lf 
 		 */
-		constructor(url: string = '') {
+		constructor(url: string = '', pf?: number, lf?: number) {
 			// console.log("create new image, url " + url);
 
 			let img: HTMLImageElement = document.createElement('img');
@@ -33,7 +19,7 @@ namespace Basik {
 			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
 			let self = this;
 
-			let gbr: Image;
+			let gbr: GbrObj;
 			gbr = this;
 			let rect = Ktk.buat(0, 0, img.naturalWidth, img.naturalHeight);
 
@@ -59,18 +45,6 @@ namespace Basik {
 			}
 
 			img.src = url;
-
-			// let img2: HTMLImageElement = ha.be.cache.getGbr(url);
-			// if (img2) {
-			// 	imgOnLoad(img2);
-			// }
-			// else {
-			// 	if (url) {
-			// 		img.src = url;
-			// 	} else {
-			// 		//TODO: logika belum selesai
-			// 	}
-			// }
 
 			function imgOnLoad(imgP: HTMLImageElement): void {
 				// console.log("img on load");
@@ -145,9 +119,11 @@ namespace Basik {
 			}
 
 			this.nama = url;
+			if (pf != undefined) this.panjangFrame = pf;
+			if (lf != undefined) this.lebarFrame = lf;
 		}
 
-		//
+		//public member
 		private _x: number = 0;
 		private _y: number = 0;
 		private _alpha: number = 100;
@@ -164,7 +140,49 @@ namespace Basik {
 		private _frame: number = 0;
 		private _pendingStempel: boolean = false;
 		private _nama: string;
+		private _img: HTMLImageElement;
+		public get img(): HTMLImageElement {
+			return this._img;
+		}
+		public set img(value: HTMLImageElement) {
+			this._img = value;
+		}
 
+		//value from param
+
+		//internal
+		private _ctrIdx: number = 0;
+		private static _ctrDraw: number = 0;
+		private _url: string;
+		private _canvas: HTMLCanvasElement;
+		private _isAnim: boolean = false;
+		public get isAnim(): boolean {
+			return this._isAnim;
+		}
+		public set isAnim(value: boolean) {
+			this._isAnim = value;
+		}
+		private _rect: Ktk = new Ktk();
+		public get rect(): Ktk {
+			return this._rect;
+		}
+		public set rect(value: Ktk) {
+			this._rect = value;
+		}
+		private _tipeDrag: number = 0;
+		private _dragStartY: number = 0;
+		private _dragStartX: number = 0;
+		private _sudutTekanAwal: number = 0;
+		private _sudutAwal: number = 0;
+		private _inputId: string;
+
+		private _dimuat: boolean = false;
+		public get dimuat(): boolean {
+			return this._dimuat;
+		}
+		public set dimuat(value: boolean) {
+			this._dimuat = value;
+		}
 		public get nama(): string {
 			return this._nama;
 		}
@@ -178,29 +196,6 @@ namespace Basik {
 		public set pendingStempel(value: boolean) {
 			this._pendingStempel = value;
 		}
-
-		//internal
-		private _dimuat: boolean = false;
-		public get dimuat(): boolean {
-			return this._dimuat;
-		}
-		public set dimuat(value: boolean) {
-			this._dimuat = value;
-		}
-		private _ctrIdx: number = 0;
-		private static _ctrDraw: number = 0;
-		private _url: string;
-		img: HTMLImageElement;
-		private _canvas: HTMLCanvasElement;
-		isAnim: boolean = false;
-		rect: Ktk = new Ktk();
-
-		private _tipeDrag: number = 0;
-		private _dragStartY: number = 0;
-		private _dragStartX: number = 0;
-		private _sudutTekanAwal: number = 0;
-		private _sudutAwal: number = 0;
-		private _inputId: string;
 
 		public get inputId(): string {
 			return this._inputId;
@@ -354,10 +349,10 @@ namespace Basik {
 		}
 
 		public static get ctrDraw(): number {
-			return Image._ctrDraw;
+			return GbrObj._ctrDraw;
 		}
 		public static set ctrDraw(value: number) {
-			Image._ctrDraw = value;
+			GbrObj._ctrDraw = value;
 		}
 
 		public get initialMouseAngle(): number {

@@ -30,14 +30,14 @@ namespace Basik {
 
 			Event.addEventListener(Evt.MOUSE_UP, () => {
 				console.log("clear image mouse status")
-				Ip.daftar.forEach((img: Image) => {
+				Ip.daftar.forEach((img: GbrObj) => {
 					img.ditekan = false;
 					img.diDrag = false;
 				});
 			})
 		}
 
-		private down(img: Image, posCanvas: any, id: string) {
+		private down(img: GbrObj, posCanvas: any, id: string) {
 			//TODO: depecrated
 			let posAbs = {
 				x: posCanvas.x - Camera.x,
@@ -63,10 +63,10 @@ namespace Basik {
 			}
 
 			let lastIdx: number = -1;
-			let lastSprite: Image = null;
+			let lastSprite: GbrObj = null;
 
 			for (let i: number = Ip.daftar.length - 1; i >= 0; i--) {
-				let img: Image;
+				let img: GbrObj;
 
 				img = Ip.daftar[i];
 
@@ -102,7 +102,7 @@ namespace Basik {
 				y: posCanvas.y - Camera.y
 			}
 
-			Ip.daftar.forEach((img: Image) => {
+			Ip.daftar.forEach((img: GbrObj) => {
 
 				if (img.ditekan && (img.tipeDrag != 0) && (img.inputId == inputId)) {
 					img.diDrag = true;

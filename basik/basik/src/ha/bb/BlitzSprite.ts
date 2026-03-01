@@ -4,9 +4,9 @@
 /**
  * Load an image from url 
  * @param url {string} the url of image to load
- * @returns {Basik.Image}
+ * @returns {Basik.GbrObj}
  */
-function muatGambar(url: string): Basik.Image {
+function muatGambar(url: string): Basik.GbrObj {
 	return Ip.Muat(url);
 }
 
@@ -14,7 +14,7 @@ function muatAnimasi(url: string, fw: number = 32, fh: number = 32) {
 	return Ip.MuatAnimasi(url, fw, fh);
 }
 
-function stempel(img: Basik.Image | string, x: number, y: number) {
+function stempel(img: Basik.GbrObj | string, x: number, y: number) {
 	if (typeof img == "string") {
 		let img2 = Ip.getByName(img, true);
 		posisi(img2, x, y);
@@ -25,7 +25,7 @@ function stempel(img: Basik.Image | string, x: number, y: number) {
 		Ip.Draw(img);
 	}
 
-	function posisi(img: Basik.Image, x: number, y: number) {
+	function posisi(img: Basik.GbrObj, x: number, y: number) {
 		if (x != undefined) {
 			img.x = x;
 		}
@@ -39,22 +39,22 @@ function stempel(img: Basik.Image | string, x: number, y: number) {
 /**
  * Check if two images collide. Use box for collision detection. Also Take account the rotation
  * 
- * @param img1 {Basik.Image} the first image
- * @param img2 {Basik.Image} the second image
+ * @param img1 {Basik.GbrObj} the first image
+ * @param img2 {Basik.GbrObj} the second image
  * @returns {boolean}
  */
-function gambarTabrakan(img1: Basik.Image, img2: Basik.Image): boolean {
+function gambarTabrakan(img1: Basik.GbrObj, img2: Basik.GbrObj): boolean {
 	return Ip.tabrakan(img1, img1.x, img1.y, img2, img2.x, img2.y);
 }
 
 /**
  * Check if an image collides a point
- * @param img {Basik.Image}
+ * @param img {Basik.GbrObj}
  * @param x {number}
  * @param y {number}
  * @returns {boolean}
  */
-function poinDidalamGambar(img: Basik.Image, x: number, y: number): boolean {
+function poinDidalamGambar(img: Basik.GbrObj, x: number, y: number): boolean {
 	return Ip.dotInsideImage(img, img.x, img.y, x, y);
 }
 
@@ -62,9 +62,9 @@ function poinDidalamGambar(img: Basik.Image, x: number, y: number): boolean {
  * Create a blank image
  * @param width {number} width
  * @param height {number} height
- * @returns {Basik.Image}
+ * @returns {Basik.GbrObj}
  */
-function buatGambar(width: number, height: number): Basik.Image {
+function buatGambar(width: number, height: number): Basik.GbrObj {
 	return Ip.CreateImage(width, height);
 }
 
@@ -81,21 +81,21 @@ function semuaGambarSelesaiDimuat(): boolean {
  * 
  * @param img 
  */
-function hapusGAmbar(img: Basik.Image): void {
+function hapusGAmbar(img: Basik.GbrObj): void {
 	Ip.free(img);
 }
 
-function posisiGambar(img: Basik.Image, x = 0, y = 0) {
+function posisiGambar(img: Basik.GbrObj, x = 0, y = 0) {
 	img.x = x;
 	img.y = y;
 }
 
-function ukuranGambar(img: Basik.Image, p = 32, l = 32) {
+function ukuranGambar(img: Basik.GbrObj, p = 32, l = 32) {
 	img.panjang = p;
 	img.lebar = l;
 }
 
-function pusatGambar(img: Basik.Image, x = 0, y = 0) {
+function pusatGambar(img: Basik.GbrObj, x = 0, y = 0) {
 	img.pusatX = x;
 	img.pusatY = y;
 }
