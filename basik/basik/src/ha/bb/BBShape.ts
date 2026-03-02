@@ -1,21 +1,21 @@
 ///<reference path="./Route.ts"/>
 
-function bukaPath(x: number = 0, y: number = 0, rel:boolean=true): void {
+function bukaPath(x: number = 0, y: number = 0): void {
 	let ctx = G.Canvas().getContext('2d');
 	ctx.beginPath();
 	ctx.moveTo(x, y);
 	G.lastX = x;
 	G.lastY = y;
-	G.relPos = rel;
+	// G.relPos = rel;
 }
 
-function garisKe(x: number, y: number): void {
+function garis(x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
 
-	if (G.relPos) {
+	// if (G.relPos) {
 		x += G.lastX;
 		y += G.lastY;
-	}
+	// }
 
 	ctx.lineTo(x, y);
 	G.lastX = x;
@@ -25,12 +25,12 @@ function garisKe(x: number, y: number): void {
 function kurvaKe(cx: number, cy: number, x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
 
-	if (G.relPos) {
+	// if (G.relPos) {
 		cx += G.lastX;
 		cy += G.lastY;
 		x += G.lastX;
 		y += G.lastY;
-	}
+	// }
 
 	let cp1x = (cx - G.lastX) / 2 + G.lastX;
 	let cp1y = (cy - G.lastY) / 2 + G.lastY;
@@ -45,23 +45,20 @@ function kurvaKe(cx: number, cy: number, x: number, y: number): void {
 	// debugger;
 }
 
-function lingkarantKe() {
-	
-}
-
 function tutupPath() {
 	let ctx = G.Canvas().getContext('2d');
 	ctx.stroke();
 	ctx.fill();
 }
 
-function garis(x1: number = 100, y1: number = 100, x2: number = 200, y2: number = 100) {
-	let ctx = G.Canvas().getContext('2d');
-	ctx.beginPath();
-	ctx.moveTo(x1, y1);
-	ctx.lineTo(x2, y2);
-	ctx.stroke();
-}
+//TODO: dihapus
+// function garis(x1: number = 100, y1: number = 100, x2: number = 200, y2: number = 100) {
+// 	let ctx = G.Canvas().getContext('2d');
+// 	ctx.beginPath();
+// 	ctx.moveTo(x1, y1);
+// 	ctx.lineTo(x2, y2);
+// 	ctx.stroke();
+// }
 
 function lingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: number = 0, akhir: number = 360): void {
 	let ctx = G.Canvas().getContext('2d');
@@ -267,4 +264,25 @@ function bintang(
 	ctx.fillStyle = fillColor;
 	ctx.fill();
 	ctx.stroke();
+}
+
+function svg(x:number, y:number, pathString: string): void {
+	const regex = /([gk])([^gk]*)/gi;
+	let match;
+
+	bukaPath(x, y);
+	while ((match = regex.exec(pathString)) !== null) {
+		const [_, cmd, params] = match;
+		const numbers = params.trim().split(/[\s,]+/).map(Number);
+
+		switch (cmd) {
+			case "g":
+				garis(numbers[0], numbers[1]);
+			break;
+			case "k":
+				kurvaKe(numbers[0], numbers[1], numbers[2], numbers[3])
+			break;
+		}
+	}
+	tutupPath();
 }
