@@ -89,7 +89,6 @@ class Edit2 {
 		}
 
 		this.getTbl("jalan").onclick = () => {
-			// this.gantiState(EState.jalankan);
 			console.debug('run');
 
 			this.editCont.classList.remove('active');
@@ -117,6 +116,14 @@ class Edit2 {
 			this.editClick();
 		}
 
+		this.getTbl("baru").onclick = () => {
+			this.baruKlik();
+		}
+
+		this.getTbl("demo").onclick = () => {
+			this.demoKlik();
+		}
+
 		this.myCodeMirror = CodeMirror.fromTextArea(this.editArea, {
 			lineNumbers: true,
 			mode: "javascript",
@@ -133,6 +140,13 @@ class Edit2 {
 		this.muatFileAwal();
 		this.fileInfo.innerText = fileNama;
 	}
+
+	demoKlik() {
+		let demo = document.querySelector("dialog.demo") || (() => { throw new Error("Demo dialog not found"); })();
+		(demo as HTMLDialogElement).showModal();
+	}
+
+	baruKlik() { }
 
 	muatKlik(): void {
 		dialogDaftarFile(
@@ -311,7 +325,7 @@ class Edit2 {
 	}
 
 	runOk(): void {
-		let hal2: string = render(this.myCodeMirror.getValue());
+		let hal2: string = renderIframe(this.myCodeMirror.getValue());
 		// hal2 = hal2.replace('{{script}}', this.myCodeMirror.getValue());
 		let iframe: HTMLIFrameElement = document.createElement('iframe') as HTMLIFrameElement;
 		let iframeCont: HTMLDivElement = document.body.querySelector('div.kontainer-2 div.web') as HTMLDivElement;
@@ -353,7 +367,7 @@ window.onload = () => {
 	// JSHINT.info = jsHintInfo;
 }
 
-function render(script: string) {
+function renderIframe(script: string) {
 	let rand: number = Math.floor(Math.random() * 1000);
 	let hal: string = `
 <html>

@@ -13,8 +13,8 @@ function garis(x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
 
 	// if (G.relPos) {
-		x += G.lastX;
-		y += G.lastY;
+	x += G.lastX;
+	y += G.lastY;
 	// }
 
 	ctx.lineTo(x, y);
@@ -26,10 +26,10 @@ function kurvaKe(cx: number, cy: number, x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
 
 	// if (G.relPos) {
-		cx += G.lastX;
-		cy += G.lastY;
-		x += G.lastX;
-		y += G.lastY;
+	cx += G.lastX;
+	cy += G.lastY;
+	x += G.lastX;
+	y += G.lastY;
 	// }
 
 	let cp1x = (cx - G.lastX) / 2 + G.lastX;
@@ -45,20 +45,38 @@ function kurvaKe(cx: number, cy: number, x: number, y: number): void {
 	// debugger;
 }
 
+/**
+ * Menggambar arc lingkaran dengan pusat, titik awal, sudut tertentu, dan arah
+ * @param {number} cx - Koordinat x pusat lingkaran
+ * @param {number} cy - Koordinat y pusat lingkaran
+ * @param {number} sweepAngleDeg - Besar sudut yang digambar (derajat)
+ * @param {boolean} counterClockwise - true = berlawanan jarum jam, false = searah jarum jam
+ */
+function lingkaranKe(cx: number, cy: number, sweepAngleDeg: number, counterClockwise = false) {
+	// Hitung jari-jari
+	const r = Math.sqrt((G.lastX - cx) ** 2 + (G.lastY - cy) ** 2);
+
+	// Hitung sudut awal relatif terhadap pusat
+	const startAngle = Math.atan2(G.lastY - cy, G.lastX - cx);
+
+	// Sudut akhir
+	const endAngle = counterClockwise
+		? startAngle - (sweepAngleDeg * Math.PI / 180)
+		: startAngle + (sweepAngleDeg * Math.PI / 180);
+
+	// Gambar arc
+	let ctx = kanvas().getContext('2d');
+	ctx.beginPath();
+	ctx.arc(cx, cy, r, startAngle, endAngle, counterClockwise);
+	ctx.stroke();
+}
+
+
 function tutupPath() {
 	let ctx = G.Canvas().getContext('2d');
 	ctx.stroke();
 	ctx.fill();
 }
-
-//TODO: dihapus
-// function garis(x1: number = 100, y1: number = 100, x2: number = 200, y2: number = 100) {
-// 	let ctx = G.Canvas().getContext('2d');
-// 	ctx.beginPath();
-// 	ctx.moveTo(x1, y1);
-// 	ctx.lineTo(x2, y2);
-// 	ctx.stroke();
-// }
 
 function lingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: number = 0, akhir: number = 360): void {
 	let ctx = G.Canvas().getContext('2d');
@@ -266,7 +284,7 @@ function bintang(
 	ctx.stroke();
 }
 
-function svg(x:number, y:number, pathString: string): void {
+function svg(x: number, y: number, pathString: string): void {
 	const regex = /([gk])([^gk]*)/gi;
 	let match;
 
@@ -278,10 +296,10 @@ function svg(x:number, y:number, pathString: string): void {
 		switch (cmd) {
 			case "g":
 				garis(numbers[0], numbers[1]);
-			break;
+				break;
 			case "k":
 				kurvaKe(numbers[0], numbers[1], numbers[2], numbers[3])
-			break;
+				break;
 		}
 	}
 	tutupPath();
