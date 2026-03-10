@@ -28,16 +28,6 @@ function kanvas(): HTMLCanvasElement {
 // 	G.Canvas().getContext('2d').clearRect(x, y, w, h);
 // }
 
-/**
- * Start the application. You have to call this method before other method.
- * @param w {number} prefered width of the canvas.
- * @param h {number} prefered height of the canvas.
- * @param canvas {HTMLCanvasElement} (optional) the canvas element.<br/>
- *   If canvas is not available, a new one will be created and the size will follow the preferred size
- * @param mode {boolean} (default to true) Use full screen
- * When in full screen mode, the canvas will automatically fill the screen and maintain the aspect ratio.
- * 
- */
 function buatKanvas(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, mode: number = 1) {
 	console.log("buat kanvas");
 	G.Graphics(w, h, canvas, mode);
@@ -110,7 +100,7 @@ function warnaGaris(idx: number, trans = 100) {
 }
 
 function tebalGaris(n: number) {
-	kanvas().getContext('2d').lineWidth = n;
+	G.Canvas().getContext('2d').lineWidth = n;
 }
 
 const dialog = G.alert;

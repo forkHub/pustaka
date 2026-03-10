@@ -12,21 +12,20 @@ function muatSuara(url: string): HTMLAudioElement {
 	let sound: HTMLAudioElement = document.createElement("audio");
 
 	sound.onload = () => {
-		Basik.Sound.lastSound = sound;
-		// Basik.Event.dispatchEvent(Basik.Evt.SOUND_LOADED);
+		Basik.data().soundEvent = sound;
 		console.log("sound loaded");
 	}
 
 	sound.onended = () => {
 		try {
-			Basik.Sound.lastSound = sound;
+			Basik.data().soundEvent = sound;
 			Basik.Event.dispatchEvent(Basik.Evt.SOUND_ENDED);
 			console.log("sound ended");
 		} catch (e) {
 
 		}
 	}
-	sound.src = "asset/" + url;
+	sound.src = url;
 
 	return sound;
 }
@@ -40,5 +39,5 @@ function mainkanSuara(s: HTMLAudioElement): void {
 }
 
 function suaraEvent() {
-	return Basik.Sound.lastSound;
+	return Basik.data().soundEvent;
 }

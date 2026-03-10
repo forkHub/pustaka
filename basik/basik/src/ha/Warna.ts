@@ -5,12 +5,18 @@ namespace Basik {
 		static warna(idx: number = 0, trans: number = 100) {
 			let item = Warna.warnaAr[idx];
 			let t2 = trans / 100;
-			kanvas().getContext('2d').fillStyle = `rgba(${item.r}, ${item.g}, ${item.b}, ${t2})`;
+			G.Canvas().getContext('2d').fillStyle = `rgba(${item.r}, ${item.g}, ${item.b}, ${t2})`;
+			G.red = item.r;
+			G.blue = item.b;
+			G.green = item.g;
 		}
 
 		static warnaGaris(idx: number = 0, trans = 100) {
 			let item = Warna.warnaAr[idx];
-			kanvas().getContext('2d').strokeStyle = `rgba(${item.r}, ${item.g}, ${item.b}, ${trans / 100})`;
+			G.Canvas().getContext('2d').strokeStyle = `rgba(${item.r}, ${item.g}, ${item.b}, ${trans / 100})`;
+			G.red = item.r;
+			G.blue = item.b;
+			G.green = item.g;
 		}
 
 		static init() {

@@ -9,7 +9,7 @@ function bukaPath(x: number = 0, y: number = 0): void {
 	// G.relPos = rel;
 }
 
-function garis(x: number, y: number): void {
+function garisKe(x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
 
 	// if (G.relPos) {
@@ -65,12 +65,11 @@ function lingkaranKe(cx: number, cy: number, sweepAngleDeg: number, counterClock
 		: startAngle + (sweepAngleDeg * Math.PI / 180);
 
 	// Gambar arc
-	let ctx = kanvas().getContext('2d');
+	let ctx = G.Canvas().getContext('2d');
 	ctx.beginPath();
 	ctx.arc(cx, cy, r, startAngle, endAngle, counterClockwise);
 	ctx.stroke();
 }
-
 
 function tutupPath() {
 	let ctx = G.Canvas().getContext('2d');
@@ -284,23 +283,10 @@ function bintang(
 	ctx.stroke();
 }
 
-function svg(x: number, y: number, pathString: string): void {
-	const regex = /([gk])([^gk]*)/gi;
-	let match;
-
-	bukaPath(x, y);
-	while ((match = regex.exec(pathString)) !== null) {
-		const [_, cmd, params] = match;
-		const numbers = params.trim().split(/[\s,]+/).map(Number);
-
-		switch (cmd) {
-			case "g":
-				garis(numbers[0], numbers[1]);
-				break;
-			case "k":
-				kurvaKe(numbers[0], numbers[1], numbers[2], numbers[3])
-				break;
-		}
-	}
-	tutupPath();
+function garis(x = 100, y = 100, x2 = 500, y2 = 500) {
+	let ctx = G.Context();
+	ctx.beginPath();
+	ctx.moveTo(x, y);
+	ctx.lineTo(x2, y2);
+	ctx.stroke();
 }

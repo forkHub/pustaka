@@ -141,9 +141,9 @@ namespace Basik {
 			bersihkanLayar();
 			warnaGaris(0);
 			warna(25);
-			posisiTeks(10, 10);
+			posisiTeks(20, 20);
 			ukuranTeks(10);
-			kanvas().getContext('2d').lineWidth = 1;
+			G.Canvas().getContext('2d').lineWidth = 1;
 			console.groupEnd();
 		}
 
@@ -153,13 +153,6 @@ namespace Basik {
 			h = h || G.drawCanvas.height;
 			ctx.clearRect(x, y, w, h);
 		}
-
-		// private static initComp() {
-		// 	In.init(G.drawCanvas);
-		// 	Keyboard.init();
-		// 	// Camera.init();
-		// 	sprInt.init();
-		// }
 
 		private static callFunc(str: string): boolean {
 			try {
