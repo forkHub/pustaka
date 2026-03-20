@@ -104,9 +104,9 @@ namespace Basik {
 				hasil.push(data[2]);
 				hasil.push(data[3]);
 
-				G.red = data[0];
-				G.green = data[1];
-				G.blue = data[2];
+				G.merah = data[0];
+				G.hijau = data[1];
+				G.biru = data[2];
 				G.alpha = data[3];
 				// G.FillColor(G.merah, G.hijau, G.biru, G.alpha);
 

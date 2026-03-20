@@ -36,7 +36,7 @@ namespace Basik {
 		}
 		// private static mainCanvas: HTMLCanvasElement;	//original canvas should never change
 
-		private static _red: number = 0;
+		private static _merah: number = 0;
 		private static _green: number = 0;
 		private static _blue: number = 0;
 		private static _transparan: number = 0;
@@ -257,27 +257,27 @@ namespace Basik {
 			overlay.style.display = "flex";
 		}
 
-		public static get red(): number {
-			return G._red;
+		public static get merah(): number {
+			return G._merah;
 		}
 
-		public static set red(value: number) {
-			G._red = value;
+		public static set merah(value: number) {
+			G._merah = value;
 		}
 
-		public static get green(): number {
+		public static get hijau(): number {
 			return G._green;
 		}
 
-		public static set green(value: number) {
+		public static set hijau(value: number) {
 			G._green = value;
 		}
 
-		public static get blue(): number {
+		public static get biru(): number {
 			return G._blue;
 		}
 
-		public static set blue(value: number) {
+		public static set biru(value: number) {
 			G._blue = value;
 		}
 

@@ -14,7 +14,8 @@ xcopy contoh\*.* stg\pg\contoh\ /s /i /y
 
 echo publikasi web
 echo.
-xcopy web\*.* stg /y || goto error
+xcopy web\index.html stg /y || goto error
+xcopy web\contoh.html stg\pg /y || goto error
 
 echo update pg
 copy assets\*.* playground\web\asset || goto error
@@ -30,6 +31,7 @@ echo selesai
 goto end
 
 :error
+pause
 pause
 
 

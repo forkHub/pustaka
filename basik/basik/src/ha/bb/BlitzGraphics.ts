@@ -1,7 +1,6 @@
 ///<reference path="./Route.ts"/>
 
 const G = Basik.G;
-// const T = Basik.Tk;
 const Ip = Basik.ImgImpl;
 const In = Basik.In;
 
@@ -16,17 +15,6 @@ function setKanvas(c: HTMLCanvasElement) {
 function kanvas(): HTMLCanvasElement {
 	return G.Canvas();
 }
-
-/**
- * Clear part of the canvas
- * @param x {number} the start x position
- * @param y {number} the start y position
- * @param w {number} the width of the area
- * @param h {number} the height of the area
- */
-// function ClearArea(x: number, y: number, w: number, h: number) {
-// 	G.Canvas().getContext('2d').clearRect(x, y, w, h);
-// }
 
 function buatKanvas(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, mode: number = 1) {
 	console.log("buat kanvas");
@@ -45,7 +33,7 @@ function bersihkanLayar(x: number = 0, y: number = 0, w: number = 0, h: number =
  * @returns {number} the green color (0 - 255)
  */
 function hijau(): number {
-	return G.green;
+	return G.hijau;
 }
 
 /**
@@ -53,7 +41,7 @@ function hijau(): number {
  * @returns {number} the red color (0 - 255)
  */
 function merah(): number {
-	return G.red;
+	return G.merah;
 }
 
 /**
@@ -61,7 +49,7 @@ function merah(): number {
  * @returns {number} the blue color (0 - 255)
  */
 function biru(): number {
-	return G.blue;
+	return G.biru;
 }
 
 /**
