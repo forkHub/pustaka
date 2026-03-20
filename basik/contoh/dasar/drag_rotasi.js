@@ -1,3 +1,5 @@
+buatKanvas(800, 600);
+
 let box = muatGambar("kotak.png");
 box.tipeDrag = 2;
 box.x = 160;

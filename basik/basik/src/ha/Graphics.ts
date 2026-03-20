@@ -139,10 +139,11 @@ namespace Basik {
 
 			// NoStroke();
 			bersihkanLayar();
-			warnaGaris(0);
-			warna(25);
+			warnaGaris(120);
+			warna(215);
 			posisiTeks(20, 20);
-			ukuranTeks(10);
+			ukuranTeks(20);
+			tebalGaris(1);
 			G.Canvas().getContext('2d').lineWidth = 1;
 			console.groupEnd();
 		}

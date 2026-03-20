@@ -38,7 +38,6 @@ namespace Basik {
 		}
 
 		private down(img: GbrObj, posCanvas: any, id: string) {
-			//TODO: depecrated
 			let posAbs = {
 				x: posCanvas.x - Camera.x,
 				y: posCanvas.y - Camera.y

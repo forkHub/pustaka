@@ -2,6 +2,7 @@
 ///<reference path="./ImageImpl.ts"/>
 
 namespace Basik {
+	//TODO: depecrated
 	export class Gbr extends GbrObj {
 		static readonly props: string[] = [];
 		static readonly daftar: GbrObj[] = [];

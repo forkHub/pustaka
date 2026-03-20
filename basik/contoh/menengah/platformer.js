@@ -1,3 +1,5 @@
+buatKanvas(320, 240);
+
 let char;
 let velY = 0;
 let velX = 2;

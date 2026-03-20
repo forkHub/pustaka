@@ -2,15 +2,10 @@ Demo Functionality:
 	image collide point
 
 Perintah Adv (kemungkinan langsung ke contex):
-	warnaRgba
-	warnaGarisRgba
 	gradient
 
 Playground:
-	simpan ke local storage
 	muat dari local storage
-		dialog sudah ada
-		cara load
 		check apakah ada file yang masih aktif belum disimpan
 	demo integrasi 
 		dibuat dalam bentuk dokumentasi yang bisa di copy paste
@@ -26,14 +21,6 @@ Camera dipakai lagi
 	layarX dan layarY hanya berlaku bila camera tidak di posisi 0
 	perlu perubahan logic dalam gambar dan collision
 perintah gambar sederhana
-	mulaiGambar
-	posisiPen
-	garisKe
-	kurvaKe 
-	linkaranKe(disederhanakan)
-	selesaiGambar
-drawing => advanced => path
+	mode global dan relatif
+	
 textObject
-semut (draw with animation)
-masking
-bentuk Object dasar
