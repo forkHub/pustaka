@@ -8,7 +8,9 @@ Library ini berisi kumpulan fungsi JavaScript yang dikelompokkan berdasarkan fun
 
 ### `stempel(url, x, y)`
 Menstempel gambar ke layar pada posisi tertentu  
+
 **Parameters**
+
 *   `url`: `string` atau `Gambar` default "kotak"  
 	`url` bisa diisi dengan alamat gambar yang akan di stempel atau object `Gambar` yang akan di stempel ke layar.  
 	Alamat  bisa berupa nama file tanpa ekstensi ("kotak"), dengan ekstensi ("kotak.png"), alamat relatif ("./assets/kotak.png"), atau alamat absolute ("http://www.alamat.com/kotak.png").
@@ -25,7 +27,8 @@ Menstempel gambar ke layar pada posisi tertentu
 
 ### `muatGambar(url)`
 
-Memuat gambar. Hasil dari perintah ini bisa digunakan dengan perintah `stempel()`. Dengan memuat gambar terlebih dahulu, kita akan punya lebih banyak fitur seperti mengatur panjang/lebar, rotasi, dsb. 
+Memuat gambar. Hasil dari perintah ini bisa digunakan dengan perintah `stempel()`, atau perintah lainnya. Dengan memuat gambar terlebih dahulu, kita akan punya lebih banyak fitur seperti mengatur panjang/lebar, rotasi, dsb. 
+Kita tidak perlu menunggu hingga gambar selesai di muat sepenuhnya untuk memulai operasi selanjutnya, semua di handle secara otomatis. Hal ini untuk memudahkan pemula dan menghindari perintah yang kompleks seperti event, dll.
 
 **Parameters**
 
@@ -38,127 +41,140 @@ Memuat gambar. Hasil dari perintah ini bisa digunakan dengan perintah `stempel()
 
 ### `gambarTabrakan(img1: Gambar, img2: Gambar): boolean`  
 
-Mengecek apakah dua gambar bertabrakan
+Mengecek apakah dua gambar bertabrakan. Pengecekan dilakukan dengan mengecek bounding box dari kedua `Gambar`.
+Pengecekan mensupport gambar yang di rotasi.
+
+**Parameters**
+
+*   `img1`: `Gambar`   
+	Gambar pertama yang akan di check
+*   `img2`: `Gambar`   
+	Gambar kedua yang akan di check
+
+**Returns:** `boolean`. bernilai true bila terjadi tabrakan, atau false bila tidak terjadi tabrakan
 
 ### `poinDidalamGambar(img: Gambar, x: number, y: number): boolean`  
 
-Mengecek apakah point ada di dalam gambar
+Mengecek apakah sebuah point pada lokasi tertentu ada di dalam gambar
 
-### `buatGambar(width: number, height: number): Gambar`
+**Parameters**
+*	`img`: `Gambar`  
+	Gambar yang akan di check
+*	`x`: `number`  
+	Posisi x point
+*	`y`: `number`  
+	Poisi y point
 
-Membuat object gambar
-
+**Returns:** `boolean`. Bernilai True bila point berada di dalam gambar
 
 ### `semuaGambarSelesaiDimuat(): boolean`  
 
-Mengecek apakah semua gambar sudah selesai di muat
+Mengecek apakah semua gambar sudah selesai di muat. Gambar yang belum di muat masih bisa menerima perintah dan event.
+Bila kita men-`stempel` gambar yang belum di muat, maka gambarnya akan terlihat setelah gambar selesai di muat.
+Perintah ini diperlukan kalau kita benar-benar ingin menunggu semua gambar selesai di muat sebelum melakukan sesuatu.
 
-### `hapusGAmbar(img: Gambar): void`  
+**Returns:** `boolean`. Bernilai true bila semua gambar selesai dimuat.
 
-Menghapus gambar dari memori
+### `hapusGAmbar(gbr: Gambar): void`  
 
-### `posisiGambar(img: Gambar, x = 0, y = 0)`  
+Menghapus gambar dari memori. Gambar yang sudah dihapus tidak akan bisa menerima perintah dan akan menghasilkan error.
 
-Mengubah posisi gambar ke koordinat tertentu
+**Parameters**
+*	`gbr`: `Gambar`  
+	Gambar yang akan di hapus
 
-### `ukuranGambar(img: Gambar, p = 32, l = 32)`  
+### `posisiGambar(gbr: Gambar, x:number = 0, y:number = 0):void`  
 
-Mengubah ukuran gambar
+Mengubah posisi gambar, kita juga bisa mengubah posisi gambar secara parsial dengan mengubah property `x` atau `y`.
 
-### `pusatGambar(img: Gambar, x = 0, y = 0)`  
+**Parameters**
+*	`gbr`: `Gambar`  
+	Gambar yang akan di pindah
+*	`x`: `number`, default 0  
+	Posisi x
+*	`y`: `number`  
+	Posisi y
 
-Mengubah pusat gambar
+
+### `ukuranGambar(gbr: Gambar, p:number = 32, l:number = 32):void`  
+
+Mengubah ukuran gambar. Kita juga bisa mengubah ukuran gambar melalui property `panjang` dan `lebar`.
+
+**Parameters**
+*	`gbr`: `Gambar`  
+	Gambar yang akan di ubah ukurannya
+*	`p`: `number`, default 32  
+	panjang gambar
+*	`l`: `number`, default 32
+	Lebar gambar
+
 
 ## 📝 Perintah Input
-### `mouseDitahan(): boolean`  
+Perintah-perintah yang berhubungan dengan input seperti mouse, touch, dan keyboard.
+Perintah mouse secara otomatis akan bisa dipakai untuk touch.
+
+### `mouseDitekan():boolean`
 
 Mengecek apakah mouse sedang di tekan
 
 ### `mouseDidrag(): boolean`  
 
-Mengecek apakah mouse sedang di drag
 
 ### `mouseDragX(): number`  
-
 Mengembalikan posisi horizontal mouse saat di drag, dihitung dari posisi awal saat drag dimulai
 
 ### `mouseDragY(): number`  
 
 Mengembalikan posisi vertikal mouse saat di drag, dihitung dari posisi awal saat drag dimulai
 
-### `mouseX(): number`  
-
 Mengembalikan posisi X dari mouse
-
 ### `mouseY(): number`  
 
 Mengembalikan posisi Y dari mouse
 
 ### `mouseDragAwalX(): number`  
-
-Mengembalikan posisi X awal saat mouse mulai di drag
-
 ### `mouseDragAwalY(): number`  
 
-Mengembalikan posisi Y awal saat mouse mulai di drag
 
 ### `mouseGerakX(): number`  
 
 Mengembalikan pergerakan horizontal saat mouse bergerak
 
-### `mouseGerakY(): number`  
-
 Mengembalikan pergerakan vertikal saat mouse bergerak
 
-## 📝 Perintah Bentuk
 ### `bukaPath(x: number = 0, y: number = 0): void`  
 
 Perintah ini berfungsi untuk memulai menggambar bentuk yang kompleks. 
 Perintah ini di ikuti dengan perintah garisKe(), kurvaKe() dan lingkaranKe()
 
-### `garisKe(x: number, y: number): void`  
 
 Membuat garis
 
 ### `kurvaKe(cx: number, cy: number, x: number, y: number): void`  
 
-Membuat kurva
 
 ### `lingkaranKe(cx: number, cy: number, sweepAngleDeg: number, counterClockwise = false)`  
-
 Membuat lingkaran
 
 ### `tutupPath()`  
 
 Menutup Path
 
-
-### `lingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: number = 0, akhir: number = 360): void`  
-
 Menggambar lingkaran
-
 ### `elip(x: number = 0, y: number = 0, radiusX: number = 0, radiusY: number = 0, awal: number = 0, akhir: number = 360): void`  
 
 Menggambar elip
 
 ### `kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 100)`  
-
-Menggambar kotak
-
 ### `segitiga(x: number, y: number, base: number, height: number, position: number): void`  
 
-Menggambar segitiga
 
 ### `pie(x: number, y: number, radius: number, startAngleDeg: number, endAngleDeg: number): void`  
 
 Menggambar pie
 
-### `polygonTeratur(x: number, y: number, radius: number, sides: number): void`
-
-Menggambar poligon standard
 
 ### `bintang(ctx: CanvasRenderingContext2D, x: number, y: number, spikes: number, outerRadius: number, innerRadius: number): void`
-
 Menggambar bintang
 
 ## 📝 Perintah Umum
