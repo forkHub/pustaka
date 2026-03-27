@@ -50,9 +50,9 @@ function kurvaKe(cx: number, cy: number, x: number, y: number): void {
  * @param {number} cx - Koordinat x pusat lingkaran
  * @param {number} cy - Koordinat y pusat lingkaran
  * @param {number} sweepAngleDeg - Besar sudut yang digambar (derajat)
- * @param {boolean} counterClockwise - true = berlawanan jarum jam, false = searah jarum jam
+ * @param {boolean} clockWise - true = berlawanan jarum jam, false = searah jarum jam
  */
-function lingkaranKe(cx: number, cy: number, sweepAngleDeg: number, counterClockwise = false) {
+function lingkaranKe(cx: number, cy: number, sweepAngleDeg: number, clockWise = false) {
 	// Hitung jari-jari
 	const r = Math.sqrt((G.lastX - cx) ** 2 + (G.lastY - cy) ** 2);
 
@@ -60,14 +60,14 @@ function lingkaranKe(cx: number, cy: number, sweepAngleDeg: number, counterClock
 	const startAngle = Math.atan2(G.lastY - cy, G.lastX - cx);
 
 	// Sudut akhir
-	const endAngle = counterClockwise
+	const endAngle = clockWise
 		? startAngle - (sweepAngleDeg * Math.PI / 180)
 		: startAngle + (sweepAngleDeg * Math.PI / 180);
 
 	// Gambar arc
 	let ctx = G.Canvas().getContext('2d');
 	ctx.beginPath();
-	ctx.arc(cx, cy, r, startAngle, endAngle, counterClockwise);
+	ctx.arc(cx, cy, r, startAngle, endAngle, !clockWise); // dibalik agar true = searah jarum jam
 	ctx.stroke();
 }
 
@@ -87,11 +87,11 @@ function lingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: 
 	ctx.fill();
 }
 
-function elip(x: number = 0, y: number = 0, radiusX: number = 0, radiusY: number = 0, awal: number = 0, akhir: number = 360): void {
+function elip(x: number = 0, y: number = 0, radiusX: number = 32, radiusY: number = 64, awal: number = 0, akhir: number = 360, searahJarumJam: boolean = false): void {
 	let ctx = G.Canvas().getContext('2d');
 	awal *= (Math.PI / 180);
 	akhir *= Math.PI / 180;
-	ctx.ellipse(x, y, radiusX, radiusY, 0, awal, akhir);
+	ctx.ellipse(x, y, radiusX, radiusY, 0, awal, akhir, !searahJarumJam);
 	ctx.stroke();
 	ctx.fill();
 }
@@ -102,6 +102,7 @@ function kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 
 	ctx.strokeRect(x1, y1, x2, y2);
 }
 
+//TODO: doc
 function segitiga(
 	x: number, // titik tengah bawah segitiga (posisi X)
 	y: number, // titik tengah bawah segitiga (posisi Y)
@@ -195,6 +196,7 @@ function segitiga(
 	}
 }
 
+//TODO: doc
 function pie(
 	x: number, // pusat lingkaran
 	y: number,
@@ -218,6 +220,7 @@ function pie(
 	ctx.stroke();
 }
 
+//TODO: doc
 function polygonTeratur(
 	x: number, // pusat poligon
 	y: number,
@@ -247,6 +250,7 @@ function polygonTeratur(
 	ctx.stroke();
 }
 
+//TODO: doc
 function bintang(
 	ctx: CanvasRenderingContext2D,
 	x: number, // posisi tengah bintang (X)
