@@ -1,11 +1,3 @@
-Siap, Fajar!  
-Berikut **wireframe tiap halaman (versi mobile)** dalam bentuk **ASCII**, simple tapi jelas, supaya mudah kamu translate ke UI nyata.  
-Semua layout didesain untuk **mobile-first**.
-
-Kalau kamu butuh versi **tablet** atau **desktop**, tinggal bilang ya!
-
-***
-
 # 📱 **1. LOGIN PAGE**
 
     +----------------------------------+
@@ -119,15 +111,12 @@ Kalau kamu butuh versi **tablet** atau **desktop**, tinggal bilang ya!
     +----------------------------------+
     | ← Nilai - X IPA 1 (Matematika)   |
     +----------------------------------+
-
     | [ + Tambah Penilaian ]           |
     +----------------------------------+
-
     | UH - Bab 1                       |
     | Tanggal: 02 Mar 2026             |
     | Status: 32 nilai masuk           |
     |----------------------------------|
-
     | Tugas - Persamaan Linear         |
     | Tanggal: 05 Mar 2026             |
     | Status: draft                    |
@@ -167,12 +156,12 @@ Kalau kamu butuh versi **tablet** atau **desktop**, tinggal bilang ya!
     | [ Hari Ini | Mingguan ]          |
     +----------------------------------+
 
-    | 08:00 - 09:30   Matematika        |
-    | Ruang: 201      Guru: Budi M      |
+    | 08:00 - 09:30   Matematika       |
+    | Ruang: 201      Guru: Budi M     |
     |----------------------------------|
 
-    | 10:00 - 11:30   Fisika            |
-    | Ruang: 203      Guru: Ani R       |
+    | 10:00 - 11:30   Fisika           |
+    | Ruang: 203      Guru: Ani R      |
     |----------------------------------|
 
 ***

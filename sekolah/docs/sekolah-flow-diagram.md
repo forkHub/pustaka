@@ -1,117 +1,15 @@
-Siap, Fajar! Berikut **flow diagram dalam ASCII** untuk proses utama aplikasi manajemen sekolah (MVP).  
-Struktur dibuat **ringkas & jelas**, mudah dipakai untuk diskusi dev/UX maupun implementasi.
-
-> **Legend singkat**  
-> `[]` = Proses/aksi • `<>` = Keputusan • `()` = Data/entitas • `==` = Layar/Halaman • `-->` = Alur lanjut • `--x` = Selesai / Error
 
 ***
 
-## 1) **Flow Login & Routing per Role**
 
-```text
-        == LOGIN ==
-           |
-           v
-      [Input Email/Password]
-           |
-           v
-     [Validasi Kredensial?]----->< No >
-           |                        |
-          < Yes >                   |
-           |                        v
-           v                 [Tampilkan error]
-   [Ambil profil & role]            |
-           |                        |
-           v                        |
-   <role == admin?>------------ No -+
-      | Yes
-      v
-== DASHBOARD ADMIN == --x
-
-   (Jika bukan admin)
-           ^
-           |
-   <role == teacher?>------ No ----+
-      | Yes                         \
-      v                              \
-== DASHBOARD GURU == --x              \
-                                       \
-   (Jika bukan guru)                   <role == student?>
-           ^                                 | Yes
-           |                                 v
-   <role == parent?>--- No -----> [Akses ditolak]
-      | Yes
-      v
-== DASHBOARD ORTU == --x
-
-(Jika student)
-== DASHBOARD SISWA == --x
-```
 
 ***
 
-## 2) **Flow Admin: Setup Tahun Ajaran & Semester**
 
-```text
-== DASHBOARD ADMIN ==
-          |
-          v
- [Menu > Tahun Ajaran]
-          |
-          v
-  [Tambah Tahun Ajaran]
-          |
-          v
- (academic_year: start_date, end_date)
-          |
-          v
- [Simpan Tahun Ajaran]--> <Valid?>---No-->[Tampilkan error]--->(perbaiki)-->[Simpan]
-          |
-         Yes
-          v
-   [Tambah Semester]
-          |
-          v
- (semester: Ganjil/Genap, start/end)
-          |
-          v
- [Simpan Semester]--> <Valid?>---No-->[Error]-->[Perbaiki]-->[Simpan]
-          |
-         Yes
-          v
- [Set Semester Aktif] --> --x
-```
 
 ***
 
-## 3) **Flow Admin: Buat Kelas (Rombel) & Enroll Siswa**
 
-```text
-== MENU KELAS ==
-      |
-      v
-[Tambah Kelas (X IPA 1)]
-      |
-      v
- (name, grade_level, homeroom_teacher)
-      |
-      v
- [Simpan Kelas]--><Valid?>--No-->[Error]-->[Perbaiki]-->[Simpan]
-      | Yes
-      v
- [Tambah Siswa ke Kelas]
-      |
-      v
- (Cari siswa) -> [Pilih siswa] -> [Tambah]
-      |
-      v
- <Duplikasi enrollment?>--Yes-->[Skip/Tampilkan info duplikat]
-      | No
-      v
- [Simpan Enrollment] --> [Selesai] --x
-```
-
-***
 
 ## 4) **Flow Admin: Buat Jadwal Pelajaran**
 
@@ -386,7 +284,3 @@ Struktur dibuat **ringkas & jelas**, mudah dipakai untuk diskusi dev/UX maupun i
 ```
 
 ***
-
-### Butuh versi **printable (PDF)** atau ingin saya **render jadi diagram mermaid** untuk dokumentasi?
-
-Aku juga bisa bikin **checklist QA** per flow (validasi & edge cases).

@@ -1,5 +1,3 @@
-Berikut **fitur minimum (Minimum Viable Features)** yang ideal untuk sebuah **aplikasi manajemen sekolah**, supaya bisa langsung digunakan namun tetap scalable untuk pengembangan lanjutan.
-
 ***
 
 # 🎒 **Fitur Minimum Aplikasi Manajemen Sekolah**
