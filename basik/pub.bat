@@ -3,6 +3,11 @@ echo off
 
 call pub_lib.bat || goto error
 
+echo update template
+echo ===============
+echo belum
+echo.
+
 echo publikasi template
 echo ===================
 xcopy template stg\pg\template /s /y /i || goto error
@@ -11,11 +16,12 @@ echo.
 echo publikasi contoh
 echo ================
 xcopy contoh\*.* stg\pg\contoh\ /s /i /y
+echo.
 
 echo publikasi web
-echo.
 xcopy web\index.html stg /y || goto error
 xcopy web\contoh.html stg\pg /y || goto error
+echo.
 
 echo update pg
 copy assets\*.* playground\web\asset || goto error
