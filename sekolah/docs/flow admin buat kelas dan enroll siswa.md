@@ -1,28 +1,23 @@
-## 3) **Flow Admin: Buat Kelas (Rombel) & Enroll Siswa**
+## **Flow Admin: Buat Kelas (Rombel) & Enroll Siswa**
 
-```text
-== MENU KELAS ==
-      |
-      v
-[Tambah Kelas (X IPA 1)]
-      |
-      v
- (name, grade_level, homeroom_teacher)
-      |
-      v
- [Simpan Kelas]--><Valid?>--No-->[Error]-->[Perbaiki]-->[Simpan]
-      | Yes
-      v
- [Tambah Siswa ke Kelas]
-      |
-      v
- (Cari siswa) -> [Pilih siswa] -> [Tambah]
-      |
-      v
- <Duplikasi enrollment?>--Yes-->[Skip/Tampilkan info duplikat]
-      | No
-      v
- [Simpan Enrollment] --> [Selesai] --x
+```mermaid
+graph TD
+    A["MENU KELAS"] --> B["Tambah Kelas (X IPA 1)"]
+    B --> C["(name, grade_level, homeroom_teacher)"]
+    C --> D["Simpan Kelas"]
+    D --> E{"Valid?"}
+    E -->|"No"| F["Error"]
+    F --> G["Perbaiki"]
+    G --> D
+    E -->|"Yes"| H["Tambah Siswa ke Kelas"]
+    H --> I["Cari siswa"]
+    I --> J["Pilih siswa"]
+    J --> K["Tambah"]
+    K --> L{"Duplikasi enrollment?"}
+    L -->|"Yes"| M["Skip/Tampilkan info duplikat"]
+    M --> N["Simpan Enrollment"]
+    L -->|"No"| N
+    N --> O["Selesai"]
 ```
 
 ***

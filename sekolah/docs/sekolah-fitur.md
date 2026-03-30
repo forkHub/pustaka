@@ -89,6 +89,3 @@ Jika ingin naik kelas:
 *   Integrasi fingerprint/face attendance
 
 ***
-
-Kalau kamu mau, aku bisa bantu **membuatkan blueprint lengkap**, **struktur database**, atau **flow aplikasi** untuk versi mobile/web.  
-Mau lanjut ke desain arsitektur atau wireframe? 😊

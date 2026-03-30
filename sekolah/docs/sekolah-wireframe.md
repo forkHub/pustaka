@@ -34,7 +34,7 @@
     +----------------------------------+
 
     | [Absensi]    [Nilai]   [SPP]     |
-    |   📋          ⭐         💸       |
+    |   📋          ⭐         💸     |
     +----------------------------------+
 
     | [Pengumuman Terbaru]             |
@@ -256,7 +256,3 @@
     | [ SIMPAN PERUBAHAN ]             |
 
 ***
-
-# 🚀 Mau saya buatkan versi **desktop wireframe**, atau **user flow diagram ASCII** juga?
-
-Cukup bilang **"Lanjutkan flow diagram"** atau **"Bikin wireframe desktop"**.

@@ -11,93 +11,11 @@
 
 
 
-## 4) **Flow Admin: Buat Jadwal Pelajaran**
 
-```text
-== MENU JADWAL ==
-       |
-       v
- [Pilih Kelas]
-       |
-       v
- [Tambah Slot Jadwal]
-       |
-       v
- (subject, teacher, day_of_week, start_time, end_time, room)
-       |
-       v
- <Cek bentrok jadwal?>---Yes-->[Tampilkan konflik]-->[Ubah jam/guru]
-       | No
-       v
- [Simpan Jadwal] --> [Tampil daftar] --x
-```
 
+n
 ***
 
-## 5) **Flow Guru: Absensi Harian**
-
-```text
-== DASHBOARD GURU ==
-        |
-        v
-  [Kelas Hari Ini]
-        |
-        v
-   [Absensi Kelas]
-        |
-        v
- (Date default: today)
-        |
-        v
-[List siswa] -> [Set status P/S/I/A per siswa]
-        |
-        v
- [Submit Absensi]
-        |
-        v
- <Ada siswa belum terisi?>--Yes-->[Prompt lengkapi]-->[Lengkapi]
-        | No
-        v
- [Simpan] --> [Rekap hadir hari ini update] --x
-```
-
-***
-
-## 6) **Flow Guru: Buat Penilaian & Input Nilai**
-
-```text
-== MENU PENILAIAN ==
-        |
-        v
-   [Pilih Kelas]
-        |
-        v
- [Pilih Mapel]
-        |
-        v
-[+ Tambah Penilaian]
-        |
-        v
- (title, type: UH/Tugas/PTS/PAS, date, weight, max_score)
-        |
-        v
- [Simpan Assessment]--><Valid?>--No-->[Error]-->[Perbaiki]-->[Simpan]
-        | Yes
-        v
- [Input Nilai per Siswa]
-        |
-        v
- (Masukkan score)
-        |
-        v
- [Simpan Nilai]
-        |
-        v
- [Hitung Rekap Otomatis (berat * skor)]
-        |
-        v
- [Tampil ringkasan nilai] --x
-```
 
 ***
 

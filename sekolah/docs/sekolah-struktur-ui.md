@@ -1,8 +1,3 @@
-Siap Fajar! Berikut **struktur halaman + flow user** untuk **Aplikasi Manajemen Sekolah (MVP)** yang selaras dengan fitur & database yang sudah kita susun sebelumnya.  
-Struktur ini disusun agar mudah diimplementasikan ke **Web App** (Admin/Guru) dan **Mobile/Web Lite** (Siswa/Ortu).
-
-***
-
 # 🧭 **1. Role dan User Flow Utama**
 
 Aplikasi ini minimal punya 4 role:
@@ -16,11 +11,7 @@ Aplikasi ini minimal punya 4 role:
 
 Flow setiap role akan berbeda, tapi sebagian halaman berbagi data.
 
-***
-
 # 🗂️ **2. Struktur Halaman per Role**
-
-***
 
 # 🟦 **A. ADMIN**
 
@@ -30,8 +21,6 @@ Flow setiap role akan berbeda, tapi sebagian halaman berbagi data.
 *   Kehadiran hari ini
 *   Tagihan SPP outstanding
 *   Pengumuman terbaru
-
-***
 
 ## **Manajemen Sekolah**
 
@@ -48,8 +37,6 @@ Flow setiap role akan berbeda, tapi sebagian halaman berbagi data.
     *   Wali kelas
     *   Anggota kelas
 
-***
-
 ## **Akademik**
 
 1.  **Mata Pelajaran**
@@ -59,16 +46,12 @@ Flow setiap role akan berbeda, tapi sebagian halaman berbagi data.
     *   Siswa
     *   Guru
 
-***
-
 ## **Penilaian**
 
 1.  Data Nilai per kelas
 2.  Rekap nilai per mapel
 3.  Rekap rapor per semester
 4.  Cetak/Generate raport (PDF)
-
-***
 
 ## **Keuangan**
 
@@ -77,17 +60,6 @@ Flow setiap role akan berbeda, tapi sebagian halaman berbagi data.
 3.  Pembayaran (input manual)
 4.  Riwayat pembayaran
 5.  Outstanding per siswa
-
-***
-
-## **Pengumuman & Notifikasi**
-
-1.  Buat pengumuman
-2.  Target audien (semua / siswa / guru / kelas)
-3.  Distribusi notifikasi
-4.  Log pengiriman
-
-***
 
 # 🟩 **B. GURU**
 
@@ -197,165 +169,3 @@ Flow setiap role akan berbeda, tapi sebagian halaman berbagi data.
 *   Nilai → per mapel & rekap
 *   Absensi → bulanan
 *   Tagihan → outstanding + riwayat
-*   Pengumuman sekolah
-
-***
-
-# 🔄 **3. Flow User per Fitur Utama**
-
-***
-
-# **FLOW 1 – User Login**
-
-    User → Login → Validasi role
-     IF admin → dashboard admin
-     IF guru → dashboard guru
-     IF siswa → dashboard siswa
-     IF ortu → dashboard ortu
-
-***
-
-# **FLOW 2 – Admin Menambah Tahun Ajaran & Semester**
-
-    Admin → Menu Tahun Ajaran → Tambah TA
-         → Tambah Semester 1
-         → Tambah Semester 2
-
-***
-
-# **FLOW 3 – Admin Membuat Kelas (Rombel)**
-
-    Admin → Kelas → Tambah Kelas (X IPA 1)
-          → Pilih wali kelas
-          → Tambah siswa ke rombel
-
-***
-
-# **FLOW 4 – Admin Buat Jadwal**
-
-    Admin → Jadwal Pelajaran
-          → Pilih kelas
-          → Pilih mapel → pilih guru
-          → Tentukan hari & jam
-
-***
-
-# **FLOW 5 – Guru Mengisi Absensi**
-
-    Guru → Dashboard → Kelas Hari Ini → Absensi
-         → Pilih status tiap siswa
-         → Submit
-
-***
-
-# **FLOW 6 – Guru Input Nilai**
-
-    Guru → Penilaian → Pilih Kelas
-         → Pilih Mapel
-         → Tambah Assessment (UH/Tugas/PTS/PAS)
-         → Input nilai siswa
-         → Sistem menghitung rekap otomatis
-
-***
-
-# **FLOW 7 – Admin Men-generate Rapor**
-
-    Admin → Penilaian → Rapor Semester
-          → Pilih kelas
-          → Generate PDF per siswa
-          → Download / distribusi
-
-***
-
-# **FLOW 8 – Admin Membuat Tagihan SPP**
-
-    Admin → Keuangan → Master Biaya
-          → Tambah SPP (nominal)
-          → Generate invoice otomatis per siswa
-
-***
-
-# **FLOW 9 – Pembayaran SPP**
-
-    Admin → Keuangan → Pembayaran
-          → Input pembayaran → Update status invoice
-
-***
-
-# **FLOW 10 – Pengumuman**
-
-    Admin/Guru → Pengumuman → Buat Baru
-               → Pilih audience (all/siswa/guru/kelas)
-               → Publish → Notifikasi terkirim
-
-***
-
-# 🧱 **4. Struktur Navigasi (Sitemap)**
-
-***
-
-## **ADMIN**
-
-    /dashboard
-    /school
-    /academic-year
-    /semester
-    /users
-    /users/students
-    /users/teachers
-    /class-groups
-    /subjects
-    /schedules
-    /attendance/students
-    /attendance/teachers
-    /assessments
-    /report-cards
-    /finance/fees
-    /finance/invoices
-    /finance/payments
-    /announcements
-    /notifications
-    /settings
-
-***
-
-## **GURU**
-
-    /dashboard
-    /classes
-    /classes/{id}
-    /attendance
-    /assessments
-    /schedule
-    /announcements
-    /profile
-
-***
-
-## **SISWA**
-
-    /dashboard
-    /schedule
-    /scores
-    /attendance
-    /invoices
-    /announcements
-    /profile
-
-## **ORANG TUA**
-
-    /dashboard
-    /child/{id}/scores
-    /child/{id}/attendance
-    /child/{id}/invoices
-    /announcements
-    /profile
-
-***
-
-# 🚀 Mau saya buatkan **diagram flow bentuk visual (flowchart)** atau **wireframe**?
-
-Tinggal kasih tahu:
-
-*   Format (PNG / SVG / Text)
-*   Level detail (high-level atau per halaman)
