@@ -4,9 +4,17 @@
 
 Library ini berisi kumpulan fungsi JavaScript yang dikelompokkan berdasarkan fungsionalitas seperti manipulasi gambar, operasi menggambar bentuk, interaktif dan lainnya.
 
-## 📝 Gambar
+## Cara pemakaian
 
-### `stempel(url, x, y)`
+```
+buatKanvas();
+stempel("kotak.png");
+```
+
+## Kumpulan perintah
+### 📝 Gambar
+
+#### `stempel(url, x, y)`
 Menstempel gambar ke layar pada posisi tertentu  
 
 **Parameters**
@@ -25,7 +33,7 @@ Menstempel gambar ke layar pada posisi tertentu
     Parameter ini berifat opsional.    
 **Returns:** `void`
 
-### `muatGambar(url)`
+#### `muatGambar(url)`
 
 Memuat gambar. Hasil dari perintah ini bisa digunakan dengan perintah `stempel()`, atau perintah lainnya. Dengan memuat gambar terlebih dahulu, kita akan punya lebih banyak fitur seperti mengatur panjang/lebar, rotasi, dsb. 
 Kita tidak perlu menunggu hingga gambar selesai di muat sepenuhnya untuk memulai operasi selanjutnya, semua di handle secara otomatis. Hal ini untuk memudahkan pemula dan menghindari perintah yang kompleks seperti event, dll.
@@ -39,7 +47,7 @@ Kita tidak perlu menunggu hingga gambar selesai di muat sepenuhnya untuk memulai
 
 **Returns:** `Gambar`  
 
-### `gambarTabrakan(img1: Gambar, img2: Gambar): boolean`  
+#### `gambarTabrakan(img1: Gambar, img2: Gambar): boolean`  
 
 Mengecek apakah dua gambar bertabrakan. Pengecekan dilakukan dengan mengecek bounding box dari kedua objek `Gambar`.
 Pengecekan mensupport gambar yang di rotasi.
@@ -53,7 +61,7 @@ Pengecekan mensupport gambar yang di rotasi.
 
 **Returns:** `boolean`. bernilai true bila terjadi tabrakan, atau false bila tidak terjadi tabrakan
 
-### `poinDidalamGambar(img: Gambar, x: number, y: number): boolean`  
+#### `poinDidalamGambar(img: Gambar, x: number, y: number): boolean`  
 
 Mengecek apakah sebuah point pada lokasi tertentu ada di dalam gambar
 
@@ -67,7 +75,7 @@ Mengecek apakah sebuah point pada lokasi tertentu ada di dalam gambar
 
 **Returns:** `boolean`. Bernilai True bila point berada di dalam gambar
 
-### `semuaGambarSelesaiDimuat(): boolean`  
+#### `semuaGambarSelesaiDimuat(): boolean`  
 
 Mengecek apakah semua gambar sudah selesai di muat. Gambar yang belum di muat masih bisa menerima perintah dan event.
 Bila kita men-`stempel` gambar yang belum di muat, maka gambarnya akan terlihat setelah gambar selesai di muat.
@@ -75,7 +83,7 @@ Perintah ini diperlukan kalau kita benar-benar ingin menunggu semua gambar seles
 
 **Returns:** `boolean`. Bernilai true bila semua gambar selesai dimuat.
 
-### `hapusGAmbar(gbr: Gambar): void`  
+#### `hapusGAmbar(gbr: Gambar): void`  
 
 Menghapus gambar dari memori. Gambar yang sudah dihapus tidak akan bisa menerima perintah dan akan menghasilkan error.
 
@@ -83,7 +91,7 @@ Menghapus gambar dari memori. Gambar yang sudah dihapus tidak akan bisa menerima
 *	`gbr`: `Gambar`  
 	objek gambar yang akan di hapus
 
-### `posisiGambar(gbr: Gambar, x:number = 0, y:number = 0):void`  
+#### `posisiGambar(gbr: Gambar, x:number = 0, y:number = 0):void`  
 
 Mengubah posisi gambar. Kita juga bisa mengubah posisi gambar secara parsial dengan mengubah property `x` atau `y` secara langsung.
 
@@ -95,7 +103,7 @@ Mengubah posisi gambar. Kita juga bisa mengubah posisi gambar secara parsial den
 *	`y`: `number`, default 0  
 	Posisi y  
 
-### `ukuranGambar(gbr: Gambar, p:number = 32, l:number = 32):void`  
+#### `ukuranGambar(gbr: Gambar, p:number = 32, l:number = 32):void`  
 
 Mengubah ukuran gambar. Kita juga bisa mengubah ukuran gambar melalui property `panjang` dan `lebar`.
 
@@ -107,70 +115,70 @@ Mengubah ukuran gambar. Kita juga bisa mengubah ukuran gambar melalui property `
 *	`l`: `number`, default 32
 	Lebar gambar
 
-## 📝 Perintah Input
+### 📝 Perintah Input
 Perintah-perintah yang berhubungan dengan input seperti mouse, touch, dan keyboard.
 
-### `mouseDitekan():boolean`
+#### `mouseDitekan():boolean`
 
 Mengecek apakah mouse sedang di tekan  
 
 **Returns:** `boolean`. Bernilai true bila mouse sedang ditekan
 
-### `mouseDidrag(): boolean`  
+#### `mouseDidrag(): boolean`  
 
 Mengecek apakah mouse sedang di drag
 
 **Returns:** `boolean`. Bernilai true bila mouse sedang di drag
 
-### `mouseDragX(): number`  
+#### `mouseDragX(): number`  
 
 Mengembalikan berapa jarak vertikal mouse saat di drag, dihitung dari posisi awal saat drag dimulai
 
 **Returns:** `number`. besaran drag horizontal
 
-### `mouseDragY(): number`  
+#### `mouseDragY(): number`  
 
 Mengembalikan berapa jarak vertikal mouse saat di drag, dihitung dari posisi awal saat drag dimulai
 
 **Returns:** `number`. besaran drag vertikal
 
-### `mouseX(): number`  
+#### `mouseX(): number`  
 
 Mengembalikan posisi X dari mouse
 
 **Returns:** `number`. posisi x dari mouse
 
-### `mouseY(): number`  
+#### `mouseY(): number`  
 
 Mengembalikan posisi Y dari mouse
 
 **Returns:** `number`. posisi y dari mouse
 
-### `mouseDragAwalX(): number`  
+#### `mouseDragAwalX(): number`  
 
 Posisi awal mouse saat mulai di drag
 
 **Returns:** `number`. posisi x saat mulai di drag
 
-### `mouseDragAwalY(): number`  
+#### `mouseDragAwalY(): number`  
 
 Posisi awal mouse saat mulai di drag
 
 **Returns:** `number`. posisi y saat mulai di drag
 
-### `mouseGerakX(): number`  
+#### `mouseGerakX(): number`  
 
 Mengembalikan pergerakan horizontal saat mouse bergerak
 
 **Returns:** `number`. besar pergerakan horizontal saat mouse digerakkan
 
-### `mouseGerakY(): number`
+#### `mouseGerakY(): number`
 
 Mengembalikan pergerakan vertikal saat mouse bergerak
 
 **Returns:** `number`. besar pergerakan vertikal saat mouse digerakkan
 
-### `bukaPath(x: number = 0, y: number = 0): void`  
+#### `bukaPath(x: number = 0, y: number = 0): void`  
 
 Perintah ini berfungsi untuk memulai menggambar bentuk yang kompleks. 
 Perintah ini di ikuti dengan perintah `garisKe()`, `kurvaKe()` dan `lingkaranKe()`
@@ -181,7 +189,7 @@ Perintah ini di ikuti dengan perintah `garisKe()`, `kurvaKe()` dan `lingkaranKe(
 *	`y`: `number`, default 32  
 	panjang gambar
 
-### `garisKe(x: number, y: number): void`  
+#### `garisKe(x: number, y: number): void`  
 
 Membuat garis ke posisi tertentu dari posisi terakhir
 
@@ -191,7 +199,7 @@ Membuat garis ke posisi tertentu dari posisi terakhir
 *	`y`: `number`, default 32  
 	posisi y ujung garis
 
-### `kurvaKe(cx: number, cy: number, x: number, y: number): void`  
+#### `kurvaKe(cx: number, cy: number, x: number, y: number): void`  
 
 Membuat kurva 
 
@@ -205,7 +213,7 @@ Membuat kurva
 *	`y`: `number`, default 32  
 	posisi ujung kurva
 
-### `lingkaranKe(tx: number, ty: number, sudut: number, searahJarumJam = false)`  
+#### `lingkaranKe(tx: number, ty: number, sudut: number, searahJarumJam = false)`  
 
 Membuat lingkaran dari posisi terakhir sebesar sudut.
 
@@ -219,11 +227,11 @@ Membuat lingkaran dari posisi terakhir sebesar sudut.
 *	`searahJarumJam`: `boolean`  
 	apakah lingkaran digambar searah jarum jam
 
-### `tutupPath()`  
+#### `tutupPath()`  
 
 Menutup Path. Perintah ini harus dipanggil untuk mengakhiri perintah dari `bukaPath()`.
 
-### `elip(x: number = 0, y: number = 0, radiusX: number = 0, radiusY: number = 0, awal: number = 0, akhir: number = 360, searahJarumJam:boolean = false): void`  
+#### `elip(x: number = 0, y: number = 0, radiusX: number = 0, radiusY: number = 0, awal: number = 0, akhir: number = 360, searahJarumJam:boolean = false): void`  
 
 Menggambar elip atau lingkaran
 
@@ -243,106 +251,195 @@ Menggambar elip atau lingkaran
 *	`searahJarumJam`: `boolean`, default false  
 	apakah elips searah jarum jam
 
-### `kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 100)`  
+#### `kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 100)`  
 
-## 📝 Perintah Umum
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
 
-### `buatKanvas(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, mode: number = 1)`  
+
+### 📝 Perintah Umum
+
+#### `buatKanvas(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, mode: number = 1)`  
+
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
 
 Membuat kanvas
 
-### `bersihkanLayar(x: number = 0, y: number = 0, w: number = 0, h: number = 0)`
+#### `bersihkanLayar(x: number = 0, y: number = 0, w: number = 0, h: number = 0)`
 
 Membersihkan layar
 
-### `warna(idx: number = 0, trans = 100)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `warna(idx: number = 0, trans = 100)`
 
 Mengeset warna fill
 
-### `warnaGaris(idx: number, trans = 100)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `warnaGaris(idx: number, trans = 100)`
 
 Mengeset warna garis
 
-### `tebalGaris(n: number)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+
+#### `tebalGaris(n: number)`
 
 Mengatur ketbalan garis
 
-## 📝 Perintah Matematika
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
 
-### `akar(n = 4)`  
+
+### 📝 Perintah Matematika
+
+#### `akar(n = 4)`  
 
 Akar
 
-### `pi()`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `pi()`
 
 Pi
 
-### `jarak(x: number = 0, y: number = 0)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `jarak(x: number = 0, y: number = 0)`
 
 Menghitung jarak
 
-### `jarakSudut(angleS: number = 0, angleT: number, min: boolean = true)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `jarakSudut(angleS: number = 0, angleT: number, min: boolean = true)`
 
 menghitung jarak antar dua sudut
 
-### `sudut(x: number, y: number)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `sudut(x: number, y: number)`
 
 Menghitung sudut
 
-### `polarX(panjang = 100, sudut = 0)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `polarX(panjang = 100, sudut = 0)`
 
 Posisi X polar
 
-### `polarY(panjang = 100, sudut = 0)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `polarY(panjang = 100, sudut = 0)`
 
 Posisi Y polar
 
-### `abs(n: number)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `abs(n: number)`
 
 absolut
 
-### `normalisasiSudut(sdt: number = 0)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `normalisasiSudut(sdt: number = 0)`
 
 Membuat sudut antara 0 - 360
 
-### `pembulatan(n: number, b: number = 1, type: number = 0)`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `pembulatan(n: number, b: number = 1, type: number = 0)`
 
 Membulatkan bilangan 
 
-## 📝 Perintah Teks
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+### 📝 Perintah Teks
 
 Perintah-perintah yang berhubungan dengan teks.
 
-### `tulis`
+#### `tulis`
 
 Menulis sesuatu 
 
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
 
-
-### `fontTeks`
+#### `fontTeks`
 
 Mengatur jenis font
 
-### `ukuranTeks`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `ukuranTeks`
 
 Mengatur ukuran teks
 
-### `perataanTeks`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### `perataanTeks`
 
 Mengatur perataan teks. 
 
-## Event Keyboard
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
 
-### `tombolDitahan(key: string = '')`
+### Event Keyboard
+
+#### `tombolDitahan(key: string = '')`
 
 mengecek apakah tombol ditahan
 
-### `tombolEvent():string`
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
+
+#### ` tombolEvent():string `
 
 Mengembalikan informasi tombol terakhir yang terlibat saat ada event keyboard
 
+**Parameters**
+*	`x`: `number`, default 0
+	posisi x dari tengah lingkaran
 
-## 📄 Lisensi
+### 📄 Lisensi
 
 GNU license
 
