@@ -29,22 +29,22 @@ const storageNama = "io.github.forkhub.basik.data";
 
 class Edit2 {
 	private myCodeMirror: any;
-	private editArea: HTMLTextAreaElement = document.querySelector('textarea.edit-area');
-	private webCont: HTMLDivElement = document.querySelector('div.kontainer-2 div.web');
-	private editCont: HTMLDivElement = document.querySelector('div.kontainer-2 div.edit-text');
+	private editArea: HTMLTextAreaElement = document.querySelector('textarea.edit-area') as HTMLTextAreaElement;
+	private webCont: HTMLDivElement = document.querySelector('div.kontainer-2 div.web') as HTMLDivElement;
+	private editCont: HTMLDivElement = document.querySelector('div.kontainer-2 div.edit-text') as HTMLDivElement;
 	private fileInfo: HTMLSpanElement;
 
-	private tblEditGroup = ["simpan", "muat", "jalan"];
+	private tblEditGroup = ["simpan", "muat", "jalan", "baru"];
 	private tblJalanGroup = ["edit",];
 
 	constructor() {
 		this.webCont;
 		this.editCont;
-		this.fileInfo = document.querySelector("div.file-info span.nama");
+		this.fileInfo = document.querySelector("div.file-info span.nama") as HTMLSpanElement;
 	}
 
 	getTbl(nama: string): HTMLButtonElement {
-		return document.querySelector(`button.${nama}`);
+		return document.querySelector(`button.${nama}`) as HTMLButtonElement;
 	}
 
 	showTbl(tbl: HTMLButtonElement | string[] | string): void {
@@ -120,9 +120,9 @@ class Edit2 {
 			this.baruKlik();
 		}
 
-		this.getTbl("demo").onclick = () => {
-			this.demoKlik();
-		}
+		// this.getTbl("demo").onclick = () => {
+		// 	this.demoKlik();
+		// }
 
 		this.myCodeMirror = CodeMirror.fromTextArea(this.editArea, {
 			lineNumbers: true,
@@ -146,7 +146,9 @@ class Edit2 {
 		(demo as HTMLDialogElement).showModal();
 	}
 
-	baruKlik() { }
+	baruKlik() {
+		window.location.reload();
+	}
 
 	muatKlik(): void {
 		dialogDaftarFile(
