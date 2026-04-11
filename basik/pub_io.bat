@@ -34,7 +34,7 @@ echo =========
 echo.
 
 echo publikasi doc
-copy doc\api-doc.md stg\doc\readme.md /y || goto error
+copy doc\api-doc.md stg\api-doc.md /y || goto error
 
 echo selesai
 goto end
