@@ -1,40 +1,10 @@
 @echo off
 echo off
 
-call pub_lib.bat || goto error
-
-echo update template
-echo ===============
-echo belum
-echo.
-
-echo publikasi template
-echo ===================
-xcopy template stg\pg\template /s /y /i || goto error
-echo.
-
-echo publikasi contoh
+echo publikasi stg
 echo ================
-xcopy contoh\*.* stg\pg\contoh\ /s /i /y
+xcopy stg\*.* ..\..\io\ /s /i /y || goto error
 echo.
-
-echo publikasi web
-xcopy web\index.html stg /y || goto error
-xcopy web\contoh.html stg\pg /y || goto error
-echo.
-
-echo update pg
-copy assets\*.* playground\web\asset || goto error
-copy build\*.* playground\web\editor\lib || goto error
-echo.
-
-echo publikasi pg
-xcopy playground\web\*.* stg\pg /s /i /y || goto error
-echo =========
-echo.
-
-echo publikasi doc
-copy doc\api-doc.md stg\api-doc.md /y || goto error
 
 echo selesai
 goto end

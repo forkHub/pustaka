@@ -15,7 +15,7 @@ echo.
 
 echo publikasi contoh
 echo ================
-xcopy contoh\*.* stg\pg\contoh\ /s /i /y
+xcopy contoh\*.* stg\pg\contoh\ /s /i /y || goto error
 echo.
 
 echo publikasi web
@@ -28,13 +28,13 @@ copy assets\*.* playground\web\asset || goto error
 copy build\*.* playground\web\editor\lib || goto error
 echo.
 
+echo publikasi doc
+xcopy doc\api-doc.md stg\doc\readme.md /i /y || goto error
+
 echo publikasi pg
 xcopy playground\web\*.* stg\pg /s /i /y || goto error
 echo =========
 echo.
-
-echo publikasi doc
-copy doc\api-doc.md stg\doc\readme.md /y || goto error
 
 echo selesai
 goto end
