@@ -1,5 +1,6 @@
-import { createClient, SupabaseClient, type User as SupabaseUser } from "@supabase/supabase-js";
+import { SupabaseClient, type User as SupabaseUser } from "@supabase/supabase-js";
 import type { UserType, AuthState } from "./types";
+
 
 class AuthManager {
 	private supabase: SupabaseClient;
@@ -9,8 +10,8 @@ class AuthManager {
 		error: null,
 	};
 
-	constructor(url: string, key: string) {
-		this.supabase = createClient(url, key);
+	constructor(supabaseClient: SupabaseClient) {
+		this.supabase = supabaseClient;
 	}
 
 	async initSession(): Promise<UserType | null> {

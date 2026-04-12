@@ -1,14 +1,10 @@
 import AuthManager from "./auth";
 import UIManager from "./ui";
 import { type Task } from "./types";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "./supabaseClient";
 
-const VITE_SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || `https://punaxsascwdlitkynfnd.supabase.co`;
-const VITE_SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_eca4ZMXgyqczd05MOpTUkw_iOLMtdZp';
-
-const authManager = new AuthManager(VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY);
+const authManager = new AuthManager(supabase);
 const uiManager = new UIManager();
-const supabase = createClient(VITE_SUPABASE_URL, VITE_SUPABASE_PUBLISHABLE_KEY);
 
 const taskInput = document.getElementById("taskInput") as HTMLInputElement;
 const addBtn = document.getElementById("addBtn") as HTMLButtonElement;
