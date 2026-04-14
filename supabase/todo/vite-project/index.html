@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>vite-project</title>
+</head>
+
+
+<body>
+	<!-- Authentication Screen -->
+	<div id="authContainer" class="auth-container">
+		<div id="loginForm" class="form-container">
+			<h2>Login</h2>
+			<input type="email" id="loginEmail" placeholder="Email" />
+			<input type="password" id="loginPassword" placeholder="Password" />
+			<button id="loginBtn">Login</button>
+			<a id="toggleRegister" href="#">Don't have an account? Register</a>
+		</div>
+		<div id="registerForm" class="form-container" style="display:none;">
+			<h2>Register</h2>
+			<input type="email" id="registerEmail" placeholder="Email" />
+			<input type="password" id="registerPassword" placeholder="Password" />
+			<input type="password" id="registerPasswordConfirm" placeholder="Confirm Password" />
+			<button id="registerBtn">Register</button>
+			<a id="toggleLogin" href="#">Already have an account? Login</a>
+		</div>
+	</div>
+
+	<!-- App Screen (visible after login) -->
+	<div id="appContainer" class="app-container" style="display:none;">
+		<div id="userInfo">
+			<p>Logged in as: <span id="userEmail"></span></p>
+			<button id="logoutBtn">Logout</button>
+		</div>
+		<form>
+			<input type="text" id="taskInput" placeholder="Add a new task..." />
+			<button type="button" id="addBtn">Add</button>
+		</form>
+		<ul id="taskList"></ul>
+	</div>
+	<script type="module" src="/src/app.ts"></script>
+</body>
+
+</html>

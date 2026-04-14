@@ -1,0 +1,40 @@
+{
+	// Explorer / search ignore
+	"files.exclude": {
+		"**/.git": true,
+		"**/.DS_Store": true,
+		"**/node_modules": true,
+		"**/dist": true,
+		"secret/**": true,
+		"private/**": true
+	},
+	"search.exclude": {
+		"**/node_modules": true,
+		"**/dist": true,
+		"secret/**": true,
+		"private/**": true
+	},
+	// Copilot/AI data scope: (perbaikaan bila tersedia setting per extension)
+	"github.copilot.restrictControl": true,
+	"github.copilot.includeFiles": [],
+	"github.copilot.excludeFiles": [
+		"**/secret/**",
+		"**/private/**",
+		"**/.env",
+		"**/.env.*"
+	],
+	// Workspace editor
+	"editor.tabSize": 2,
+	"editor.insertSpaces": true,
+	"editor.formatOnSave": true,
+	"files.autoSave": "afterDelay",
+	"files.autoSaveDelay": 800,
+	"typescript.tsdk": "node_modules/typescript/lib",
+	// Optional: nonaktifkan snippet auto di area yang sensitif
+	"editor.suggestSelection": "first",
+	"editor.quickSuggestions": {
+		"other": true,
+		"comments": false,
+		"strings": false
+	}
+}
