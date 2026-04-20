@@ -14,7 +14,7 @@ function kanvas(): HTMLCanvasElement {
 	return G.Canvas();
 }
 
-function buatKanvas(w: number = 320, h: number = 240, canvas: HTMLCanvasElement = null, mode: number = 1) {
+function buatKanvas(w: number = 800, h: number = 600, canvas: HTMLCanvasElement = null, mode: number = 1) {
 	console.log("buat kanvas");
 	G.Graphics(w, h, canvas, mode);
 }

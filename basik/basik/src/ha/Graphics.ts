@@ -86,9 +86,9 @@ namespace Basik {
 			G.drawCanvas = canvas;
 		}
 
-		static Start(canvas: HTMLCanvasElement): void {
-			G.Graphics(0, 0, canvas, 0);
-		}
+		// static Start(canvas: HTMLCanvasElement): void {
+		// 	G.Graphics(0, 0, canvas, 0);
+		// }
 
 		static Graphics(w?: number, h?: number, canvas: HTMLCanvasElement = null, mode: number = 1) {
 			console.groupCollapsed("init");
@@ -156,7 +156,7 @@ namespace Basik {
 				}
 				return false;
 			} catch (e) {
-				dialog(`Ada kesalahan di fungsi ${str}. Silahkan check codenya.<hr/>${e.message}<hr/>${e.stack}`);
+				dialog(`Ada kesalahan di fungsi ${str}. Silahkan check codenya.<hr/>${(e as any).message}<hr/>${(e as any).stack}`);
 				throw (e);
 			}
 		}
