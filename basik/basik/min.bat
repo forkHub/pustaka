@@ -3,8 +3,8 @@ echo ("minify")
 @REM echo  ("minify")
 @REM minify .\build\basik.js > .\build\basik.min.js
 
-node .\minify.js .\build\basik.js .\build\basik.min.js
-copy .\build\basik.min.js ..\build\basik.min.js /y || goto error
+node .\minify.js ..\build\basik.js ..\build\basik.min.js
+@rem copy .\build\basik.min.js ..\build\basik.min.js /y || goto error
 
 goto end
 

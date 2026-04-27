@@ -29,7 +29,7 @@ namespace Basik {
 			})
 
 			Event.addEventListener(Evt.MOUSE_UP, () => {
-				console.log("clear image mouse status")
+				// console.log("clear image mouse status")
 				Ip.daftar.forEach((img: GbrObj) => {
 					img.ditekan = false;
 					img.diDrag = false;
@@ -55,7 +55,7 @@ namespace Basik {
 
 		//TODO: call event
 		private inputDown(posCanvas: any, id: string): void {
-			console.group('input down');
+			// console.group('input down');
 			let posAbs = {
 				x: posCanvas.x - Camera.x,
 				y: posCanvas.y - Camera.y
@@ -85,14 +85,14 @@ namespace Basik {
 
 			//
 			if (lastSprite) {
-				console.log("img pressed, id: " + id);
+				// console.log("img pressed, id: " + id);
 				this.down(lastSprite, posCanvas, id);
 			} else {
-				console.log("no image pressed")
+				// console.log("no image pressed")
 			}
 
 			//
-			console.groupEnd();
+			// console.groupEnd();
 		}
 
 		private inputMove(posCanvas: any, inputId: string): void {

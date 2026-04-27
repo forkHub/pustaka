@@ -14,14 +14,16 @@ function muatAnimasi(url: string, fw: number = 32, fh: number = 32) {
 	return Ip.MuatAnimasi(url, fw, fh);
 }
 
-function stempel(img: Basik.GbrObj | string, x: number, y: number) {
+function stempel(img: Basik.GbrObj | string, x?: number, y?: number) {
 	if (typeof img == "string") {
 		let img2 = Ip.getByName(img, true);
 		posisi(img2, x, y);
 		Ip.Draw(img2);
 	}
 	else {
-		posisi(img, x, y);
+		if (x != undefined && y != undefined) {
+			posisi(img, x, y);
+		}
 		Ip.Draw(img);
 	}
 

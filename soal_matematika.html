@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Latihan Perkalian 1-10</title>
+  <style>
+    body {
+      font-family: monospace;
+      margin: 40px;
+      color: black;
+      background: white;
+    }
+    .container {
+      display: block; /* satu kolom */
+    }
+    .soal {
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    @media print {
+      body {
+        margin: 20mm;
+      }
+      .soal {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Latihan Perkalian 1–10</h2>
+  <div class="container" id="soalContainer"></div>
+
+  <script>
+    function formatMultiplicationWithBlanks(a, b) {
+      const sumParts = Array(b).fill("...").join(" + ");
+      return `${a} x ${b} = ${sumParts} = ....`;
+    }
+
+    function generateRandomSoal() {
+      const a = Math.floor(Math.random() * 10) + 1; // angka 1-10
+      const b = Math.floor(Math.random() * 10) + 1; // angka 1-10
+      return formatMultiplicationWithBlanks(a, b);
+    }
+
+    const container = document.getElementById("soalContainer");
+    for (let i = 0; i < 10; i++) {
+      const div = document.createElement("div");
+      div.className = "soal";
+      div.textContent = generateRandomSoal();
+      container.appendChild(div);
+    }
+  </script>
+</body>
+</html>

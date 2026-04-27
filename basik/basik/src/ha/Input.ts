@@ -220,7 +220,7 @@ namespace Basik {
 		}
 
 		static init(buffer: HTMLCanvasElement): void {
-			console.log('Input init');
+			// console.log('Input init');
 
 			buffer.style.touchAction = 'none';
 
@@ -240,7 +240,7 @@ namespace Basik {
 					Input._lastButton = e.button;
 
 					if (downState == false) {
-						console.log("dispatch mouse down event, id " + inp.id);
+						// console.log("dispatch mouse down event, id " + inp.id);
 						Event.dispatchEvent(Evt.MOUSE_DOWN);
 					}
 				});
@@ -264,7 +264,7 @@ namespace Basik {
 
 						if (input.isDown) {
 							if (!input.isDrag) {
-								console.log("dispatch mouse drag, id " + input.id);
+								// console.log("dispatch mouse drag, id " + input.id);
 								input.isDrag = true;
 								input.xStart = input.x;
 								input.yStart = input.y;
@@ -299,7 +299,7 @@ namespace Basik {
 				e.stopPropagation();
 				e.preventDefault();
 
-				console.group("pointer up " + Input.getId(e));
+				// console.group("pointer up " + Input.getId(e));
 
 				let input = Input.getInput(e);
 				Input.evt.up(input);
@@ -318,19 +318,19 @@ namespace Basik {
 				//clear up all input status
 				Input.lst.forEach((item) => {
 					if (item.isDrag) {
-						console.log("dispatch mouse drag end id " + input.id);
+						// console.log("dispatch mouse drag end id " + input.id);
 						Event.dispatchEvent(Evt.MOUSE_END_DRAG);
 					}
 					Input.evt.up(item);
 				})
 
 				Event.dispatchEvent(Evt.MOUSE_UP);
-				console.groupEnd();
+				// console.groupEnd();
 			}
 		}
 
 		private static reg(e: PointerEvent): IInput {
-			console.log("reg input type " + e.pointerType + "/button " + e.button + "/id " + e.pointerId);
+			// console.log("reg input type " + e.pointerType + "/button " + e.button + "/id " + e.pointerId);
 			let inp: IInput = new input.InpuObj()
 			inp.id = Input.getId(e);
 			inp.pointerType = e.pointerType;

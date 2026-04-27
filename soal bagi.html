@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Latihan Pembagian 1-10</title>
+  <style>
+    body {
+      font-family: monospace;
+      margin: 40px;
+      color: black;
+      background: white;
+    }
+    .container {
+      display: block; /* satu kolom */
+    }
+    .soal {
+      margin-bottom: 15px;
+      font-size: 18px;
+    }
+    @media print {
+      body {
+        margin: 20mm;
+      }
+      .soal {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h2>Latihan Pembagian 1–10</h2>
+  <div class="container" id="soalContainer"></div>
+
+  <script>
+    function formatDivisionWithBlanks(a, b) {
+      // dividend = a * b supaya hasil pembagian bulat
+      const dividend = a * b;
+      // hasil pembagian
+      const quotient = a;
+
+      // buat pengurangan berulang: dividend - ... - ... dst sebanyak quotient kali
+      const subParts = Array(quotient).fill("...").join(" - ");
+
+      return `${dividend} ÷ ${b} = ${dividend} - ${subParts} = ....`;
+    }
+
+    function generateRandomSoal() {
+      const a = Math.floor(Math.random() * 10) + 1; // hasil pembagian (1-10)
+      const b = Math.floor(Math.random() * 10) + 1; // pembagi (1-10)
+      return formatDivisionWithBlanks(a, b);
+    }
+
+    const container = document.getElementById("soalContainer");
+    for (let i = 0; i < 10; i++) {
+      const div = document.createElement("div");
+      div.className = "soal";
+      div.textContent = generateRandomSoal();
+      container.appendChild(div);
+    }
+  </script>
+</body>
+</html>

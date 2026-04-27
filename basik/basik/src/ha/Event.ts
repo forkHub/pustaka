@@ -11,7 +11,7 @@ namespace Basik {
 		KEYB_DOWN = "keyboardDitekan",
 		KEYB_UP = "keyboardDilepas",
 
-		// SOUND_LOADED = "Sound",
+		// SOUND_LOADED = "Sound",B
 		SOUND_ENDED = "suaraSelesai",
 
 		UPDATE = "update",
@@ -43,7 +43,7 @@ namespace Basik {
 		static addEventListener(type: string, f: () => void): Event {
 			let e = new Event(type.toLowerCase(), f);
 			Event.list.push(e);
-			console.log("add listener: type ", type);
+			// console.log("add listener: type ", type);
 			// console.log(f);
 			return e;
 		}
