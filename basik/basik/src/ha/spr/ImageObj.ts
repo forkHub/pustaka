@@ -12,7 +12,6 @@ namespace Basik {
 		 * @param lf 
 		 */
 		constructor(url: string = '', pf?: number, lf?: number) {
-			// console.log("create new image, url " + url);
 
 			let img: HTMLImageElement = document.createElement('img');
 			let canvas: HTMLCanvasElement = document.createElement('canvas');
@@ -77,45 +76,7 @@ namespace Basik {
 			}
 
 			function imgOnLoadDefault(): void {
-				// console.log("img on load default");
-
-				// canvas.width = 32;
-				// canvas.height = 32;
-
-				// // ctx = canvas.getContext('2d');
-				// gbr.img = document.createElement('img');
-				// // ctx.drawImage(gbr.img, 0, 0);
-
-				// gbr.rect = Ktk.buat(0, 0, 32, 32);
-				// ctx.fillStyle = 'rgba(255, 255, 255, 100)';
-				// ctx.strokeStyle = 'rgba(255, 0, 0, 100)';
-				// ctx.beginPath();
-				// ctx.rect(0, 0, 32, 32);
-				// ctx.moveTo(0, 0);
-				// ctx.lineTo(31, 31);
-				// ctx.moveTo(0, 31);
-				// ctx.lineTo(31, 0);
-				// ctx.stroke();
-
-				// // ctx.setf
-				// // ctx.fillRect(0, 0, 32, 32);
-
-				// gbr.load = true;
-
-				// if (!gbr.width) {
-				// 	// gbr.panjangDiSet = true;
-				// 	gbr.width = 32;
-				// }
-
-				// if (!gbr.height) {
-				// 	gbr.height = 32;
-				// 	// gbr.lebarDiSet = true;
-				// }
-
-				// gbr.frameH = 32;
-				// gbr.frameW = 32;
-
-				// ha.be.cache.setFile(url, gbr.img);
+				//TODO:
 			}
 
 			this.nama = url;

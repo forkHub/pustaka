@@ -26,7 +26,6 @@ namespace Basik {
 		public static set lastY(value: number) {
 			Graphic._lastY = value;
 		}
-		// private static mainCanvas: HTMLCanvasElement;	//original canvas should never change
 
 		private static _merah: number = 0;
 		private static _green: number = 0;
@@ -86,24 +85,17 @@ namespace Basik {
 			G.drawCanvas = canvas;
 		}
 
-		// static Start(canvas: HTMLCanvasElement): void {
-		// 	G.Graphics(0, 0, canvas, 0);
-		// }
-
 		static Graphics(w?: number, h?: number, canvas: HTMLCanvasElement = null, mode: number = 1) {
 			console.groupCollapsed("init");
 
 			if (!canvas) canvas = G.buildCanvas(w, h);
-			// G.mainCanvas = canvas;
 			G.drawCanvas = canvas;
 
 			G._autoScale = (mode == 1);
 			G.setupMainCanvas(w, h, mode);
-			// G.initComp();
 			In.init(G.drawCanvas);
 			Keyboard.init();
 			Warna.init();
-			// Camera.init();
 			sprInt.init();
 			G.initEvent();
 
@@ -119,7 +111,6 @@ namespace Basik {
 					console.log(e);
 					console.warn(e);
 					console.log("error !!!");
-					//TODO: error on update
 				}
 			}
 			window.requestAnimationFrame(update);
@@ -129,7 +120,6 @@ namespace Basik {
 			}, 100);
 			G.handleWindowResize();
 
-			// NoStroke();
 			bersihkanLayar();
 			warnaGaris(120);
 			warna(215);
@@ -195,7 +185,6 @@ namespace Basik {
 				G.callFunc(Evt.SOUND_ENDED);
 			})
 			Event.addEventListener(Evt.GAMBAR_DILOAD, () => {
-				//gambar pending 
 				Ip.daftar.forEach((gbr) => {
 					if (gbr.pendingStempel) {
 						gbr.pendingStempel = false;
@@ -220,7 +209,6 @@ namespace Basik {
 		}
 
 		public static alert(msg: string): void {
-			// cek apakah overlay sudah ada
 			let overlay = document.getElementById("customAlertOverlay");
 			if (!overlay) {
 				overlay = document.createElement("div");
@@ -245,7 +233,6 @@ namespace Basik {
 				document.body.appendChild(overlay);
 			}
 
-			// set pesan dan tampilkan
 			document.getElementById("customAlertMessage").innerHTML = msg;
 			overlay.style.display = "flex";
 		}

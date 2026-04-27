@@ -11,7 +11,6 @@ namespace Basik {
 
 		init() {
 			Event.addEventListener(Evt.MOUSE_DOWN, () => {
-				// this.down();
 				this.inputDown({
 					x: Input.global.x,
 					y: Input.global.y
@@ -29,7 +28,6 @@ namespace Basik {
 			})
 
 			Event.addEventListener(Evt.MOUSE_UP, () => {
-				// console.log("clear image mouse status")
 				Ip.daftar.forEach((img: GbrObj) => {
 					img.ditekan = false;
 					img.diDrag = false;
@@ -37,7 +35,7 @@ namespace Basik {
 			})
 		}
 
-		private down(img: GbrObj, posCanvas: any, id: string) {
+		private down(img: GbrObj, posCanvas: { x: number, y: number }, id: string) {
 			let posAbs = {
 				x: posCanvas.x - Camera.x,
 				y: posCanvas.y - Camera.y
@@ -52,10 +50,7 @@ namespace Basik {
 			img.initialAngle = img.rotasi;
 		}
 
-
-		//TODO: call event
-		private inputDown(posCanvas: any, id: string): void {
-			// console.group('input down');
+		private inputDown(posCanvas: { x: number, y: number }, id: string): void {
 			let posAbs = {
 				x: posCanvas.x - Camera.x,
 				y: posCanvas.y - Camera.y
@@ -65,9 +60,7 @@ namespace Basik {
 			let lastSprite: GbrObj = null;
 
 			for (let i: number = Ip.daftar.length - 1; i >= 0; i--) {
-				let img: GbrObj;
-
-				img = Ip.daftar[i];
+				const img = Ip.daftar[i];
 
 				if (Ip.dotInsideImage(img, img.x, img.y, posAbs.x, posAbs.y)) {
 					if (img.ctrIdx > lastIdx) {
@@ -76,23 +69,19 @@ namespace Basik {
 					}
 				}
 				else {
-					//remote drag
-					if (img.tipeDrag == 3 || img.tipeDrag == 4) {
-						this.down(img, posCanvas, id);
+					if (img.tipeDrag === TypeDrag.remoteDrag || img.tipeDrag === TypeDrag.remoteRotation) {
+						if (img.ctrIdx > lastIdx) {
+							lastIdx = img.ctrIdx;
+							lastSprite = img;
+						}
+						// this.down(img, posCanvas, id);
 					}
 				}
 			}
 
-			//
 			if (lastSprite) {
-				// console.log("img pressed, id: " + id);
 				this.down(lastSprite, posCanvas, id);
-			} else {
-				// console.log("no image pressed")
 			}
-
-			//
-			// console.groupEnd();
 		}
 
 		private inputMove(posCanvas: any, inputId: string): void {
@@ -109,7 +98,6 @@ namespace Basik {
 					if (img.tipeDrag == TypeDrag.drag || (img.tipeDrag == TypeDrag.remoteDrag)) {
 						img.x = posAbs.x - img.dragAwalX
 						img.y = posAbs.y - img.dragAwalY
-						console.debug('item drag move');
 					}
 					else if (img.tipeDrag == TypeDrag.rotasi || (img.tipeDrag == TypeDrag.remoteRotation)) {
 						let sudut2: number = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);

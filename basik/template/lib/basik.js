@@ -1670,8 +1670,7 @@ var Basik;
             let lastIdx = -1;
             let lastSprite = null;
             for (let i = Ip.daftar.length - 1; i >= 0; i--) {
-                let img;
-                img = Ip.daftar[i];
+                const img = Ip.daftar[i];
                 if (Ip.dotInsideImage(img, img.x, img.y, posAbs.x, posAbs.y)) {
                     if (img.ctrIdx > lastIdx) {
                         lastIdx = img.ctrIdx;
@@ -1679,15 +1678,16 @@ var Basik;
                     }
                 }
                 else {
-                    if (img.tipeDrag == 3 || img.tipeDrag == 4) {
-                        this.down(img, posCanvas, id);
+                    if (img.tipeDrag === TypeDrag.remoteDrag || img.tipeDrag === TypeDrag.remoteRotation) {
+                        if (img.ctrIdx > lastIdx) {
+                            lastIdx = img.ctrIdx;
+                            lastSprite = img;
+                        }
                     }
                 }
             }
             if (lastSprite) {
                 this.down(lastSprite, posCanvas, id);
-            }
-            else {
             }
         }
         inputMove(posCanvas, inputId) {
@@ -1701,7 +1701,6 @@ var Basik;
                     if (img.tipeDrag == TypeDrag.drag || (img.tipeDrag == TypeDrag.remoteDrag)) {
                         img.x = posAbs.x - img.dragAwalX;
                         img.y = posAbs.y - img.dragAwalY;
-                        console.debug('item drag move');
                     }
                     else if (img.tipeDrag == TypeDrag.rotasi || (img.tipeDrag == TypeDrag.remoteRotation)) {
                         let sudut2 = Basik.Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
@@ -1715,259 +1714,6 @@ var Basik;
         }
     }
     Basik.sprInt = new ImgIntHandler();
-})(Basik || (Basik = {}));
-var Basik;
-(function (Basik) {
-    class Gbr extends Basik.GbrObj {
-        static get lastImg() {
-            return Gbr._lastImg;
-        }
-        static set lastImg(value) {
-            Gbr._lastImg = value;
-        }
-        constructor(url = '', pf, lf) {
-            super(url, pf, lf);
-        }
-        static Buat(width, height) {
-            let h = new Gbr();
-            h.kanvas = document.createElement('canvas');
-            h.kanvas.width = width;
-            h.kanvas.height = height;
-            h.lebarFrame = height;
-            h.panjangFrame = width;
-            h.panjang = width;
-            h.lebar = height;
-            h.dimuat = true;
-            h.img = document.createElement('img');
-            return h;
-        }
-        static MuatAnimasi(url, pf, lf) {
-            let gbr = Gbr.Muat(url);
-            gbr.isAnim = true;
-            gbr.panjangFrame = pf;
-            gbr.lebarFrame = lf;
-            gbr.panjang = pf;
-            gbr.lebar = lf;
-            return gbr;
-        }
-        static Muat(url) {
-            let imgUrl = url;
-            if (imgUrl.indexOf("/") >= 0) {
-            }
-            else {
-                imgUrl = "asset/" + url;
-                if (imgUrl.indexOf(".") >= 0) {
-                }
-                else {
-                    imgUrl = imgUrl + ".png";
-                }
-            }
-            return new Gbr(imgUrl);
-        }
-        static getByName(nama, buat) {
-            for (let i = 0; i < Gbr.daftar.length; i++) {
-                let item = Gbr.daftar[i];
-                if (item.nama == nama)
-                    return item;
-            }
-            if (buat) {
-                return Gbr.Muat(nama);
-            }
-            return null;
-        }
-        static register(image, url, tipeDrag) {
-            let hasil;
-            hasil = image;
-            hasil.tipeDrag = tipeDrag;
-            hasil.url = url;
-            Gbr.daftar.push(hasil);
-            return hasil;
-        }
-        static AmbilPiksel(x = 0, y = 0) {
-            try {
-                let data = Basik.G.Canvas().getContext('2d').getImageData(x, y, 1, 1).data;
-                let hasil = [];
-                hasil.push(data[0]);
-                hasil.push(data[1]);
-                hasil.push(data[2]);
-                hasil.push(data[3]);
-                Basik.G.merah = data[0];
-                Basik.G.hijau = data[1];
-                Basik.G.biru = data[2];
-                Basik.G.alpha = data[3];
-            }
-            catch (e) {
-            }
-        }
-        static SetPiksel(x = 0, y = 0) {
-            Basik.G.Canvas().getContext('2d').fillRect(Math.floor(x), Math.floor(y), 1, 1);
-        }
-        DrawSingle(x = 0, y = 0, frame = 0) {
-            let ctx = Basik.G.Canvas().getContext('2d');
-            let jmlH = 0;
-            let frameX = 0;
-            let frameY = 0;
-            let imgW = 0;
-            let self = this;
-            if (this.dimuat == false) {
-                return;
-            }
-            imgW = this.img.naturalWidth;
-            this.ctrIdx = Basik.GbrObj.ctrDraw++;
-            frame = Math.floor(frame);
-            jmlH = Math.floor(imgW / this.panjangFrame);
-            frameX = (frame % jmlH);
-            frameY = Math.floor(frame / jmlH);
-            frameX *= this.panjangFrame;
-            frameY *= this.lebarFrame;
-            frameX = Math.floor(frameX);
-            frameY = Math.floor(frameY);
-            let x2 = Math.floor(x);
-            let y2 = Math.floor(y);
-            let w2 = Math.floor(this.panjang);
-            let h2 = Math.floor(this.lebar);
-            x2 -= (this.pusatX);
-            y2 -= (this.pusatY);
-            if (this.rotasi != 0) {
-                ctx.save();
-                ctx.translate(x, y);
-                ctx.rotate(this.rotasi * (Math.PI / 180));
-                drawImpl(-this.pusatX, -this.pusatY);
-                ctx.restore();
-            }
-            else {
-                ctx.save();
-                drawImpl(x2, y2);
-                ctx.restore();
-            }
-            function drawImpl(dx, dy) {
-                dx -= Basik.Camera.x;
-                dy -= Basik.Camera.y;
-                ctx.globalAlpha = self.alpha / 100;
-                ctx.drawImage(self.kanvas, frameX, frameY, self.panjangFrame, self.lebarFrame, Math.floor(dx), Math.floor(dy), w2, h2);
-                ctx.globalAlpha = 1;
-            }
-        }
-        tabrakan(gbr2, x2, y2) {
-            this.resetRect();
-            this.rectToImageTf(this.x, this.y);
-            gbr2.resetRect();
-            gbr2.rectToImageTf(x2, y2);
-            return Basik.Ktk.collide(this.rect, gbr2.rect);
-        }
-        free(img) {
-            for (let i = 0; i < Gbr.daftar.length; i++) {
-                if (Gbr.daftar[i] == img) {
-                    img.kanvas = null;
-                    img.img = null;
-                    Basik.Ktk.destroy(img.rect);
-                    Gbr.daftar.splice(i, 1);
-                    return;
-                }
-            }
-        }
-        dotInsideImage(gbr1, x1, y1, x2, y2) {
-            this.resetRect();
-            this.rectToImageTf(x1, y1);
-            return Basik.Ktk.collideDot(gbr1.rect, x2, y2);
-        }
-        ;
-        gambarUbin(x = 0, y = 0, frame = 0) {
-            let jmlH = 0;
-            let jmlV = 0;
-            if (this.dimuat == false)
-                return;
-            let w2 = Math.floor(this.panjang);
-            let h2 = Math.floor(this.lebar);
-            while (x < 0) {
-                x += w2;
-            }
-            while (x > 0) {
-                x -= w2;
-            }
-            while (y < 0) {
-                y += h2;
-            }
-            while (y > 0) {
-                y -= h2;
-            }
-            x -= w2;
-            y -= h2;
-            frame = Math.floor(frame);
-            jmlH = Math.ceil((Basik.G.Canvas().width + Math.abs(x)) / w2);
-            jmlV = Math.ceil((Basik.G.Canvas().height + Math.abs(y)) / h2);
-            for (let i = 0; i < jmlH; i++) {
-                for (let j = 0; j < jmlV; j++) {
-                    this.DrawSingle(x + (i * w2), y + (j * h2), frame);
-                }
-            }
-        }
-        stempel() {
-            const gambarSetelahDimuat = () => {
-                if (this.ubin) {
-                    this.gambarUbin(this.x, this.y, this.frame);
-                }
-                else {
-                    this.DrawSingle(this.x, this.y, this.frame);
-                }
-            };
-            if (this.dimuat) {
-                gambarSetelahDimuat();
-            }
-            else {
-                if (Basik.G.isUpdating) {
-                }
-                else {
-                    this.pendingStempel = true;
-                }
-            }
-        }
-        resetRect() {
-            let rect = this.rect;
-            let p;
-            p = rect.vs[0];
-            p.x = 0;
-            p.y = 0;
-            p = rect.vs[1];
-            p.x = this.panjangFrame - 1;
-            p.y = 0;
-            p = rect.vs[2];
-            p.x = this.panjangFrame - 1;
-            p.y = this.lebarFrame - 1;
-            p = rect.vs[3];
-            p.x = 0;
-            p.y = this.lebarFrame - 1;
-        }
-        rectToImageTf(x, y) {
-            let rect = this.rect;
-            let p;
-            let x2 = this.panjang - 1;
-            let y2 = this.lebar - 1;
-            p = rect.vs[1];
-            p.x = x2;
-            p.y = 0;
-            p = rect.vs[2];
-            p.x = x2;
-            p.y = y2;
-            p = rect.vs[3];
-            p.x = 0;
-            p.y = y2;
-            Basik.Ktk.translate(rect, x, y);
-            Basik.Ktk.translate(rect, -this.pusatX, -this.pusatY);
-            Basik.Ktk.rotate(rect, this.rotasi, x, y, false);
-        }
-        static AllImageLoaded() {
-            for (let i = 0; i < Gbr.daftar.length; i++) {
-                let img = Gbr.daftar[i];
-                if (!img.dimuat)
-                    return false;
-            }
-            return true;
-        }
-    }
-    Gbr.props = [];
-    Gbr.daftar = [];
-    Basik.Gbr = Gbr;
 })(Basik || (Basik = {}));
 var Basik;
 (function (Basik) {

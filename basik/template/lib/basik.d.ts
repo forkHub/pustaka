@@ -384,32 +384,6 @@ declare namespace Basik {
     export {};
 }
 declare namespace Basik {
-    class Gbr extends GbrObj {
-        static readonly props: string[];
-        static readonly daftar: GbrObj[];
-        private static _lastImg;
-        static get lastImg(): GbrObj;
-        static set lastImg(value: GbrObj);
-        constructor(url?: string, pf?: number, lf?: number);
-        static Buat(width: number, height: number): GbrObj;
-        static MuatAnimasi(url: string, pf: number, lf: number): GbrObj;
-        static Muat(url: string): GbrObj;
-        static getByName(nama: string, buat: boolean): GbrObj;
-        static register(image: GbrObj, url: string, tipeDrag: number): GbrObj;
-        static AmbilPiksel(x?: number, y?: number): void;
-        static SetPiksel(x?: number, y?: number): void;
-        private DrawSingle;
-        tabrakan(gbr2: Gbr, x2: number, y2: number): boolean;
-        free(img: Basik.GbrObj): void;
-        dotInsideImage(gbr1: GbrObj, x1: number, y1: number, x2: number, y2: number): boolean;
-        private gambarUbin;
-        stempel(): void;
-        resetRect(): void;
-        private rectToImageTf;
-        static AllImageLoaded(): boolean;
-    }
-}
-declare namespace Basik {
     class Teks {
         private static _name;
         private static _size;

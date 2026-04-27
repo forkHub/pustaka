@@ -131,20 +131,6 @@ namespace Basik {
 			return null;
 		}
 
-		// static getByDraggedStatus(btn: number): IInput {
-		// 	for (let i = 0; i < Input.lst.length; i++) {
-		// 		let inp = Input.lst[i];
-		// 		if (inp.isDrag && (inp.pointerType == 'mouse') && inp.button == btn) {
-		// 			return inp;
-		// 		}
-		// 		if (inp.isDrag && (inp.pointerType == 'touch')) {
-		// 			return inp;
-		// 		}
-		// 	}
-
-		// 	return null;
-		// }
-
 		static getDraggedInput(): IInput {
 			for (let i = 0; i < Input.lst.length; i++) {
 				let inp = Input.lst[i];
@@ -162,21 +148,6 @@ namespace Basik {
 
 			return null;
 		}
-
-		// static getByButton(btn?: number): IInput {
-		// 	for (let i = 0; i < Input.lst.length; i++) {
-		// 		let inp = Input.lst[i];
-		// 		if (inp.pointerType == 'mouse') {
-		// 			if (inp.button == btn) {
-		// 				return inp;
-		// 			}
-		// 		}
-		// 	}
-
-		// 	// if (Input.global.pointerType == 'touch') return Input.global;
-
-		// 	return null;
-		// }
 
 		static getById(id: string): IInput {
 			for (let i = 0; i < Input.lst.length; i++) {
@@ -220,7 +191,6 @@ namespace Basik {
 		}
 
 		static init(buffer: HTMLCanvasElement): void {
-			// console.log('Input init');
 
 			buffer.style.touchAction = 'none';
 
@@ -240,7 +210,6 @@ namespace Basik {
 					Input._lastButton = e.button;
 
 					if (downState == false) {
-						// console.log("dispatch mouse down event, id " + inp.id);
 						Event.dispatchEvent(Evt.MOUSE_DOWN);
 					}
 				});
@@ -264,7 +233,6 @@ namespace Basik {
 
 						if (input.isDown) {
 							if (!input.isDrag) {
-								// console.log("dispatch mouse drag, id " + input.id);
 								input.isDrag = true;
 								input.xStart = input.x;
 								input.yStart = input.y;
@@ -318,7 +286,6 @@ namespace Basik {
 				//clear up all input status
 				Input.lst.forEach((item) => {
 					if (item.isDrag) {
-						// console.log("dispatch mouse drag end id " + input.id);
 						Event.dispatchEvent(Evt.MOUSE_END_DRAG);
 					}
 					Input.evt.up(item);
@@ -330,7 +297,6 @@ namespace Basik {
 		}
 
 		private static reg(e: PointerEvent): IInput {
-			// console.log("reg input type " + e.pointerType + "/button " + e.button + "/id " + e.pointerId);
 			let inp: IInput = new input.InpuObj()
 			inp.id = Input.getId(e);
 			inp.pointerType = e.pointerType;

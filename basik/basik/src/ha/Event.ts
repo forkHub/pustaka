@@ -58,7 +58,6 @@ namespace Basik {
 		}
 
 		static dispatchEvent(type: string): void {
-
 			Event.list.forEach((item) => {
 				if (item.type === type.toLowerCase()) {
 					item.f();
