@@ -2,7 +2,7 @@ import { store } from "./Data";
 import { id } from "./Id";
 import { type resourceCountByType, resourceType } from "./Resource";
 
-const jobType = {
+export const jobType = {
 	CUT_TREE: 'cut wood'
 } as const;
 
@@ -137,16 +137,19 @@ export class Job {
 		return Job.list.filter(item => item.buildingId == buildingId);
 	}
 
+	static getByBuildingIdAndType(id:number, type: jobType): Job[] {
+		return this.getByBuildingId(id).filter((item) => item.type === type);
+	}
+
 	static createIfDoesntExists() {
 
 	}
 
-	static create(type: jobType): Job {
+	static create(type: jobType, buildingId:number): Job {
 		let j: Job;
 
 		if (type == jobType.CUT_TREE) {
 			j = new Job();
-			j.type = type;
 			j.requiredResource.push({
 				resType: resourceType.TREE,
 				amount: 1
@@ -159,6 +162,9 @@ export class Job {
 		else {
 			throw Error('undefined type');
 		}
+
+		j.type = type;
+		j.buildingId = buildingId;
 
 		return j;
 	}

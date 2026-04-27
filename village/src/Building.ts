@@ -1,6 +1,6 @@
 import { gameData } from "./Data.js";
 import { id } from "./Id.js";
-import { Job, jobStateType } from "./Job.js";
+import { Job, jobStateType, jobType } from "./Job.js";
 
 export const buildingType = {
 	FORESTER: 'FORESTER',
@@ -31,7 +31,7 @@ export class Building {
 	private _width: number = 1;
 	private _height: number = 1;
 	private _state: buildingState = buildingState.PLAN;
-	private jobs: number[] = [];
+
 	private _id: number;
 	private _x: number = 0;
 	private _y: number = 0;
@@ -44,16 +44,32 @@ export class Building {
 	}
 
 	tick(): void {
-		//TODO issue job
-
-		//udate job
-		Job.getByBuildingId(this.id).forEach((item) => {
-			item.tick();
-			if (item.state == jobStateType.FINISH) {
-				Job.removeByJob(item);
-				//TODO: remove UI
+		//Issue job if required
+		this.jobType().forEach((jobType) => {
+			if (Job.getByBuildingIdAndType(this.id, jobType).length==0) {
+				Job.create(jobType, this.id);
 			}
 		})
+
+		//TODO: handle di job
+		// Job.getByBuildingId(this.id).forEach((item) => {
+		// 	item.tick();
+		// 	if (item.state == jobStateType.FINISH) {
+		// 		Job.removeByJob(item);
+		// 		//TODO: remove UI
+		// 	}
+		// })
+	}
+
+	jobType():jobType[] {
+		if (this._type === buildingType.FORESTER) {
+			return [
+				jobType.CUT_TREE
+			]
+		}
+		else {
+			throw Error('no job defined yet');
+		}
 	}
 
 	//TODO:
@@ -63,14 +79,15 @@ export class Building {
 	}
 
 	remove(): void {
-		while (this.jobs.length > 0) {
-			let id = this.jobs.pop();
-			if (id) {
-				let j = Job.getById(id);
-				if (!j) throw Error('invalid job to remove');
-				j.cancel();
-			}
-		}
+		//TODO: handle di job
+		// while (this.jobs.length > 0) {
+		// 	let id = this.jobs.pop();
+		// 	if (id) {
+		// 		let j = Job.getById(id);
+		// 		if (!j) throw Error('invalid job to remove');
+		// 		j.cancel();
+		// 	}
+		// }
 	}
 
 	static tick(): void {
@@ -88,7 +105,7 @@ export class Building {
 		b.x = mouseX();
 		b.y = mouseY();
 
-		//TODO: invalid test for collapsing building
+		//TODO: test for collapsing building
 	}
 
 	static mouseTap() {
@@ -177,7 +194,7 @@ export class Building {
 		this._height = value;
 	}
 
-	public get type(): string {
+	public get type(): buildingType {
 		return this._type;
 	}
 
