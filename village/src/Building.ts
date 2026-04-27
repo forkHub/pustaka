@@ -1,6 +1,6 @@
 import { gameData } from "./Data.js";
 import { id } from "./Id.js";
-import { Job, jobStateType, jobType } from "./Job.js";
+import { Job, jobType } from "./Job.js";
 
 export const buildingType = {
 	FORESTER: 'FORESTER',
@@ -43,13 +43,20 @@ export class Building {
 		this._id = id.id;
 	}
 
-	tick(): void {
-		//Issue job if required
-		this.jobType().forEach((jobType) => {
-			if (Job.getByBuildingIdAndType(this.id, jobType).length==0) {
+	private issueNewJob() {
+		if (this._state != buildingState.PRODUCE) return;
+
+		this.availableJobList().forEach((jobType) => {
+			if (Job.getByBuildingIdAndType(this.id, jobType).length == 0) {
+				// console.log("Building: produce job, type: " + jobType);
 				Job.create(jobType, this.id);
 			}
 		})
+	}
+
+	tick(): void {
+		//Issue job if required
+		this.issueNewJob();
 
 		//TODO: handle di job
 		// Job.getByBuildingId(this.id).forEach((item) => {
@@ -61,10 +68,15 @@ export class Building {
 		// })
 	}
 
-	jobType():jobType[] {
+	availableJobList(): jobType[] {
 		if (this._type === buildingType.FORESTER) {
 			return [
-				jobType.CUT_TREE
+				jobType.PLAN_TREE
+			]
+		}
+		else if (this._type === buildingType.WELL) {
+			return [
+				jobType.WATER
 			]
 		}
 		else {
@@ -79,15 +91,7 @@ export class Building {
 	}
 
 	remove(): void {
-		//TODO: handle di job
-		// while (this.jobs.length > 0) {
-		// 	let id = this.jobs.pop();
-		// 	if (id) {
-		// 		let j = Job.getById(id);
-		// 		if (!j) throw Error('invalid job to remove');
-		// 		j.cancel();
-		// 	}
-		// }
+
 	}
 
 	static tick(): void {
@@ -96,8 +100,8 @@ export class Building {
 		})
 	}
 
-	static mouseDown() {
-		if (gameData.buildingToBuild <= 0) return;
+	private static updatePlan(): boolean {
+		if (gameData.buildingToBuild <= 0) return false;
 
 		let b = Building.getById(gameData.buildingToBuild);
 		if (b == null) throw Error('invalid building');
@@ -105,16 +109,34 @@ export class Building {
 		b.x = mouseX();
 		b.y = mouseY();
 
+		return true;
+
 		//TODO: test for collapsing building
 	}
 
-	static mouseTap() {
+	private static buildingMouseDown() {
+		console.log("building image mouse down, test " + Building.list[0].img.ditekan);
+		console.log(Building.list.length);
 
+		Building.list.forEach((item) => {
+			if (item.img.ditekan) {
+				console.log('Building, img pressed, id ' + item.id);
+			}
+		})
+	}
+
+	static mouseDown() {
+		if (Building.updatePlan()) return;
+		this.buildingMouseDown();
+	}
+
+	static mouseTap() {
 	}
 
 	static remove(id: number) {
 		let b = Building.getById(id);
 		if (!b) throw Error('invalid building to remove');
+		b.remove();
 
 		Building.list = Building.list.filter(item => item.id != id);
 	}
@@ -143,13 +165,13 @@ export class Building {
 	}
 
 	static render() {
-		//TODO: sorting
 		Building.list.forEach((item) => {
 			if (item.state == buildingState.PLAN) {
-				//TODO: set alpha
+				if (item.positionSet) stempel(item.img);
 			}
-
-			if (item.positionSet) stempel(item.img);
+			else {
+				stempel(item.img);
+			}
 		})
 	}
 

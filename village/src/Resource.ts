@@ -1,7 +1,8 @@
 export const resourceType = {
 	WOOD: 'wood',
 	TREE: 'tree',
-	PLANK: 'plank'
+	PLANK: 'plank',
+	WATER: 'water'
 } as const;
 
 export type resourceType = typeof resourceType[keyof typeof resourceType];

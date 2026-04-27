@@ -3,7 +3,9 @@ import { id } from "./Id";
 import { type resourceCountByType, resourceType } from "./Resource";
 
 export const jobType = {
-	CUT_TREE: 'cut wood'
+	CUT_TREE: 'cut wood',
+	PLAN_TREE: 'plan tree',
+	WATER: 'water'
 } as const;
 
 export type jobType = typeof jobType[keyof typeof jobType];
@@ -98,10 +100,9 @@ export class Job {
 					store.getResourceByType(item.resType).amount -= item.amount;
 				});
 				this.state = jobStateType.PROGRESS;
-				this.counter = this._counterMax
+				this.counter = this._counterMax;
+				// console.log("Job: start");
 			}
-
-
 		}
 		else if (this.state == jobStateType.PROGRESS) {
 			if (this.counter > 0) {
@@ -115,7 +116,9 @@ export class Job {
 			}
 		}
 		else if (this.state == jobStateType.FINISH) {
-			//todo
+			Job.removeByJob(this);
+			// console.log('job finish');
+			//TODO: remove ui if necesary
 		}
 		else {
 			throw new Error('invalid state');
@@ -123,6 +126,7 @@ export class Job {
 	}
 
 	destroy(): void {
+		// console.log('Job destroyed, type ' + this._type);
 		this.requiredResource = [];
 		this.produce = [];
 	}
@@ -137,7 +141,7 @@ export class Job {
 		return Job.list.filter(item => item.buildingId == buildingId);
 	}
 
-	static getByBuildingIdAndType(id:number, type: jobType): Job[] {
+	static getByBuildingIdAndType(id: number, type: jobType): Job[] {
 		return this.getByBuildingId(id).filter((item) => item.type === type);
 	}
 
@@ -145,11 +149,10 @@ export class Job {
 
 	}
 
-	static create(type: jobType, buildingId:number): Job {
-		let j: Job;
+	static create(type: jobType, buildingId: number): Job {
+		let j: Job = new Job();
 
 		if (type == jobType.CUT_TREE) {
-			j = new Job();
 			j.requiredResource.push({
 				resType: resourceType.TREE,
 				amount: 1
@@ -157,6 +160,12 @@ export class Job {
 			j.produce.push({
 				resType: resourceType.WOOD,
 				amount: 2
+			});
+		}
+		else if (type === jobType.WATER) {
+			j.produce.push({
+				resType: resourceType.WATER,
+				amount: 1
 			})
 		}
 		else {
@@ -165,13 +174,23 @@ export class Job {
 
 		j.type = type;
 		j.buildingId = buildingId;
+		Job.list.push(j);
 
 		return j;
 	}
 
 	static removeByJob(j: Job): void {
+		// console.log("Job: remove by job, id " + j.id);
 		j.destroy();
 		Job.list = this.list.filter((item) => item.id != j.id);
+		// console.log(Job.list.length);
 	}
+
+	static tick() {
+		Job.list.forEach((item) => {
+			item.tick();
+		})
+	}
+
 
 }

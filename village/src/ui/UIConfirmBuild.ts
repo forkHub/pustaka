@@ -14,12 +14,12 @@ class UIConfirmBuild extends UIBase {
 		this.appendChild(this.cancelBtn);
 
 		this.okBtn.el.addEventListener('click', () => {
-			console.log("ok button click");
+			console.log("ok button click, building to build " + gameData.buildingToBuild);
 			if (gameData.buildingToBuild <= 0) return;
 
 			let b = Building.getById(gameData.buildingToBuild);
 			if (!b) throw Error('invalid building');
-			b.state = buildingState.BUILD;
+			b.state = buildingState.PRODUCE;
 			gameData.buildingToBuild = 0;
 			// if (this.parent) this.parent.
 			// document.body.removeChild(this.el);
