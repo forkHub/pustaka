@@ -1,2 +1,5 @@
+TODO:
 update ke module system
-copy ke english version
+kurangi penggunaan static
+pecah file dan implementasi
+penggunaan bahasa yang konsistent

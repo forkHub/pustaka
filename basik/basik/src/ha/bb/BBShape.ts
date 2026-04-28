@@ -6,16 +6,13 @@ function bukaPath(x: number = 0, y: number = 0): void {
 	ctx.moveTo(x, y);
 	G.lastX = x;
 	G.lastY = y;
-	// G.relPos = rel;
 }
 
 function garisKe(x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
 
-	// if (G.relPos) {
 	x += G.lastX;
 	y += G.lastY;
-	// }
 
 	ctx.lineTo(x, y);
 	G.lastX = x;
@@ -25,12 +22,10 @@ function garisKe(x: number, y: number): void {
 function kurvaKe(cx: number, cy: number, x: number, y: number): void {
 	let ctx = G.Canvas().getContext('2d');
 
-	// if (G.relPos) {
 	cx += G.lastX;
 	cy += G.lastY;
 	x += G.lastX;
 	y += G.lastY;
-	// }
 
 	let cp1x = (cx - G.lastX) / 2 + G.lastX;
 	let cp1y = (cy - G.lastY) / 2 + G.lastY;
@@ -42,7 +37,6 @@ function kurvaKe(cx: number, cy: number, x: number, y: number): void {
 
 	G.lastX = x;
 	G.lastY = y;
-	// debugger;
 }
 
 /**
@@ -215,7 +209,6 @@ function pie(
 	ctx.lineTo(x, y); // kembali ke pusat
 	ctx.closePath();
 
-	// ctx.fillStyle = fillColor;
 	ctx.fill();
 	ctx.stroke();
 }
@@ -245,7 +238,6 @@ function polygonTeratur(
 	}
 	ctx.closePath();
 
-	// ctx.fillStyle = fillColor;
 	ctx.fill();
 	ctx.stroke();
 }

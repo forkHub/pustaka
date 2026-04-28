@@ -47,7 +47,6 @@ namespace Basik {
 			let bound: boolean = Sg.boundCollide(seg1, seg2);
 			if (!bound) return false;
 
-			// let deg: number = Sg.deg(seg2);
 			let seg2Copy: Seg = Sg.clone(seg2);
 			let seg1Copy: Seg = Sg.clone(seg1);
 			let deg: number = Sg.deg(seg2);
@@ -103,17 +102,9 @@ namespace Basik {
 			return seg.A.x + (idx * Sg.vecI(seg));
 		}
 
-		// static getYAtIdx(seg: Seg, idx: number): number {
-		// 	return seg.A.y + (idx * Sg.vecJ(seg));
-		// }
-
 		private static vecI(seg: Seg): number {
 			return seg.B.x - seg.A.x;
 		}
-
-		// static vecJ(seg: Seg): number {
-		// 	return seg.B.y - seg.A.y;
-		// }
 
 		private static rotate(seg: Seg, deg: number = 0, xc: number = 0, yc: number = 0): void {
 			Pt.putarPoros(seg.A, xc, yc, deg);

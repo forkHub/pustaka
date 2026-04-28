@@ -65,14 +65,6 @@ function mouseDragAwalY(): number {
 }
 
 /**
- * return last button pressed for mouseevent. For mobile device this can return any number
- * @returns {number}
- */
-// function MouseButton(): number {
-// 	return In.lastButton;
-// }
-
-/**
  * return last mouse horizontal movement
  * @returns {number}
  */
@@ -87,6 +79,3 @@ function mouseGerakX(): number {
 function mouseGerakY(): number {
 	return In.global.moveY;
 }
-
-//TODO:
-// mouseSudutB

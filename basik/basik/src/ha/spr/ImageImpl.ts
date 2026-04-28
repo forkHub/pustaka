@@ -25,7 +25,6 @@ namespace Basik {
 			h.lebar = height;
 			h.dimuat = true;
 			h.img = document.createElement('img');
-			// Ip.register(h, h.url, h.tipeDrag);
 			return h;
 		}
 
@@ -135,7 +134,6 @@ namespace Basik {
 				x -= w2;
 			}
 
-			//posisi gambar dimulai dari sebelum titik 0,0
 			while (y < 0) {
 				y += h2;
 			}
@@ -174,14 +172,11 @@ namespace Basik {
 				G.hijau = data[1];
 				G.biru = data[2];
 				G.alpha = data[3];
-				// G.FillColor(G.merah, G.hijau, G.biru, G.alpha);
 
 			}
 			catch (e) {
-				// console.error(e);
+				console.error(e);
 			}
-
-			// return [0, 0, 0];
 		}
 
 		static SetPiksel(x: number = 0, y: number = 0) {
@@ -217,8 +212,6 @@ namespace Basik {
 			let frameX: number = 0;
 			let frameY: number = 0;
 			let imgW: number = 0;
-
-			// let imgH: number = 0;
 
 			//TODO: dihapuss
 			if (gbr.dimuat == false) {
@@ -274,8 +267,6 @@ namespace Basik {
 				ctx.globalAlpha = gbr.alpha / 100;
 				ctx.drawImage(gbr.kanvas, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(dx), Math.floor(dy), w2, h2);
 				ctx.globalAlpha = 1;
-				//console.log("draw image, frame x: " + frameX + "/frame y: " + frameY + "/jml H " + jmlH);
-				// debugger;
 			}
 
 		}
@@ -339,6 +330,4 @@ namespace Basik {
 		}
 
 	}
-	// export const Ip = ImgImpl;
-
 }

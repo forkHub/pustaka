@@ -46,7 +46,6 @@ namespace Basik {
 			img.src = url;
 
 			function imgOnLoad(imgP: HTMLImageElement): void {
-				// console.log("img on load");
 				canvas.width = imgP.naturalWidth;
 				canvas.height = imgP.naturalHeight;
 
@@ -57,19 +56,15 @@ namespace Basik {
 				gbr.img = imgP;
 
 				if (!gbr.panjang) {
-					// gbr.panjangDiSet = true;
 					gbr.panjang = imgP.naturalWidth;
 				}
 
 				if (!gbr.lebar) {
 					gbr.lebar = imgP.naturalHeight;
-					// gbr.lebarDiSet = true;
 				}
 
 				if (!gbr.lebarFrame) gbr.lebarFrame = imgP.naturalHeight;
 				if (!gbr.panjangFrame) gbr.panjangFrame = imgP.naturalWidth;
-
-				// ha.be.cache.setFile(url, imgP);
 
 				ImgImpl.lastImg = self;
 				Event.dispatchEvent(Evt.GAMBAR_DILOAD);
@@ -242,7 +237,6 @@ namespace Basik {
 
 		public set panjang(value: number) {
 			this._panjang = value;
-			// this._panjangDiSet = true;
 		}
 
 		public get lebar(): number {

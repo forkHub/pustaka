@@ -38,14 +38,8 @@ namespace Basik {
 		}
 
 		private static copy(r: Ktk): Ktk {
-			// console.log('copy:');
-			// console.log(r.vs);
-
-			// let hasil: IRect = Rect.create(r.vs[0].x, r.vs[0].y, r.vs[2].x, r.vs[2].y);
 			let hasil: Ktk = Ktk.buat();
 			Ktk.copyInfo(r, hasil);
-
-			// console.log(hasil.vs);
 
 			return hasil;
 		}
@@ -57,28 +51,20 @@ namespace Basik {
 		}
 
 		private static collideBound(r1: Ktk, r2: Ktk): boolean {
-			// console.debug('collide bound');
 
 			if (Ktk.maxX(r1) < Ktk.minX(r2)) {
-				// console.debug('maxX gagal');
 				return false;
 			}
 
-			// console.log('maxx ' + Rect.maxX(r1));
-			// console.log('minx ' + Rect.minX(r2));
-
 			if (Ktk.minX(r1) > Ktk.maxX(r2)) {
-				// console.debug('min x gagal');
 				return false;
 			}
 
 			if (Ktk.maxY(r1) < Ktk.minY(r2)) {
-				// console.debug('max y gagal');
 				return false;
 			}
 
 			if (Ktk.minY(r1) > Ktk.maxY(r2)) {
-				// console.debug('min y gagal');
 				return false;
 			}
 
@@ -102,25 +88,18 @@ namespace Basik {
 
 		private static collideDotBound(r: Ktk, d: Pt): boolean {
 			if (d.x < Ktk.minX(r)) {
-				// console.log('minx failed');
 				return false;
 			}
 
 			if (d.x > Ktk.maxX(r)) {
-				// console.log('maxX failed');
-				// console.log(d);
-				// console.log(Rect.maxX(r));
-				// console.log(r.vs);
 				return false;
 			}
 
 			if (d.y < Ktk.minY(r)) {
-				// console.log('minY failed');
 				return false;
 			}
 
 			if (d.y > Ktk.maxY(r)) {
-				// console.log('maxY failed');
 				return false;
 			}
 
@@ -141,10 +120,6 @@ namespace Basik {
 			Pt.putarPoros(p, pRot.x, pRot.y, -d);
 
 			if (!Ktk.collideDotBound(r2, p)) {
-				// console.log('collide bound 2 failed');
-				// console.log('deg ' + d);
-				// console.log('rect');
-				// console.log(r2);
 				return false;
 			}
 

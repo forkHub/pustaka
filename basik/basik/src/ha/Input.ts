@@ -85,28 +85,7 @@ namespace Basik {
 			return Input._pointerEvent;
 		}
 
-		//for touch event that is not consistent and does not have button
 		static readonly global: IInput = new input.InpuObj()
-		// {
-		// 	id: '',
-		// 	pointerType: "",
-		// 	xStart: 0,
-		// 	yStart: 0,
-		// 	xDrag: 0,
-		// 	yDrag: 0,
-		// 	x: 0,
-		// 	y: 0,
-		// 	isDrag: false,
-		// 	isDown: false,
-		// 	isTap: false,
-		// 	evt: undefined,
-		// 	button: 0,
-		// 	timerStart: 0,
-		// 	timerEnd: 0,
-		// 	pointerId: 0,
-		// 	moveX: 0,
-		// 	moveY: 0
-		// }
 
 		public static get debug(): boolean {
 			return Input._debug;
@@ -267,14 +246,10 @@ namespace Basik {
 				e.stopPropagation();
 				e.preventDefault();
 
-				// console.group("pointer up " + Input.getId(e));
-
 				let input = Input.getInput(e);
 				Input.evt.up(input);
 				Input.evt.up(Input.global);
 				Input._pointerEvent = e;
-				// Input.global.id = Input.getId(e);
-				// Input.global.pointerType = e.pointerType;
 
 				let isTap = Input.checkTap(input);
 				input.isTap = (isTap == '');
@@ -292,7 +267,6 @@ namespace Basik {
 				})
 
 				Event.dispatchEvent(Evt.MOUSE_UP);
-				// console.groupEnd();
 			}
 		}
 

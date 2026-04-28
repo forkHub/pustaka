@@ -1,5 +1,5 @@
 namespace Basik {
-	enum TypeDrag {
+	enum tipeDrag {
 		drag = 1,
 		rotasi = 2,
 		remoteDrag = 3,
@@ -7,7 +7,7 @@ namespace Basik {
 	}
 
 	//Sprite interactivity
-	class ImgIntHandler {
+	class GbrInter {
 
 		init() {
 			Event.addEventListener(Evt.MOUSE_DOWN, () => {
@@ -35,7 +35,7 @@ namespace Basik {
 			})
 		}
 
-		private down(img: GbrObj, posCanvas: { x: number, y: number }, id: string) {
+		private handleGbrDitekan(img: GbrObj, posCanvas: { x: number, y: number }, id: string) {
 			let posAbs = {
 				x: posCanvas.x - Camera.x,
 				y: posCanvas.y - Camera.y
@@ -60,31 +60,27 @@ namespace Basik {
 			let lastSprite: GbrObj = null;
 
 			for (let i: number = Ip.daftar.length - 1; i >= 0; i--) {
-				const img = Ip.daftar[i];
+				const gbr = Ip.daftar[i];
 
-				if (Ip.dotInsideImage(img, img.x, img.y, posAbs.x, posAbs.y)) {
-					if (img.ctrIdx > lastIdx) {
-						lastIdx = img.ctrIdx;
-						lastSprite = img;
-					}
+				if (gbr.tipeDrag === tipeDrag.remoteDrag || gbr.tipeDrag === tipeDrag.remoteRotation) {
+					this.handleGbrDitekan(gbr, posCanvas, id);
 				}
 				else {
-					if (img.tipeDrag === TypeDrag.remoteDrag || img.tipeDrag === TypeDrag.remoteRotation) {
-						if (img.ctrIdx > lastIdx) {
-							lastIdx = img.ctrIdx;
-							lastSprite = img;
+					if (Ip.dotInsideImage(gbr, gbr.x, gbr.y, posAbs.x, posAbs.y)) {
+						if (gbr.ctrIdx > lastIdx) {
+							lastIdx = gbr.ctrIdx;
+							lastSprite = gbr;
 						}
-						// this.down(img, posCanvas, id);
 					}
 				}
 			}
 
 			if (lastSprite) {
-				this.down(lastSprite, posCanvas, id);
+				this.handleGbrDitekan(lastSprite, posCanvas, id);
 			}
 		}
 
-		private inputMove(posCanvas: any, inputId: string): void {
+		private inputMove(posCanvas: { x: number, y: number }, inputId: string): void {
 			let posAbs = {
 				x: posCanvas.x - Camera.x,
 				y: posCanvas.y - Camera.y
@@ -95,11 +91,11 @@ namespace Basik {
 				if (img.ditekan && (img.tipeDrag != 0) && (img.inputId == inputId)) {
 					img.diDrag = true;
 
-					if (img.tipeDrag == TypeDrag.drag || (img.tipeDrag == TypeDrag.remoteDrag)) {
+					if (img.tipeDrag == tipeDrag.drag || (img.tipeDrag == tipeDrag.remoteDrag)) {
 						img.x = posAbs.x - img.dragAwalX
 						img.y = posAbs.y - img.dragAwalY
 					}
-					else if (img.tipeDrag == TypeDrag.rotasi || (img.tipeDrag == TypeDrag.remoteRotation)) {
+					else if (img.tipeDrag == tipeDrag.rotasi || (img.tipeDrag == tipeDrag.remoteRotation)) {
 						let sudut2: number = Tf.sudut(posAbs.x - img.x, posAbs.y - img.y);
 						let perbedaan: number = sudut2 - img.initialMouseAngle;
 						img.rotasi = img.initialAngle + perbedaan;
@@ -113,5 +109,5 @@ namespace Basik {
 		}
 	}
 
-	export const sprInt: ImgIntHandler = new ImgIntHandler();
+	export const sprInt: GbrInter = new GbrInter();
 }

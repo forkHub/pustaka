@@ -26,37 +26,6 @@ namespace Basik {
 		b: number;
 	}
 
-
-	// interface ISprImgObj {
-	// 	//share-ble
-	// 	img: HTMLImageElement;
-	// 	canvas: HTMLCanvasElement;
-	// 	ctx: CanvasRenderingContext2D;
-
-	// 	x: number;
-	// 	y: number;
-	// 	frameW: number;
-	// 	frameH: number;
-	// 	rotasi: number;
-	// 	alpha: number;
-	// 	isAnim: boolean;
-	// 	rect: Ikt;
-	// 	ctrIdx: number;		//index counter buat drawing
-	// 	panjang: number;
-	// 	lebar: number;
-	// 	handleX: number;	//dipakai cuman pas saat gambar, dan perhitungan geometri, posisi tetap pakai x
-	// 	handleY: number;	//dipakai cuman pas saat gambar
-	// 	load: boolean;
-
-	// 	//status internal
-	// 	panjangDiSet: boolean;
-	// 	lebarDiSet: boolean;
-
-	// 	ratioX?: number,	//buat canvas buffer saat window resize
-	// 	ratioY?: number
-	// }
-
-	//geom
 	export interface IV2D {
 		x: number,
 		y: number
@@ -68,21 +37,4 @@ namespace Basik {
 		sound: HTMLAudioElement;
 		playedCount: number;
 	}
-
-	// interface ISprObj {
-	// 	buff: ISprImgObj,
-	// 	dragable: boolean
-	// 	dragged: boolean
-	// 	down: boolean
-
-	// 	drgStartX: number
-	// 	drgStartY: number
-	// 	url: string
-
-	// 	//
-	// 	tipeDrag: number; //1 drag, 2 rotasi, 3 skew (todo)
-	// 	sudutTekanAwal: number
-	// 	sudutAwal: number
-	// 	inputId: number
-	// }
 }

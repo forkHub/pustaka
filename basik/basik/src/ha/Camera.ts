@@ -1,4 +1,5 @@
 namespace Basik {
+	
 	export class Camera {
 		private static _x: number = 0;
 		public static get x(): number {
