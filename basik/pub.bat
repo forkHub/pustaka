@@ -15,7 +15,8 @@ echo.
 
 echo publikasi contoh
 echo ================
-xcopy contoh\*.* stg\pg\contoh\ /s /i /y || goto error
+xcopy contoh\*.* stg\contoh\ /s /i /y || goto error
+xcopy assets\*.* stg\asset\ /s /i /y || goto error 
 echo.
 
 echo publikasi web
