@@ -71,7 +71,7 @@ namespace Basik {
 			}
 
 			function imgOnLoadDefault(): void {
-				//TODO:
+				console.log("muat gambar default")
 			}
 
 			this.nama = url;

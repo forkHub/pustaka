@@ -2,7 +2,6 @@
 
 const S = Basik.Sn;
 
-//TODO: load dari nama file, url resolve otomatis
 /**
  * Load sound
  * @param url {string} the url
@@ -12,13 +11,13 @@ function muatSuara(url: string): HTMLAudioElement {
 	let sound: HTMLAudioElement = document.createElement("audio");
 
 	sound.onload = () => {
-		Basik.data().soundEvent = sound;
+		Basik.data.soundEvent = sound;
 		console.log("sound loaded");
 	}
 
 	sound.onended = () => {
 		try {
-			Basik.data().soundEvent = sound;
+			Basik.data.soundEvent = sound;
 			Basik.Event.dispatchEvent(Basik.Evt.SOUND_ENDED);
 			console.log("sound ended");
 		} catch (e) {
@@ -39,5 +38,5 @@ function mainkanSuara(s: HTMLAudioElement): void {
 }
 
 function suaraEvent() {
-	return Basik.data().soundEvent;
+	return Basik.data.soundEvent;
 }

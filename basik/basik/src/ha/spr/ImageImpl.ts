@@ -152,7 +152,7 @@ namespace Basik {
 
 			for (let i: number = 0; i < jmlH; i++) {
 				for (let j: number = 0; j < jmlV; j++) {
-					Ip.DrawSingle(gbr, x + (i * w2), y + (j * h2), frame);
+					Ip.GamberSingle(gbr, x + (i * w2), y + (j * h2), frame);
 				}
 			}
 		}
@@ -201,19 +201,18 @@ namespace Basik {
 					Ip.gambarUbin(img, img.x, img.y, img.frame);
 				}
 				else {
-					Ip.DrawSingle(img, img.x, img.y, img.frame);
+					Ip.GamberSingle(img, img.x, img.y, img.frame);
 				}
 			}
 		}
 
-		private static DrawSingle(gbr: GbrObj, x: number = 0, y: number = 0, frame: number = 0) {
+		private static GamberSingle(gbr: GbrObj, x: number = 0, y: number = 0, frame: number = 0) {
 			let ctx: CanvasRenderingContext2D = G.Canvas().getContext('2d');
 			let jmlH: number = 0;
 			let frameX: number = 0;
 			let frameY: number = 0;
 			let imgW: number = 0;
 
-			//TODO: dihapuss
 			if (gbr.dimuat == false) {
 				return;
 			}
@@ -259,8 +258,6 @@ namespace Basik {
 			}
 
 			function drawImpl(dx: number, dy: number) {
-
-				//TODO: pindahin ke depan
 				dx -= Camera.x;
 				dy -= Camera.y;
 

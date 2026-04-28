@@ -4,7 +4,6 @@ namespace Basik {
 		MOUSE_UP = "mouseDilepas",
 		MOUSE_MOVE = "mouseGerak",
 		MOUSE_TAP = "mouseDitap",
-		//TODO: mouse di klik
 		MOUSE_START_DRAG = "mouseMulaiDrag",	//demo belum ada
 		MOUSE_END_DRAG = "mouseSelesaiDrag",	//demo belum ada
 

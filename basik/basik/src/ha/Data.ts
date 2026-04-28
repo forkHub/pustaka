@@ -1,5 +1,4 @@
 namespace Basik {
-	//TODO: semua state dan data taruh di sini
 	class Data {
 		private _soundEvent: HTMLAudioElement;
 
@@ -13,8 +12,5 @@ namespace Basik {
 	}
 
 
-	let _data: Data = new Data();
-	export function data(): Data {
-		return _data;
-	}
+	export const data: Data = new Data();
 }

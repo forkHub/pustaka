@@ -96,7 +96,6 @@ function kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 
 	ctx.strokeRect(x1, y1, x2, y2);
 }
 
-//TODO: doc
 function segitiga(
 	x: number, // titik tengah bawah segitiga (posisi X)
 	y: number, // titik tengah bawah segitiga (posisi Y)
@@ -190,7 +189,6 @@ function segitiga(
 	}
 }
 
-//TODO: doc
 function pie(
 	x: number, // pusat lingkaran
 	y: number,
@@ -213,7 +211,6 @@ function pie(
 	ctx.stroke();
 }
 
-//TODO: doc
 function polygonTeratur(
 	x: number, // pusat poligon
 	y: number,
@@ -242,7 +239,6 @@ function polygonTeratur(
 	ctx.stroke();
 }
 
-//TODO: doc
 function bintang(
 	ctx: CanvasRenderingContext2D,
 	x: number, // posisi tengah bintang (X)

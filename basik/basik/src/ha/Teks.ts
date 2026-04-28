@@ -27,16 +27,15 @@ namespace Basik {
 			Teks.size = n;
 		}
 
-		//TODO: pakai angka
-		static Align(s: number = 1) {
+		static Align(n: number = 1) {
 			let align: CanvasTextAlign = "left";
 
-			if (s == 1) {
+			if (n == 1) {
 				align = "left";
-			} else if (s == 2) {
+			} else if (n == 2) {
 				align = "center";
 			}
-			else if (s == 3) {
+			else {
 				align = "right";
 			}
 

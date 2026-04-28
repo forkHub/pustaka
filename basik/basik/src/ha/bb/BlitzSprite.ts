@@ -77,7 +77,6 @@ function buatGambar(width: number, height: number): Basik.GbrObj {
 function semuaGambarSelesaiDimuat(): boolean {
 	return Ip.AllImageLoaded();
 }
-//TODO: event
 
 /**
  * 
