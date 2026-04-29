@@ -25,20 +25,23 @@ class UIBuildingDetail extends UIBase {
 
 	}
 
+	destroy() {
+		this.parent = null;
+		UIJob.list.forEach(item => {
+			item.parent = null
+		});
+	}
+
 	render() {
-		let b = Building.getById(this.buildingId);
-		if (!b) {
-			this.parent = null;
+		if (!Building.getById(this.buildingId)) {
+			this.destroy();
+			return;
 		}
 
 		if (!this.parent) {
-			UIJob.list.forEach(item => {
-				item.parent = null
-			});
-			return;
-
-			// this.cont.removeAllChildren();
+			this.destroy();
 		}
+
 
 		this.renderJob();
 	}

@@ -26,7 +26,7 @@ export class UIJob extends UIBase {
 
 		let j = Job.getById(this.jobId);
 		if (!j) {
-			this.parent == null;
+			this.parent = null;
 			return;
 		}
 
@@ -40,7 +40,7 @@ export class UIJob extends UIBase {
 
 	static render() {
 		UIJob.uiList.forEach((item) => {
-			item.render
+			item.render();
 		})
 	}
 
