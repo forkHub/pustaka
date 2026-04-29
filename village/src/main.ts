@@ -1,15 +1,15 @@
 import { Building, buildingType } from "./Building.js";
-// import { cursor } from "./Cursor.js";
 import { gameData, GameState } from "./Data.js";
 import { Job } from "./Job.js";
+import { uiBuildingDetail } from "./ui/UIBuildingDetail.js";
 import { uiConfirmBuild } from "./ui/UIConfirmBuild.js";
-
+import { UIJob } from "./ui/UIJob.js";
 
 function render() {
 	bersihkanLayar();
-	// cursor.render();
 	Building.render();
-	//TODO: UIRender
+	UIJob.render();
+	uiBuildingDetail.render();
 }
 
 function tick(n: number) {
@@ -34,6 +34,7 @@ Basik.Event.addEventListener(Basik.Evt.UPDATE, () => {
 	tick(gameData.tickCount);
 	render();
 });
+
 document.body.appendChild(uiConfirmBuild.el);
 uiConfirmBuild.el.style.zIndex = '1000px';
 gameData.state = GameState.BUILD;

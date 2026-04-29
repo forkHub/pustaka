@@ -1,6 +1,7 @@
 import { gameData } from "./Data.js";
 import { id } from "./Id.js";
 import { Job, jobType } from "./Job.js";
+import { uiBuildingDetail } from "./ui/UIBuildingDetail.js";
 
 export const buildingType = {
 	FORESTER: 'FORESTER',
@@ -121,6 +122,7 @@ export class Building {
 		Building.list.forEach((item) => {
 			if (item.img.ditekan) {
 				console.log('Building, img pressed, id ' + item.id);
+				uiBuildingDetail.buildingId = item.id;
 			}
 		})
 	}

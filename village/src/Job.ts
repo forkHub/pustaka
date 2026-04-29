@@ -39,7 +39,7 @@ export class Job {
 	private _type: jobType = jobType.CUT_TREE;
 	private _state: jobStateType = jobStateType.START;
 	private _counterMax: number = 100;
-	private counter: number = 0;
+	private _counter: number = 0;
 	private _id: number = 0;
 	private _buildingId: number = 0;
 	private requiredResource: resourceCountByType[] = [];
@@ -74,6 +74,12 @@ export class Job {
 	}
 	public set state(value: jobStateType) {
 		this._state = value;
+	}
+	public get counter(): number {
+		return this._counter;
+	}
+	public set counter(value: number) {
+		this._counter = value;
 	}
 
 

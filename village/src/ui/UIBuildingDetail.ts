@@ -2,60 +2,60 @@ import { Building } from "../Building";
 import { Job } from "../Job";
 import { UIBase, UICont } from "./IUI";
 import { UIH1 } from "./UIH1";
+import { UIJob } from "./UIJob";
 
-export class UIBuildingDetail extends UIBase {
-	private buildingId: number = 0;
-	private b: Building | null;
+class UIBuildingDetail extends UIBase {
+	private _buildingId: number = 0;
 	private cont: UICont = new UICont();
 
-	constructor(id: number) {
+	constructor() {
 		super();
-		this.buildingId = id;
-		this.b = Building.getById(this.buildingId);
-		if (!this.b) throw Error("invalid building for view");
 		this._el = document.createElement('dialog');
 		this.appendChild(new UIH1("Building Detail"));
 		this.appendChild(this.cont);
 
-		//image
-		//jobs
+		(this._el as HTMLDialogElement).showModal();
+
+		//image foto
+
 		this.render();
 	}
 
-	private render() {
-		window.requestAnimationFrame(() => {
-			this.b = Building.getById(this.buildingId);
-			if (!this.b) {
-				this.parent = null;
-			}
+	static render() {
 
-			if (!this.parent) return;
-			this.renderJob();
+	}
 
-			//loop
-			this.render();
-		});
+	render() {
+		let b = Building.getById(this.buildingId);
+		if (!b) {
+			this.parent = null;
+		}
+
+		if (!this.parent) {
+			UIJob.list.forEach(item => {
+				item.parent = null
+			});
+			return;
+
+			// this.cont.removeAllChildren();
+		}
+
+		this.renderJob();
 	}
 
 	private renderJob(): void {
-		//check expired job
-		//check new job
-	}
-}
-
-export class UIJob extends UIBase {
-	private id: number;
-
-	constructor(id: number) {
-		super();
-		this._el = document.createElement('meter');
-		this.id = id;
-
-		let j = Job.getById(this.id);
-		if (!j) throw Error("invalid job for view, id: " + this.id);
-
-		window.requestAnimationFrame(() => {
-
+		Job.getByBuildingId(this.buildingId).forEach((j) => {
+			UIJob.getOrCreate(j.id).parent = this.cont;
 		})
 	}
+
+	public get buildingId(): number {
+		return this._buildingId;
+	}
+	public set buildingId(value: number) {
+		this._buildingId = value;
+	}
+
 }
+
+export const uiBuildingDetail = new UIBuildingDetail();
