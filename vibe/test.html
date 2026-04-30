@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Simple RTS ECS Demo</title>
+    <style>
+        canvas {
+            border: 1px solid #444;
+            background: #1e1e1e;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="game" width="800" height="500"></canvas>
+
+    <script>
+        /*********************************
+         * ECS CORE
+         *********************************/
+        let nextEntityId = 0;
+
+        class World {
+            constructor() {
+                this.entities = new Set();
+                this.components = new Map(); // componentName -> Map(entityId, data)
+            }
+
+            createEntity() {
+                const id = nextEntityId++;
+                this.entities.add(id);
+                return id;
+            }
+
+            addComponent(entity, name, data) {
+                if (!this.components.has(name)) {
+                    this.components.set(name, new Map());
+                }
+                this.components.get(name).set(entity, data);
+            }
+
+            getComponent(entity, name) {
+                return this.components.get(name)?.get(entity);
+            }
+
+            getEntitiesWith(...componentNames) {
+                return [...this.entities].filter(entity =>
+                    componentNames.every(name =>
+                        this.components.get(name)?.has(entity)
+                    )
+                );
+            }
+        }
+
+        /*********************************
+         * COMPONENTS
+         *********************************/
+        const Position = (x, y) => ({ x, y });
+        const Velocity = (speed) => ({ speed });
+        const Target = (x, y) => ({ x, y });
+
+        /*********************************
+         * SYSTEMS
+         *********************************/
+        function movementSystem(world, dt) {
+            const entities = world.getEntitiesWith("Position", "Velocity", "Target");
+
+            for (const e of entities) {
+                const pos = world.getComponent(e, "Position");
+                const vel = world.getComponent(e, "Velocity");
+                const tgt = world.getComponent(e, "Target");
+
+                const dx = tgt.x - pos.x;
+                const dy = tgt.y - pos.y;
+                const dist = Math.hypot(dx, dy);
+
+                if (dist < 1) {
+                    // reached target
+                    world.components.get("Target").delete(e);
+                    continue;
+                }
+
+                pos.x += (dx / dist) * vel.speed * dt;
+                pos.y += (dy / dist) * vel.speed * dt;
+            }
+        }
+
+        function renderSystem(world, ctx) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+            const entities = world.getEntitiesWith("Position");
+
+            for (const e of entities) {
+                const pos = world.getComponent(e, "Position");
+
+                ctx.fillStyle = "lime";
+                ctx.beginPath();
+                ctx.arc(pos.x, pos.y, 10, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        /*********************************
+         * GAME SETUP
+         *********************************/
+        const canvas = document.getElementById("game");
+        const ctx = canvas.getContext("2d");
+
+        const world = new World();
+
+        // Create one agent
+        const agent = world.createEntity();
+        world.addComponent(agent, "Position", Position(400, 250));
+        world.addComponent(agent, "Velocity", Velocity(120)); // pixels/second
+
+        /*********************************
+         * INPUT SYSTEM
+         *********************************/
+        canvas.addEventListener("click", (e) => {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            world.addComponent(agent, "Target", Target(x, y));
+        });
+
+        /*********************************
+         * GAME LOOP
+         *********************************/
+        let lastTime = performance.now();
+
+        function loop(time) {
+            const dt = (time - lastTime) / 1000;
+            lastTime = time;
+
+            movementSystem(world, dt);
+            renderSystem(world, ctx);
+
+            requestAnimationFrame(loop);
+        }
+
+        requestAnimationFrame(loop);
+    </script>
+</body>
+
+</html>
