@@ -88,10 +88,10 @@ namespace Basik {
 
 			Ip.daftar.forEach((img: GbrObj) => {
 
-				if (img.ditekan && (img.tipeDrag != 0) && (img.inputId == inputId)) {
+				if (img.ditekan && (img.tipeDrag !== 0) && (img.inputId === inputId)) {
 					img.diDrag = true;
 
-					if (img.tipeDrag == tipeDrag.drag || (img.tipeDrag == tipeDrag.remoteDrag)) {
+					if (img.tipeDrag === tipeDrag.drag || (img.tipeDrag === tipeDrag.remoteDrag)) {
 						img.x = posAbs.x - img.dragAwalX
 						img.y = posAbs.y - img.dragAwalY
 					}

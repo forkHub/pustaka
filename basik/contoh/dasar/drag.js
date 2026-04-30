@@ -12,12 +12,11 @@ function update() {
 }
 
 function debugMouse() {
-	posisiTeks(0, 20);
+	posisiTeks(10, 20);
 	tulis("Gerakkan kotak dengan cara menggesernya dengan mouse");
 	tulis("");
 	tulis("Gambar ditekan: " + box.ditekan);
 	tulis("Gambar di drag: " + box.diDrag);
-	tulis("Gambar drag mulai x " + box.dragAwalX + "/drag mulai y " + box.dragAwalY);
 	tulis("Gambar x " + box.x);
 	tulis("Gambar y " + box.y);
 }

@@ -17,7 +17,7 @@ declare namespace Basik {
         get soundEvent(): HTMLAudioElement;
         set soundEvent(value: HTMLAudioElement);
     }
-    export function data(): Data;
+    export const data: Data;
     export {};
 }
 declare namespace Basik {
@@ -367,20 +367,20 @@ declare namespace Basik {
         static AmbilPiksel(x?: number, y?: number): void;
         static SetPiksel(x?: number, y?: number): void;
         static Draw(img: GbrObj): void;
-        private static DrawSingle;
+        private static GamberSingle;
         private static resetRect;
         private static rectToImageTf;
         static AllImageLoaded(): boolean;
     }
 }
 declare namespace Basik {
-    class ImgIntHandler {
+    class GbrInter {
         init(): void;
-        private down;
+        private handleGbrDitekan;
         private inputDown;
         private inputMove;
     }
-    export const sprInt: ImgIntHandler;
+    export const sprInt: GbrInter;
     export {};
 }
 declare namespace Basik {
@@ -394,7 +394,7 @@ declare namespace Basik {
         static Goto(x: number, y: number): void;
         static Name(name?: string): void;
         static Size(n?: number): void;
-        static Align(s?: number): void;
+        static Align(n?: number): void;
         static WriteLn(teks: string, x: number, y: number): void;
         static Write(teks: string): void;
     }
@@ -425,37 +425,6 @@ declare namespace Basik {
         static warnaGaris(idx?: number, trans?: number): void;
         static init(): void;
     }
-}
-declare namespace Basik {
-    export class Pena {
-        diangkat(): void;
-        ditekan(x: number, y: number): void;
-        kanan(x: number): void;
-        atas(x: number): void;
-        kiri(x: number): void;
-        bawah(x: number): void;
-        diag(x: number, y: number): void;
-        polar(jarak: number, sudut: number): void;
-        kurva(): PenaData.Kurva2;
-    }
-    namespace PenaData {
-        class Kurva2 {
-            constructor();
-            kanan(x: number): Kurva3;
-            bawah(x: number): Kurva3;
-        }
-        class Kurva3 {
-            private cx;
-            private cy;
-            constructor(cx: number, cy: number);
-            kanan(x: number): void;
-            bawah(y: number): void;
-            diag(x: number, y: number): void;
-            kiri(x: number): void;
-            atas(y: number): void;
-        }
-    }
-    export {};
 }
 declare function bukaPath(x?: number, y?: number): void;
 declare function garisKe(x: number, y: number): void;

@@ -1,11 +1,14 @@
 @echo off
 echo off
 
-set io_folder=D:\xampp4\htdocs\io\basik
+@rem C:\xampp\htdocs\io
+@rem C:\xampp\htdocs\pustaka\basik
+
+set io_folder=..\..\io\basik
 
 echo publikasi stg
 echo ================
-xcopy stg\*.* %io_folder% /s /i /y || goto error
+xcopy stg\*.* %io_folder% /s /y || goto error
 echo.
 
 echo selesai

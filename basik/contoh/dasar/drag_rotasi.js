@@ -11,6 +11,6 @@ box.pusatY = 16;
 function update() {
 	bersihkanLayar();
 	stempel(box);
-	posisiTeks(0, 20);
+	posisiTeks(10, 20);
 	tulis("Putar kotak dengan mouse");
 }
