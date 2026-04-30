@@ -1,4 +1,4 @@
-import { UIBase } from "./IUI";
+import { UIBase } from "./UIBase";
 
 export class UISpan extends UIBase {
 	public set label(value: string) {

@@ -1,4 +1,4 @@
-import { UIBase } from "./IUI";
+import { UIBase } from "./UIBase";
 
 export class UIH1 extends UIBase {
 

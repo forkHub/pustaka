@@ -1,7 +1,7 @@
 class Id {
 	private _id: number = Date.now();
 
-	get id(): number {
+	get nextid(): number {
 		this._id++;
 		return this._id;
 	}

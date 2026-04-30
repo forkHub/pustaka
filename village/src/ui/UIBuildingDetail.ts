@@ -1,54 +1,54 @@
-import { Building } from "../Building";
-import { Job } from "../Job";
-import { UIBase, UICont } from "./IUI";
+import { JobManager } from "../job/JobManager";
+import { UIBase, UICont } from "./UIBase";
+import { UIButton } from "./UIButton";
 import { UIH1 } from "./UIH1";
 import { UIJob } from "./UIJob";
 
 class UIBuildingDetail extends UIBase {
 	private _buildingId: number = 0;
 	private cont: UICont = new UICont();
+	private btn:UIButton = new UIButton('close');
+	private debugCont:UICont = new UICont();
+	private isOpen:boolean=false;
 
 	constructor() {
 		super();
 		this._el = document.createElement('dialog');
 		this.appendChild(new UIH1("Building Detail"));
 		this.appendChild(this.cont);
+		this.appendChild(this.btn);
+		this.appendChild(this.debugCont);
 
+		this.btn.el.addEventListener("click", () => {
+			this.close();
+		})
+
+		document.body.appendChild(this._el);
+	}
+
+	open() {
 		(this._el as HTMLDialogElement).showModal();
-
-		//image foto
-
-		this.render();
+		this.isOpen=true;
 	}
 
-	static render() {
-
-	}
-
-	destroy() {
-		this.parent = null;
-		UIJob.list.forEach(item => {
-			item.parent = null
-		});
+	close() {
+		(this._el as HTMLDialogElement).close();
+		UIJob.removeByBuildingId(this.buildingId);
+		this.isOpen=false;
 	}
 
 	render() {
-		if (!Building.getById(this.buildingId)) {
-			this.destroy();
-			return;
-		}
+		if (!this.isOpen) return;
 
-		if (!this.parent) {
-			this.destroy();
-		}
+		UIJob.renderByBuildingId(this.buildingId, this.cont);
 
+		//debug
+		JobManager.getByBuildingId(this.buildingId).forEach((j) => {
+			this.debugCont.el.innerHTML = j.counter + '<br/>';
+		})
 
-		this.renderJob();
-	}
-
-	private renderJob(): void {
-		Job.getByBuildingId(this.buildingId).forEach((j) => {
-			UIJob.getOrCreate(j.id).parent = this.cont;
+		UIBase.getByType(UIJob).forEach((ui) => {
+			this.debugCont.el.innerHTML += ui.id + '/job Id' + ui.jobId;
 		})
 	}
 
@@ -58,7 +58,6 @@ class UIBuildingDetail extends UIBase {
 	public set buildingId(value: number) {
 		this._buildingId = value;
 	}
-
 }
 
 export const uiBuildingDetail = new UIBuildingDetail();
