@@ -28,7 +28,7 @@ export class JobManager {
 	}
 
 	static remove(job: Job): void {
-		console.log("job removed " + job.id + "/" + job.counter);
+		// console.log("job removed " + job.id + "/" + job.counter);
 		job.destroy();
 		this.list = this.list.filter(item => item.id !== job.id);
 	}

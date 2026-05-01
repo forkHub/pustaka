@@ -3,8 +3,8 @@ import { type resourceCountByType } from "../Resource.js";
 
 export const jobType = {
 	CUT_TREE: 'cut wood',
-	PLAN_TREE: 'plan tree',
-	WATER: 'water'
+	PLAN_TREE: 'planting tree',
+	WATER: 'draw water'
 } as const;
 
 export type jobType = typeof jobType[keyof typeof jobType];
@@ -12,6 +12,7 @@ export type jobType = typeof jobType[keyof typeof jobType];
 export const jobStateTypeConst = {
 	START: 'start',
 	PROGRESS: 'progress',
+	COOL_DOWN: 'cool down',
 	FINISH: 'finish'
 } as const;
 
@@ -94,6 +95,9 @@ export class Job {
 		else if (this.state === jobStateTypeConst.PROGRESS) {
 			this.tickProgress();
 		}
+		else if (this.state === jobStateTypeConst.COOL_DOWN) {
+			this.state = jobStateTypeConst.FINISH;
+		}
 		// Note: FINISH state is now handled by JobManager
 	}
 
@@ -126,7 +130,7 @@ export class Job {
 			this.produce.forEach((item) => {
 				store.getResourceByType(item.resType).amount += item.amount;
 			});
-			this.state = jobStateTypeConst.FINISH;
+			this.state = jobStateTypeConst.COOL_DOWN;
 		}
 	}
 

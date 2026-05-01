@@ -22,7 +22,7 @@ export class JobDefinitions {
 		}],
 		[jobType.WATER, {
 			type: jobType.WATER,
-			counterMax: 1000,
+			counterMax: 100,
 			requiredResources: [],
 			producedResources: [
 				{ resType: resourceType.WATER, amount: 1 }

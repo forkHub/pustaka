@@ -22,3 +22,8 @@ body {
 .right-0 {
 	right: 0px;
 }
+
+.disp.block {
+	display: block;
+}
+

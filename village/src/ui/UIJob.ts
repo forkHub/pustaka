@@ -1,32 +1,31 @@
 import { JobManager } from "../job/JobManager";
-import { UIBase, UICont } from "./UIBase";
-import { UISpan } from "./UISpan";
+import { UIBase } from "./base/UIBase";
+import type { UICont } from "./base/UICont";
+import { UIMeter } from "./base/UIGauge";
+import { UIManager } from "./base/UIManager";
+import { UISpan } from "./base/UISpan";
 
 export class UIJob extends UIBase {
 	private _jobId: number = 0;
+	private jobName: UISpan = new UISpan('');
+	private meter:UIMeter = new UIMeter();
+
 	public get jobId(): number {
 		return this._jobId;
 	}
 	public set jobId(value: number) {
 		this._jobId = value;
 	}
-	private label: UISpan = new UISpan('');
-	private jobName: UISpan = new UISpan('');
 
 	constructor(jobId: number) {
 		super();
 		this._el = document.createElement('div');
 		this.appendChild(this.jobName);
-		this.appendChild(this.label);
+		this.appendChild(this.meter);
 
 		this.jobId = jobId;
-	}
-
-	static removeByBuildingId(buildingId: number) {
-		JobManager.getByBuildingId(buildingId).forEach((item) => {
-			const uiJob = UIJob.getByJobId(item.id);
-			if (uiJob) uiJob.parent = null;
-		})
+		console.log("ui job created");
+		console.log(this._el);
 	}
 
 	render() {
@@ -35,61 +34,44 @@ export class UIJob extends UIBase {
 		let j = JobManager.getById(this.jobId);
 		if (!j) {
 			this.parent = null; 
-			console.log("ui job removed, ui id " + this.id + "/job id " + this.jobId);
-			// debugger;
-			// debugger;
+			this.jobId = 0;
 			return;
 		}
 
-		this.jobName.label = j.type;
-		this.label.label = j.counter + '';
-	}
-
-	static get list():UIJob[] {
-		return UIBase.getByType(UIJob);
-	}
-
-	static getFree(): UIJob | null {
-		let j = UIJob.list.filter(item => item.parent === null);
-		return j.length > 0 ? j[0] as UIJob : null;
+		this.jobName.label = j.type + " = " + j.counter+ "/" + j.counterMax; 
+		this.meter.value = (j.counterMax - j.counter);
 	}
 
 	static getOrCreate(jobId: number): UIJob {
 
-		let j = UIJob.getFree();
+		let js:UIJob[] = UIManager.getFree(UIJob) as UIJob[];
+		let j:UIJob
 
-		if (j) {
-			j.jobId = jobId;
+		if (js.length>0) {
+			j = js[0];
+			// console.log('reuse ui job');
 		} else {
 			j = new UIJob(jobId);
-			j.jobId = jobId;
+			// console.log('crete new ui job');
 		}
 
+		j.jobId = jobId;
+		j.meter.max = JobManager.getById(jobId)?.counterMax || 100;
 		return j;
 	}
 
-	static renderByBuildingId(buildingId:number, cont:UICont):void {
+	static createByBuildingId(buildingId:number, cont:UICont):void {
 		JobManager.getByBuildingId(buildingId).forEach((job) => {
 			if (UIJob.getByJobId(job.id) !== null) return;
 
-			UIJob.getOrCreate(job.id).parent = cont;
-			console.log("build new job ui for " + job.id);
+			let ui = UIJob.getOrCreate(job.id);
+			ui.jobName.label = job.type
+			cont.appendChild(ui);
 		})
 	}
 
-	static render() {
-		UIBase.getByType(UIJob).forEach((ui) => {
-			ui.render();
-		});
-	}
-
 	static getByJobId(jobId: number): UIJob | null {
-		let j = UIJob.list.filter(item => item.jobId == jobId);
+		let j = UIManager.getByType(UIJob).filter(item => item.jobId == jobId);
 		return j.length > 0 ? j[0] : null;
-	}
-
-	static getById(id: number): UIJob | null {
-		let j = UIJob.list.filter(item => item.id === id);
-		return j.length > 0 ? j[0] : null
 	}
 }

@@ -1,7 +1,7 @@
-import { JobManager } from "../job/JobManager";
-import { UIBase, UICont } from "./UIBase";
-import { UIButton } from "./UIButton";
-import { UIH1 } from "./UIH1";
+import { UIBase } from "./base/UIBase";
+import { UIButton } from "./base/UIButton";
+import { UICont } from "./base/UICont";
+import { UIH1 } from "./base/UIH1";
 import { UIJob } from "./UIJob";
 
 class UIBuildingDetail extends UIBase {
@@ -14,10 +14,10 @@ class UIBuildingDetail extends UIBase {
 	constructor() {
 		super();
 		this._el = document.createElement('dialog');
-		this.appendChild(new UIH1("Building Detail"));
-		this.appendChild(this.cont);
-		this.appendChild(this.btn);
-		this.appendChild(this.debugCont);
+		(new UIH1("Building Detail")).parent = this;
+		this.cont.parent = this;
+		this.btn.parent = this;
+		this.debugCont.parent = this;
 
 		this.btn.el.addEventListener("click", () => {
 			this.close();
@@ -33,23 +33,16 @@ class UIBuildingDetail extends UIBase {
 
 	close() {
 		(this._el as HTMLDialogElement).close();
-		UIJob.removeByBuildingId(this.buildingId);
 		this.isOpen=false;
 	}
 
 	render() {
 		if (!this.isOpen) return;
 
-		UIJob.renderByBuildingId(this.buildingId, this.cont);
+		let el = this.debugCont.el;
+		el.innerHTML='';
 
-		//debug
-		JobManager.getByBuildingId(this.buildingId).forEach((j) => {
-			this.debugCont.el.innerHTML = j.counter + '<br/>';
-		})
-
-		UIBase.getByType(UIJob).forEach((ui) => {
-			this.debugCont.el.innerHTML += ui.id + '/job Id' + ui.jobId;
-		})
+		UIJob.createByBuildingId(this.buildingId, this.cont);
 	}
 
 	public get buildingId(): number {

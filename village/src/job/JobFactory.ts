@@ -24,7 +24,7 @@ export class JobFactory {
 			amount: res.amount
 		}));
 
-		console.log("job created " + job.id + "/building id " + job.buildingId);
+		// console.log("job created " + job.id + "/building id " + job.buildingId);
 		
 		return job;
 	}

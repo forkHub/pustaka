@@ -4,15 +4,15 @@ import { BuildingRenderer } from "./building/BuildingRenderer.js";
 import { BuildingInteractionHandler } from "./building/BuildingInteractionHandler.js";
 import { gameData, GameState } from "./Data.js";
 import { JobManager } from "./job/JobManager.js";
-import { uiBuildingDetail } from "./ui/UIBuildingDetail.js";
+// import { uiBuildingDetail } from "./ui/UIBuildingDetail.js";
 import { uiConfirmBuild } from "./ui/UIConfirmBuild.js";
-import { UIJob } from "./ui/UIJob.js";
+import { UIManager } from "./ui/base/UIManager.js";
 
 function render() {
 	bersihkanLayar();
 	BuildingRenderer.render();
-	uiBuildingDetail.render();
-	UIJob.render();
+	// uiBuildingDetail.render();
+	UIManager.render();
 }
 
 function tick(n: number) {
@@ -41,4 +41,5 @@ document.body.appendChild(uiConfirmBuild.el);
 gameData.state = GameState.BUILD;
 let b = BuildingManager.buildByType(buildingTypeConst.WELL);
 gameData.buildingToBuild = b.id;
+uiConfirmBuild.confirm();
 

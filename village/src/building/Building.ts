@@ -30,29 +30,30 @@ export class Building {
 	private positionSet: boolean = false;
 
 	//debug purpose
-	private jobCtr:number=0;
+	// private jobCtr:number=0;
 
 	constructor(url: string, ty: buildingType) {
 		this._type = ty;
 		this._img = muatGambar(url);
 		this._id = id.nextid;
 	}
+	
+	private canCreateJob():boolean {
+		if (this._state != buildingState.PRODUCE) return false;
+		// if (this.jobCtr > 5) return false;
+		return true;
+	}
 
 	private createJob() {
-		if (this._state != buildingState.PRODUCE) return;
-		if (this.jobCtr > 10) return;
-
 		this.availableJobList().forEach((jobType) => {
 			if (JobManager.getByBuildingIdAndType(this.id, jobType).length == 0) {
 				JobManager.create(jobType, this.id);
-				this.jobCtr++;
-				console.log("job ctr " + this.jobCtr);
 			}
 		})
 	}
 
 	tick(): void {
-		this.createJob();
+		if (this.canCreateJob()) this.createJob();
 	}
 
 	availableJobList(): jobType[] {
