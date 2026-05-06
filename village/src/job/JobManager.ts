@@ -1,4 +1,6 @@
-import { Job, jobType } from "./Job.js";
+import type { Building } from "../building/Building.js";
+import { Job } from "./Job.js";
+import { jobType } from "./JobData.js";
 import { JobFactory } from "./JobFactory.js";
 
 export class JobManager {
@@ -13,23 +15,27 @@ export class JobManager {
 		return jobs.length > 0 ? jobs[0] : null;
 	}
 
-	static getByBuildingId(buildingId: number): Job[] {
-		return this.list.filter(item => item.buildingId === buildingId);
+	static getByBuilding(building: Building): Job[] {
+		return this.list.filter(item => item.buildingRef == building);
 	}
 
-	static getByBuildingIdAndType(buildingId: number, type: jobType): Job[] {
-		return this.getByBuildingId(buildingId).filter(item => item.type === type);
-	}
+	// static getByBuildingId(buildingId: number): Job[] {
+	// 	return this.list.filter(item => item.buildingId === buildingId);
+	// }
 
-	static create(type: jobType, buildingId: number): Job {
-		const job = JobFactory.create(type, buildingId);
+	// static getByBuildingIdAndType(buildingId: number, type: jobType): Job[] {
+	// 	return this.getByBuildingId(buildingId).filter(item => item.type === type);
+	// }
+
+	static create(type: jobType, building: Building): Job {
+		const job = JobFactory.create(type, building);
 		this.list.push(job);
 		return job;
 	}
 
 	static remove(job: Job): void {
 		// console.log("job removed " + job.id + "/" + job.counter);
-		job.destroy();
+		job.remove();
 		this.list = this.list.filter(item => item.id !== job.id);
 	}
 
@@ -37,12 +43,6 @@ export class JobManager {
 		// Process all jobs
 		this.list.forEach(job => {
 			job.tick();
-		});
-
-		// Remove finished jobs
-		const finishedJobs = this.list.filter(job => job.isFinished());
-		finishedJobs.forEach(job => {
-			this.remove(job);
 		});
 	}
 }

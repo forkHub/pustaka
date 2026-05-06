@@ -1,59 +1,65 @@
-import { id } from "../Id.js";
-import { jobType } from "../job/Job.js";
-import { JobManager } from "../job/JobManager.js";
+import { jobType } from "../job/JobData.js";
+import { BuildingData, type buildingType, buildingState, buildingTypeConst } from "./buildingData.js";
+import { BuildingManager } from "./BuildingManager.js";
 
-export const buildingTypeConst = {
-	FORESTER: 'FORESTER',
-	WELL: 'WELL',
-	SAWMILL: 'SAWMILL'
-} as const;
-
-export type buildingType = typeof buildingTypeConst[keyof typeof buildingTypeConst];
-
-export const buildingState = {
-	PLAN: 'plan',
-	BUILD: 'build',
-	PRODUCE: 'produce'
-}
-export type buildingState = typeof buildingState[keyof typeof buildingState];
-
-export class Building {
-	private _type: buildingType = buildingTypeConst.FORESTER;
-	private _img: Basik.GbrObj;
-	private _width: number = 1;
-	private _height: number = 1;
-	private _state: buildingState = buildingState.PLAN;
-
-	private _id: number;
-	private _x: number = 0;
-	private _y: number = 0;
-	private positionSet: boolean = false;
-
-	//debug purpose
-	// private jobCtr:number=0;
-
+export class Building extends BuildingData {
 	constructor(url: string, ty: buildingType) {
-		this._type = ty;
-		this._img = muatGambar(url);
-		this._id = id.nextid;
-	}
-	
-	private canCreateJob():boolean {
-		if (this._state != buildingState.PRODUCE) return false;
-		// if (this.jobCtr > 5) return false;
-		return true;
+		super(url, ty);
 	}
 
-	private createJob() {
-		this.availableJobList().forEach((jobType) => {
-			if (JobManager.getByBuildingIdAndType(this.id, jobType).length == 0) {
-				JobManager.create(jobType, this.id);
+	collideBuilding(): boolean {
+		let startX = this._gridX;
+		let startY = this._gridY;
+		let endX = startX + this._width;
+		let endY = startY + this._height;
+
+		const buildings = BuildingManager.getAll();
+		for (const b of buildings) {
+			if (b !== this) {
+				for (let i = startX; i < endX; i++) {
+					for (let j = startY; j < endY; j++) {
+						if (b.collidePoint(true, i, j)) {
+							return true;
+						}
+					}
+				}
 			}
-		})
+		}
+		
+		return false;
+	}
+
+	collidePoint(pad: boolean, px: number, py: number): boolean {
+		let startX = this._gridX;
+		let startY = this._gridY;
+
+		let endX = startX + this._width;
+		let endY = startY + this._height;
+
+		if (pad) {
+			startX--;
+			startY--;
+			endX++;
+			endY++;
+		}
+
+		return px >= startX && px < endX && py >= startY && py < endY;
 	}
 
 	tick(): void {
-		if (this.canCreateJob()) this.createJob();
+		if (this._state === buildingState.PRODUCE) {
+			//empty implementation
+		}
+		else if (this._state === buildingState.BUILD) {
+			this.state = buildingState.PRODUCE;
+			console.log("building state transition to producing");
+		}
+		else if (this._state === buildingState.PLAN) {
+			//empty impementation
+		}
+		else {
+			throw Error("invalid building state " + this._state);
+		}
 	}
 
 	availableJobList(): jobType[] {
@@ -67,7 +73,7 @@ export class Building {
 				jobType.WATER
 			]
 		}
-		else if (this._type == buildingTypeConst.SAWMILL) {
+		else if (this._type == buildingTypeConst.WOOD_CUTTER) {
 			return [
 				
 			]
@@ -75,58 +81,5 @@ export class Building {
 		else {
 			throw Error('no job defined yet');
 		}
-	}
-
-	isPositionSet(): boolean {
-		return this.positionSet;
-	}
-
-	public get y(): number {
-		return this._y;
-	}
-	public set y(value: number) {
-		this._y = value;
-		this.img.y = value;
-		this.positionSet = true;
-	}
-
-	public get x(): number {
-		return this._x;
-	}
-	public set x(value: number) {
-		this._x = value;
-		this.img.x = value;
-		this.positionSet = true;
-	}
-
-	public get id(): number {
-		return this._id;
-	}
-
-	public get state(): buildingState {
-		return this._state;
-	}
-	public set state(value: buildingState) {
-		this._state = value;
-	}
-	public get width(): number {
-		return this._width;
-	}
-	public set width(value: number) {
-		this._width = value;
-	}
-	public get height(): number {
-		return this._height;
-	}
-	public set height(value: number) {
-		this._height = value;
-	}
-
-	public get type(): buildingType {
-		return this._type;
-	}
-
-	public get img(): Basik.GbrObj {
-		return this._img;
 	}
 }

@@ -4,7 +4,6 @@ import { UIManager } from "./UIManager";
 export interface IUi {
 	id:number;
 	parent: IUi | null;
-	// appendChild: (p: IUi) => void;
 	el: HTMLElement;
 }
 
@@ -12,19 +11,23 @@ export class UIBase implements IUi {
 	protected _el!: HTMLElement;
 	protected _parent: UIBase | null = null;
 	protected _id: number = 0;
-	protected _type: string = '';
+	protected isOpen:boolean = false;
 
-	// protected static allUI:UIBase[] = []; 
+	static create<T>(classRef: new (...args: any[]) => T): T {
+		return new classRef();
+	}
 
-	// static add(ui:UIBase):void {
-	// 	if (ui.constructor.name === 'UIJob') {
-	// 		console.log("UI Base add UI " + ui);
-	// 	}
-	// 	else {
-	// 		console.log("UI Base add any UI " + ui);
-	// 	}
-	// 	UIBase.allUI.push(ui); 
-	// }
+	destroy() {
+		this.remove();
+		this.removeAllChildren();
+	}
+
+	event<T extends Event = Event>(str: string, f: (e: T) => void, options?: boolean | AddEventListenerOptions): UIBase {
+		this._el.addEventListener(str, (e) => {
+			f(e as T);
+		}, options);
+		return this;
+	}
 
 	remove() {
 		this.parent =null;
@@ -33,27 +36,53 @@ export class UIBase implements IUi {
 	render() {
 		//Implemented by child
 	}
-	
-	// static getById(id:number):UIBase|null {
-	// 	let ui = UIBase.list.filter(item => item.id == id);
-	// 	return ui.length>0?ui[0]:null;
-	// }
 
-	// static removeById(id:number):void {
-	// 	let ui = UIBase.getById(id);
-	// 	if (ui) ui.remove();
-	// 	UIBase.allUI = UIBase.allUI.filter(item => item.id !== id);
-	// }
-
-	// static getByType<T>(classRef:new (...args: any[]) => T):T[] {
-	// 	return UIBase.allUI.filter(item => item instanceof classRef) as T[];
-	// }
-
-	public get type(): string {
-		return this._type;
+	open() {
+		if (this._el instanceof HTMLDialogElement) {
+			(this._el as HTMLDialogElement).showModal();
+			this.isOpen = true;
+		}
+		else {
+			console.warn("close for non modal ui");
+		}
 	}
-	public set type(value: string) {
-		this._type = value;
+
+	close() {
+		if (this._el instanceof HTMLDialogElement) {
+			(this._el as HTMLDialogElement).close();
+			this.isOpen = false;
+		}
+		else {
+			console.warn("close for non modal ui");
+		}
+	}
+
+	appendToDocument() {
+		document.body.appendChild(this._el);
+	}
+
+	getByTypeRec<T>(classRef: new (...args: any[]) => T): T | null {
+		for (const item of UIManager.getByParentId(this.id)) {
+			if (item instanceof classRef) return item as T;
+			const found = item.getByTypeRec(classRef);
+			if (found) return found;
+		}
+		return null;
+	}
+
+	innerText(str:string):UIBase {
+		this._el.innerText = str;
+		return this;
+	}
+
+	innerHtml(str:string):UIBase {
+		this._el.innerHTML = str;
+		return this;
+	}
+
+	addClass(...token: string[]): UIBase {
+		this._el.classList.add(...token);
+		return this;
 	}
 
 	public get id(): number {
@@ -78,28 +107,33 @@ export class UIBase implements IUi {
 		}
 	}
 
-	public appendChild(c:UIBase):void {
+	public appendChild(c:UIBase):UIBase {
 		c.parent=this;
+		return this;
 	}
 
 	public removeChild(c:UIBase):void {
 		if (c.parent == this) c.parent=null;
 	}
 
+	public removeAllChildren():void {
+		UIManager.getByParentId(this.id).forEach((item) => {
+			item.parent = null;
+		})
+	}
+
 	get el(): HTMLElement {
 		return this._el;
 	}
-
-	// static get list():UIBase[] {
-		// return UIBase.allUI.slice(); 
-	// }
 	
-	constructor() {
+	constructor(tag:string = 'div') {
 		this._id = id.nextid;
+		this._el = document.createElement(tag);
 		UIManager.add(this);
 	}
+}
 
-	// appendChild(p: IUi) {
-	// 	p.parent = this;
-	// };
+export function p(str:string):UIBase {
+	let p =  new UIBase('p').innerText(str);
+	return p;
 }

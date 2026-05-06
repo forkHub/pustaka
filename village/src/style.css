@@ -1,6 +1,39 @@
+* {
+	box-sizing: border-box;
+}
+
 html,
 body {
 	background-color: grey;
+	width: 100%;
+	height: 100%;
+	padding: 0px;
+	margin: 0px;
+	overflow: hidden;
+}
+
+button {
+	padding: 4px;
+}
+
+canvas {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.width-100vw {
+	width: 100vw;
+}
+
+.height-100vh {
+	height: 100vh;
+}
+
+.width-100, .width-12 {
+	width: 100%;
 }
 
 .pd {
@@ -27,3 +60,28 @@ body {
 	display: block;
 }
 
+.disp-flex {
+	display: flex;
+}
+
+.justify-content-center {
+	justify-content: center;
+}
+
+.align-items-center {
+	align-items: center;
+}
+
+.fixed-bottom {
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+.fixed-top {
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+}

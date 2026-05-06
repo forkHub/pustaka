@@ -1,6 +1,6 @@
-import { Building } from "./Building.js";
-import { BuildingFactory } from "./BuildingFactory.js";
-import type { buildingType } from "./Building.js";
+import { JobManager } from "../job/JobManager";
+import { Building } from "./Building";
+import { buildingTypeConst, type buildingType } from "./buildingData";
 
 export class BuildingManager {
 	private static list: Building[] = [];
@@ -10,11 +10,9 @@ export class BuildingManager {
 	}
 
 	static remove(id: number): void {
-		let b = BuildingManager.getById(id);
-		if (!b) throw Error('invalid building to remove');
-
 		BuildingManager.list = BuildingManager.list.filter(item => item.id != id);
 	}
+
 
 	static getById(id: number): Building | null {
 		let b = BuildingManager.list.filter(item => item.id == id);
@@ -22,7 +20,29 @@ export class BuildingManager {
 	}
 
 	static buildByType(ty: buildingType): Building {
-		let b = BuildingFactory.buildByType(ty);
+		let b: Building;
+
+		if (ty == buildingTypeConst.FORESTER) {
+			b = new Building("well", buildingTypeConst.FORESTER);
+			b.width = 2;
+			b.height = 3;
+			b.offsetY = 64;
+		}
+		else if (ty == buildingTypeConst.WELL) {
+			b = new Building("well2", buildingTypeConst.WELL);
+			b.width = 2;
+			b.height = 3;
+			b.offsetY = 64;
+		}
+		else {
+			throw Error('invalid type');
+		}
+
+		for (const jobType of b.availableJobList()) {
+			console.log("job created " + jobType);
+			JobManager.create(jobType, b);
+		}
+
 		BuildingManager.add(b);
 		return b;
 	}
@@ -36,4 +56,10 @@ export class BuildingManager {
 			item.tick();
 		});
 	}
+
+	// static checkCol(bSource:Building):boolean {
+	// 	let col:boolean=false;
+
+	// 	return col;
+	// }
 }

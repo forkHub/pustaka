@@ -1,3 +1,5 @@
+import type { Scalar } from "./Skalar";
+
 export const resourceType = {
 	WOOD: 'wood',
 	TREE: 'tree',
@@ -9,5 +11,5 @@ export type resourceType = typeof resourceType[keyof typeof resourceType];
 
 export interface resourceCountByType {
 	resType: resourceType;
-	amount: number;
+	amount: Scalar<number>;
 }

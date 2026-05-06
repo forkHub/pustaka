@@ -1,4 +1,6 @@
+import type { Building } from "./building/Building";
 import { resourceType, type resourceCountByType } from "./Resource";
+import { Scalar } from "./Skalar";
 
 export const GameState = {
 	LOGO: 'LOGO',
@@ -20,7 +22,7 @@ class Store {
 	private addRes(ty: resourceType): void {
 		this.res.push({
 			resType: ty,
-			amount: 0
+			amount: new Scalar<number>(0)
 		})
 	}
 
@@ -33,14 +35,33 @@ export const store: Store = new Store();
 class Data {
 	private _state: GameState = GameState.LOGO;
 	private _tickCount: number = 1;
-	private _buildingToBuild: number = 0;
+	// private _buildingToBuild: number = 0;
+	private _buildingRef: Building | undefined;
 
-	public get buildingToBuild(): number {
-		return this._buildingToBuild;
+	public get buildingRef(): Building | undefined{
+		return this._buildingRef;
+	
 	}
-	public set buildingToBuild(value: number) {
-		this._buildingToBuild = value;
+	public set buildingRef(value: Building | undefined) {
+		this._buildingRef = value;
 	}
+
+	private _maxLog: number = 10;
+	
+	public get maxLog(): number {
+		return this._maxLog;
+	}
+	public set maxLog(value: number) {
+		this._maxLog = value;
+	}
+	readonly GRID_WIDTH:number=32;
+
+	// public get buildingToBuildId(): number {
+	// 	return this._buildingToBuild;
+	// }
+	// public set buildingToBuildId(value: number) {
+	// 	this._buildingToBuild = value;
+	// }
 
 	public get tickCount(): number {
 		return this._tickCount;

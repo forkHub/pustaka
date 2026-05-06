@@ -1,24 +1,34 @@
+import type { Building } from "../building/Building";
 import { UIBase } from "./base/UIBase";
 import { UIButton } from "./base/UIButton";
 import { UICont } from "./base/UICont";
 import { UIH1 } from "./base/UIH1";
+import { UIManager } from "./base/UIManager";
 import { UIJob } from "./UIJob";
 
 class UIBuildingDetail extends UIBase {
 	private _buildingId: number = 0;
-	private cont: UICont = new UICont();
+	private _buildingRef: Building | undefined;
+	private jobCont: UICont = new UICont();
 	private btn:UIButton = new UIButton('close');
 	private debugCont:UICont = new UICont();
-	private isOpen:boolean=false;
+	private title:UIH1 = new UIH1("");
+
+	public get buildingRef(): Building | undefined {
+		return this._buildingRef;
+	}
+	public set buildingRef(value: Building) {
+		this._buildingRef = value;
+	}
 
 	constructor() {
 		super();
 		this._el = document.createElement('dialog');
-		(new UIH1("Building Detail")).parent = this;
-		this.cont.parent = this;
+		this.appendChild(this.title);
+		this.jobCont.parent = this;
 		this.btn.parent = this;
 		this.debugCont.parent = this;
-
+		
 		this.btn.el.addEventListener("click", () => {
 			this.close();
 		})
@@ -27,13 +37,20 @@ class UIBuildingDetail extends UIBase {
 	}
 
 	open() {
-		(this._el as HTMLDialogElement).showModal();
-		this.isOpen=true;
+		super.open();
+
+		if (this._buildingRef) {
+			this.title.label = this._buildingRef.type;
+			UIJob.createByBuilding(this._buildingRef, this.jobCont);
+		}
 	}
 
 	close() {
-		(this._el as HTMLDialogElement).close();
-		this.isOpen=false;
+		super.close();
+		this.jobCont.removeAllChildren();
+		UIManager.getByType(UIJob).forEach((ui) => {
+			ui.remove();
+		})
 	}
 
 	render() {
@@ -41,8 +58,6 @@ class UIBuildingDetail extends UIBase {
 
 		let el = this.debugCont.el;
 		el.innerHTML='';
-
-		UIJob.createByBuildingId(this.buildingId, this.cont);
 	}
 
 	public get buildingId(): number {

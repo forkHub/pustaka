@@ -1,5 +1,6 @@
 import { resourceType, type resourceCountByType } from "../Resource.js";
-import { jobType } from "./Job.js";
+import { Scalar } from "../Skalar.js";
+import { jobType } from "./JobData.js";
 
 export interface JobDefinition {
 	type: jobType;
@@ -14,10 +15,10 @@ export class JobDefinitions {
 			type: jobType.CUT_TREE,
 			counterMax: 1000,
 			requiredResources: [
-				{ resType: resourceType.TREE, amount: 1 }
+				{ resType: resourceType.TREE, amount: new Scalar<number>(1) }
 			],
 			producedResources: [
-				{ resType: resourceType.WOOD, amount: 2 }
+				{ resType: resourceType.WOOD, amount: new Scalar<number>(2) }
 			]
 		}],
 		[jobType.WATER, {
@@ -25,17 +26,17 @@ export class JobDefinitions {
 			counterMax: 100,
 			requiredResources: [],
 			producedResources: [
-				{ resType: resourceType.WATER, amount: 1 }
+				{ resType: resourceType.WATER, amount: new Scalar<number>(1) }
 			]
 		}],
 		[jobType.PLAN_TREE, {
 			type: jobType.PLAN_TREE,
 			counterMax: 1000,
 			requiredResources: [
-				{ resType:resourceType.WATER, amount: 1 }
+				{ resType:resourceType.WATER, amount: new Scalar<number>(1) }
 			],
 			producedResources: [
-				{ resType: resourceType.TREE, amount: 1 }
+				{ resType: resourceType.TREE, amount: new Scalar<number>(1) }
 			]
 		}]
 	]);

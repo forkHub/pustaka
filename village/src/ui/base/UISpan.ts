@@ -1,6 +1,7 @@
 import { UIBase } from "./UIBase";
 
 export class UISpan extends UIBase {
+	
 	public set label(value: string) {
 		this._el.innerHTML = value;
 	}

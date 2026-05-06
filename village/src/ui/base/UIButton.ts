@@ -8,3 +8,7 @@ export class UIButton extends UIBase {
         this._el = btn;
     }
 }
+
+export function button(label:string):UIButton {
+    return new UIButton(label);
+}

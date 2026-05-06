@@ -5,37 +5,37 @@ import { uiBuildingDetail } from "../ui/UIBuildingDetail.js";
 const NO_BUILDING = 0;
 
 export class BuildingInteractionHandler {
-	static updatePlanMode(): boolean {
-		if (gameData.buildingToBuild <= NO_BUILDING) return false;
+	static updatePlanMode(): void {
+		let b = gameData.buildingRef;
+		if (b == null) throw Error('invalid building');		
 
-		let b = BuildingManager.getById(gameData.buildingToBuild);
-		if (b == null) throw Error('invalid building');
+		b.gridX = Math.floor(mouseX()/32);
+		b.gridY = Math.floor(mouseY()/32);
 
-		b.x = mouseX();
-		b.y = mouseY();
-
-		return true;
+		if (b.collideBuilding()) {
+			console.log("colliding other building");
+		}
 	}
 
 	static buildingMouseDown(): void {
-		console.log("building image mouse down, test " + BuildingManager.getAll()[0].img.ditekan);
-		console.log(BuildingManager.getAll().length);
-
 		BuildingManager.getAll().forEach((item) => {
 			if (item.img.ditekan) {
-				console.log('Building, img pressed, id ' + item.id);
 				uiBuildingDetail.buildingId = item.id;
+				uiBuildingDetail.buildingRef = item;
 				uiBuildingDetail.open();
 			}
 		});
 	}
 
 	static mouseDown(): void {
-		if (BuildingInteractionHandler.updatePlanMode()) return;
-		BuildingInteractionHandler.buildingMouseDown();
+		if (!gameData.buildingRef) {
+			BuildingInteractionHandler.updatePlanMode();	
+		} else {
+			BuildingInteractionHandler.buildingMouseDown();
+		}
 	}
 
 	static mouseTap(): void {
-		// Empty implementation
+		//Empty implementation
 	}
 }

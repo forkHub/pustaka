@@ -1,48 +1,58 @@
-import { buildingState } from "../building/Building";
-import { BuildingManager } from "../building/BuildingManager";
+// import { buildingState } from "../building/Building";
+// import { BuildingManager } from "../building/BuildingManager";
+// import { buildingState } from "../building/Building";
+import { buildingState } from "../building/buildingData";
+// import { BuildingManager } from "../building/BuildingManager";
 import { gameData } from "../Data";
-import { UIBase } from "./base/UIBase";
+import { p, UIBase } from "./base/UIBase";
 import { UIButton } from "./base/UIButton";
+import { div } from "./UIDiv";
+import { uiMenu } from "./UIMenu";
 
 class UIConfirmBuild extends UIBase {
 	okBtn: UIButton = new UIButton("Ok");
 	cancelBtn: UIButton = new UIButton("Cancel");
+	message:UIBase = p("");
 
 	constructor() {
 		super();
 		this._el = document.createElement('div');
-		this._el.classList.add('pd', 'bottom-0', 'left-0', 'pos-fixed');
+		this._el.classList.add('pd', 'bottom-0', 'left-0', 'pos-fixed', '');
 		this._el.style.zIndex = '1000';
-		this.okBtn.parent = this;
-		this.cancelBtn.parent = this;
+
+		this.appendChild(p('Click where you want to put the building'));
+		this.appendChild(this.message);
+		this.appendChild(
+			div(
+				this.okBtn,
+				this.cancelBtn
+			).addClass("disp-flex")
+		)
 
 		this.okBtn.el.addEventListener('click', () => {
 			this.confirm();
 		});
 
 		this.cancelBtn.el.addEventListener("click", () => {
-			console.log("cancel button click");
-
-			let b = BuildingManager.getById(gameData.buildingToBuild);
-			if (!b) throw Error('invalid building');
-			gameData.buildingToBuild = 0;
+			gameData.buildingRef = undefined;
 			this.parent = null;
 		})
 	}
 
 	confirm() {
-			// console.log("ok button click, building to build " + gameData.buildingToBuild);
-			if (gameData.buildingToBuild <= 0) return;
-
-			let b = BuildingManager.getById(gameData.buildingToBuild);
-			if (!b) throw Error('invalid building');
-			b.state = buildingState.PRODUCE;
-			gameData.buildingToBuild = 0;
-			// if (this.parent) this.parent.
-			// document.body.removeChild(this.el);
-			this.parent = null;
+		if (gameData.buildingRef) {
+			gameData.buildingRef.state = buildingState.BUILD;
+			//validate building has been positioned
+		}
+		
+		gameData.buildingRef = undefined;
+		this.parent = null;
+		uiMenu.appendToDocument();
 	}
 
+	debug() {
+		this.confirm();
+	}
 
 }
 

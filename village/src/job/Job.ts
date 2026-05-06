@@ -1,82 +1,10 @@
 import { store } from "../Data.js";
-import { type resourceCountByType } from "../Resource.js";
+import { JobData, jobStateTypeConst } from "./JobData.js";
 
-export const jobType = {
-	CUT_TREE: 'cut wood',
-	PLAN_TREE: 'planting tree',
-	WATER: 'draw water'
-} as const;
-
-export type jobType = typeof jobType[keyof typeof jobType];
-
-export const jobStateTypeConst = {
-	START: 'start',
-	PROGRESS: 'progress',
-	COOL_DOWN: 'cool down',
-	FINISH: 'finish'
-} as const;
-
-export type jobStateType = typeof jobStateTypeConst[keyof typeof jobStateTypeConst]
-
-/**
- * Job - Pure data model representing a single job/task
- * Responsibilities: Hold job state, execute job logic per tick
- */
-export class Job {
-	private _type: jobType = jobType.CUT_TREE;
-	private _state: jobStateType = jobStateTypeConst.START;
-	private _counterMax: number = 100;
-	private _counter: number = 0;
-	private _id: number = 0;
-	private _buildingId: number = 0;
+export class Job extends JobData {
 	
-	// Made public for JobFactory access
-	public requiredResource: resourceCountByType[] = [];
-	public produce: resourceCountByType[] = [];
-
-	public get type(): jobType {
-		return this._type;
-	}
-	public set type(value: jobType) {
-		this._type = value;
-	}
-
-	public get id(): number {
-		return this._id;
-	}
-	public set id(value: number) {
-		this._id = value;
-	}
-
-	public get counterMax(): number {
-		return this._counterMax;
-	}
-	public set counterMax(value: number) {
-		this._counterMax = value;
-	}
-
-	public get buildingId(): number {
-		return this._buildingId;
-	}
-	public set buildingId(value: number) {
-		this._buildingId = value;
-	}
-
-	public get state(): jobStateType {
-		return this._state;
-	}
-	public set state(value: jobStateType) {
-		this._state = value;
-	}
-
-	public get counter(): number {
-		return this._counter;
-	}
-	public set counter(value: number) {
-		this._counter = value;
-	}
-
 	constructor() {
+		super();
 		// ID is now assigned by JobFactory
 	}
 
@@ -96,9 +24,28 @@ export class Job {
 			this.tickProgress();
 		}
 		else if (this.state === jobStateTypeConst.COOL_DOWN) {
-			this.state = jobStateTypeConst.FINISH;
+			this.coolDownCtr--;
+			if (this.coolDownCtr <= 0) {
+				this.state = jobStateTypeConst.FINISH;
+			}
 		}
-		// Note: FINISH state is now handled by JobManager
+		else if (this.state === jobStateTypeConst.FINISH) {
+			this.state = jobStateTypeConst.START;
+		}
+		else {
+			throw Error('invalid state');
+		}
+	}
+
+	finish() {
+		// Produce resources
+		this.produce.forEach((item) => {
+			let res = store.getResourceByType(item.resType)
+			res.amount.value += item.amount.value;
+		});
+
+		this.state = jobStateTypeConst.COOL_DOWN;
+		this.coolDownCtr = this.COOL_DOWN_MAX;
 	}
 
 	private tryStart(): void {
@@ -114,7 +61,7 @@ export class Job {
 		if (canStart) {
 			// Consume required resources
 			this.requiredResource.forEach((item) => {
-				store.getResourceByType(item.resType).amount -= item.amount;
+				store.getResourceByType(item.resType).amount.value -= item.amount.value;
 			});
 			this.state = jobStateTypeConst.PROGRESS;
 			this.counter = this._counterMax;
@@ -126,15 +73,11 @@ export class Job {
 			this.counter--;
 		}
 		else {
-			// Produce resources
-			this.produce.forEach((item) => {
-				store.getResourceByType(item.resType).amount += item.amount;
-			});
-			this.state = jobStateTypeConst.COOL_DOWN;
+			this.finish();
 		}
 	}
 
-	destroy(): void {
+	remove(): void {
 		this.requiredResource = [];
 		this.produce = [];
 	}
