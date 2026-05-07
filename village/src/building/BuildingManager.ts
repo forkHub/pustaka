@@ -1,9 +1,19 @@
 import { JobManager } from "../job/JobManager";
 import { Building } from "./Building";
-import { buildingTypeConst, type buildingType } from "./buildingData";
+import { buildingTypeConst, type buildingDbo, type buildingType } from "./buildingData";
 
 export class BuildingManager {
 	private static list: Building[] = [];
+
+	static toDbo():buildingDbo[] {
+		let r:buildingDbo[] = [];
+
+		BuildingManager.list.forEach((item) => {
+			r.push(item.toDbo());
+		})
+
+		return r;
+	}
 
 	static add(building: Building): void {
 		BuildingManager.list.push(building);
@@ -56,10 +66,4 @@ export class BuildingManager {
 			item.tick();
 		});
 	}
-
-	// static checkCol(bSource:Building):boolean {
-	// 	let col:boolean=false;
-
-	// 	return col;
-	// }
 }

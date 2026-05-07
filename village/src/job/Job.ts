@@ -1,4 +1,4 @@
-import { store } from "../Data.js";
+import { storage, store } from "../Data.js";
 import { JobData, jobStateTypeConst } from "./JobData.js";
 
 export class Job extends JobData {
@@ -10,10 +10,6 @@ export class Job extends JobData {
 
 	cancel(): void {
 		this.state = jobStateTypeConst.FINISH;
-	}
-
-	isFinished(): boolean {
-		return this.state === jobStateTypeConst.FINISH;
 	}
 
 	tick(): void {
@@ -38,7 +34,6 @@ export class Job extends JobData {
 	}
 
 	finish() {
-		// Produce resources
 		this.produce.forEach((item) => {
 			let res = store.getResourceByType(item.resType)
 			res.amount.value += item.amount.value;
@@ -46,6 +41,7 @@ export class Job extends JobData {
 
 		this.state = jobStateTypeConst.COOL_DOWN;
 		this.coolDownCtr = this.COOL_DOWN_MAX;
+		storage.save();
 	}
 
 	private tryStart(): void {
@@ -53,8 +49,12 @@ export class Job extends JobData {
 
 		// Check if we have required resources
 		this.requiredResource.forEach((item) => {
-			if (store.getResourceByType(item.resType).amount < item.amount) {
+			let res = store.getResourceByType(item.resType); 
+			if (res.amount.value < item.amount.value) {
 				canStart = false;
+				// console.log("cannot start job " + this._type)
+				// console.log("not enough resource: " + item.resType + "/amount: " + item.amount.value)
+				// console.log("required " + "/required: " + res.amount.value);
 			}
 		});
 
@@ -65,6 +65,8 @@ export class Job extends JobData {
 			});
 			this.state = jobStateTypeConst.PROGRESS;
 			this.counter = this._counterMax;
+		}
+		else {
 		}
 	}
 

@@ -1,5 +1,6 @@
 import { gameData } from "../Data";
 import { id } from "../Id";
+import { Scalar } from "../Skalar";
 
 export const buildingTypeConst = {
     FORESTER: 'FORESTER',
@@ -16,18 +17,33 @@ export const buildingState = {
 }
 export type buildingState = typeof buildingState[keyof typeof buildingState];
 
-export class BuildingData {
+export type buildingDbo = {
+    id:number,
+    type:buildingType
+}
+
+export class BuildingData implements buildingDbo {
     protected _type: buildingType = buildingTypeConst.FORESTER;
+    protected _id: number;
+
     protected _img: Basik.GbrObj;
     protected _width: number = 1;
     protected _height: number = 1;
     protected _state: buildingState = buildingState.PLAN;
-    protected _id: number;
     protected _gridX: number = 0;
     protected _gridY: number = 0;
     protected _offsetY: number = 2;
     protected _offsetX: number = 2;
     protected _isPosisionSet: boolean = false;
+    private _message: Scalar<string> = new Scalar<string>('');
+
+    public get message(): Scalar<string> {
+        return this._message;
+    }
+    public set message(value: Scalar<string>) {
+        this._message = value;
+    }
+
 
     public get isPosisionSet(): boolean {
         return this._isPosisionSet;

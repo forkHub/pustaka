@@ -1,10 +1,18 @@
 import { jobType } from "../job/JobData.js";
-import { BuildingData, type buildingType, buildingState, buildingTypeConst } from "./buildingData.js";
+import { JobManager } from "../job/JobManager.js";
+import { BuildingData, type buildingType, buildingState, buildingTypeConst, type buildingDbo } from "./buildingData.js";
 import { BuildingManager } from "./BuildingManager.js";
 
 export class Building extends BuildingData {
 	constructor(url: string, ty: buildingType) {
 		super(url, ty);
+	}
+
+	toDbo():buildingDbo {
+		return {
+			id: this._id,
+			type: this._type
+		}
 	}
 
 	collideBuilding(): boolean {
@@ -48,7 +56,9 @@ export class Building extends BuildingData {
 
 	tick(): void {
 		if (this._state === buildingState.PRODUCE) {
-			//empty implementation
+			// JobManager.getByBuilding(this).forEach((job) => {
+			// 	job.tick();
+			// })
 		}
 		else if (this._state === buildingState.BUILD) {
 			this.state = buildingState.PRODUCE;

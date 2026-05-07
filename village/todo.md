@@ -1,20 +1,16 @@
 next phase:
-collided building will be red
+forester
 save to local storage
 dashboard UI using icon/text instead of image
 camera
+
+next 2:
 zoom
 time machine
-
 instant finish cost 1 gold
-
 convert settler online => 1 second = 1 tick 
-
-1 second = 20 tick
-
 season change every 24 hours
 maksimum speedup is for 12 hours
-
 store has area to cover
 cannot build store too near to other store (50%)
 cannot build store too far to other store (175%)

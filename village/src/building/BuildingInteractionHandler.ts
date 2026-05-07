@@ -2,19 +2,27 @@ import { BuildingManager } from "./BuildingManager.js";
 import { gameData } from "../Data.js";
 import { uiBuildingDetail } from "../ui/UIBuildingDetail.js";
 
-const NO_BUILDING = 0;
+// const NO_BUILDING = 0;
 
 export class BuildingInteractionHandler {
 	static updatePlanMode(): void {
 		let b = gameData.buildingRef;
-		if (b == null) throw Error('invalid building');		
 
-		b.gridX = Math.floor(mouseX()/32);
-		b.gridY = Math.floor(mouseY()/32);
+		if (b) {
+			b.gridX = Math.floor(mouseX()/32);
+			b.gridY = Math.floor(mouseY()/32);
 
-		if (b.collideBuilding()) {
-			console.log("colliding other building");
+			if (b.collideBuilding()) {
+				console.log("colliding other building");
+				b.message.value = "building sould be separated by one tile from others";
+			} 
+			else {
+				b.message.value = "";
+			}
+
+			b.isPosisionSet = true;
 		}
+
 	}
 
 	static buildingMouseDown(): void {
@@ -28,7 +36,7 @@ export class BuildingInteractionHandler {
 	}
 
 	static mouseDown(): void {
-		if (!gameData.buildingRef) {
+		if (gameData.buildingRef) {
 			BuildingInteractionHandler.updatePlanMode();	
 		} else {
 			BuildingInteractionHandler.buildingMouseDown();

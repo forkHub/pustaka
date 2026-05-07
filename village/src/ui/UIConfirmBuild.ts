@@ -3,7 +3,7 @@
 // import { buildingState } from "../building/Building";
 import { buildingState } from "../building/buildingData";
 // import { BuildingManager } from "../building/BuildingManager";
-import { gameData } from "../Data";
+import { gameData, storage } from "../Data";
 import { p, UIBase } from "./base/UIBase";
 import { UIButton } from "./base/UIButton";
 import { div } from "./UIDiv";
@@ -17,7 +17,7 @@ class UIConfirmBuild extends UIBase {
 	constructor() {
 		super();
 		this._el = document.createElement('div');
-		this._el.classList.add('pd', 'bottom-0', 'left-0', 'pos-fixed', '');
+		this.addClass('pd', 'bottom-0', 'left-0', 'pos-fixed', '');
 		this._el.style.zIndex = '1000';
 
 		this.appendChild(p('Click where you want to put the building'));
@@ -39,15 +39,23 @@ class UIConfirmBuild extends UIBase {
 		})
 	}
 
+	appendToDocument(): void {
+		super.appendToDocument();
+		gameData.buildingRef?.message.addListener(() => {
+			this.message.innerText(gameData.buildingRef?.message.value || "");
+		})
+	}
+
 	confirm() {
 		if (gameData.buildingRef) {
 			gameData.buildingRef.state = buildingState.BUILD;
-			//validate building has been positioned
 		}
 		
+		gameData.buildingRef?.message.clearListener();
 		gameData.buildingRef = undefined;
 		this.parent = null;
 		uiMenu.appendToDocument();
+		storage.save();
 	}
 
 	debug() {
@@ -56,4 +64,4 @@ class UIConfirmBuild extends UIBase {
 
 }
 
-export const uiConfirmBuild: UIConfirmBuild = new UIConfirmBuild;
+export const uiConfirmBuild: UIConfirmBuild = new UIConfirmBuild();

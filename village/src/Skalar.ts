@@ -2,7 +2,7 @@ export class Scalar<T extends number | string> {
     private static id:number=0;
 
     private _value: T;
-    private listener: {id:number, f:(oldValue: T, newValue: T)=>void}[] = [];
+    private listener: {id:number, f:()=>void}[] = [];
 
     constructor(v: T) {
         this._value = v;
@@ -35,11 +35,11 @@ export class Scalar<T extends number | string> {
     }
 
     public set value(value: T) {
-        let oldValue = this._value;
+        // let oldValue = this._value;
         this._value = value;
 
         this.listener.forEach((item) => {
-            item.f(oldValue, value);
+            item.f();
         });
     }
 }

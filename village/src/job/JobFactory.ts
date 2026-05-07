@@ -13,6 +13,7 @@ export class JobFactory {
 		job.type = type;
 		job.buildingRef = building;
 		job.counterMax = definition.counterMax;
+		job.counter = job.counterMax;
 		
 		// Deep copy required resources
 		job.requiredResource = definition.requiredResources.map(res => ({

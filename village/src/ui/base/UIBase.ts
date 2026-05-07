@@ -7,11 +7,17 @@ export interface IUi {
 	el: HTMLElement;
 }
 
+export type listener = {
+	type:string,
+	f:(e:any) => void;
+}
+
 export class UIBase implements IUi {
 	protected _el!: HTMLElement;
 	protected _parent: UIBase | null = null;
 	protected _id: number = 0;
 	protected isOpen:boolean = false;
+	protected listenerList:listener[] = [];
 
 	static create<T>(classRef: new (...args: any[]) => T): T {
 		return new classRef();
@@ -26,7 +32,18 @@ export class UIBase implements IUi {
 		this._el.addEventListener(str, (e) => {
 			f(e as T);
 		}, options);
+
+		this.listenerList.push({ type: str, f });
 		return this;
+	}
+
+	clearEvent():void {
+		while (this.listenerList.length > 0) {
+			let t = this.listenerList.pop();
+			if (t && t.type) {
+				this._el.removeEventListener(t.type, t.f);
+			}
+		} 
 	}
 
 	remove() {
@@ -81,7 +98,10 @@ export class UIBase implements IUi {
 	}
 
 	addClass(...token: string[]): UIBase {
-		this._el.classList.add(...token);
+		const filtered = token.filter(t => t && t.trim());
+		if (filtered.length > 0) {
+			this._el.classList.add(...filtered);
+		}
 		return this;
 	}
 

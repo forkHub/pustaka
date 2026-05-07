@@ -2,10 +2,11 @@ import { BuildingManager } from "./building/BuildingManager.js";
 import { BuildingRenderer } from "./building/BuildingRenderer.js";
 import { BuildingInteractionHandler } from "./building/BuildingInteractionHandler.js";
 import { gameData } from "./Data.js";
-import { JobManager } from "./job/JobManager.js";
+// import { JobManager } from "./job/JobManager.js";
 import { UIManager } from "./ui/base/UIManager.js";
 import { uiHeader } from "./ui/UIHeader.js";
 import { uiMainMenu } from "./ui/UIMainMenu.js";
+import { JobManager } from "./job/JobManager.js";
 
 buatKanvas(480, 480, undefined, 0);
 uiMainMenu.open();

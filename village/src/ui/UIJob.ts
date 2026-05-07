@@ -1,4 +1,3 @@
-// import type { Building } from "../building/Building";
 import type { Building } from "../building/Building";
 import { Job } from "../job/Job";
 import { JobManager } from "../job/JobManager";
@@ -9,17 +8,9 @@ import { UIManager } from "./base/UIManager";
 import { UISpan } from "./base/UISpan";
 
 export class UIJob extends UIBase {
-	// private _jobId: number = 0;
 	private jobName: UISpan = new UISpan('');
 	private meter:UIMeter = new UIMeter();
 	private jobRef: Job | null;
-
-	// public get jobId(): number {
-	// 	return this._jobId;
-	// }
-	// public set jobId(value: number) {
-	// 	this._jobId = value;
-	// }
 
 	constructor(jobRef:Job) {
 		super();
@@ -43,8 +34,16 @@ export class UIJob extends UIBase {
 		if (!this.parent) return;
 
 		if (this.jobRef) {
-			this.jobName.label = this.jobRef?.type || ""; 
-			this.meter.value = (this.jobRef?.counterMax - this.jobRef?.counter);
+			this.jobName.label = this.jobRef.type || ""; 
+			let value = (this.jobRef.counterMax - this.jobRef.counter);
+			value = Math.floor((value / this.jobRef.counterMax) * 100);
+
+			this.meter.value = value;
+		}
+		else {
+			console.log(this);
+			throw Error("no job reference");
+			
 		}
 	}
 
@@ -55,9 +54,16 @@ export class UIJob extends UIBase {
 
 		if (uis.length > 0) {
 			ui = uis[0];
+			ui.jobRef = job;
+			console.log('reuse ui job');
 		} else {
 			ui = new UIJob(job);
+			console.log('new ui job')
 		}
+
+		//setup min and max for job
+		ui.meter.min = 0;
+		ui.meter.max = 100;
 
 		return ui;
 	}
@@ -67,6 +73,7 @@ export class UIJob extends UIBase {
 			let ui = UIJob.getOrCreate(job);
 			ui.jobName.label = job.type
 			cont.appendChild(ui);
+			// console.log('create ui job', ui.el);
 		})
 	}
 

@@ -43,6 +43,9 @@ class UIBuildingDetail extends UIBase {
 			this.title.label = this._buildingRef.type;
 			UIJob.createByBuilding(this._buildingRef, this.jobCont);
 		}
+		else {
+			console.error("no building ref");
+		}
 	}
 
 	close() {

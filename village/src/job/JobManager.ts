@@ -1,4 +1,5 @@
 import type { Building } from "../building/Building.js";
+import { buildingState } from "../building/buildingData.js";
 import { Job } from "./Job.js";
 import { jobType } from "./JobData.js";
 import { JobFactory } from "./JobFactory.js";
@@ -19,14 +20,6 @@ export class JobManager {
 		return this.list.filter(item => item.buildingRef == building);
 	}
 
-	// static getByBuildingId(buildingId: number): Job[] {
-	// 	return this.list.filter(item => item.buildingId === buildingId);
-	// }
-
-	// static getByBuildingIdAndType(buildingId: number, type: jobType): Job[] {
-	// 	return this.getByBuildingId(buildingId).filter(item => item.type === type);
-	// }
-
 	static create(type: jobType, building: Building): Job {
 		const job = JobFactory.create(type, building);
 		this.list.push(job);
@@ -40,9 +33,10 @@ export class JobManager {
 	}
 
 	static tick(): void {
-		// Process all jobs
 		this.list.forEach(job => {
-			job.tick();
+			if (job.buildingRef?.state == buildingState.PRODUCE) {
+				job.tick();
+			}
 		});
 	}
 }
