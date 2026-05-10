@@ -110,6 +110,15 @@ namespace Basik {
 			}
 		}
 
+		/**
+		 * 
+		 * @param gbr1 
+		 * @param x1 
+		 * @param y1 
+		 * @param x2 
+		 * @param y2 
+		 * @returns 
+		 */
 		static dotInsideImage(gbr1: GbrObj, x1: number, y1: number, x2: number, y2: number): boolean {
 			Ip.resetRect(gbr1);
 			Ip.rectToImageTf(gbr1, x1, y1);
@@ -257,12 +266,10 @@ namespace Basik {
 				ctx.restore();
 			}
 
-			function drawImpl(dx: number, dy: number) {
-				dx -= Camera.x;
-				dy -= Camera.y;
-
+			function drawImpl(posX: number, posY: number) {				
+				//
 				ctx.globalAlpha = gbr.alpha / 100;
-				ctx.drawImage(gbr.kanvas, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(dx), Math.floor(dy), w2, h2);
+				ctx.drawImage(gbr.kanvas, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(posX), Math.floor(posY), w2, h2);
 				ctx.globalAlpha = 1;
 			}
 

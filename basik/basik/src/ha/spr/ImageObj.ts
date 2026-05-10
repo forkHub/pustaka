@@ -97,6 +97,15 @@ namespace Basik {
 		private _pendingStempel: boolean = false;
 		private _nama: string;
 		private _img: HTMLImageElement;
+
+		public get layarX(): number {
+			return this._x - Camera.x;
+		}
+
+		public get layarY(): number {
+			return this._x - Camera.y;
+		}
+
 		public get img(): HTMLImageElement {
 			return this._img;
 		}

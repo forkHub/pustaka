@@ -2,26 +2,26 @@ namespace Basik {
 	
 	export class Camera {
 		private static _x: number = 0;
+		private static _y: number = 0;
+		private static _img: Basik.GbrObj;
+
 		public static get x(): number {
 			return Camera._x;
 		}
 		public static set x(value: number) {
 			Camera._x = value;
 		}
-		private static _y: number = 0;
 		public static get y(): number {
 			return Camera._y;
 		}
 		public static set y(value: number) {
 			Camera._y = value;
 		}
-		private static _img: Basik.GbrObj;
 		public static get img(): Basik.GbrObj {
 			return Camera._img;
 		}
 		public static set img(value: Basik.GbrObj) {
 			Camera._img = value;
 		}
-
 	}
 }
