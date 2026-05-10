@@ -3,7 +3,9 @@ import { BuildingManager } from "../building/BuildingManager";
 import { gameData } from "../Data";
 import { UIBase } from "./base/UIBase";
 import { UIButton } from "./base/UIButton";
+import { h1 } from "./base/UIH1";
 import { uiConfirmBuild } from "./UIConfirmBuild";
+import { div } from "./UIDiv";
 
 class UISelectBuildingToBuild extends UIBase {
     private wellBtn = new UIButton("well");
@@ -13,9 +15,15 @@ class UISelectBuildingToBuild extends UIBase {
     constructor() {
         super();
         this._el = document.createElement('dialog');
-        this.appendChild(this.wellBtn);
-        this.appendChild(this.foresterBtn);
-        this.appendChild(this.woodCutterBtn);
+        this.appendChild(
+            div()
+                .appendChild(h1("Select building to build"))
+                .appendChild(this.wellBtn)
+                .appendChild(this.foresterBtn)
+                .appendChild(this.woodCutterBtn)
+                .addClass('disp-flex', "pd", "flex-dir-col", "flex-gap")
+        )
+
         this.appendToDocument();
 
         this.wellBtn.el.addEventListener("click", () => {

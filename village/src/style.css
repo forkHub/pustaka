@@ -64,6 +64,19 @@ canvas {
 	display: flex;
 }
 
+.flex-dir-row {
+	flex-direction: row;
+}
+
+.flex-dir-col {
+	flex-direction: column;
+}
+
+.flex-gap {
+	gap: 8px;
+}
+
+
 .justify-content-center {
 	justify-content: center;
 }
