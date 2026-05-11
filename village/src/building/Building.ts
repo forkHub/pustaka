@@ -1,5 +1,5 @@
 import { jobType } from "../job/JobData.js";
-import { JobManager } from "../job/JobManager.js";
+// import { JobManager } from "../job/JobManager.js";
 import { BuildingData, type buildingType, buildingState, buildingTypeConst, type buildingDbo } from "./buildingData.js";
 import { BuildingManager } from "./BuildingManager.js";
 
@@ -8,7 +8,7 @@ export class Building extends BuildingData {
 		super(url, ty);
 	}
 
-	toDbo():buildingDbo {
+	toDbo(): buildingDbo {
 		return {
 			id: this._id,
 			type: this._type
@@ -33,7 +33,7 @@ export class Building extends BuildingData {
 				}
 			}
 		}
-		
+
 		return false;
 	}
 
@@ -85,7 +85,7 @@ export class Building extends BuildingData {
 		}
 		else if (this._type == buildingTypeConst.WOOD_CUTTER) {
 			return [
-				
+
 			]
 		}
 		else {

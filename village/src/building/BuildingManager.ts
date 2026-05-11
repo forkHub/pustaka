@@ -5,8 +5,8 @@ import { buildingTypeConst, type buildingDbo, type buildingType } from "./buildi
 export class BuildingManager {
 	private static list: Building[] = [];
 
-	static toDbo():buildingDbo[] {
-		let r:buildingDbo[] = [];
+	static toDbo(): buildingDbo[] {
+		let r: buildingDbo[] = [];
 
 		BuildingManager.list.forEach((item) => {
 			r.push(item.toDbo());
@@ -33,13 +33,21 @@ export class BuildingManager {
 		let b: Building;
 
 		if (ty == buildingTypeConst.FORESTER) {
-			b = new Building("well", buildingTypeConst.FORESTER);
-			b.width = 2;
+			b = new Building("forester", buildingTypeConst.FORESTER);
+			b.width = 3;
 			b.height = 3;
-			b.offsetY = 64;
+			b.offsetY = 32;
+			b.offsetX = 32;
+		}
+		else if (ty == buildingTypeConst.WOOD_CUTTER) {
+			b = new Building("wood_cutter", buildingTypeConst.WELL);
+			b.width = 3;
+			b.height = 3;
+			b.offsetY = 32;
+			b.offsetX = 32;
 		}
 		else if (ty == buildingTypeConst.WELL) {
-			b = new Building("well2", buildingTypeConst.WELL);
+			b = new Building("well", buildingTypeConst.WELL);
 			b.width = 2;
 			b.height = 3;
 			b.offsetY = 64;
