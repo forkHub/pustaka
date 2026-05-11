@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Dashboard Admin</title>
+	<link rel="stylesheet" href="../../../public/styles/main.css"> <!-- Asumsi CSS global -->
+</head>
+
+<body>
+	<header class="header">
+		<button id="hamburger">☰</button>
+		<h1>Dashboard Admin</h1>
+		<button id="notifications">🔔</button>
+	</header>
+
+	<main class="dashboard">
+		<div class="greeting">
+			<p>Hello, Admin <span id="adminName"></span>!</p>
+			<p>Today: <span id="currentDate"></span></p>
+		</div>
+
+		<div class="card summary">
+			<h3>📊 Ringkasan Sekolah</h3>
+			<p>Siswa Aktif: <span id="studentCount"></span></p>
+			<p>Guru Aktif: <span id="teacherCount"></span></p>
+			<p>Total Kelas: <span id="classCount"></span></p>
+			<p>Tahun Ajaran: <span id="academicYear"></span></p>
+		</div>
+
+		<div class="card attendance">
+			<h3>📋 Kehadiran Hari Ini</h3>
+			<p>Hadir: <span id="presentCount"></span> (<span id="presentPercent"></span>%)</p>
+			<p>Sakit: <span id="sickCount"></span> | Izin: <span id="excusedCount"></span> | Alpha: <span
+					id="absentCount"></span></p>
+			<button onclick="navigateTo('attendance')">Lihat Detail Absensi</button>
+		</div>
+
+		<div class="card finance">
+			<h3>💸 Tagihan SPP Outstanding</h3>
+			<p>Total Tunggakan: Rp <span id="outstandingAmount"></span></p>
+			<p>Siswa Belum Bayar: <span id="unpaidStudents"></span></p>
+			<button onclick="navigateTo('finance')">Kelola Tagihan</button>
+		</div>
+
+		<div class="card announcements">
+			<h3>📣 Pengumuman Terbaru</h3>
+			<ul id="announcementList"></ul>
+			<button onclick="navigateTo('announcements')">Kelola Pengumuman</button>
+		</div>
+
+		<div class="shortcuts">
+			<button onclick="navigateTo('users')">👥 Users</button>
+			<button onclick="navigateTo('classes')">🏫 Kelas</button>
+			<button onclick="navigateTo('academic')">📚 Akademik</button>
+			<button onclick="navigateTo('assessments')">⭐ Penilaian</button>
+			<button onclick="navigateTo('finance')">💰 Keuangan</button>
+		</div>
+	</main>
+
+	<!-- TODO: dibuat modul -->
+	<script src="dashboard.ts"></script>
+</body>
+
+</html>

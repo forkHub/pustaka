@@ -1,0 +1,23 @@
+-- Tambah kolom user_id dan created_at jika belum ada
+ALTER TABLE todos ADD COLUMN IF NOT EXISTS user_id UUID REFERENCES auth.users(id) ON DELETE CASCADE;
+ALTER TABLE todos ADD COLUMN IF NOT EXISTS created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW();
+
+-- Aktifkan Row Level Security
+ALTER TABLE todos ENABLE ROW LEVEL SECURITY;
+
+-- Policy: hanya user yang bisa akses datanya sendiri
+CREATE POLICY "Users can only access their own todos"
+  ON todos FOR SELECT
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can only insert their own todos"
+  ON todos FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+
+CREATE POLICY "Users can only update their own todos"
+  ON todos FOR UPDATE
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can only delete their own todos"
+  ON todos FOR DELETE
+  USING (auth.uid() = user_id);
