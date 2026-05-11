@@ -1,7 +1,7 @@
-import { Spider2 } from "./Spider2.js";
+import { Spider } from "./Spider2.js";
 
 window.onload = () => {
-	const spider = new Spider2(100, 50);
+	const spider = new Spider(100, 50);
 	const canvas = document.createElement('canvas');
 	const ctx = canvas.getContext('2d')!;
 	if (!ctx) throw Error("no context");

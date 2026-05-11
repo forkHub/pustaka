@@ -35,17 +35,17 @@ class SpiderData {
 	}
 }
 
-export class Spider2 extends SpiderData {
+export class Spider extends SpiderData {
 
-	constructor(x: number, y: number) {
+	constructor(x: number, y: number, ty:number=0) {
 		super();
 		this._x = x;
 		this._y = y;
 
-		this.pijakan.push(new Pijakan(x - 50, y - 50));
-		this.pijakan.push(new Pijakan(x + 50, y + 50));
-		this.pijakan.push(new Pijakan(x + 50, y - 50));
-		this.pijakan.push(new Pijakan(x - 50, y + 50));
+		this.pijakan.push(new Pijakan(x - 50, y - 50, ty));
+		this.pijakan.push(new Pijakan(x + 50, y + 50, ty));
+		this.pijakan.push(new Pijakan(x + 50, y - 50, ty));
+		this.pijakan.push(new Pijakan(x - 50, y + 50, ty));
 
 		this.setPijakanTarget(0, this.target);
 	}
