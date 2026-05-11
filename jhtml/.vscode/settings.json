@@ -1,4 +1,0 @@
-{
-    "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
-    "json.format.keepLines": true
-}
