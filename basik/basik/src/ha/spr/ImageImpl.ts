@@ -156,8 +156,8 @@ namespace Basik {
 
 			frame = Math.floor(frame);
 
-			jmlH = Math.ceil((G.Canvas().width + Math.abs(x)) / w2);
-			jmlV = Math.ceil((G.Canvas().height + Math.abs(y)) / h2);
+			jmlH = Math.ceil((G.Kanvas().width + Math.abs(x)) / w2);
+			jmlV = Math.ceil((G.Kanvas().height + Math.abs(y)) / h2);
 
 			for (let i: number = 0; i < jmlH; i++) {
 				for (let j: number = 0; j < jmlV; j++) {
@@ -168,7 +168,7 @@ namespace Basik {
 
 		static AmbilPiksel(x: number = 0, y: number = 0): void {
 			try {
-				let data: Uint8ClampedArray = G.Canvas().getContext('2d').getImageData(x, y, 1, 1).data;
+				let data: Uint8ClampedArray = G.Kanvas().getContext('2d').getImageData(x, y, 1, 1).data;
 
 				let hasil: number[] = [];
 
@@ -189,7 +189,7 @@ namespace Basik {
 		}
 
 		static SetPiksel(x: number = 0, y: number = 0) {
-			G.Canvas().getContext('2d').fillRect(Math.floor(x), Math.floor(y), 1, 1);
+			G.Kanvas().getContext('2d').fillRect(Math.floor(x), Math.floor(y), 1, 1);
 		}
 
 		static Draw(img: GbrObj) {
@@ -216,7 +216,7 @@ namespace Basik {
 		}
 
 		private static GamberSingle(gbr: GbrObj, x: number = 0, y: number = 0, frame: number = 0) {
-			let ctx: CanvasRenderingContext2D = G.Canvas().getContext('2d');
+			let ctx: CanvasRenderingContext2D = G.Kanvas().getContext('2d');
 			let jmlH: number = 0;
 			let frameX: number = 0;
 			let frameY: number = 0;

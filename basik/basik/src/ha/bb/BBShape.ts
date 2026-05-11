@@ -1,7 +1,7 @@
 ///<reference path="./Route.ts"/>
 
 function bukaPath(x: number = 0, y: number = 0): void {
-	let ctx = G.Canvas().getContext('2d');
+	let ctx = G.Kanvas().getContext('2d');
 	ctx.beginPath();
 	ctx.moveTo(x, y);
 	G.lastX = x;
@@ -9,7 +9,7 @@ function bukaPath(x: number = 0, y: number = 0): void {
 }
 
 function garisKe(x: number, y: number): void {
-	let ctx = G.Canvas().getContext('2d');
+	let ctx = G.Kanvas().getContext('2d');
 
 	x += G.lastX;
 	y += G.lastY;
@@ -20,7 +20,7 @@ function garisKe(x: number, y: number): void {
 }
 
 function kurvaKe(cx: number, cy: number, x: number, y: number): void {
-	let ctx = G.Canvas().getContext('2d');
+	let ctx = G.Kanvas().getContext('2d');
 
 	cx += G.lastX;
 	cy += G.lastY;
@@ -59,20 +59,20 @@ function lingkaranKe(cx: number, cy: number, sweepAngleDeg: number, clockWise = 
 		: startAngle + (sweepAngleDeg * Math.PI / 180);
 
 	// Gambar arc
-	let ctx = G.Canvas().getContext('2d');
+	let ctx = G.Kanvas().getContext('2d');
 	ctx.beginPath();
 	ctx.arc(cx, cy, r, startAngle, endAngle, !clockWise); // dibalik agar true = searah jarum jam
 	ctx.stroke();
 }
 
 function tutupPath() {
-	let ctx = G.Canvas().getContext('2d');
+	let ctx = G.Kanvas().getContext('2d');
 	ctx.stroke();
 	ctx.fill();
 }
 
 function lingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: number = 0, akhir: number = 360): void {
-	let ctx = G.Canvas().getContext('2d');
+	let ctx = G.Kanvas().getContext('2d');
 	ctx.beginPath();
 	awal *= (Math.PI / 180);
 	akhir *= Math.PI / 180;
@@ -82,7 +82,7 @@ function lingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: 
 }
 
 function elip(x: number = 0, y: number = 0, radiusX: number = 32, radiusY: number = 64, awal: number = 0, akhir: number = 360, searahJarumJam: boolean = false): void {
-	let ctx = G.Canvas().getContext('2d');
+	let ctx = G.Kanvas().getContext('2d');
 	awal *= (Math.PI / 180);
 	akhir *= Math.PI / 180;
 	ctx.ellipse(x, y, radiusX, radiusY, 0, awal, akhir, !searahJarumJam);
@@ -91,7 +91,7 @@ function elip(x: number = 0, y: number = 0, radiusX: number = 32, radiusY: numbe
 }
 
 function kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 100) {
-	let ctx = G.Canvas().getContext('2d');
+	let ctx = G.Kanvas().getContext('2d');
 	ctx.fillRect(x1, y1, x2, y2);
 	ctx.strokeRect(x1, y1, x2, y2);
 }
@@ -103,7 +103,7 @@ function segitiga(
 	height: number,
 	position: number
 ): void {
-	let ctx = G.Context();
+	let ctx = G.Kontek();
 
 	if (height == undefined && position == undefined) {
 		// Hitung tinggi segitiga sama sisi
@@ -120,7 +120,7 @@ function segitiga(
 		const y3 = y - height;
 
 		// Gambar segitiga
-		G.Context().beginPath();
+		G.Kontek().beginPath();
 		ctx.moveTo(x1, y1);
 		ctx.lineTo(x2, y2);
 		ctx.lineTo(x3, y3);
@@ -200,7 +200,7 @@ function pie(
 	const startAngle = (startAngleDeg * Math.PI) / 180;
 	const endAngle = (endAngleDeg * Math.PI) / 180;
 
-	let ctx = G.Context();
+	let ctx = G.Kontek();
 	ctx.beginPath();
 	ctx.moveTo(x, y); // mulai dari pusat
 	ctx.arc(x, y, radius, startAngle, endAngle); // gambar busur
@@ -221,7 +221,7 @@ function polygonTeratur(
 
 	const angleStep = (2 * Math.PI) / sides;
 
-	let ctx = G.Context();
+	let ctx = G.Kontek();
 	ctx.beginPath();
 	for (let i = 0; i < sides; i++) {
 		const px = x + radius * Math.cos(angleStep * i - Math.PI / 2);
@@ -276,7 +276,7 @@ function bintang(
 }
 
 function garis(x = 100, y = 100, x2 = 500, y2 = 500) {
-	let ctx = G.Context();
+	let ctx = G.Kontek();
 	ctx.beginPath();
 	ctx.moveTo(x, y);
 	ctx.lineTo(x2, y2);

@@ -9,7 +9,7 @@ function setKanvas(c: HTMLCanvasElement) {
 }
 
 function kanvas(): HTMLCanvasElement {
-	return G.Canvas();
+	return G.Kanvas();
 }
 
 function buatKanvas(w: number = 800, h: number = 600, canvas: HTMLCanvasElement = null, mode: number = 1) {
@@ -57,7 +57,7 @@ function warnaGaris(idx: number, trans = 100) {
 }
 
 function tebalGaris(n: number) {
-	G.Canvas().getContext('2d').lineWidth = n;
+	G.Kanvas().getContext('2d').lineWidth = n;
 }
 
 const dialog = G.alert;

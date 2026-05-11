@@ -73,12 +73,15 @@ namespace Basik {
 			return canvas;
 		}
 
-		static Canvas(): HTMLCanvasElement {
+		static Kanvas(): HTMLCanvasElement {
+			if (!G.drawCanvas) {
+				G.Graphics();
+			}
 			return G.drawCanvas;
 		}
 
-		static Context(): CanvasRenderingContext2D {
-			return Graphic.Canvas().getContext('2d')
+		static Kontek(): CanvasRenderingContext2D {
+			return Graphic.Kanvas().getContext('2d')
 		}
 
 		static SetCanvas(canvas: HTMLCanvasElement): void {
@@ -103,6 +106,7 @@ namespace Basik {
 				try {
 					G._isUpdating = true;
 					Event.dispatchEvent(Evt.UPDATE);
+					Event.dispatchEvent(Evt.RENDER);
 					window.requestAnimationFrame(update);
 					G._isUpdating = false;
 				}
@@ -126,7 +130,7 @@ namespace Basik {
 			posisiTeks(20, 20);
 			ukuranTeks(20);
 			tebalGaris(1);
-			G.Canvas().getContext('2d').lineWidth = 1;
+			G.Kanvas().getContext('2d').lineWidth = 1;
 			console.groupEnd();
 		}
 
@@ -184,6 +188,7 @@ namespace Basik {
 			Event.addEventListener(Evt.SOUND_ENDED, () => {
 				G.callFunc(Evt.SOUND_ENDED);
 			})
+
 			Event.addEventListener(Evt.GAMBAR_DILOAD, () => {
 				Ip.daftar.forEach((gbr) => {
 					if (gbr.pendingStempel) {
@@ -192,6 +197,19 @@ namespace Basik {
 					}
 				})
 			});
+
+			Event.addEventListener(Evt.RENDER, () => {
+				if (G.callFunc(Evt.RENDER)) {
+					
+				}
+				else {
+					//auto render bila belum ada render
+					bersihkanLayar();
+					Ip.daftar.forEach((gbr) => {
+						stempel(gbr);
+					})
+				}
+			})
 		}
 
 		private static setupMainCanvas(p?: number, l?: number, mode: number = 1): void {

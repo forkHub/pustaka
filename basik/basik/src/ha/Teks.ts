@@ -39,7 +39,7 @@ namespace Basik {
 				align = "right";
 			}
 
-			G.Canvas().getContext('2d').textAlign = align;
+			G.Kanvas().getContext('2d').textAlign = align;
 		}
 
 		static WriteLn(teks: string, x: number, y: number): void {
@@ -49,16 +49,16 @@ namespace Basik {
 			if (y != undefined) {
 				Teks._y = y;
 			}
-			G.Canvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
-			G.Canvas().getContext('2d').fillText(teks, Teks._x, Teks._y);
-			G.Canvas().getContext('2d').strokeText(teks, Teks._x, Teks._y);
+			G.Kanvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
+			G.Kanvas().getContext('2d').fillText(teks, Teks._x, Teks._y);
+			G.Kanvas().getContext('2d').strokeText(teks, Teks._x, Teks._y);
 			Teks._y += Teks.size + (Teks.size * .4); // Move down for the next line
 		}
 
 		static Write(teks: string): void {
-			G.Canvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
-			G.Canvas().getContext('2d').fillText(teks, Teks._x, Teks._y);
-			G.Canvas().getContext('2d').strokeText(teks, Teks._x, Teks._y);
+			G.Kanvas().getContext('2d').font = Teks.size + 'px ' + Teks._name;
+			G.Kanvas().getContext('2d').fillText(teks, Teks._x, Teks._y);
+			G.Kanvas().getContext('2d').strokeText(teks, Teks._x, Teks._y);
 		}
 
 	}

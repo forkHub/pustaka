@@ -13,6 +13,7 @@ namespace Basik {
 		SOUND_ENDED = "suaraSelesai",
 
 		UPDATE = "update",
+		RENDER = "render",
 		MULAI = "mulai",
 		GAMBAR_DILOAD = "gambarDiload",
 		RESIZE = "resize"

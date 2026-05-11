@@ -97,6 +97,15 @@ namespace Basik {
 		private _pendingStempel: boolean = false;
 		private _nama: string;
 		private _img: HTMLImageElement;
+		private _tipeDrag: number = 0;
+		private _diRender: Boolean = true;
+		
+		public get diRender(): Boolean {
+			return this._diRender;
+		}
+		public set diRender(value: Boolean) {
+			this._diRender = value;
+		}
 
 		public get layarX(): number {
 			return this._x - Camera.x;
@@ -121,6 +130,12 @@ namespace Basik {
 		private _url: string;
 		private _canvas: HTMLCanvasElement;
 		private _isAnim: boolean = false;
+		private _dragStartY: number = 0;
+		private _dragStartX: number = 0;
+		private _sudutTekanAwal: number = 0;
+		private _sudutAwal: number = 0;
+		private _inputId: string;
+
 		public get isAnim(): boolean {
 			return this._isAnim;
 		}
@@ -134,12 +149,6 @@ namespace Basik {
 		public set rect(value: Ktk) {
 			this._rect = value;
 		}
-		private _tipeDrag: number = 0;
-		private _dragStartY: number = 0;
-		private _dragStartX: number = 0;
-		private _sudutTekanAwal: number = 0;
-		private _sudutAwal: number = 0;
-		private _inputId: string;
 
 		private _dimuat: boolean = false;
 		public get dimuat(): boolean {
@@ -179,6 +188,7 @@ namespace Basik {
 		public get kanvas(): HTMLCanvasElement {
 			return this._canvas;
 		}
+
 		public set kanvas(value: HTMLCanvasElement) {
 			this._canvas = value;
 		}
