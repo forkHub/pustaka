@@ -161,9 +161,13 @@ namespace Basik {
 
 			for (let i: number = 0; i < jmlH; i++) {
 				for (let j: number = 0; j < jmlV; j++) {
-					Ip.GamberSingle(gbr, x + (i * w2), y + (j * h2), frame);
+					gbr.x = x + (i * w2);
+					gbr.y = y + (j * h2);
+					Ip.GamberSingle(gbr);
 				}
 			}
+
+			
 		}
 
 		static AmbilPiksel(x: number = 0, y: number = 0): void {
@@ -210,12 +214,12 @@ namespace Basik {
 					Ip.gambarUbin(img, img.x, img.y, img.frame);
 				}
 				else {
-					Ip.GamberSingle(img, img.x, img.y, img.frame);
+					Ip.GamberSingle(img);
 				}
 			}
 		}
 
-		private static GamberSingle(gbr: GbrObj, x: number = 0, y: number = 0, frame: number = 0) {
+		private static GamberSingle(gbr: GbrObj) {
 			let ctx: CanvasRenderingContext2D = G.Kanvas().getContext('2d');
 			let jmlH: number = 0;
 			let frameX: number = 0;
@@ -229,7 +233,7 @@ namespace Basik {
 			imgW = gbr.img.naturalWidth;
 
 			gbr.ctrIdx = GbrObj.ctrDraw++;
-			frame = Math.floor(frame);
+			let frame = Math.floor(gbr.frame);
 
 			jmlH = Math.floor(imgW / gbr.panjangFrame);
 
@@ -240,8 +244,8 @@ namespace Basik {
 			frameX = Math.floor(frameX);
 			frameY = Math.floor(frameY);
 
-			let x2: number = Math.floor(x);
-			let y2: number = Math.floor(y);
+			let x2: number = Math.floor(gbr.x);
+			let y2: number = Math.floor(gbr.y);
 
 			let w2: number = Math.floor(gbr.panjang);
 			let h2: number = Math.floor(gbr.lebar);
@@ -251,7 +255,7 @@ namespace Basik {
 
 			if (gbr.rotasi != 0) {
 				ctx.save();
-				ctx.translate(x, y);
+				ctx.translate(gbr.x, gbr.y);
 				ctx.rotate(gbr.rotasi * (Math.PI / 180));
 
 				drawImpl(-gbr.pusatX, -gbr.pusatY)
