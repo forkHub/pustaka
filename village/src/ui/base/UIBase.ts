@@ -2,22 +2,22 @@ import { id } from "../../Id";
 import { UIManager } from "./UIManager";
 
 export interface IUi {
-	id:number;
+	id: number;
 	parent: IUi | null;
 	el: HTMLElement;
 }
 
 export type listener = {
-	type:string,
-	f:(e:any) => void;
+	type: string,
+	f: (e: any) => void;
 }
 
 export class UIBase implements IUi {
 	protected _el!: HTMLElement;
 	protected _parent: UIBase | null = null;
 	protected _id: number = 0;
-	protected isOpen:boolean = false;
-	protected listenerList:listener[] = [];
+	protected isOpen: boolean = false;
+	protected listenerList: listener[] = [];
 
 	static create<T>(classRef: new (...args: any[]) => T): T {
 		return new classRef();
@@ -37,17 +37,17 @@ export class UIBase implements IUi {
 		return this;
 	}
 
-	clearEvent():void {
+	clearEvent(): void {
 		while (this.listenerList.length > 0) {
 			let t = this.listenerList.pop();
 			if (t && t.type) {
 				this._el.removeEventListener(t.type, t.f);
 			}
-		} 
+		}
 	}
 
 	remove() {
-		this.parent =null;
+		this.parent = null;
 	}
 
 	render() {
@@ -74,6 +74,10 @@ export class UIBase implements IUi {
 		}
 	}
 
+	attr(attr: string, val: string = '') {
+		this._el.setAttribute(attr, val);
+	}
+
 	appendToDocument() {
 		document.body.appendChild(this._el);
 	}
@@ -87,12 +91,12 @@ export class UIBase implements IUi {
 		return null;
 	}
 
-	innerText(str:string):UIBase {
+	innerText(str: string): UIBase {
 		this._el.innerText = str;
 		return this;
 	}
 
-	innerHtml(str:string):UIBase {
+	innerHtml(str: string): UIBase {
 		this._el.innerHTML = str;
 		return this;
 	}
@@ -121,22 +125,22 @@ export class UIBase implements IUi {
 
 		if (!i) {
 			this._el.parentElement?.removeChild(this._el);
-		} 
+		}
 		else {
 			i._el.appendChild(this._el);
 		}
 	}
 
-	public appendChild(c:UIBase):UIBase {
-		c.parent=this;
+	public appendChild(c: UIBase): UIBase {
+		c.parent = this;
 		return this;
 	}
 
-	public removeChild(c:UIBase):void {
-		if (c.parent == this) c.parent=null;
+	public removeChild(c: UIBase): void {
+		if (c.parent == this) c.parent = null;
 	}
 
-	public removeAllChildren():void {
+	public removeAllChildren(): void {
 		UIManager.getByParentId(this.id).forEach((item) => {
 			item.parent = null;
 		})
@@ -145,15 +149,19 @@ export class UIBase implements IUi {
 	get el(): HTMLElement {
 		return this._el;
 	}
-	
-	constructor(tag:string = 'div') {
+
+	constructor(tag: string = 'div') {
 		this._id = id.nextid;
 		this._el = document.createElement(tag);
 		UIManager.add(this);
 	}
 }
 
-export function p(str:string):UIBase {
-	let p =  new UIBase('p').innerText(str);
+export function p(str: string): UIBase {
+	let p = new UIBase('p').innerText(str);
 	return p;
+}
+
+export function br(): UIBase {
+	return new UIBase('br');
 }

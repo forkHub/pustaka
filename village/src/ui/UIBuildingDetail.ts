@@ -1,5 +1,5 @@
 import type { Building } from "../building/Building";
-import { UIBase } from "./base/UIBase";
+import { br, UIBase } from "./base/UIBase";
 import { UIButton } from "./base/UIButton";
 import { UICont } from "./base/UICont";
 import { UIH1 } from "./base/UIH1";
@@ -10,9 +10,9 @@ class UIBuildingDetail extends UIBase {
 	private _buildingId: number = 0;
 	private _buildingRef: Building | undefined;
 	private jobCont: UICont = new UICont();
-	private btn:UIButton = new UIButton('close');
-	private debugCont:UICont = new UICont();
-	private title:UIH1 = new UIH1("");
+	private btn: UIButton = new UIButton('close');
+	private debugCont: UICont = new UICont();
+	private title: UIH1 = new UIH1("");
 
 	public get buildingRef(): Building | undefined {
 		return this._buildingRef;
@@ -24,11 +24,13 @@ class UIBuildingDetail extends UIBase {
 	constructor() {
 		super();
 		this._el = document.createElement('dialog');
-		this.appendChild(this.title);
-		this.jobCont.parent = this;
-		this.btn.parent = this;
-		this.debugCont.parent = this;
-		
+		this.appendChild(this.title)
+			.appendChild(this.jobCont)
+			.appendChild(br())
+			.appendChild(this.btn.addClass('bevel-btn'))
+			.appendChild(this.debugCont)
+			.addClass('bg-color-01', 'border-03')
+
 		this.btn.el.addEventListener("click", () => {
 			this.close();
 		})
@@ -40,7 +42,7 @@ class UIBuildingDetail extends UIBase {
 		super.open();
 
 		if (this._buildingRef) {
-			this.title.label = this._buildingRef.type;
+			this.title.setLabel(this._buildingRef.type);
 			UIJob.createByBuilding(this._buildingRef, this.jobCont);
 		}
 		else {
@@ -60,7 +62,7 @@ class UIBuildingDetail extends UIBase {
 		if (!this.isOpen) return;
 
 		let el = this.debugCont.el;
-		el.innerHTML='';
+		el.innerHTML = '';
 	}
 
 	public get buildingId(): number {
