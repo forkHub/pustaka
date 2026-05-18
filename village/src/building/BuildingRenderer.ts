@@ -6,11 +6,11 @@ export class BuildingRenderer {
 		BuildingManager.getAll().forEach((item) => {
 			if (item.state == buildingState.PLAN) {
 				if (item.isPosisionSet) {
-					stempel(item.img);
+					item.render();
 				}
 			}
 			else {
-				stempel(item.img);
+				item.render();
 			}
 		});
 	}

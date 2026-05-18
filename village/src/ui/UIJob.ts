@@ -4,19 +4,25 @@ import { JobManager } from "../job/JobManager";
 import { UIBase } from "./base/UIBase";
 import type { UICont } from "./base/UICont";
 import { UIMeter } from "./base/UIGauge";
+import { UIImage } from "./base/UIImage";
 import { UIManager } from "./base/UIManager";
-import { UISpan } from "./base/UISpan";
+// import { UISpan } from "./base/UISpan";
 
 export class UIJob extends UIBase {
-	private jobName: UISpan = new UISpan('');
-	private meter:UIMeter = new UIMeter();
+	// private jobName: UISpan = new UISpan('');
+	private image: UIImage = new UIImage('');
+	private meter: UIMeter = new UIMeter();
 	private jobRef: Job | null;
 
-	constructor(jobRef:Job) {
+	constructor(jobRef: Job) {
 		super();
 		this._el = document.createElement('div');
-		this.appendChild(this.jobName);
+		this.appendChild(this.image);
 		this.appendChild(this.meter);
+
+		this.image.addClass("vertical-align-center");
+		this.image.attr("width", "32px");
+		this.image.attr("height", "32px");
 
 		this.jobRef = jobRef;
 		this.meter.max = jobRef.counterMax;
@@ -34,7 +40,7 @@ export class UIJob extends UIBase {
 		if (!this.parent) return;
 
 		if (this.jobRef) {
-			this.jobName.label = this.jobRef.type || ""; 
+			// this.image.src = this.jobRef.produce[0].resType || "";
 			let value = (this.jobRef.counterMax - this.jobRef.counter);
 			value = Math.floor((value / this.jobRef.counterMax) * 100);
 
@@ -43,14 +49,14 @@ export class UIJob extends UIBase {
 		else {
 			console.log(this);
 			throw Error("no job reference");
-			
+
 		}
 	}
 
-	static getOrCreate(job:Job): UIJob {
+	static getOrCreate(job: Job): UIJob {
 
-		let uis:UIJob[] = UIManager.getFree(UIJob) as UIJob[];
-		let ui:UIJob
+		let uis: UIJob[] = UIManager.getFree(UIJob) as UIJob[];
+		let ui: UIJob
 
 		if (uis.length > 0) {
 			ui = uis[0];
@@ -68,10 +74,11 @@ export class UIJob extends UIBase {
 		return ui;
 	}
 
-	static createByBuilding(building:Building, cont:UICont):void {
+	static createByBuilding(building: Building, cont: UICont): void {
 		JobManager.getByBuilding(building).forEach((job) => {
 			let ui = UIJob.getOrCreate(job);
-			ui.jobName.label = job.type
+			ui.image.src = job.produce[0].resType + ".png";
+			// ui.jobName.label = job.type
 			cont.appendChild(ui);
 			// console.log('create ui job', ui.el);
 		})

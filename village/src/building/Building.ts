@@ -1,3 +1,5 @@
+import { camera } from "../Camera.js";
+import { gameData } from "../Data.js";
 import { jobType } from "../job/JobData.js";
 // import { JobManager } from "../job/JobManager.js";
 import { BuildingData, type buildingType, buildingState, buildingTypeConst, type buildingDbo } from "./buildingData.js";
@@ -72,6 +74,36 @@ export class Building extends BuildingData {
 		}
 	}
 
+	projectImage(): void {
+		this.img.x = this._gridX * gameData.GRID_WIDTH - camera.x;
+		this.img.y = this._gridY * gameData.GRID_WIDTH - camera.y;
+		if (gameData.loadingImg) {
+			gameData.loadingImg.x = this.img.x;
+			gameData.loadingImg.y = this.img.y;
+			gameData.loadingImg.panjang = this.img.panjang;
+			gameData.loadingImg.lebar = this.img.lebar;
+		}
+	}
+
+	remove() {
+
+	}
+
+	render(): void {
+		this.projectImage();
+		if (this.img.dimuat) {
+			stempel(this.img);
+		}
+		else {
+			if (gameData.loadingImg) {
+				stempel(gameData.loadingImg);
+			}
+		}
+
+		//TODO: additonal condition:
+		//border when build mode is on
+	}
+
 	availableJobList(): jobType[] {
 		if (this._type === buildingTypeConst.FORESTER) {
 			return [
@@ -85,7 +117,12 @@ export class Building extends BuildingData {
 		}
 		else if (this._type == buildingTypeConst.WOOD_CUTTER) {
 			return [
-
+				jobType.CUT_TREE
+			]
+		}
+		else if (this._type == buildingTypeConst.SAW_MILL) {
+			return [
+				jobType.SAW_MILL
 			]
 		}
 		else {

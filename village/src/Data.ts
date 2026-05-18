@@ -29,24 +29,40 @@ export const store: Store = new Store();
 class Data {
 	private _tickCount: number = 1;
 	private _buildingRef: Building | undefined;
+	private _buildingCollide: boolean = false;
+	private _loadingImg: Basik.GbrObj | undefined;
 
-	public get buildingRef(): Building | undefined{
+	public get loadingImg(): Basik.GbrObj | undefined {
+		return this._loadingImg;
+	}
+	public set loadingImg(value: Basik.GbrObj | undefined) {
+		this._loadingImg = value;
+	}
+
+	public get buildingCollide(): boolean {
+		return this._buildingCollide;
+	}
+	public set buildingCollide(value: boolean) {
+		this._buildingCollide = value;
+	}
+
+	public get buildingRef(): Building | undefined {
 		return this._buildingRef;
-	
+
 	}
 	public set buildingRef(value: Building | undefined) {
 		this._buildingRef = value;
 	}
 
 	private _maxLog: number = 10;
-	
+
 	public get maxLog(): number {
 		return this._maxLog;
 	}
 	public set maxLog(value: number) {
 		this._maxLog = value;
 	}
-	readonly GRID_WIDTH:number=32;
+	readonly GRID_WIDTH: number = 32;
 
 	public get tickCount(): number {
 		return this._tickCount;
@@ -69,7 +85,7 @@ type dbo = {
 class Storage {
 
 	save() {
-		let dbo:dbo = {
+		let dbo: dbo = {
 			building: BuildingManager.toDbo()
 		}
 
@@ -77,7 +93,7 @@ class Storage {
 	}
 
 	load() {
-		
+
 	}
 
 }

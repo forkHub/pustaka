@@ -13,6 +13,7 @@ class UIHeader extends UIBase {
 			this.addInfo(key);
 		}
 		this._el.classList.add('fixed-top', 'disp-flex', 'align-items-center', 'justify-content-center');
+		this.addClass('bg-color-02', 'border-01');
 	}
 
 	render() {
@@ -45,8 +46,14 @@ class UIInfo extends UIBase {
 	constructor(url: string) {
 		super();
 		this.image = new UIImage(url);
+		this.image.addClass('vertical-align-center', 'padding');
+		this.image.attr("width", "32px");
+		this.image.attr("height", "32px");
+
 		this.appendChild(this.image);
 		this.appendChild(this.span);
+		this.span.addClass('white', 'bold')
+		this.addClass("padding");
 	}
 
 	public get amount(): number {

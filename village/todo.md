@@ -1,8 +1,9 @@
 next phase:
-forester
+building cost
 save to local storage
-dashboard UI using icon/text instead of image
 camera
+job has message when resource is not enough
+building status on alert
 
 next 2:
 zoom

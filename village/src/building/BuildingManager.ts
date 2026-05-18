@@ -20,9 +20,9 @@ export class BuildingManager {
 	}
 
 	static remove(id: number): void {
+		BuildingManager.getById(id)?.remove();
 		BuildingManager.list = BuildingManager.list.filter(item => item.id != id);
 	}
-
 
 	static getById(id: number): Building | null {
 		let b = BuildingManager.list.filter(item => item.id == id);
@@ -33,24 +33,31 @@ export class BuildingManager {
 		let b: Building;
 
 		if (ty == buildingTypeConst.FORESTER) {
-			b = new Building("forester", buildingTypeConst.FORESTER);
+			b = new Building("forester3", buildingTypeConst.FORESTER);
 			b.width = 3;
 			b.height = 3;
 			b.offsetY = 32;
 			b.offsetX = 32;
 		}
 		else if (ty == buildingTypeConst.WOOD_CUTTER) {
-			b = new Building("wood_cutter", buildingTypeConst.WELL);
+			b = new Building("wood_cutter3", buildingTypeConst.WOOD_CUTTER);
 			b.width = 3;
 			b.height = 3;
 			b.offsetY = 32;
 			b.offsetX = 32;
 		}
 		else if (ty == buildingTypeConst.WELL) {
-			b = new Building("well", buildingTypeConst.WELL);
+			b = new Building("well3", buildingTypeConst.WELL);
 			b.width = 2;
 			b.height = 3;
 			b.offsetY = 64;
+		}
+		else if (ty == buildingTypeConst.SAW_MILL) {
+			b = new Building("sawmill3", buildingTypeConst.SAW_MILL);
+			b.width = 3;
+			b.height = 3;
+			b.offsetY = 32;
+			b.offsetX = 32;
 		}
 		else {
 			throw Error('invalid type');

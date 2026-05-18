@@ -9,6 +9,7 @@ export class UIImage extends UIBase {
 	public set src(value: string) {
 		this._src = value;
 		(this._el as HTMLImageElement).src = "./asset/" + value;
+		this._el.setAttribute('align', 'middle');
 	}
 
 	constructor(src: string) {
