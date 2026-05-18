@@ -91,7 +91,7 @@ namespace Basik {
 		private _tilable: boolean = false;
 		private _panjangFrame: number = 0;
 		private _lebarFrame: number = 0;
-		private _dragged: boolean = false;
+		private _diDrag: boolean = false;
 		private _down: boolean = false;
 		private _frame: number = 0;
 		private _pendingStempel: boolean = false;
@@ -99,7 +99,7 @@ namespace Basik {
 		private _img: HTMLImageElement;
 		private _tipeDrag: number = 0;
 		private _diRender: Boolean = true;
-		
+
 		public get diRender(): Boolean {
 			return this._diRender;
 		}
@@ -130,8 +130,8 @@ namespace Basik {
 		private _url: string;
 		private _canvas: HTMLCanvasElement;
 		private _isAnim: boolean = false;
-		private _dragStartY: number = 0;
-		private _dragStartX: number = 0;
+		private _dragAwalY: number = 0;
+		private _dragAwalX: number = 0;
 		private _sudutTekanAwal: number = 0;
 		private _sudutAwal: number = 0;
 		private _inputId: string;
@@ -282,23 +282,23 @@ namespace Basik {
 		}
 
 		public get dragAwalX(): number {
-			return this._dragStartX;
+			return this._dragAwalX;
 		}
 		public set dragAwalX(value: number) {
-			this._dragStartX = value;
+			this._dragAwalX = value;
 		}
 		public get dragAwalY(): number {
-			return this._dragStartY;
+			return this._dragAwalY;
 		}
 		public set dragAwalY(value: number) {
-			this._dragStartY = value;
+			this._dragAwalY = value;
 		}
 
 		public get diDrag(): boolean {
-			return this._dragged;
+			return this._diDrag;
 		}
 		public set diDrag(value: boolean) {
-			this._dragged = value;
+			this._diDrag = value;
 		}
 		public get ditekan(): boolean {
 			return this._down;
