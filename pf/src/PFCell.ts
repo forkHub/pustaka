@@ -3,7 +3,7 @@ namespace Basik.pf {
 	export class PFCell {
 
 		protected _dist: number = 0;
-		protected _parent: PFCell;
+		protected _parent: PFCell | undefined;
 		protected _x: number = 0;
 		protected _y: number = 0;
 		protected _idx: number = -1;
@@ -14,7 +14,7 @@ namespace Basik.pf {
 		}
 
 		public destroy(): void {
-			this._parent = null;
+			this._parent = undefined;
 		}
 
 		public toStringRef(): String {
@@ -61,7 +61,7 @@ namespace Basik.pf {
 			this._open = value;
 		}
 
-		public get parent(): PFCell {
+		public get parent(): PFCell |undefined {
 			return this._parent;
 		}
 

@@ -1,9 +1,9 @@
 namespace Basik.pf {
 	export class Point {
-		x: number;
-		y: number;
+		x: number = 0;
+		y: number = 0;
 
-		constructor(i?: number, j?: number) {
+		constructor(i: number, j: number) {
 			this.x = i;
 			this.y = j;
 		}

@@ -17,8 +17,8 @@ namespace Basik.pf {
 		private _langkahTotal: number = 3;
 		private _langkahIdx: number = 0;
 		private jalanIdx: number = 0;
-		private _pos: Point = new Point();
-		private posTemp: Point = new Point();
+		private _pos: Point = new Point(0,0);
+		private posTemp: Point = new Point(0,0);
 		private _arah: number = Agent.BAWAH;
 		private _updateArahCallBack: Function;
 

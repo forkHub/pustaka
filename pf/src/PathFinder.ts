@@ -92,7 +92,7 @@ namespace Basik {
 				cell.parent = parent;
 			}
 			else {
-				cell.parent = null;
+				cell.parent = undefined;
 			}
 
 			cell.dist = Math.abs(targetX - i) + Math.abs(targetY - j);
