@@ -8,19 +8,18 @@ save to local storage
 job has message when resource is not enough
 building status on alert
 consumption
-
-next 2:
-=======
-boundary is per building
-disaster (fire, earthquake, wind, flood)
-zoom
 time machine
-season change every 24 hours
-maksimum speedup is for 12 hours
+boundary is per building
+zoom/mini map
+menu select item to appear on top dashboard
+arrow button next to resource to indicate grow state
 stage at the edge of boundary
 
 not implemented:
 ================
+disaster (fire, earthquake, wind, flood)
+season change every 24 hours
+maksimum speedup is for 12 hours
 earth deposit/refill
 export import
 
