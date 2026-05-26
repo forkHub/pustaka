@@ -1,5 +1,23 @@
 <html>
     <head>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            canvas {
+                image-rendering: pixelated;
+            }
+
+            div.border {
+                padding: 20px;
+                border: 1px solid;
+                width: fit-content;
+                margin: 16px;
+                background-color: white;
+                
+            }
+        </style>
     </head>
     <body>
         <form>
@@ -8,7 +26,8 @@
                 <input type="file" id="fileInput">
             </label>
         </form>
-        <canvas id="canvas"></canvas>
-        <script src="./index.js"></script>
+        <script src="./js/canvas.js"></script>
+        <script src="./js/rgb.js"></script>
+        <script src="./js/index.js"></script>
     </body>
 </html>
