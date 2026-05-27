@@ -20,6 +20,7 @@ fileInput.addEventListener("change", (e) => {
         return;
     const img = new Image();
     img.onload = () => {
+        console.log("img on load");
         let canvasDoc = document.createElement('canvas');
         hasilCont.innerHTML = '';
         canvasDoc.width = img.width;
@@ -30,17 +31,36 @@ fileInput.addEventListener("change", (e) => {
     };
     img.src = URL.createObjectURL(file);
 });
+function log(msg) {
+    let p = document.createElement('p');
+    p.innerText = msg;
+    document.body.appendChild(p);
+    console.log(msg);
+}
+async function delay() {
+    // console.log("delay");
+    await new Promise(resolve => requestAnimationFrame(resolve));
+}
 async function editUlang(n, canvasDoc, cont) {
+    console.log("edit ulang");
     let wrap = document.createElement('div');
     wrap.classList.add('border');
     cont.appendChild(wrap);
     let p = document.createElement('p');
     wrap.appendChild(p);
+    await delay();
     for (let i = 0; i < n; i++) {
         // p.innerText = 'Perulangan: ' + (i + 1);
+        log("process 1/4");
         await edit(canvasDoc, 0, wrap);
+        await delay();
+        log("process 2/4");
         await edit(canvasDoc, 1, wrap);
+        await delay();
+        log("process 3/4");
         await edit(canvasDoc, 2, wrap);
+        await delay();
+        log("process 4/4");
         await edit(canvasDoc, 3, wrap);
     }
 }
@@ -53,14 +73,11 @@ function createWrap(canvas, cont) {
 }
 async function edit(canvasSrc, mode, cont) {
     const canvas2 = document.createElement('canvas');
+    console.log("edit");
     createWrap(canvas2, cont);
     canvas2.width = Math.ceil(canvasSrc.width / 2);
     canvas2.height = Math.ceil(canvasSrc.height / 2);
-    if (mode == 0) {
-        canvas2.getContext('2d').drawImage(canvasSrc, 0, 0, canvas2.width, canvas2.height);
-        return canvas2;
-    }
-    for (let i = 0; i < canvasSrc.width; i += 2) {
+    const processJ = async (i) => {
         for (let j = 0; j < canvasSrc.height; j += 2) {
             let p = getPixelEx(i, j, canvasSrc);
             if (mode == 1) {
@@ -76,6 +93,14 @@ async function edit(canvasSrc, mode, cont) {
                 drawFilledRect(canvas2.getContext('2d'), i / 2, j / 2, 1, 1, px.rgb.r, px.rgb.g, px.rgb.b);
             }
         }
+    };
+    if (mode == 0) {
+        canvas2.getContext('2d').drawImage(canvasSrc, 0, 0, canvas2.width, canvas2.height);
+        return canvas2;
+    }
+    for (let i = 0; i < canvasSrc.width; i += 2) {
+        await delay();
+        await processJ(i);
     }
     return canvas2;
 }
