@@ -1,7 +1,7 @@
 const fileInput = document.getElementById("fileInput") as HTMLInputElement;
-const hasilCont = document.createElement('div');
-hasilCont.classList.add('border');
-document.body.appendChild(hasilCont);
+const cont = document.createElement('div');
+// hasilCont.classList.add('border');
+document.body.appendChild(cont);
 
 type TRgb = {
 	r: number,
@@ -36,23 +36,27 @@ fileInput.addEventListener("change", (e: Event) => {
 	img.onload = () => {
 		console.log("img on load");
 		let canvasDoc = document.createElement('canvas');
-		hasilCont.innerHTML = '';
+		cont.innerHTML = '';
 
-		canvasDoc.width = img.width;
-		canvasDoc.height = img.height;
-		canvasDoc.getContext('2d')!.drawImage(img, 0, 0);
+		let w = img.width + (img.width % 2);
+		let h = img.height + (img.height % 2);
 
-		createWrap(canvasDoc, hasilCont);
-		editUlang(1, canvasDoc, hasilCont);
+		canvasDoc.width = w;
+		canvasDoc.height = h;
+		canvasDoc.getContext('2d')!.drawImage(img, 0, 0, w, h);
+
+		log("gambar asli", cont);
+		cont.appendChild(canvasDoc);
+		editUlang(1, canvasDoc, cont);
 	};
 
 	img.src = URL.createObjectURL(file);
 });
 
-function log(msg: string) {
+function log(msg: string, cont: HTMLElement) {
 	let p = document.createElement('p');
 	p.innerText = msg;
-	document.body.appendChild(p);
+	cont ? cont.appendChild(p) : document.body.appendChild(p);
 	console.log(msg);
 }
 
@@ -64,26 +68,26 @@ async function delay() {
 async function editUlang(n: number, canvasDoc: HTMLCanvasElement, cont: HTMLElement) {
 	console.log("edit ulang");
 
-	let wrap = document.createElement('div');
-	wrap.classList.add('border');
-	cont.appendChild(wrap);
-	let p = document.createElement('p');
-	wrap.appendChild(p);
+	// let wrap = document.createElement('div');
+	// wrap.classList.add('border');
+	// cont.appendChild(wrap);
+	// let p = document.createElement('p');
+	// wrap.appendChild(p);
 	await delay();
 
 	for (let i = 0; i < n; i++) {
 		// p.innerText = 'Perulangan: ' + (i + 1);
-		log("process 1/4");
-		await edit(canvasDoc, 0, wrap);
+		log("process 1/4", cont);
+		await edit(canvasDoc, 0);
 		await delay();
-		log("process 2/4");
-		await edit(canvasDoc, 1, wrap);
+		log("process 2/4", cont);
+		await edit(canvasDoc, 1);
 		await delay();
-		log("process 3/4");
-		await edit(canvasDoc, 2, wrap);
+		log("process 3/4", cont);
+		await edit(canvasDoc, 2);
 		await delay();
-		log("process 4/4");
-		await edit(canvasDoc, 3, wrap);
+		log("process 4/4", cont);
+		await edit(canvasDoc, 3);
 	}
 }
 
@@ -98,18 +102,20 @@ function createWrap(canvas: HTMLCanvasElement, cont: HTMLElement): HTMLDivElemen
 	return div;
 }
 
-async function edit(canvasSrc: HTMLCanvasElement, mode: number, cont: HTMLElement): Promise<HTMLCanvasElement> {
+async function edit(canvasSrc: HTMLCanvasElement, mode: number): Promise<HTMLCanvasElement> {
 	const canvas2 = document.createElement('canvas');
 	console.log("edit");
 
-	createWrap(canvas2, cont);
+	cont.appendChild(canvas2);
+
+	// createWrap(canvas2, cont);
 
 	canvas2.width = Math.ceil(canvasSrc.width / 2);
 	canvas2.height = Math.ceil(canvasSrc.height / 2);
 
 	const processJ = async (i: number) => {
 		for (let j = 0; j < canvasSrc.height; j += 2) {
-			let p = getPixelEx(i, j, canvasSrc);
+			let p = getPixelEx2(i, j, 2, canvasSrc);
 			if (mode == 1) {
 				let px = findMostBlack(p);
 				drawFilledRect(canvas2.getContext('2d')!, i / 2, j / 2, 1, 1, px.rgb.r, px.rgb.g, px.rgb.b);
