@@ -24,17 +24,6 @@ function insideCanvas(x: number, y: number, canvas: HTMLCanvasElement): boolean 
 	return true;
 }
 
-function getPixelEx(x: number, y: number, canvas: HTMLCanvasElement): TPixel[] {
-	let res: TPixel[] = [];
-
-	res.push(getPixel(x, y, canvas));
-	res.push(getPixel(x + 1, y, canvas));
-	res.push(getPixel(x + 1, y + 1, canvas));
-	res.push(getPixel(x, y + 1, canvas));
-
-	return res;
-}
-
 function getPixelEx2(x: number, y: number, n: number, canvas: HTMLCanvasElement): TPixel[] {
 	let res: TPixel[] = [];
 
@@ -69,4 +58,43 @@ function getPixel(x: number, y: number, canvas: HTMLCanvasElement): TPixel {
 	// console.groupEnd();
 
 	return lastPixel;
+}
+
+async function canvasToTRgb(canvas: HTMLCanvasElement): Promise<TRgb[][]> {
+	log("canvas to rgb", cont);
+	const ctx = canvas.getContext("2d");
+	if (!ctx) throw new Error("Canvas context tidak tersedia");
+
+	const { width, height } = canvas;
+	const imageData = ctx.getImageData(0, 0, width, height);
+	const data = imageData.data; // RGBA flat array
+
+	const result: TRgb[][] = [];
+	for (let y = 0; y < height; y++) {
+		const row: TRgb[] = [];
+		await delay();
+		for (let x = 0; x < width; x++) {
+			const idx = (y * width + x) * 4;
+			const r = data[idx];
+			const g = data[idx + 1];
+			const b = data[idx + 2];
+			const a = data[idx + 3] //(jika perlu)
+			row.push({ r, g, b, a });
+		}
+		result.push(row);
+	}
+	return result;
+}
+
+function createCanvasDoc(img: HTMLImageElement, skala: number): HTMLCanvasElement {
+	let canvasDoc = document.createElement('canvas');
+
+	let w = img.width + (img.width % skala);
+	let h = img.height + (img.height % skala);
+
+	canvasDoc.width = w;
+	canvasDoc.height = h;
+	canvasDoc.getContext('2d')!.drawImage(img, 0, 0, w, h);
+
+	return canvasDoc;
 }

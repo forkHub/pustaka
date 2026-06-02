@@ -1,8 +1,3 @@
-const fileInput = document.getElementById("fileInput") as HTMLInputElement;
-const cont = document.createElement('div');
-// hasilCont.classList.add('border');
-document.body.appendChild(cont);
-
 type TRgb = {
 	r: number,
 	g: number,
@@ -35,35 +30,14 @@ fileInput.addEventListener("change", (e: Event) => {
 	const img = new Image();
 	img.onload = () => {
 		console.log("img on load");
-		let canvasDoc = document.createElement('canvas');
+		let canvasDoc = createCanvasDoc(img, 2);
 		cont.innerHTML = '';
-
-		let w = img.width + (img.width % 2);
-		let h = img.height + (img.height % 2);
-
-		canvasDoc.width = w;
-		canvasDoc.height = h;
-		canvasDoc.getContext('2d')!.drawImage(img, 0, 0, w, h);
-
-		log("gambar asli", cont);
 		cont.appendChild(canvasDoc);
 		editUlang(1, canvasDoc, cont);
 	};
 
 	img.src = URL.createObjectURL(file);
 });
-
-function log(msg: string, cont: HTMLElement) {
-	let p = document.createElement('p');
-	p.innerText = msg;
-	cont ? cont.appendChild(p) : document.body.appendChild(p);
-	console.log(msg);
-}
-
-async function delay() {
-	// console.log("delay");
-	await new Promise(resolve => requestAnimationFrame(resolve));
-}
 
 async function editUlang(n: number, canvasDoc: HTMLCanvasElement, cont: HTMLElement) {
 	console.log("edit ulang");
