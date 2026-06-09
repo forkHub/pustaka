@@ -1,5 +1,3 @@
-buatKanvas(800, 600);
-
 let jmlTekan = 0;
 let jmlLepas = 0;
 

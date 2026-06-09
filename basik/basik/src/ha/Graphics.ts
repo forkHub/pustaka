@@ -2,7 +2,13 @@ namespace Basik {
 
 	export class Graphic {
 		private static _autoScale: boolean = true;
-		private static drawCanvas: HTMLCanvasElement;
+		private static _drawCanvas: HTMLCanvasElement;
+		public static get drawCanvas(): HTMLCanvasElement {
+			return Graphic._drawCanvas;
+		}
+		public static set drawCanvas(value: HTMLCanvasElement) {
+			Graphic._drawCanvas = value;
+		}
 		private static _lastX: number = 0;
 		private static _isUpdating: boolean = false;
 
@@ -36,10 +42,10 @@ namespace Basik {
 			if (!G._autoScale) return;
 			if (G.callFunc("resize")) return;
 
-			let canvas: HTMLCanvasElement = G.drawCanvas;
+			let canvas: HTMLCanvasElement = G._drawCanvas;
 
-			let cp = G.drawCanvas.width;
-			let cl = G.drawCanvas.height;
+			let cp = G._drawCanvas.width;
+			let cl = G._drawCanvas.height;
 
 			let wp = window.innerWidth;
 			let wl = window.innerHeight;
@@ -74,10 +80,10 @@ namespace Basik {
 		}
 
 		static Kanvas(): HTMLCanvasElement {
-			if (!G.drawCanvas) {
+			if (!G._drawCanvas) {
 				G.Graphics();
 			}
-			return G.drawCanvas;
+			return G._drawCanvas;
 		}
 
 		static Kontek(): CanvasRenderingContext2D {
@@ -85,22 +91,24 @@ namespace Basik {
 		}
 
 		static SetCanvas(canvas: HTMLCanvasElement): void {
-			G.drawCanvas = canvas;
+			G._drawCanvas = canvas;
 		}
 
 		static Graphics(w?: number, h?: number, canvas: HTMLCanvasElement = null, mode: number = 1) {
 			console.groupCollapsed("init");
 
 			if (!canvas) canvas = G.buildCanvas(w, h);
-			G.drawCanvas = canvas;
+			G._drawCanvas = canvas;
 
 			G._autoScale = (mode == 1);
 			G.setupMainCanvas(w, h, mode);
-			In.init(G.drawCanvas);
-			Keyboard.init();
-			Warna.init();
-			sprInt.init();
-			G.initEvent();
+
+			In.init(G._drawCanvas);
+
+			// Keyboard.init();
+			// Warna.init();
+			// sprInt.init();
+			// G.initEvent();
 
 			function update() {
 				try {
@@ -135,9 +143,9 @@ namespace Basik {
 		}
 
 		static Cls(x: number = 0, y: number = 0, w: number = 0, h: number = 0) {
-			let ctx: CanvasRenderingContext2D = G.drawCanvas.getContext('2d');
-			w = w || G.drawCanvas.width;
-			h = h || G.drawCanvas.height;
+			let ctx: CanvasRenderingContext2D = G._drawCanvas.getContext('2d');
+			w = w || G._drawCanvas.width;
+			h = h || G._drawCanvas.height;
 			ctx.clearRect(x, y, w, h);
 		}
 
@@ -155,7 +163,7 @@ namespace Basik {
 			}
 		}
 
-		private static initEvent() {
+		static initEvent() {
 			Event.addEventListener(Evt.KEYB_DOWN, () => {
 				G.callFunc(Evt.KEYB_DOWN);
 			});
@@ -200,7 +208,7 @@ namespace Basik {
 
 			Event.addEventListener(Evt.RENDER, () => {
 				if (G.callFunc(Evt.RENDER)) {
-					
+
 				}
 				else {
 					//auto render bila belum ada render
@@ -213,13 +221,13 @@ namespace Basik {
 		}
 
 		private static setupMainCanvas(p?: number, l?: number, mode: number = 1): void {
-			if (p) G.drawCanvas.width = p;
-			if (l) G.drawCanvas.height = l;
+			if (p) G._drawCanvas.width = p;
+			if (l) G._drawCanvas.height = l;
 
 			if (mode == 1) {
-				G.drawCanvas.style.width = p + 'px';
-				G.drawCanvas.style.padding = '0px';
-				G.drawCanvas.style.margin = '0px';
+				G._drawCanvas.style.width = p + 'px';
+				G._drawCanvas.style.padding = '0px';
+				G._drawCanvas.style.margin = '0px';
 				window.addEventListener("resize", (): void => {
 					G.handleWindowResize();
 				})
@@ -289,5 +297,7 @@ namespace Basik {
 
 
 	}
+
 	export const G = Graphic;
+
 }

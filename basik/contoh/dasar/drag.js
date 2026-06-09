@@ -1,5 +1,3 @@
-buatKanvas(800, 600);
-
 let box = muatGambar("kotak.png");
 box.x = 400;
 box.y = 300;

@@ -1,7 +1,6 @@
-Tampilan dibuat dua kolom, bagian kiri untuk kode bagian kanan untuk hasil
+[x] Tampilan dibuat dua kolom, bagian kiri untuk kode bagian kanan untuk hasil
+[x] tombol simpan sebagai
+[x] fungsi rename
+[x] menu tombol untuk tampilan demo
 
-tombol simpan sebagai
-
-fungsi rename
-
-menu tombol untuk tampilan demo
+load dari file seperti basik-blok

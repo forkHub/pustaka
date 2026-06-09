@@ -1,3 +1,6 @@
+doc dibuat high level, tidak bisa mentarget terlalu rendah
+target anak kelas atas
+
 fase 2
 ======
 struktur latihan

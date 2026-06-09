@@ -20,6 +20,7 @@ Camera dipakai lagi
 	ada konsep layarX dan layarY
 	layarX dan layarY hanya berlaku bila camera tidak di posisi 0
 	perlu perubahan logic dalam gambar dan collision
+	
 perintah gambar sederhana
 	mode global dan relatif
 	

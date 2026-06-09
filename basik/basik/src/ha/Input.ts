@@ -170,6 +170,9 @@ namespace Basik {
 		}
 
 		static init(buffer: HTMLCanvasElement): void {
+			if (!buffer) {
+
+			}
 
 			buffer.style.touchAction = 'none';
 

@@ -61,3 +61,5 @@ function tebalGaris(n: number) {
 }
 
 const dialog = G.alert;
+
+
