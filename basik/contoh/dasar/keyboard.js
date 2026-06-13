@@ -1,3 +1,4 @@
+mulai();
 let jmlTekan = 0;
 let jmlLepas = 0;
 

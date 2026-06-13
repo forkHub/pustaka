@@ -1,3 +1,4 @@
+mulai();
 let jmlKlik = 0;
 
 function mouseKlik() {

@@ -1,3 +1,4 @@
+mulai();
 let box = muatGambar("kotak.png");
 box.panjang = 92;
 box.lebar = 92;

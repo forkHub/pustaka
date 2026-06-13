@@ -1,3 +1,4 @@
+mulai();
 let jmlSoundBerakhir = 0;
 let sound = muatSuara("sound.mp3");
 

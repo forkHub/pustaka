@@ -1,3 +1,4 @@
+mulai();
 let brush = muatAnimasi("fx.png", 32, 100);
 stempel(brush);
 
