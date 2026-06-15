@@ -1,9 +1,9 @@
 mulai();
-let box = muatGambar("kotak.png");
-box.panjang = 92;
-box.lebar = 92;
-box.rotasi = 45;
-box.x = 160;
-box.y = 120;
+let roket = muatGambar("roket");
+roket.panjang = 92;
+roket.lebar = 92;
+roket.rotasi = 45;
+roket.x = 160;
+roket.y = 120;
 
-stempel(box);
+stempel(roket);

@@ -1,12 +1,12 @@
 mulai();
-let box = muatGambar("kotak.png");
-box.x = 400;
-box.y = 300;
-box.tipeDrag = 3;
+let roket = muatGambar("roket");
+roket.x = 400;
+roket.y = 300;
+roket.tipeDrag = 3;
 
 function update() {
 	bersihkanLayar();
-	stempel(box);
+	stempel(roket);
 	debugMouse();
 }
 
@@ -14,8 +14,8 @@ function debugMouse() {
 	posisiTeks(10, 20);
 	tulis("Gerakkan kotak dengan cara menggeser mouse di mana saja");
 	tulis("");
-	tulis("Gambar ditekan: " + box.ditekan);
-	tulis("Gambar di drag: " + box.diDrag);
-	tulis("Gambar x " + box.x);
-	tulis("Gambar y " + box.y);
+	tulis("Gambar ditekan: " + roket.ditekan);
+	tulis("Gambar di drag: " + roket.diDrag);
+	tulis("Gambar x " + roket.x);
+	tulis("Gambar y " + roket.y);
 }

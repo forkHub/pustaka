@@ -1,14 +1,14 @@
 mulai();
-let box = muatGambar("kotak.png");
-box.tipeDrag = 4;
-box.x = 320;
-box.y = 240;
-box.pusatX = 16;
-box.pusatY = 16;
+let roket = muatGambar("roket");
+roket.tipeDrag = 4;
+roket.x = 320;
+roket.y = 240;
+roket.pusatX = 16;
+roket.pusatY = 16;
 
 function update() {
 	bersihkanLayar();
-	stempel(box);
+	stempel(roket);
 	posisiTeks(0, 20);
 	tulis("Drag dimana saja untuk memutar kotak");
 }
