@@ -1,8 +1,8 @@
 # 📝 Gambar sebagai object
 BASIK memiliki object bawaan bernama object Gambar.
-object ini dibuat dengan perintah `muatGambar()`.
+Object ini dibuat dengan perintah `muatGambar()`.
 
-object `Gambar` memiliki property sebagai berikut:
+Object `Gambar` memiliki property sebagai berikut:
 *   `x`: number  
 	posisi x 
 *   `y`: number  
@@ -22,14 +22,24 @@ object `Gambar` memiliki property sebagai berikut:
 *   `ubin`: boolean  
 	apakah gambar akan digambar sebagai ubin yang memenuhi layar
 *   `diDrag`: boolean  
-	apakah gamba sedang di drag
+	apakah gambar sedang di drag
 *   `diTekan`: boolean  
 	apakah gambar sedang di tekan oleh mouse/jari
 *   `tipeDrag`: number  
 	tipe drag: 1 = geser, 2 = rotasi, 3 = geser tanpa sentuh, 4 = rotasi tanpa sentuh
-*   `x`: number  
-	Posisi x dari gambar
-*   `x`: number  
-	Posisi x dari gambar
-*   `x`: number  
-	Posisi x dari gambar
+*   `dimuat`: boolean  
+	apakah gambar sudah selesai di muat
+*   `frame`: number  
+	nomor frame aktif, bila gambar berupa animasi spritesheet
+*   `panjangFrame`: number  
+	panjang dari tiap frame dalam animasi, bila gambar berupa animasi spritesheet. 
+*   `lebarFrame`: number  
+	lebar dari tiap frame, bila gambar berupa animasi spritesheet
+*   `dragAwalX`: number  
+	posisi awal x saat gambar mulai di drag
+*   `dragAwalY`: number  
+	posisi awal y saat gambar mulai di drag
+*   `ditekan`: boolean  
+	apakah gambar sedang di tekan
+
+
