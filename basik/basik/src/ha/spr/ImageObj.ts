@@ -110,7 +110,6 @@ namespace Basik {
 		public get layarX(): number {
 			return this._x - Camera.x;
 		}
-
 		public get layarY(): number {
 			return this._x - Camera.y;
 		}
@@ -157,6 +156,7 @@ namespace Basik {
 		public set dimuat(value: boolean) {
 			this._dimuat = value;
 		}
+
 		public get nama(): string {
 			return this._nama;
 		}
