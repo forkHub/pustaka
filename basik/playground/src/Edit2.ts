@@ -78,8 +78,45 @@ class Edit2 {
 		}
 	}
 
-	init(): void {
+	getQuery(key: string): string {
+		let q = '';
+		let h = '';
 
+		console.group('get query: ' + key);
+
+		q = window.top.location.search;
+		console.log(q);
+
+		q = q.slice(1, q.length);
+		console.log(q);
+
+		let qAr = q.split("&");
+		console.log(qAr);
+
+		qAr.forEach((item) => {
+			let keyAr = item.split('=');
+			let pKey = keyAr[0];
+			if (pKey == key) {
+				h = keyAr[1];
+			}
+		})
+		console.log('res: ' + h);
+		console.groupEnd();
+
+		return h;
+	}
+
+	injectScript(src: string, f: () => void) {
+		console.group('inject script');
+		console.log('src:', src);
+		let script = document.createElement('script');
+		script.onload = f;
+		script.src = src;
+		document.head.appendChild(script);
+		console.groupEnd();
+	}
+
+	initTombol() {
 		this.getTbl("simpan").onclick = () => {
 			this.simpanKlik();
 		}
@@ -119,10 +156,11 @@ class Edit2 {
 		this.getTbl("baru").onclick = () => {
 			this.baruKlik();
 		}
+	}
 
-		// this.getTbl("demo").onclick = () => {
-		// 	this.demoKlik();
-		// }
+	init(): void {
+
+		this.initTombol();
 
 		this.myCodeMirror = CodeMirror.fromTextArea(this.editArea, {
 			lineNumbers: true,
@@ -132,13 +170,20 @@ class Edit2 {
 		});
 
 		this.myCodeMirror.on("change", () => {
-			// console.log('change');
 			this.updateNama();
 		});
 
 		this.hideTbl("edit");
 		this.muatFileAwal();
 		this.fileInfo.innerText = fileNama;
+
+		let code = this.getQuery("pId");
+		if (code) {
+			this.injectScript("", () => {
+				//TODO:
+				console.log("script loaded");
+			})
+		}
 	}
 
 	demoKlik() {
