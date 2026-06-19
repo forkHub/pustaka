@@ -1,16 +1,15 @@
-buatKanvas(800, 600);
-
-let box = muatGambar("kotak.png");
-box.tipeDrag = 2;
-box.x = 160;
-box.y = 120;
-box.pusatX = 16;
-box.pusatY = 16;
+mulai();
+let roket = muatGambar("roket");
+roket.tipeDrag = 2;
+roket.x = 160;
+roket.y = 120;
+roket.pusatX = 16;
+roket.pusatY = 16;
 
 //game loop
 function update() {
 	bersihkanLayar();
-	stempel(box);
+	stempel(roket);
 	posisiTeks(10, 20);
 	tulis("Putar kotak dengan mouse");
 }

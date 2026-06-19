@@ -12,8 +12,14 @@ function kanvas(): HTMLCanvasElement {
 	return G.Kanvas();
 }
 
+//TODO: depecrated diganti dengan mulai untuk perintah yang lebih sederhana
 function buatKanvas(w: number = 800, h: number = 600, canvas: HTMLCanvasElement = null, mode: number = 1) {
 	console.log("buat kanvas");
+	G.Graphics(w, h, canvas, mode);
+}
+
+function mulai(w: number = 800, h: number = 600, canvas: HTMLCanvasElement = null, mode: number = 1) {
+	// console.log("buat kanvas");
 	G.Graphics(w, h, canvas, mode);
 }
 
@@ -61,3 +67,5 @@ function tebalGaris(n: number) {
 }
 
 const dialog = G.alert;
+
+

@@ -1,33 +1,34 @@
-# 📚 Dokumentasi BASIK (DRAFT)
-
 ## 📖 Gambaran Umum
 
 BASIK adalah kumpulan perintah/fungsi javascript yang bisa dipakai sebagai media pembelajaran pengenalan koding untuk pemula. BASIK mengenalkan pemrograman kepada pemula dengan membuat aplikasi interaktif berbasis kanvas sederhana. Cocok untuk siswa, guru, atau siapa saja yang ingin belajar dasar pemrograman visual.
 
-Prinsip-prinsip BASIK
+Prinsip-prinsip dasar BASIK
 - Semua perintah bisa langsung dilihat hasilnya tanpa dibingungkan dengan struktur yang kompleks. 
 - Tidak perlu install aplikasi tambahan. BASIK berjalan sepenuhnya di browser.
 - Bisa jalan secara daring ataupun luring.
+- Format perintah bersifat procedural, menghindari penggunaan format yang kompleks seperti callback, class, dll.
 
-## Cara pemakaian
+## 📖 Cara pemakaian
 
-Buka file `editor.html` di broser untuk memulai.  
-BASIK bisa dipakai dengan cara sederhana seperti berikut:
+Untuk pengguna daring, BASIK bisa di buka melalui alamat berikut: ...  
+Untuk pengguna luring, BASIK bisa di buka dengan membuka file `editor.html` di broser untuk memulai.  
+
+Contoh applikasi sederhana:
 
 ```
-buatKanvas(800, 600);
+mulai();
 stempel("roket");
 ```
 
-`buatKanvas()` adalah perintah pertama yang berfungsi untuk memulai semua perintah BASIK. Fungsinya adalah untuk membuat kanvas tempat untuk menggambar.
-`stempel("roket")` adalah perintah untuk men-stempel gambar ke kanvas. "roket" adalah nama file dari gambar yang ingin distempel. Perintah `stempel()` bisa menerima perintah berupa nama file langsung atau alamat file secara absolut. Bila dijalankan maka akan terlihat sebuah gambar roket di layar.
+`mulai()` adalah perintah pertama yang berfungsi untuk memulai aplikasi. Perintah ini harus dipanggil pertama kali sebelum memanggil perintah yang lain.  
+`stempel("roket")` adalah perintah untuk men-stempel gambar ke kanvas. "roket" adalah gambar yang ingin distempel. 
 
-Pada contoh ini kita menggunakan gambar "roket" yang sudah tersedia di folder asset. Anda bisa menambahkan sendiri gambar yang dimau, atau bisa juga memuat gambar dengan url yang penuh.
+Untuk mengetahui gambar apa saja yang bisa distempel, Anda bisa membuka folder `asset`. Gunakan nama file sebagai parameter dari perintah `stempel()`.
 
-perintah `stempel()` adalah perintah sederhana untuk menempel gambar. Perintah ini sangat terbatas fungsinya. Untuk mendapatkan fungsi yang lebih kompleks seperti memutar gambar, mengubah posisi, dll maka kita harus memuat gambar terlebih dahulu.
+Perintah `stempel()` adalah perintah sederhana untuk menstempel gambar. Perintah ini sangat terbatas fungsinya. Untuk mendapatkan fungsi yang lebih kompleks seperti memutar gambar, mengubah posisi, dll maka kita harus memuat gambar terlebih dahulu.
 
 ```
-buatKanvas(800, 600);
+mulai();
 let roket = muatGambar("roket");
 roket.x = 400;
 roket.y = 300;
@@ -36,23 +37,26 @@ roket.lebar = 70;
 stempel(roket);
 ```
 
-Pada contoh di atas, kita memuat gambar terlebih dahulu, kemudian kita ubah posisi dan ukuran dari gambar tersebut dengan merubah property secara langsung, kemudian menempelkannya ke kanvas.
+Pada contoh di atas, kita memuat gambar terlebih dahulu, kemudian kita ubah posisi dan ukuran dari gambar tersebut dengan merubah property secara langsung, kemudian menempelkannya ke kanvas. Saat kita memuat gambar terlebih dahulu, maka kita tidak lagi menggunakan nama file sebagai parameter dari perintah `stempel()`. Kita menggunakan nama variable yang dijadikan referensi saat memuat gambar.
 
 Kita juga bisa merubah property dengan perintah yang lebih ringkas.
 
 ```
-buatKanvas(800, 600);
+mulai();
 let roket = muatGambar("roket");
 posisiGambar(roket, 400, 300);
 ukuranGambar(roket, 90, 70);
 stempel(roket);
 ```
 
-BASIK mendukung aplikasi interaktif dan dinamis dengan menyediakan fungsi bawaan yang menangani mouse, keyboard, dan update applikasi.
-Untuk menangani update aplikasi, maka user harus menyediakan fungsi update() yang akan dipanggil secara otomatis saat aplikasi di update.
+Daftar perintah lengkap bisa di lihat di [sini](api-doc-gambar.md)
+
+BASIK mendukung aplikasi interaktif dan dinamis dengan menyediakan fungsi bawaan yang menangani mouse, keyboard, update applikasi, dll.
+
+Di contoah di bawah ini menunjukkan bagaimana kita menghandle event update secara sederhana. Anda cukup membuat fungsi update(), dan fungsi ini akan dipanggil secara otomatis saat applikasi diupdate.
 
 ```
-buatKanvas(800, 600);
+mulai();
 let roket = muatGambar("roket");
 pusatGambar(roket, 32, 46);
 posisiGambar(roket, 400, 300);
@@ -64,10 +68,10 @@ function update() {
 }
 ```
 
-BASIK menyediakan fungsi bawaan untuk menangani event-event yang berhubungan dengan mouse, touch dan keyboard.
+BASIK juga menyediakan fungsi bawaan untuk menangani event-event yang berhubungan dengan mouse, touch dan keyboard.
 
 ```
-buatKanvas(800, 600);
+mulai();
 let roket = muatGambar("roket");
 pusatGambar(roket, 32, 46);
 
@@ -80,10 +84,12 @@ function update() {
 }
 ```
 
-BASIK juga menyediakan fungsi bawaan untuk menangani drag. Ada 4 tipe drag yang didukung. Memungkinkan pengguna untuk membuat aplikasi interaktif dengan mudah tanpa memikirkan struktur dan alogrithma yang rumit.
+Bila contoh di atas dijalankan, maka Anda akan melihat gambar roket yang berputar sambil bergerak mengikuti mouse.
+
+BASIK juga menyediakan fungsi bawaan untuk menangani interaksi drag. Ada 4 tipe drag yang didukung. Memungkinkan pengguna untuk membuat aplikasi interaktif dengan mudah tanpa memikirkan struktur dan alogrithma yang rumit.
 
 ```
-buatKanvas(800, 600);
+mulai();
 let roket = muatGambar("roket");
 pusatGambar(roket, 32, 46);
 posisiGambar(roket, 400, 300);
@@ -97,10 +103,11 @@ function update() {
 }
 ```
 
-Contoh yang lebih kompleks tersedia di halaman resmi BASIK.
+Pada contoh di atas, kita menggunakan drag dengan tipe 1. User bisa mendrag gambar menggunakan mouse atau touch (bila di handphone). 
 
+Dokumentasi lengkap mengenai cara menghandle event bisa dilihat di [sini](api-doc-event.md)
 
-### 📄 Lisensi
+## 📖 Lisensi
 
 GNU license
 

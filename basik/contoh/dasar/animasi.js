@@ -1,5 +1,4 @@
-buatKanvas(800, 600);
-
+mulai();
 let brush = muatAnimasi("fx.png", 32, 100);
 stempel(brush);
 

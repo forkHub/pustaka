@@ -1,4 +1,5 @@
-## Kumpulan perintah
+# Kumpulan perintah Basik
+
 ## 📝 Gambar
 
 ### `stempel(url, x, y)`
@@ -102,7 +103,7 @@ Mengubah ukuran gambar. Kita juga bisa mengubah ukuran gambar melalui property `
 *	`l`: `number`, default 32
 	Lebar gambar
 
-## 📝 Perintah Input
+## 📝 Input
 Perintah-perintah yang berhubungan dengan input seperti mouse, touch, dan keyboard.
 
 ### `mouseDitekan():boolean`
@@ -165,7 +166,7 @@ Mengembalikan besar pergerakan vertikal saat mouse bergerak
 
 **Returns:** `number`. besar pergerakan vertikal saat mouse digerakkan
 
-## 📝 Perintah menggambar bentuk dasar
+## 📝 menggambar bentuk dasar
 Berisi kumpulan perintah untuk menggambar dengan bangun geometri
 
 ### `bukaPath(x: number = 0, y: number = 0): void`  
@@ -259,7 +260,7 @@ Berisi perintah umum yang tidak masuk kategori manapun
 
 ### `buatKanvas(pjg: number = 800, lbr: number = 600, kanvas: HTMLCanvasElement = null, mode: number = 1)`  
 
-Membuat kanvas. Ini adalah perintah awal yang harus dipanggil untuk memulai applikasi dengan BASIK
+Membuat kanvas. Ini adalah perintah awal untuk memulai applikasi dengan BASIK. Perintah ini akan otomatis dipanggil bila tidak ada dalam kode
 
 **Parameters**
 *	`pjg`: `number`, default 800  
@@ -307,10 +308,10 @@ Mengatur ketbalan garis
 	posisi x dari tengah lingkaran
 
 
-### 📝 Perintah Matematika
+## 📝 Perintah Matematika
 perintah umum matematika.
 
-#### `akar(n = 4): number`  
+### `akar(n = 4): number`  
 
 Mencari akar dari bilangan
 
@@ -320,13 +321,13 @@ Mencari akar dari bilangan
 
 **Returns:** `number`. 
 
-#### `pi(): number`
+### `pi(): number`
 
 Mengembalikan nilai dari Pi, (3.14 ...)
 
 **Returns:** `number`. 
 
-#### `jarak(x: number = 0, y: number = 0): number`
+### `jarak(x: number = 0, y: number = 0): number`
 
 Menghitung jarak
 
@@ -338,7 +339,7 @@ Menghitung jarak
 
 **Returns:** `number`. 
 
-#### `jarakSudut(angleS: number = 0, angleT: number, min: boolean = true)`
+### `jarakSudut(angleS: number = 0, angleT: number, min: boolean = true)`
 
 menghitung jarak antar dua sudut
 
@@ -348,7 +349,7 @@ menghitung jarak antar dua sudut
 
 **Returns:** `number`. 
 
-#### `sudut(x: number, y: number)`
+### `sudut(x: number, y: number)`
 
 Menghitung sudut
 
@@ -358,7 +359,7 @@ Menghitung sudut
 
 **Returns:** `number`. 
 
-#### `polarX(panjang = 100, sudut = 0)`
+### `polarX(panjang = 100, sudut = 0)`
 
 Posisi X polar
 
@@ -368,7 +369,7 @@ Posisi X polar
 
 **Returns:** `number`. 
 
-#### `polarY(panjang = 100, sudut = 0)`
+### `polarY(panjang = 100, sudut = 0)`
 
 Posisi Y polar
 
@@ -378,7 +379,7 @@ Posisi Y polar
 
 **Returns:** `number`. 
 
-#### `abs(n: number): number`
+### `abs(n: number): number`
 
 menghasilkan nilai absolute dari suatu bilangan
 
@@ -388,7 +389,7 @@ menghasilkan nilai absolute dari suatu bilangan
 
 **Returns:** `number`. 
 
-#### `normalisasiSudut(sdt: number = 0): number`
+### `normalisasiSudut(sdt: number = 0): number`
 
 Menghasilkan sudut antara 0 - 360, berguna bila ingin mengubah sudut yang lebih dari 360 atau kurang dari 0 menjadi sudut antara 0 - 360 
 
@@ -398,7 +399,7 @@ Menghasilkan sudut antara 0 - 360, berguna bila ingin mengubah sudut yang lebih 
 
 **Returns:** `number`. 
 
-#### `pembulatan(n: number, b: number = 1, type: number = 0): number`
+### `pembulatan(n: number, b: number = 1, type: number = 0): number`
 
 Membulatkan bilangan 
 
@@ -406,13 +407,13 @@ Membulatkan bilangan
 *	`x`: `number`, default 0
 	posisi x dari tengah lingkaran
 
-### 📝 Perintah Teks
+## 📝 Perintah Teks
 
 Perintah-perintah yang berhubungan dengan teks.
 
 #### `tulis`
 
-Menulis sesuatu 
+Menulis sesuatu di layar
 
 **Parameters**
 *	`x`: `number`, default 0
@@ -442,9 +443,9 @@ Mengatur perataan teks.
 *	`x`: `number`, default 0
 	posisi x dari tengah lingkaran
 
-### 📝Event Input Keyboard
+## 📝Event Input Keyboard
 
-#### `tombolDitahan(key: string = '')`
+### `tombolDitahan(key: string = '')`
 
 mengecek apakah tombol ditahan
 
@@ -452,46 +453,7 @@ mengecek apakah tombol ditahan
 *	`x`: `number`, default 0
 	posisi x dari tengah lingkaran
 
-#### ` tombolEvent():string `
+### ` tombolEvent():string `
 
 Mengembalikan informasi tombol terakhir yang terlibat saat ada event keyboard
 
-**Parameters**
-*	`x`: `number`, default 0
-	posisi x dari tengah lingkaran
-
-## 📝 Gambar sebagai object
-BASIK memiliki object bawaan bernama object Gambar.
-object ini dibuat dengan perintah `muatGambar()`.
-
-object `Gambar` memiliki property sebagai berikut:
-*   `x`: number  
-	posisi x 
-*   `y`: number  
-	posisi y 
-*   `alpha`: number  
-	transparansi (0 - 100)
-*   `pusatX`: number  
-	posisi pusat x
-*   `pusatY`: number  
-	posisi y 
-*   `panjang`: number  
-	panjang
-*   `lebar`: number  
-	lebar
-*   `rotasi`: number  
-	rotasi (0 - 360)
-*   `ubin`: boolean  
-	apakah gambar akan digambar sebagai ubin yang memenuhi layar
-*   `diDrag`: boolean  
-	apakah gamba sedang di drag
-*   `diTekan`: boolean  
-	apakah gambar sedang di tekan oleh mouse/jari
-*   `tipeDrag`: number  
-	tipe drag: 1 = geser, 2 = rotasi, 3 = geser tanpa sentuh, 4 = rotasi tanpa sentuh
-*   `x`: number  
-	Posisi x dari gambar
-*   `x`: number  
-	Posisi x dari gambar
-*   `x`: number  
-	Posisi x dari gambar

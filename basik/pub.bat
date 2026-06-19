@@ -13,8 +13,8 @@ echo ===================
 xcopy template stg\pg\template /s /y /i || goto error
 echo.
 
-echo publikasi contoh
-echo ================
+echo publikasi contoh dan assets
+echo ===========================
 xcopy contoh\*.* stg\contoh\ /s /i /y || goto error
 xcopy assets\*.* stg\asset\ /s /i /y || goto error 
 echo.
@@ -24,13 +24,13 @@ xcopy web\index.html stg /y || goto error
 xcopy web\contoh.html stg\pg /y || goto error
 echo.
 
+echo publikasi doc
+xcopy doc\api-doc.md stg\pg\doc\readme.md /i /y || goto error
+
 echo update pg
 copy assets\*.* playground\web\asset || goto error
 copy build\*.* playground\web\editor\lib || goto error
 echo.
-
-echo publikasi doc
-xcopy doc\api-doc.md stg\doc\readme.md /i /y || goto error
 
 echo publikasi pg
 xcopy playground\web\*.* stg\pg /s /i /y || goto error
@@ -43,6 +43,5 @@ goto end
 :error
 pause
 pause
-
 
 :end

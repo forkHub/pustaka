@@ -1,5 +1,4 @@
-buatKanvas(800, 600);
-
+mulai();
 let jmlKlik = 0;
 
 function mouseKlik() {
