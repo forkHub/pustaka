@@ -63,8 +63,6 @@ Memilih level
 # ❓ 3. QUIZ SCREEN
 
 ```
-+-----------------------------+
-| ⏱️ 00:30      ❤️❤️❤️        |
 |-----------------------------|
 | Soal 3 / 10                |
 |                             |
@@ -75,7 +73,6 @@ Memilih level
 |  [ 63 ]                    |
 |  [ 54 ]                    |
 |                             |
-| ███████░░░ 70%             |
 +-----------------------------+
 ```
 
@@ -86,26 +83,20 @@ Menjawab soal
 ## ✅ Rules core:
 
 * Setiap level memiliki:
-  * Jumlah soal tetap (misal: 10)
+  * Jumlah soal tetap: 10
   * 1 jawaban benar
 * User hanya bisa pilih **1 jawaban**
 
 ## ✅ Jawaban:
 
 * Jika **benar**:
-  * Tambah skor (+10 misalnya)
-  * Lanjut otomatis ke soal berikutnya
+  * Tambah skor (+10)
+  * tampilkan pesan jawaban benar
+  * Lanjut otomatis ke soal berikutnya setelah tombol "selanjutnya" ditekan
 * Jika **salah**:
   * Skor dikurangi (-5)
   * Tampilkan pesan kesalahan dan berikan jawaban yang benar
-  * lanjut otomatis ke soal berikutnya
-
-
-## ✅ Timer (opsional):
-
-* Jika waktu habis:
-  * dianggap salah
-  * lanjut ke soal berikutnya
+  * lanjut otomatis ke soal berikutnya setelah tombol "selanjutnya" ditekan
 
 ## ✅ Progress:
 
@@ -151,12 +142,12 @@ atau
 
 ```
 +----------------------------+
-|       🎉 LEVEL SELESAI     |
+|       🎉 LEVEL SELESAI    |
 |----------------------------|
 |  ✅ Benar: 8              |
 |  ❌ Salah: 2              |
 |                            |
-|  ⭐⭐ (2 Bintang)         |
+|  ⭐Skor: ...              |
 |                            |
 |  [ Lanjut Level ]          |
 |  [ Ulangi ]                |
@@ -182,6 +173,9 @@ Kembali ke Map
 
 # 🎨 CATATAN DESAIN
 
+* fluid layout, mobile friendly
+* vanilla javascript
+* soal dalam bentuk file js terpisah
 * Gunakan **Card / Button UI** (tanpa canvas)
 * Warna:
   * Hijau = benar ✅
