@@ -1,7 +1,3 @@
-Berikut adalah revisi **Spesifikasi Teknis (Spec) Game Math Adventure** yang telah diperbaiki untuk mengatasi celah logika, ambiguitas skor, status level, serta integrasi penyimpanan (*state persistence*).
-
----
-
 # 📱 1. HOME SCREEN
 
 ```
