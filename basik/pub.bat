@@ -1,6 +1,14 @@
 @echo off
 echo off
 
+echo hapus stg
+echo =========
+rd stg_backup /s /q
+xcopy stg stg_backup /s /q /i || goto error
+rd stg /s /q || goto error
+md stg || goto error
+echo.
+
 call pub_lib.bat || goto error
 
 echo update template
@@ -16,26 +24,20 @@ echo.
 echo publikasi contoh dan assets
 echo ===========================
 xcopy contoh\*.* stg\contoh\ /s /i /y || goto error
-xcopy assets\*.* stg\asset\ /s /i /y || goto error 
+@REM xcopy assets\*.* stg\asset\ /s /i /y || goto error 
 echo.
 
 echo publikasi web
+echo =============
 xcopy web\index.html stg /y || goto error
-xcopy web\contoh.html stg\pg /y || goto error
+@REM xcopy web\contoh.html stg\pg /y || goto error
 echo.
 
 echo publikasi doc
-xcopy doc\api-doc.md stg\pg\doc\readme.md /i /y || goto error
+echo =============
+xcopy doc\site\*.* stg\pg\doc /i /y /s || goto error
 
-echo update pg
-copy assets\*.* playground\web\asset || goto error
-copy build\*.* playground\web\editor\lib || goto error
-echo.
-
-echo publikasi pg
-xcopy playground\web\*.* stg\pg /s /i /y || goto error
-echo =========
-echo.
+call pub_pg.bat || goto error
 
 echo selesai
 goto end
@@ -45,3 +47,4 @@ pause
 pause
 
 :end
+pause
