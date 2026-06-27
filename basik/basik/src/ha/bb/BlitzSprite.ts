@@ -15,6 +15,10 @@ function muatAnimasi(url: string, fw: number = 32, fh: number = 32) {
 }
 
 function stempel(img: Basik.GbrObj | string, x?: number, y?: number) {
+	if (img === undefined) {
+		img = "roket";
+	}
+
 	if (typeof img == "string") {
 		let img2 = Ip.getByName(img, true);
 		posisi(img2, x, y);

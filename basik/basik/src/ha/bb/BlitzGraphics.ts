@@ -4,9 +4,9 @@ const G = Basik.G;
 const Ip = Basik.ImgImpl;
 const In = Basik.In;
 
-function setKanvas(c: HTMLCanvasElement) {
-	G.SetCanvas(c);
-}
+// function setKanvas(c: HTMLCanvasElement) {
+// 	G.SetCanvas(c);
+// }
 
 function kanvas(): HTMLCanvasElement {
 	return G.Kanvas();

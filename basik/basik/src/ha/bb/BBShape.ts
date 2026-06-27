@@ -91,9 +91,12 @@ function elip(x: number = 0, y: number = 0, radiusX: number = 32, radiusY: numbe
 }
 
 function kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 100) {
+	// console.group("kotak");
 	let ctx = G.Kanvas().getContext('2d');
 	ctx.fillRect(x1, y1, x2, y2);
 	ctx.strokeRect(x1, y1, x2, y2);
+	// console.log("dokument ctx == basik ctx " + (document.getElementsByTagName("canvas")[0].getContext('2d') === ctx));
+	// console.groupEnd();
 }
 
 function segitiga(

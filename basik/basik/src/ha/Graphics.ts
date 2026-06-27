@@ -90,12 +90,17 @@ namespace Basik {
 			return Graphic.Kanvas().getContext('2d')
 		}
 
-		static SetCanvas(canvas: HTMLCanvasElement): void {
-			G._drawCanvas = canvas;
-		}
+		// static SetCanvas(canvas: HTMLCanvasElement): void {
+		// 	G._drawCanvas = canvas;
+		// }
 
 		static Graphics(w?: number, h?: number, canvas: HTMLCanvasElement = null, mode: number = 1) {
 			console.groupCollapsed("init");
+			if (data.init) {
+				console.warn("sudah di init");
+				console.groupEnd();
+				return;
+			}
 
 			if (!canvas) canvas = G.buildCanvas(w, h);
 			G._drawCanvas = canvas;
@@ -104,11 +109,10 @@ namespace Basik {
 			G.setupMainCanvas(w, h, mode);
 
 			In.init(G._drawCanvas);
-
-			// Keyboard.init();
-			// Warna.init();
-			// sprInt.init();
-			// G.initEvent();
+			Keyboard.init();
+			Warna.init();
+			sprInt.init();
+			G.initEvent();
 
 			function update() {
 				try {
@@ -125,7 +129,9 @@ namespace Basik {
 					console.log("error !!!");
 				}
 			}
-			window.requestAnimationFrame(update);
+			setTimeout(() => {
+				window.requestAnimationFrame(update);
+			})
 
 			setTimeout(() => {
 				G.handleWindowResize();
@@ -137,8 +143,8 @@ namespace Basik {
 			warna(215);
 			posisiTeks(20, 20);
 			ukuranTeks(20);
-			tebalGaris(1);
-			G.Kanvas().getContext('2d').lineWidth = 1;
+			tebalGaris(2);
+			data.init = true;
 			console.groupEnd();
 		}
 
@@ -210,13 +216,13 @@ namespace Basik {
 				if (G.callFunc(Evt.RENDER)) {
 
 				}
-				else {
-					//auto render bila belum ada render
-					bersihkanLayar();
-					Ip.daftar.forEach((gbr) => {
-						stempel(gbr);
-					})
-				}
+				// else {
+				// 	//auto render bila belum ada render
+				// 	bersihkanLayar();
+				// 	Ip.daftar.forEach((gbr) => {
+				// 		stempel(gbr);
+				// 	})
+				// }
 			})
 		}
 

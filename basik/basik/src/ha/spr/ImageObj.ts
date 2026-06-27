@@ -35,6 +35,7 @@ namespace Basik {
 			}
 
 			img.onload = () => {
+				console.log("selesai memuat gambar, url: " + url);
 				imgOnLoad(img);
 			}
 
