@@ -1,3 +1,8 @@
+dasar:
+======
+drag gambar besar
+drag masjid 360
+
 intermediate:
 =============
 fx bendera sin
@@ -8,7 +13,9 @@ jam simple bisa di drag, tanpa info jam/menit
 jam di drag auto fix jam/menit, dengan info jam/menits
 jam animasi tanpa interaksi
 traktor interaktif
-tata surya
+tata surya bumi matahari
+tata surya bumi bulan
+tata surya penuh
 
 demo ellipse path
 fx alpha
@@ -18,6 +25,8 @@ shump
 	drag auto shoot
 	rotate follow mouse
 
+project:
+========
 arkanoid
 flappy bird
 bomb with mouse to direct
