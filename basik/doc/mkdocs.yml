@@ -1,0 +1,4 @@
+site_name: Dokumentasi BASIK
+nav:
+  - Beranda : index.md
+  - API : api-doc-perintah.md
