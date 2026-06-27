@@ -1,5 +1,8 @@
 declare var CodeMirror: any;
 declare var JSHINT: any;
+declare var codeDemo: {
+	code: string
+}
 
 enum EState {
 	awal,
@@ -158,20 +161,27 @@ class Edit2 {
 		}
 	}
 
-	init(): void {
-
-		this.initTombol();
-
+	initCodeMirror(code: string = '') {
+		console.log("init code mirror");
 		this.myCodeMirror = CodeMirror.fromTextArea(this.editArea, {
 			lineNumbers: true,
 			mode: "javascript",
 			gutters: ["CodeMirror-lint-markers"],
-			lint: false
+			lint: false,
+			init: code
 		});
+
+		this.myCodeMirror.setValue(code);
 
 		this.myCodeMirror.on("change", () => {
 			this.updateNama();
 		});
+	}
+
+	init(): void {
+		console.group("init");
+
+		this.initTombol();
 
 		this.hideTbl("edit");
 		this.muatFileAwal();
@@ -179,11 +189,16 @@ class Edit2 {
 
 		let code = this.getQuery("pId");
 		if (code) {
-			this.injectScript("", () => {
+			this.injectScript("./demo/" + code + ".js", () => {
 				//TODO:
 				console.log("script loaded");
+				this.initCodeMirror(codeDemo.code);
 			})
+		} else {
+			this.initCodeMirror("mulai();\n");
 		}
+
+		console.groupEnd();
 	}
 
 	demoKlik() {
@@ -196,10 +211,19 @@ class Edit2 {
 	}
 
 	muatKlik(): void {
+		console.log("");
+
 		dialogDaftarFile(
 			(item: file) => {
+				console.group("");
 				console.log("muat data");
 				console.log(item.data);
+				console.log("this", this);
+				console.log("code mirror instance", this.myCodeMirror);
+				console.log("globalThis instance", globalThis);
+				console.log("globalThis edit instance", (globalThis as any)["edit"]);
+				console.groupEnd();
+
 				fileBaru = false;
 				fileNama = item.namaFile;
 				fileAktif = item;
@@ -257,6 +281,12 @@ class Edit2 {
 
 	simpanKlik(): void {
 		let dataKode: string = this.myCodeMirror.getValue();
+
+		let code = {
+			code: dataKode
+		}
+		console.log("code str");
+		console.log(code);
 
 		if (!dataKode) {
 			alert("Tidak ada data yang disimpan, Anda belum menulis apa-apa.");
@@ -407,7 +437,7 @@ class Edit2 {
 window.onload = () => {
 	let edit: Edit2 = new Edit2();
 	edit.init();
-	console.log(JSHINT.errors);
+	// console.log(JSHINT.errors);
 
 	// JSHINT.errors = jsHIntErrors;
 	// JSHINT.warnings = jshintWarnings;

@@ -30,14 +30,14 @@ function dialogDaftarFile(
 
 			const confirmBtn = document.createElement('button');
 			confirmBtn.className = 'dialog-confirm';
-			confirmBtn.textContent = 'Confirm';
+			confirmBtn.textContent = 'OK';
 			confirmBtn.onclick = () => {
 				confirmKlik();
 			};
 
 			const cancelBtn = document.createElement('button');
 			cancelBtn.className = 'dialog-cancel';
-			cancelBtn.textContent = 'Cancel';
+			cancelBtn.textContent = 'Batal';
 			cancelBtn.onclick = () => {
 				cancelKlik();
 			};
@@ -135,7 +135,7 @@ function dialogDaftarFile(
 	});
 	refresh();
 
-	document.body.appendChild(dialog); 
+	document.body.appendChild(dialog);
 	(dialog as any).showModal();
 }
 
