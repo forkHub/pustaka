@@ -23,14 +23,13 @@ echo.
 
 echo publikasi contoh dan assets
 echo ===========================
-xcopy contoh\*.* stg\contoh\ /s /i /y || goto error
-@REM xcopy assets\*.* stg\asset\ /s /i /y || goto error 
+xcopy contoh\*.* stg\pg\contoh\ /s /i /y || goto error
 echo.
 
 echo publikasi web
 echo =============
 xcopy web\index.html stg /y || goto error
-@REM xcopy web\contoh.html stg\pg /y || goto error
+xcopy web\player.html stg\pg /y || goto error
 echo.
 
 echo publikasi doc

@@ -49,11 +49,8 @@
 		}
 	</style>
 	<script>
-		function __loadScriptsSequentially(sources, finalCallback) {
-			console.log("data:", sources);
-
-			function __loadNext(index) {
-
+		function loadScriptsSequentially(sources, finalCallback) {
+			function loadNext(index) {
 				if (index >= sources.length) {
 					if (typeof finalCallback === 'function') finalCallback();
 					return;
@@ -61,36 +58,38 @@
 
 				const script = document.createElement('script');
 				script.src = sources[index];
-				script.onload = () => __loadNext(index + 1);
+				script.onload = () => loadNext(index + 1);
 				script.onerror = () => {
 					console.error("Failed to load: " + sources[index]);
-					__loadNext(index + 1); // Skip failed script and continue
+					loadNext(index + 1); // Skip failed script and continue
 				};
-
-				console.log("load script " + script.src);
 				document.head.appendChild(script);
 			}
 
-			__loadNext(0);
+			loadNext(0);
+		}
+
+		function getParam() {
+			// Example URL: https://example.com/page?a=1&b=3&c=m2-m3-m4-m5
+			// Get the query string from the current page
+			const queryString = window.location.search;
+			// Create a URLSearchParams object
+			const urlParams = new URLSearchParams(queryString);
+			// Retrieve the value of parameter 'c'
+			const cValue = urlParams.get('demo');
+			console.log(cValue); // Output: m2-m3-m4-m5
+			return cValue;
 		}
 
 		// Example usage:
-		const __params = new URLSearchParams(window.location.search);
-		let __rand = Math.floor(Math.random() * 1000);
-		let __src = __params?.get('src');
-		let __data = [
-			`./editor/lib/basik.min.js?r=${__rand}`,
-			`./editor/lib/mulai.js?r=${__rand}`,
-		];
-		if (__src) __data.push(__src);
-
-		__loadScriptsSequentially(__data, () => {
-			console.log('load complete ');
-			// const script = document.createElement('script');
-			// script.textContent = `${script}`
-			// document.head.appendChild(script);
+		loadScriptsSequentially([
+			'./editor/lib/basik.min.js?r=${rand}',
+			getParam()
+		], () => {
+			const script = document.createElement('script');
+			script.textContent = '//';
+			document.head.appendChild(script);
 		});
-
 	</script>
 </head>
 

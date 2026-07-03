@@ -403,7 +403,6 @@ class Edit2 {
 
 	runOk(): void {
 		let hal2: string = renderIframe(this.myCodeMirror.getValue());
-		// hal2 = hal2.replace('{{script}}', this.myCodeMirror.getValue());
 		let iframe: HTMLIFrameElement = document.createElement('iframe') as HTMLIFrameElement;
 		let iframeCont: HTMLDivElement = document.body.querySelector('div.kontainer-2 div.web') as HTMLDivElement;
 
