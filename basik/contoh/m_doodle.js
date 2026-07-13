@@ -1,8 +1,11 @@
-buatKanvas(800, 600);
+mulai();
 
 let brush = muatGambar("brush.png");
 brush.handleX = 8;
 brush.handleY = 8;
+
+posisiTeks(10, 20);
+tulis("Drag pelan-pelan untuk menggambar");
 
 function update() {
 	if (mouseDitahan()) {
@@ -10,7 +13,4 @@ function update() {
 		brush.y = mouseY();
 		stempel(brush);
 	}
-	bersihkanLayar(0, 600, 800, 600);
-	posisiTeks(0, 550);
-	tulis("Drag to draw");
 }

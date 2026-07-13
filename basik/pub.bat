@@ -21,16 +21,9 @@ echo ===================
 xcopy template stg\pg\template /s /y /i || goto error
 echo.
 
-echo publikasi contoh dan assets
-echo ===========================
-xcopy contoh\*.* stg\pg\contoh\ /s /i /y || goto error
-echo.
+call pub_contoh.bat || goto error
 
-echo publikasi web
-echo =============
-xcopy web\index.html stg /y || goto error
-xcopy web\player.html stg\pg /y || goto error
-echo.
+call pub_web.bat || goto error
 
 echo publikasi doc
 echo =============

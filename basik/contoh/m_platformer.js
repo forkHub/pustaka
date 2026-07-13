@@ -1,10 +1,10 @@
-buatKanvas(320, 240);
+mulai(320, 240);
 
 let char;
 let velY = 0;
 let velX = 2;
 let diLantai = false;
-let accY = .1;
+let accY = 0.1;
 let ubinAr = [];
 let ubinTertabrak;
 let data;
@@ -15,12 +15,14 @@ char.y = 32;
 char.lebar = 32;
 char.panjang = 32;
 data = [
-	"111111111111111111111111111111111111",
-	"1        1                     1",
-	"1        1                     1",
-	"1   1    1          11111     11",
-	"1   1    1         1        1111",
-	"111111111111111111111111111111111111",
+	"1111111111",
+	"1        1",
+	"1        1",
+	"1   1    1",
+	"1   11   1",
+	"1    11  1",
+	"1        1",
+	"1111111111",
 ];
 
 for (let baris = 0; baris < data.length; baris++) {
@@ -103,12 +105,6 @@ function checkUbin() {
 }
 
 function debug() {
-	posisiTeks(0, 10);
-	tulis("char.grid x " + posGrid(char.x) + "/char x " + char.x);
-	tulis("char.grid y " + posGrid(char.y) + "/char y " + char.y);
-	tulis("char on floor: " + diLantai);
-	if (ubinTertabrak)
-		tulis("collided tile " + ubinTertabrak.x + "/" + ubinTertabrak.y);
 }
 
 function posGrid(x) {

@@ -135,7 +135,7 @@ namespace ha.comp {
 					console.log('Util error');
 					console.log(e);
 					loading.detach();
-					reject(new Error(e.message));
+					reject(new Error((e as any).message));
 				}
 
 			});

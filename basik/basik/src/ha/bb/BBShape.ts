@@ -71,7 +71,7 @@ function tutupPath() {
 	ctx.fill();
 }
 
-function lingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: number = 0, akhir: number = 360): void {
+function gambarLingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: number = 0, akhir: number = 360): void {
 	let ctx = G.Kanvas().getContext('2d');
 	ctx.beginPath();
 	awal *= (Math.PI / 180);
@@ -81,7 +81,7 @@ function lingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: 
 	ctx.fill();
 }
 
-function elip(x: number = 0, y: number = 0, radiusX: number = 32, radiusY: number = 64, awal: number = 0, akhir: number = 360, searahJarumJam: boolean = false): void {
+function gambarElips(x: number = 0, y: number = 0, radiusX: number = 32, radiusY: number = 64, awal: number = 0, akhir: number = 360, searahJarumJam: boolean = false): void {
 	let ctx = G.Kanvas().getContext('2d');
 	awal *= (Math.PI / 180);
 	akhir *= Math.PI / 180;
@@ -90,7 +90,7 @@ function elip(x: number = 0, y: number = 0, radiusX: number = 32, radiusY: numbe
 	ctx.fill();
 }
 
-function kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 100) {
+function gambarKotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 100) {
 	// console.group("kotak");
 	let ctx = G.Kanvas().getContext('2d');
 	ctx.fillRect(x1, y1, x2, y2);
@@ -99,7 +99,7 @@ function kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 
 	// console.groupEnd();
 }
 
-function segitiga(
+function gambarSegitiga(
 	x: number, // titik tengah bawah segitiga (posisi X)
 	y: number, // titik tengah bawah segitiga (posisi Y)
 	base: number, // panjang sisi segitiga
@@ -192,7 +192,7 @@ function segitiga(
 	}
 }
 
-function pie(
+function gambarPie(
 	x: number, // pusat lingkaran
 	y: number,
 	radius: number, // jari-jari
@@ -242,7 +242,7 @@ function polygonTeratur(
 	ctx.stroke();
 }
 
-function bintang(
+function gambarBintang(
 	ctx: CanvasRenderingContext2D,
 	x: number, // posisi tengah bintang (X)
 	y: number, // posisi tengah bintang (Y)
@@ -278,7 +278,7 @@ function bintang(
 	ctx.stroke();
 }
 
-function garis(x = 100, y = 100, x2 = 500, y2 = 500) {
+function gambarGaris(x = 100, y = 100, x2 = 500, y2 = 500) {
 	let ctx = G.Kontek();
 	ctx.beginPath();
 	ctx.moveTo(x, y);

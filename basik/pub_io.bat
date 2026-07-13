@@ -6,7 +6,7 @@ echo off
 
 set io_folder=..\..\io\basik
 
-echo publikasi stg
+echo publikasi io
 echo ================
 xcopy stg\*.* %io_folder% /s /y || goto error
 echo.

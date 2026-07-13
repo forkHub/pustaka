@@ -194,9 +194,24 @@ class Edit2 {
 				console.log("script loaded");
 				this.initCodeMirror(codeDemo.code);
 			})
-		} else {
+			return;
+		}
+
+		//let load code;
+		let loadCode = this.getQuery("url");
+		if (loadCode) {
+			loadFileFromUrl(loadCode)
+				.then((code) => {
+					this.initCodeMirror(code);
+				})
+				.catch((err) => {
+					console.log(err);
+				})
+		}
+		else {
 			this.initCodeMirror("mulai();\n");
 		}
+
 
 		console.groupEnd();
 	}
@@ -413,6 +428,7 @@ class Edit2 {
 			iframe.contentWindow.document.open();
 			iframe.contentWindow.document.write(hal2);
 			iframe.contentWindow.document.close();
+			iframe.focus();
 		}, 0);
 	}
 
@@ -527,6 +543,7 @@ function renderIframe(script: string) {
 		script.textContent = \`${script}\`
 		document.head.appendChild(script);
 	});
+	window.focus();
 	</script>
 </head>
 
@@ -574,6 +591,12 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 	});
 	dialog.appendChild(list);
 
+	dialog.appendChild(document.createElement('hr'));
+
+	const p = document.createElement('p');
+	p.innerText = "Tekan 'Lanjutkan' untuk tetap menjalankan aplikasi, tekan 'Batal' untuk mengedit kembali.";
+	dialog.appendChild(p);
+
 	// Buttons container
 	const buttons: HTMLDivElement = document.createElement('div');
 	buttons.style.marginTop = '20px';
@@ -583,7 +606,7 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 
 	// Continue button
 	const continueBtn: HTMLButtonElement = document.createElement('button');
-	continueBtn.textContent = 'Continue';
+	continueBtn.textContent = 'Lanjutkan';
 	continueBtn.onclick = () => {
 		// Empty handler
 		(dialog as any).close();
@@ -592,7 +615,7 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 
 	// Abort button
 	const abortBtn: HTMLButtonElement = document.createElement('button');
-	abortBtn.textContent = 'Abort';
+	abortBtn.textContent = 'Batal';
 	abortBtn.onclick = () => {
 		// Empty handler
 		(dialog as any).close();
@@ -611,6 +634,33 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 function dlgBelumSelesai() {
 	alert("Maaf fungsi masih belum tersedia");
 }
+
+/**
+ * Load file content from a given URL.
+ * @param url - The URL of the file to fetch.
+ * @param type - The expected response type: "text", "json", or "arrayBuffer".
+ * @returns Promise with the file content in the chosen format.
+ */
+async function loadFileFromUrl<T = any>(
+	url: string,
+	type: "text" | "json" | "arrayBuffer" = "text"
+): Promise<T> {
+	const response = await fetch(url);
+
+	if (!response.ok) {
+		throw new Error(`Failed to load file: ${response.status} ${response.statusText}`);
+	}
+
+	switch (type) {
+		case "json":
+			return (await response.json()) as T;
+		case "arrayBuffer":
+			return (await response.arrayBuffer()) as T;
+		default:
+			return (await response.text()) as T;
+	}
+}
+
 
 
 

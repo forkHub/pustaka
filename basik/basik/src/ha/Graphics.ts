@@ -129,12 +129,15 @@ namespace Basik {
 					console.log("error !!!");
 				}
 			}
+
 			setTimeout(() => {
 				window.requestAnimationFrame(update);
-			})
+				window.focus();
+			}, 100)
 
 			setTimeout(() => {
 				G.handleWindowResize();
+				window.focus();
 			}, 100);
 			G.handleWindowResize();
 
@@ -143,8 +146,9 @@ namespace Basik {
 			warna(215);
 			posisiTeks(20, 20);
 			ukuranTeks(20);
-			tebalGaris(2);
+			tebalGaris(1);
 			data.init = true;
+			window.focus();
 			console.groupEnd();
 		}
 

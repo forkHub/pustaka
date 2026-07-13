@@ -12,10 +12,5 @@ function update() {
 
 function debugMouse() {
 	posisiTeks(10, 20);
-	tulis("Gerakkan kotak dengan cara menggesernya dengan mouse");
-	tulis("");
-	tulis("Gambar ditekan: " + roket.ditekan);
-	tulis("Gambar di drag: " + roket.diDrag);
-	tulis("Gambar x " + roket.x);
-	tulis("Gambar y " + roket.y);
+	tulis("Geser roket dengan mouse");
 }
