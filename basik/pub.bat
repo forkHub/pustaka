@@ -25,9 +25,7 @@ call pub_contoh.bat || goto error
 
 call pub_web.bat || goto error
 
-echo publikasi doc
-echo =============
-xcopy doc\site\*.* stg\pg\doc /i /y /s || goto error
+call pub_doc.bat || goto error
 
 call pub_pg.bat || goto error
 

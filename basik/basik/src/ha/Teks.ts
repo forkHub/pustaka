@@ -42,7 +42,7 @@ namespace Basik {
 			G.Kanvas().getContext('2d').textAlign = align;
 		}
 
-		static WriteLn(teks: string, x: number, y: number): void {
+		static WriteLn(teks: string = "", x: number, y: number): void {
 			if (x != undefined) {
 				Teks._x = x;
 			}

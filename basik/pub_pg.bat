@@ -1,6 +1,7 @@
 @echo off
 echo off
 
+echo.
 echo update pg
 echo ==============
 copy assets\*.* playground\web\asset || goto error
