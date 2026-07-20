@@ -10,3 +10,4 @@ goto end
 exit /b 1
 
 :end
+pause

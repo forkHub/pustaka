@@ -3,14 +3,19 @@
 BASIK adalah kumpulan perintah/fungsi javascript yang bisa dipakai sebagai media pembelajaran pengenalan koding untuk pemula. BASIK mengenalkan pemrograman kepada pemula dengan membuat aplikasi interaktif berbasis kanvas sederhana. Cocok untuk siswa, guru, atau siapa saja yang ingin belajar dasar pemrograman visual.
 
 Prinsip-prinsip dasar BASIK
-- Semua perintah bisa langsung dilihat hasilnya tanpa dibingungkan dengan struktur yang kompleks. 
-- Tidak perlu install aplikasi tambahan. BASIK berjalan sepenuhnya di browser.
-- Bisa jalan secara daring ataupun luring.
-- Format perintah bersifat procedural, menghindari penggunaan format yang kompleks seperti callback, class, dll.
+- Perintah yang disederhanakan ✅ 
+- Tanpa install server 📐
+- Memancing kreatifitas 🔥
+- Umpan balik langsung ⚡
+- Fungsi bawaan siap pakai 🧠
+- Struktur proyek siap digunakan 📦
+- Contoh yang variatif 🎨
+- Dapat digunakan secara luring/daring 🌐
+- Jalan di mobile ataupun desktop 📱
 
 ## 📖 Cara pemakaian
 
-Untuk pengguna daring, BASIK bisa di buka melalui alamat berikut: ...  
+Untuk pengguna daring, BASIK bisa di buka melalui [alamat ini](https://forkhub.github.io/basik/pg/editor.html) 
 Untuk pengguna luring, BASIK bisa di buka dengan membuka file `editor.html` di broser untuk memulai.  
 
 Contoh applikasi sederhana:
@@ -37,7 +42,7 @@ roket.lebar = 70;
 stempel(roket);
 ```
 
-Pada contoh di atas, kita memuat gambar terlebih dahulu, kemudian kita ubah posisi dan ukuran dari gambar tersebut dengan merubah property secara langsung, kemudian menempelkannya ke kanvas. Saat kita memuat gambar terlebih dahulu, maka kita tidak lagi menggunakan nama file sebagai parameter dari perintah `stempel()`. Kita menggunakan nama variable yang dijadikan referensi saat memuat gambar.
+Pada contoh di atas, kita memuat gambar terlebih dahulu, kemudian kita ubah posisi dan ukuran dari gambar tersebut dengan merubah property secara langsung, kemudian menempelkannya ke kanvas. Dengan kita tidak lagi menggunakan nama file sebagai parameter dari perintah `stempel()`. Kita menggunakan nama variable yang dijadikan referensi saat memuat gambar.
 
 Kita juga bisa merubah property dengan perintah yang lebih ringkas.
 
@@ -53,7 +58,7 @@ Daftar perintah lengkap bisa di lihat di [sini](api-doc-gambar.md)
 
 BASIK mendukung aplikasi interaktif dan dinamis dengan menyediakan fungsi bawaan yang menangani mouse, keyboard, update applikasi, dll.
 
-Di contoah di bawah ini menunjukkan bagaimana kita menghandle event update secara sederhana. Anda cukup membuat fungsi update(), dan fungsi ini akan dipanggil secara otomatis saat applikasi diupdate.
+Contoh ini menunjukkan bagaimana kita menghandle event update secara sederhana. Anda cukup membuat fungsi `update()`, maka fungsi ini akan dipanggil secara otomatis saat applikasi diupdate.
 
 ```
 mulai();
@@ -68,7 +73,7 @@ function update() {
 }
 ```
 
-BASIK juga menyediakan fungsi bawaan untuk menangani event-event yang berhubungan dengan mouse, touch dan keyboard.
+BASIK juga menyediakan fungsi bawaan untuk menangani event-event yang berhubungan dengan mouse, touch dan keyboard, contoh:
 
 ```
 mulai();
@@ -97,7 +102,6 @@ roket.tipeDrag = 1;
 
 function update() {
 	bersihkanLayar();
-	Tulis("");
 	roket.rotasi++;
 	stempel(roket);
 }
@@ -108,10 +112,11 @@ Pada contoh di atas, kita menggunakan drag dengan tipe 1. User bisa mendrag gamb
 Dokumentasi lengkap mengenai cara menghandle event bisa dilihat di [sini](api-doc-event.md)
 
 ## 📝 Gambar sebagai object
-BASIK memiliki object bawaan bernama object Gambar.
+BASIK memiliki object bawaan `Gambar`.
 Object ini dibuat dengan perintah `muatGambar()`.
 
 Object `Gambar` memiliki property sebagai berikut:
+
 *   `x`: number  
 	posisi x 
 *   `y`: number  

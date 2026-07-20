@@ -16,7 +16,7 @@ function mouseDitekan() {
 
 Bila contoh diatas dijalankan, ketika user menekan tombol mouse maka gambar roket akan di gambar pada posisi dimana mouse berada.
 
-Berikut adalah daftar fungsi yang akan dipanggil secara otomatis dan event yang berkaitan dengan fungsi tersebut
+Berikut adalah daftar fungsi yang akan dipanggil secara otomatis dan event yang berkaitan dengan fungsi tersebut:
 
 - mouseDitekan: ketika mouse mulai ditekan
 - mouseDilepas: ketika mouse mulai dilepaskan

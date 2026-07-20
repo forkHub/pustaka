@@ -38,7 +38,8 @@ namespace Basik {
 			return gbr;
 		}
 
-		static Muat(url: string): GbrObj {
+		//indempoten
+		static resolveGbrUrl(url: string): string {
 			let imgUrl: string = url;
 
 			//auto asset
@@ -57,6 +58,13 @@ namespace Basik {
 				}
 			}
 
+
+			return imgUrl;
+		}
+
+		static Muat(url: string): GbrObj {
+			let imgUrl: string = ImgImpl.resolveGbrUrl(url);
+
 			return new GbrObj(imgUrl);
 		}
 
@@ -71,12 +79,15 @@ namespace Basik {
 		};
 
 		static getByName(nama: string, buat: boolean): GbrObj {
+			nama = Basik.ImgImpl.resolveGbrUrl(nama);
+
 			for (let i = 0; i < Ip.daftar.length; i++) {
 				let item = Ip.daftar[i];
 				if (item.nama == nama) return item;
 			}
 
 			if (buat) {
+				console.log("buat item baru");
 				return Ip.Muat(nama);
 			}
 
@@ -167,7 +178,7 @@ namespace Basik {
 				}
 			}
 
-			
+
 		}
 
 		static AmbilPiksel(x: number = 0, y: number = 0): void {
@@ -270,7 +281,7 @@ namespace Basik {
 				ctx.restore();
 			}
 
-			function drawImpl(posX: number, posY: number) {				
+			function drawImpl(posX: number, posY: number) {
 				//
 				ctx.globalAlpha = gbr.alpha / 100;
 				ctx.drawImage(gbr.kanvas, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(posX), Math.floor(posY), w2, h2);

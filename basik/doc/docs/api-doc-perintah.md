@@ -209,7 +209,7 @@ Mengembalikan informasi tombol terakhir yang terlibat saat ada event keyboard
 
 Perintah-perintah yang berhubungan dengan teks.
 
-##### `tulis()`
+##### `tulis(teks: string = "", x:number, y:number)`
 
 Menulis sesuatu di layar
 
@@ -220,5 +220,4 @@ Menulis sesuatu di layar
 *	`x`: `number`, opsional
 	posisi x dari tulisan, bila tidak disediakan maka akan sama dengan teks sebelumnya
 *	`y`: `number`, optional
-	posisi y dari tulisan, bila tidak disediakan maka posisinya adalah di bawah teks sebelumnyas
-s
+	posisi y dari tulisan, bila tidak disediakan maka posisinya adalah di bawah teks sebelumnya
