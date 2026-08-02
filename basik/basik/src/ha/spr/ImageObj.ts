@@ -99,12 +99,20 @@ namespace Basik {
 		private _nama: string;
 		private _img: HTMLImageElement;
 		private _tipeDrag: number = 0;
-		private _diRender: Boolean = true;
+		private _diRender: boolean = true;
+		private _temp: boolean = false;
 
-		public get diRender(): Boolean {
+		public get temp(): boolean {
+			return this._temp;
+		}
+		public set temp(value: boolean) {
+			this._temp = value;
+		}
+
+		public get diRender(): boolean {
 			return this._diRender;
 		}
-		public set diRender(value: Boolean) {
+		public set diRender(value: boolean) {
 			this._diRender = value;
 		}
 

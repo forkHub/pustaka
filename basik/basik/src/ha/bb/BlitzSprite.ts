@@ -20,7 +20,8 @@ function stempel(img: Basik.GbrObj | string, x?: number, y?: number) {
 	}
 
 	if (typeof img == "string") {
-		let img2 = Ip.getByName(img, true);
+		let img2 = Ip.Muat(img);
+		img2.temp = true;
 		posisi(img2, x, y);
 		Ip.Draw(img2);
 	}

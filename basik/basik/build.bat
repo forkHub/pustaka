@@ -1,6 +1,6 @@
 @echo on
 
-npm run build
+call npm run build
 
 pause
 pause

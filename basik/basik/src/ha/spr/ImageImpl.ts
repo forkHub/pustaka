@@ -227,6 +227,11 @@ namespace Basik {
 				else {
 					Ip.GamberSingle(img);
 				}
+				if (img.temp) {
+					//hapus image
+					ImgImpl.free(img);
+					console.log('free image ' + img.url);
+				}
 			}
 		}
 

@@ -1,7 +1,8 @@
 echo publikasi web
 echo =============
-xcopy web\index.html stg /y || goto error
-xcopy web\player.html stg\pg /y || goto error
+
+xcopy web\*.html stg /y || goto error
+xcopy web\*.css stg /y || goto error
 echo.
 
 goto end
