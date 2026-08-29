@@ -117,8 +117,8 @@ namespace Basik {
 			function update() {
 				try {
 					G._isUpdating = true;
-					Event.dispatchEvent(Evt.UPDATE);
-					Event.dispatchEvent(Evt.RENDER);
+					BEvent.dispatchEvent(Evt.UPDATE);
+					BEvent.dispatchEvent(Evt.RENDER);
 					window.requestAnimationFrame(update);
 					G._isUpdating = false;
 				}
@@ -174,49 +174,78 @@ namespace Basik {
 		}
 
 		static initEvent() {
-			Event.addEventListener(Evt.KEYB_DOWN, () => {
+			BEvent.addEventListener(Evt.KEYB_DOWN, () => {
 				G.callFunc(Evt.KEYB_DOWN);
 			});
 
-			Event.addEventListener(Evt.KEYB_UP, () => {
+			BEvent.addEventListener(Evt.KEYB_UP, () => {
 				G.callFunc(Evt.KEYB_UP);
 			});
 
-			Event.addEventListener(Evt.MOUSE_DOWN, () => {
+			BEvent.addEventListener(Evt.MOUSE_DOWN, () => {
 				G.callFunc(Evt.MOUSE_DOWN);
 			});
-			Event.addEventListener(Evt.MOUSE_END_DRAG, () => {
+			BEvent.addEventListener(Evt.MOUSE_END_DRAG, () => {
 				G.callFunc(Evt.MOUSE_END_DRAG);
 			});
-			Event.addEventListener(Evt.MOUSE_MOVE, () => {
+			BEvent.addEventListener(Evt.MOUSE_MOVE, () => {
 				G.callFunc(Evt.MOUSE_MOVE);
 			});
-			Event.addEventListener(Evt.MOUSE_START_DRAG, () => {
+			BEvent.addEventListener(Evt.MOUSE_START_DRAG, () => {
 				G.callFunc(Evt.MOUSE_START_DRAG);
 			});
-			Event.addEventListener(Evt.MOUSE_TAP, () => {
+			BEvent.addEventListener(Evt.MOUSE_TAP, () => {
 				G.callFunc(Evt.MOUSE_TAP);
 			});
-			Event.addEventListener(Evt.MOUSE_UP, () => {
+			BEvent.addEventListener(Evt.MOUSE_UP, () => {
 				G.callFunc(Evt.MOUSE_UP);
 			});
-			Event.addEventListener(Evt.UPDATE, () => {
+			BEvent.addEventListener(Evt.UPDATE, () => {
 				G.callFunc(Evt.UPDATE);
 			})
-			Event.addEventListener(Evt.SOUND_ENDED, () => {
+			BEvent.addEventListener(Evt.SOUND_ENDED, () => {
 				G.callFunc(Evt.SOUND_ENDED);
 			})
 
-			Event.addEventListener(Evt.GAMBAR_DILOAD, () => {
-				Ip.daftar.forEach((gbr) => {
-					if (gbr.pendingStempel) {
-						gbr.pendingStempel = false;
-						Ip.Draw(gbr);
-					}
-				})
+			BEvent.addEventListener(Evt.GAMBAR_DILOAD, () => {
+				// console.log("event gambar di load");
+				// Ip.daftar.forEach((gbr) => {
+				// 	if (gbr.dimuat && gbr.pendingStempel) {
+				// 		console.log("stempel gambar pending");
+				// 		gbr.pendingStempel = false;
+
+				// 		//IP.Draw akan memutasi gbr.ctrIdx
+				// 		//untuk gambar yang digambar karena pending, maka gbr.ctrIdx harus di preserve
+				// 		//agar tidak mengubah urutan gambar
+				// 		let idx = gbr.ctrIdx;
+				// 		Ip.Draw(gbr);
+				// 		gbr.ctrIdx = idx;
+
+				// 		console.group('debug daftar image');
+				// 		Ip.daftar.forEach((img) => {
+				// 			console.log(img.url + "/idx " + img.ctrIdx);
+				// 		})
+				// 		console.groupEnd();
+
+				// 		//schedule deletion
+				// 		if (gbr.temp) {
+				// 			setTimeout(() => {
+				// 				Ip.free(gbr);
+				// 			}, 5000);
+				// 		}
+
+				// 		//gambar gbr yang indexnya lebih tinggi
+				// 		Ip.daftar.filter((item) => {
+				// 			return (item.ctrIdx > idx) && (item != gbr);
+				// 		}).forEach((gbr2) => {
+				// 			console.log("gambar image yang lebih tinggi, ", gbr2);
+				// 			Ip.Draw(gbr2);
+				// 		})
+				// 	}
+				// })
 			});
 
-			Event.addEventListener(Evt.RENDER, () => {
+			BEvent.addEventListener(Evt.RENDER, () => {
 				if (G.callFunc(Evt.RENDER)) {
 
 				}

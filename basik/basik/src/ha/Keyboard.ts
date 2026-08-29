@@ -77,7 +77,7 @@ namespace Basik {
 				if (k.isDown == false) {
 					Keyboard.setDown(e.key, true);
 					Keyboard.setDown('', true);
-					Event.dispatchEvent(Evt.KEYB_DOWN);
+					BEvent.dispatchEvent(Evt.KEYB_DOWN);
 				}
 			})
 
@@ -87,7 +87,7 @@ namespace Basik {
 				Keyboard._obj = e;
 				Keyboard.setDown(e.key, false);
 				Keyboard.setDown('', false);
-				Event.dispatchEvent(Evt.KEYB_UP);
+				BEvent.dispatchEvent(Evt.KEYB_UP);
 			})
 		}
 	}

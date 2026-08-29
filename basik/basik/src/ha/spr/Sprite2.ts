@@ -10,7 +10,7 @@ namespace Basik {
 	class GbrInter {
 
 		init() {
-			Event.addEventListener(Evt.MOUSE_DOWN, () => {
+			BEvent.addEventListener(Evt.MOUSE_DOWN, () => {
 				this.inputDown({
 					x: Input.global.x,
 					y: Input.global.y
@@ -19,7 +19,7 @@ namespace Basik {
 				)
 			});
 
-			Event.addEventListener(Evt.MOUSE_MOVE, () => {
+			BEvent.addEventListener(Evt.MOUSE_MOVE, () => {
 				this.inputMove({
 					x: Input.global.x,
 					y: Input.global.y
@@ -27,7 +27,7 @@ namespace Basik {
 					Input.global.id)
 			})
 
-			Event.addEventListener(Evt.MOUSE_UP, () => {
+			BEvent.addEventListener(Evt.MOUSE_UP, () => {
 				Ip.daftar.forEach((img: GbrObj) => {
 					img.ditekan = false;
 					img.diDrag = false;

@@ -16,9 +16,9 @@ namespace Basik {
 
 		static CreateImage(width: number, height: number): GbrObj {
 			let h: GbrObj = new GbrObj();
-			h.kanvas = document.createElement('canvas')
-			h.kanvas.width = width;
-			h.kanvas.height = height;
+			// h.kanvas = document.createElement('canvas')
+			// h.kanvas.width = width;
+			// h.kanvas.height = height;
 			h.lebarFrame = height;
 			h.panjangFrame = width;
 			h.panjang = width;
@@ -112,10 +112,11 @@ namespace Basik {
 		static free(img: Basik.GbrObj) {
 			for (let i = 0; i < this.daftar.length; i++) {
 				if (this.daftar[i] == img) {
-					img.kanvas = null;
+					// img.kanvas = null;
 					img.img = null;
 					Basik.Ktk.destroy(img.rect);
 					this.daftar.splice(i, 1);
+					img.rect = null;
 					return;
 				}
 			}
@@ -208,7 +209,11 @@ namespace Basik {
 		}
 
 		static Draw(img: GbrObj) {
+			img.ctrIdx = (++GbrObj.ctrDraw);
+
+			// console.group("draw");
 			if (img.dimuat) {
+				// console.log("gambar selesai dimuat");
 				gambarSetelahDimuat();
 			}
 			else {
@@ -216,9 +221,11 @@ namespace Basik {
 					//ketika update maka akan dipanggil berkali2, tidak perlu menunggu dimuat
 				}
 				else {
+					// console.log('pending gambar', img);
 					img.pendingStempel = true;
 				}
 			}
+			// console.groupEnd();
 
 			function gambarSetelahDimuat() {
 				if (img.ubin) {
@@ -227,11 +234,11 @@ namespace Basik {
 				else {
 					Ip.GamberSingle(img);
 				}
-				if (img.temp) {
-					//hapus image
-					ImgImpl.free(img);
-					console.log('free image ' + img.url);
-				}
+				// if (img.temp) {
+				//hapus image
+				// ImgImpl.free(img);
+				// console.log('free image ' + img.url);
+				// }
 			}
 		}
 
@@ -243,12 +250,13 @@ namespace Basik {
 			let imgW: number = 0;
 
 			if (gbr.dimuat == false) {
+				console.log("gambar single, belum di muat: ", gbr);
 				return;
 			}
 
 			imgW = gbr.img.naturalWidth;
 
-			gbr.ctrIdx = GbrObj.ctrDraw++;
+			// gbr.ctrIdx = GbrObj.ctrDraw++;
 			let frame = Math.floor(gbr.frame);
 
 			jmlH = Math.floor(imgW / gbr.panjangFrame);
@@ -289,7 +297,63 @@ namespace Basik {
 			function drawImpl(posX: number, posY: number) {
 				//
 				ctx.globalAlpha = gbr.alpha / 100;
-				ctx.drawImage(gbr.kanvas, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(posX), Math.floor(posY), w2, h2);
+				ctx.drawImage(gbr.img, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(posX), Math.floor(posY), w2, h2);
+				ctx.globalAlpha = 1;
+			}
+
+		}
+
+		static GamberTrans(t: ItemRender) {
+			let ctx: CanvasRenderingContext2D = G.Kanvas().getContext('2d');
+			let jmlH: number = 0;
+			let frameX: number = 0;
+			let frameY: number = 0;
+			let imgW: number = 0;
+			let trans = t.trans;
+
+			imgW = trans.panjangOri;
+
+			let frame = Math.floor(trans.frame);
+
+			jmlH = Math.floor(imgW / trans.panjangFrame);
+
+			frameX = (frame % jmlH);
+			frameY = Math.floor(frame / jmlH);
+			frameX *= trans.panjangFrame;
+			frameY *= trans.lebarFrame;
+			frameX = Math.floor(frameX);
+			frameY = Math.floor(frameY);
+
+			let x2: number = Math.floor(trans.x);
+			let y2: number = Math.floor(trans.y);
+
+			let w2: number = Math.floor(trans.panjang);
+			let h2: number = Math.floor(trans.lebar);
+
+			x2 -= (trans.pusatX);
+			y2 -= (trans.pusatY);
+
+			if (trans.rotasi != 0) {
+				ctx.save();
+				ctx.translate(trans.x, trans.y);
+				ctx.rotate(trans.rotasi * (Math.PI / 180));
+
+				drawImpl(-trans.pusatX, -trans.pusatY)
+
+				ctx.restore();
+			}
+			else {
+				ctx.save();
+
+				drawImpl(x2, y2);
+
+				ctx.restore();
+			}
+
+			function drawImpl(posX: number, posY: number) {
+				//
+				ctx.globalAlpha = trans.alpha / 100;
+				ctx.drawImage(t.gbr.img, frameX, frameY, trans.panjangFrame, trans.lebarFrame, Math.floor(posX), Math.floor(posY), w2, h2);
 				ctx.globalAlpha = 1;
 			}
 

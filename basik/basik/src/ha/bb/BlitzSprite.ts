@@ -15,6 +15,8 @@ function muatAnimasi(url: string, fw: number = 32, fh: number = 32) {
 }
 
 function stempel(img: Basik.GbrObj | string, x?: number, y?: number) {
+	// console.log("stempel, img ", img);
+
 	if (img === undefined) {
 		img = "roket";
 	}
@@ -23,22 +25,25 @@ function stempel(img: Basik.GbrObj | string, x?: number, y?: number) {
 		let img2 = Ip.Muat(img);
 		img2.temp = true;
 		posisi(img2, x, y);
-		Ip.Draw(img2);
+		Basik.scheduler.reg(img2);
+		// Ip.Draw(img2);
 	}
 	else {
 		if (x != undefined && y != undefined) {
 			posisi(img, x, y);
 		}
-		Ip.Draw(img);
+		Basik.scheduler.reg(img);
 	}
+
+
 
 	function posisi(img: Basik.GbrObj, x: number, y: number) {
 		if (x != undefined) {
-			img.x = x;
+			img.t.x = x;
 		}
 
 		if (y != undefined) {
-			img.y = y;
+			img.t.y = y;
 		}
 	}
 }
@@ -51,7 +56,7 @@ function stempel(img: Basik.GbrObj | string, x?: number, y?: number) {
  * @returns {boolean}
  */
 function gambarTabrakan(img1: Basik.GbrObj, img2: Basik.GbrObj): boolean {
-	return Ip.tabrakan(img1, img1.x, img1.y, img2, img2.x, img2.y);
+	return Ip.tabrakan(img1, img1.t.x, img1.t.y, img2, img2.t.x, img2.t.y);
 }
 
 /**
@@ -62,7 +67,7 @@ function gambarTabrakan(img1: Basik.GbrObj, img2: Basik.GbrObj): boolean {
  * @returns {boolean}
  */
 function poinDidalamGambar(img: Basik.GbrObj, x: number, y: number): boolean {
-	return Ip.dotInsideImage(img, img.x, img.y, x, y);
+	return Ip.dotInsideImage(img, img.t.x, img.t.y, x, y);
 }
 
 /**
@@ -92,8 +97,8 @@ function hapusGAmbar(img: Basik.GbrObj): void {
 }
 
 function posisiGambar(img: Basik.GbrObj, x = 0, y = 0) {
-	img.x = x;
-	img.y = y;
+	img.t.x = x;
+	img.t.y = y;
 }
 
 function ukuranGambar(img: Basik.GbrObj, p = 32, l = 32) {

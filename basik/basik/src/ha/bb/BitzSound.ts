@@ -18,7 +18,7 @@ function muatSuara(url: string): HTMLAudioElement {
 	sound.onended = () => {
 		try {
 			Basik.data.soundEvent = sound;
-			Basik.Event.dispatchEvent(Basik.Evt.SOUND_ENDED);
+			Basik.BEvent.dispatchEvent(Basik.Evt.SOUND_ENDED);
 			console.log("sound ended");
 		} catch (e) {
 

@@ -19,8 +19,8 @@ namespace Basik {
 		RESIZE = "resize"
 	}
 
-	export class Event {
-		private static readonly list: Event[] = [];
+	export class BEvent {
+		private static readonly list: BEvent[] = [];
 
 		private _type: string = '';
 		private _f: () => void;
@@ -39,23 +39,23 @@ namespace Basik {
 			//todo: filter
 		}
 
-		static addEventListener(type: string, f: () => void): Event {
-			let e = new Event(type.toLowerCase(), f);
-			Event.list.push(e);
+		static addEventListener(type: string, f: () => void): BEvent {
+			let e = new BEvent(type.toLowerCase(), f);
+			BEvent.list.push(e);
 			return e;
 		}
 
-		static removeListener(e: Event): void {
-			for (let i = Event.list.length - 1; i >= 0; i--) {
-				if (Event.list[i] === e) {
-					Event.list.splice(i, 1);
+		static removeListener(e: BEvent): void {
+			for (let i = BEvent.list.length - 1; i >= 0; i--) {
+				if (BEvent.list[i] === e) {
+					BEvent.list.splice(i, 1);
 					return;
 				}
 			}
 		}
 
 		static dispatchEvent(type: string): void {
-			Event.list.forEach((item) => {
+			BEvent.list.forEach((item) => {
 				if (item.type === type.toLowerCase()) {
 					item.f();
 				}

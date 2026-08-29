@@ -192,7 +192,7 @@ namespace Basik {
 					Input._lastButton = e.button;
 
 					if (downState == false) {
-						Event.dispatchEvent(Evt.MOUSE_DOWN);
+						BEvent.dispatchEvent(Evt.MOUSE_DOWN);
 					}
 				});
 
@@ -220,7 +220,7 @@ namespace Basik {
 								input.yStart = input.y;
 
 								if (input != Input.global) {
-									Event.dispatchEvent(Evt.MOUSE_START_DRAG);
+									BEvent.dispatchEvent(Evt.MOUSE_START_DRAG);
 								}
 							}
 
@@ -229,7 +229,7 @@ namespace Basik {
 						}
 					}
 
-					Event.dispatchEvent(Evt.MOUSE_MOVE);
+					BEvent.dispatchEvent(Evt.MOUSE_MOVE);
 				});
 
 			buffer.addEventListener(
@@ -258,18 +258,18 @@ namespace Basik {
 				input.isTap = (isTap == '');
 
 				if (input.isTap) {
-					Event.dispatchEvent(Evt.MOUSE_TAP);
+					BEvent.dispatchEvent(Evt.MOUSE_TAP);
 				}
 
 				//clear up all input status
 				Input.lst.forEach((item) => {
 					if (item.isDrag) {
-						Event.dispatchEvent(Evt.MOUSE_END_DRAG);
+						BEvent.dispatchEvent(Evt.MOUSE_END_DRAG);
 					}
 					Input.evt.up(item);
 				})
 
-				Event.dispatchEvent(Evt.MOUSE_UP);
+				BEvent.dispatchEvent(Evt.MOUSE_UP);
 			}
 		}
 

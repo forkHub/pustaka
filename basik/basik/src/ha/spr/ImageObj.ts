@@ -1,5 +1,127 @@
 namespace Basik {
 
+	export class GbrTransform {
+		static fromGbr(gbr: GbrObj): GbrTransform {
+			let h = new GbrTransform();
+			h.x = gbr.t.x;
+			h.y = gbr.t.y;
+			h.panjang = gbr.t.panjang;
+			h.lebar = gbr.t.lebar;
+			h.frame = gbr.t.frame;
+			h.panjangFrame = gbr.t.panjangFrame;
+			h.lebarFrame = gbr.t.lebarFrame;
+			h.alpha = gbr.t.alpha;
+			h.pusatX = gbr.t.pusatX;
+			h.pusatY = gbr.t.pusatY;
+			h.rotasi = gbr.t.rotasi;
+			h.ubin = gbr.t.ubin;
+
+			return h;
+		}
+
+		private _panjangOri: number = undefined;
+		private _lebarOri: number = undefined;
+		private _x: number = 0;
+		private _y: number = 0;
+		private _alpha: number = 100;
+		private _pusatX: number = 0;
+		private _pusatY: number = 0;
+		private _panjang: number = undefined;
+		private _lebar: number = undefined;
+		private _rotasi: number = 0;
+		private _tilable: boolean = false;
+		private _panjangFrame: number = 0;
+		private _lebarFrame: number = 0;
+		private _frame: number = 0;
+
+		public get panjangOri(): number {
+			return this._panjangOri;
+		}
+		public set panjangOri(value: number) {
+			this._panjangOri = value;
+		}
+
+		public get lebarOri(): number {
+			return this._lebarOri;
+		}
+		public set lebarOri(value: number) {
+			this._lebarOri = value;
+		}
+
+		public get x(): number {
+			return this._x;
+		}
+		public set x(value: number) {
+			this._x = value;
+		}
+		public get y(): number {
+			return this._y;
+		}
+		public set y(value: number) {
+			this._y = value;
+		}
+		public get alpha(): number {
+			return this._alpha;
+		}
+		public set alpha(value: number) {
+			this._alpha = value;
+		}
+		public get pusatX(): number {
+			return this._pusatX;
+		}
+		public set pusatX(value: number) {
+			this._pusatX = value;
+		}
+		public get pusatY(): number {
+			return this._pusatY;
+		}
+		public set pusatY(value: number) {
+			this._pusatY = value;
+		}
+		public get panjang(): number {
+			return this._panjang;
+		}
+		public set panjang(value: number) {
+			this._panjang = value;
+		}
+		public get lebar(): number {
+			return this._lebar;
+		}
+		public set lebar(value: number) {
+			this._lebar = value;
+		}
+		public get rotasi(): number {
+			return this._rotasi;
+		}
+		public set rotasi(value: number) {
+			this._rotasi = value;
+		}
+		public get ubin(): boolean {
+			return this._tilable;
+		}
+		public set ubin(value: boolean) {
+			this._tilable = value;
+		}
+		public get panjangFrame(): number {
+			return this._panjangFrame;
+		}
+		public set panjangFrame(value: number) {
+			this._panjangFrame = value;
+		}
+		public get lebarFrame(): number {
+			return this._lebarFrame;
+		}
+		public set lebarFrame(value: number) {
+			this._lebarFrame = value;
+		}
+		public get frame(): number {
+			return this._frame;
+		}
+		public set frame(value: number) {
+			this._frame = value;
+		}
+	}
+
 	/**
 	 * Image Object
 	 */
@@ -12,95 +134,59 @@ namespace Basik {
 		 * @param lf 
 		 */
 		constructor(url: string = '', pf?: number, lf?: number) {
+			let gbr: GbrObj = this;
+			gbr.t.lebarFrame = pf;
+			gbr.t.panjangFrame = lf;
 
-			let img: HTMLImageElement = document.createElement('img');
-			let canvas: HTMLCanvasElement = document.createElement('canvas');
-			let ctx: CanvasRenderingContext2D = canvas.getContext('2d');
-			let self = this;
+			ImageCache.get(Ip.resolveGbrUrl(url), (img) => {
+				Ip.register(gbr, url, 0);
 
-			let gbr: GbrObj;
-			gbr = this;
-			let rect = Ktk.buat(0, 0, img.naturalWidth, img.naturalHeight);
-
-			Ip.register(this, url, 0);
-
-			gbr.img = img;
-			gbr.kanvas = canvas;
-			gbr.rect = rect;
-			gbr.dimuat = false;
-
-			if (!gbr.url) {
+				gbr.img = img;
 				gbr.dimuat = true;
-				imgOnLoad(img);
-			}
 
-			img.onload = () => {
-				console.log("selesai memuat gambar, url: " + url);
-				imgOnLoad(img);
-			}
+				gbr.rect = Ktk.buat(0, 0, img.naturalWidth, img.naturalHeight);
 
-			img.onerror = () => {
-				console.warn('gagal load image, url ' + url);
-				imgOnLoadDefault();
-			}
+				ImgImpl.lastImg = gbr;
+				BEvent.dispatchEvent(Evt.GAMBAR_DILOAD);
+			}, () => {
+				gbr.error = true;
+			})
 
-			img.src = url;
-
-			function imgOnLoad(imgP: HTMLImageElement): void {
-				canvas.width = imgP.naturalWidth;
-				canvas.height = imgP.naturalHeight;
-
-				ctx.drawImage(imgP, 0, 0);
-				gbr.rect = Ktk.buat(0, 0, imgP.naturalWidth, imgP.naturalHeight);
-
-				gbr.dimuat = true;
-				gbr.img = imgP;
-
-				if (!gbr.panjang) {
-					gbr.panjang = imgP.naturalWidth;
-				}
-
-				if (!gbr.lebar) {
-					gbr.lebar = imgP.naturalHeight;
-				}
-
-				if (!gbr.lebarFrame) gbr.lebarFrame = imgP.naturalHeight;
-				if (!gbr.panjangFrame) gbr.panjangFrame = imgP.naturalWidth;
-
-				ImgImpl.lastImg = self;
-				Event.dispatchEvent(Evt.GAMBAR_DILOAD);
-			}
-
-			function imgOnLoadDefault(): void {
-				console.log("muat gambar default")
-			}
-
-			this.nama = url;
-			if (pf != undefined) this.panjangFrame = pf;
-			if (lf != undefined) this.lebarFrame = lf;
 		}
 
-		//public member
-		private _x: number = 0;
-		private _y: number = 0;
-		private _alpha: number = 100;
-		private _pusatX: number = 0;
-		private _pusatY: number = 0;
-		private _panjang: number = 0;
-		private _lebar: number = 0;
-		private _rotasi: number = 0;
-		private _tilable: boolean = false;
-		private _panjangFrame: number = 0;
-		private _lebarFrame: number = 0;
+
+		readonly t: GbrTransform = new GbrTransform();
+
 		private _diDrag: boolean = false;
 		private _down: boolean = false;
-		private _frame: number = 0;
 		private _pendingStempel: boolean = false;
 		private _nama: string;
 		private _img: HTMLImageElement;
 		private _tipeDrag: number = 0;
 		private _diRender: boolean = true;
 		private _temp: boolean = false;
+		private _error: boolean = false;
+		private _dimuat: boolean = false;
+
+		public get lebarOri(): number {
+			return this.t.lebarOri;
+		}
+		public set lebarOri(value: number) {
+			this.t.lebarOri = value;;
+		}
+		public get panjangOri(): number {
+			return this.t.panjangOri;
+		}
+		public set panjangOri(value: number) {
+			this.t.panjangOri = value;
+		}
+
+		public get error(): boolean {
+			return this._error;
+		}
+		public set error(value: boolean) {
+			this._error = value;
+		}
 
 		public get temp(): boolean {
 			return this._temp;
@@ -117,10 +203,10 @@ namespace Basik {
 		}
 
 		public get layarX(): number {
-			return this._x - Camera.x;
+			return this.t.x - Camera.x;
 		}
 		public get layarY(): number {
-			return this._x - Camera.y;
+			return this.t.y - Camera.y;
 		}
 
 		public get img(): HTMLImageElement {
@@ -130,13 +216,11 @@ namespace Basik {
 			this._img = value;
 		}
 
-		//value from param
-
-		//internal
+		//internal only
 		private _ctrIdx: number = 0;
 		private static _ctrDraw: number = 0;
 		private _url: string;
-		private _canvas: HTMLCanvasElement;
+		// private _canvas: HTMLCanvasElement;
 		private _isAnim: boolean = false;
 		private _dragAwalY: number = 0;
 		private _dragAwalX: number = 0;
@@ -158,7 +242,6 @@ namespace Basik {
 			this._rect = value;
 		}
 
-		private _dimuat: boolean = false;
 		public get dimuat(): boolean {
 			return this._dimuat;
 		}
@@ -187,93 +270,101 @@ namespace Basik {
 			this._inputId = value;
 		}
 
+		// public get kanvas(): HTMLCanvasElement {
+		// 	return this._canvas;
+		// }
+
+		// public set kanvas(value: HTMLCanvasElement) {
+		// 	this._canvas = value;
+		// }
+
 		public get frame(): number {
-			return this._frame;
+			return this.t.frame;
 		}
 		public set frame(value: number) {
-			this._frame = value;
-		}
-
-		public get kanvas(): HTMLCanvasElement {
-			return this._canvas;
-		}
-
-		public set kanvas(value: HTMLCanvasElement) {
-			this._canvas = value;
+			this.t.frame = value;
 		}
 
 		public get ubin(): boolean {
-			return this._tilable;
+			return this.t.ubin;
 		}
 		public set ubin(value: boolean) {
-			this._tilable = value;
+			this.t.ubin = value;
 		}
 
 		public get panjangFrame(): number {
-			return this._panjangFrame;
+			return this.t.panjangFrame;
 		}
 		public set panjangFrame(value: number) {
-			this._panjangFrame = value;
+			this.t.panjangFrame = value;
 		}
+
 		public get lebarFrame(): number {
-			return this._lebarFrame;
+			return this.t.lebarFrame;
 		}
 		public set lebarFrame(value: number) {
-			this._lebarFrame = value;
+			this.t.lebarFrame = value;
 		}
 
 		public get x(): number {
-			return this._x;
+			return this.t.x;
 		}
 		public set x(value: number) {
-			this._x = value;
+			this.t.x = value;
 		}
 
 		public get y(): number {
-			return this._y;
+			return this.t.y;
 		}
 		public set y(value: number) {
-			this._y = value;
+			this.t.y = value;
 		}
 
 		public get alpha(): number {
-			return this._alpha;
+			return this.t.alpha;
 		}
 		public set alpha(value: number) {
-			this._alpha = value;
+			this.t.alpha = value;
 		}
 
 		public get pusatY(): number {
-			return this._pusatY;
+			return this.t.pusatY;
 		}
 		public set pusatY(value: number) {
-			this._pusatY = value;
+			this.t.pusatY = value;
 		}
 
 		public get pusatX(): number {
-			return this._pusatX;
+			return this.t.pusatX;
 		}
 		public set pusatX(value: number) {
-			this._pusatX = value;
+			this.t.pusatX = value;
 		}
 
 		public get panjang(): number {
-			if (this._panjang) return this._panjang;
+			if (this.t.panjang != undefined) return this.t.panjang;
 			if (this.img) return this.img.naturalWidth;
 			return 0;
 		}
 
 		public set panjang(value: number) {
-			this._panjang = value;
+			this.t.panjang = value;
 		}
 
 		public get lebar(): number {
-			if (this._lebar) return this._lebar;
+			if (this.t.lebar != undefined) return this.t.lebar;
 			if (this.img) return this.img.naturalHeight;
 			return 0;
 		}
 		public set lebar(value: number) {
-			this._lebar = value;
+			this.t.lebar = value;
+		}
+
+		public get rotasi(): number {
+			return normalisasiSudut(this.t.rotasi);
+		}
+		public set rotasi(value: number) {
+			this.t.rotasi = value;
 		}
 
 		public get ctrIdx(): number {
@@ -281,13 +372,6 @@ namespace Basik {
 		}
 		public set ctrIdx(value: number) {
 			this._ctrIdx = value;
-		}
-
-		public get rotasi(): number {
-			return normalisasiSudut(this._rotasi);
-		}
-		public set rotasi(value: number) {
-			this._rotasi = value;
 		}
 
 		public get dragAwalX(): number {
