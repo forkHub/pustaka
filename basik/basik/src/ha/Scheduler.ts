@@ -20,8 +20,7 @@ namespace Basik {
 			while (this.ls.length > 0) {
 				const item = this.ls[0];
 				if (item.gbr.dimuat) {
-					//TODO: gambar; simpan status terlebih dahulu; hapus gambar temporary
-					// ImgImpl.d
+					Ip.GamberTransSingle(item);
 					this.ls.shift();
 				}
 				else {

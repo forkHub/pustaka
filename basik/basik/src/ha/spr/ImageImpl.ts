@@ -138,6 +138,7 @@ namespace Basik {
 			return Ktk.collideDot(gbr1.rect, x2, y2);
 		};
 
+		/*
 		private static gambarUbin(gbr: GbrObj, x: number = 0, y: number = 0, frame: number = 0) {
 			let jmlH: number = 0;
 			let jmlV: number = 0;
@@ -181,6 +182,7 @@ namespace Basik {
 
 
 		}
+			*/
 
 		static AmbilPiksel(x: number = 0, y: number = 0): void {
 			try {
@@ -208,6 +210,8 @@ namespace Basik {
 			G.Kanvas().getContext('2d').fillRect(Math.floor(x), Math.floor(y), 1, 1);
 		}
 
+		//depecrated
+		/*
 		static Draw(img: GbrObj) {
 			img.ctrIdx = (++GbrObj.ctrDraw);
 
@@ -241,69 +245,128 @@ namespace Basik {
 				// }
 			}
 		}
+			*/
 
-		private static GamberSingle(gbr: GbrObj) {
-			let ctx: CanvasRenderingContext2D = G.Kanvas().getContext('2d');
+		// private static GamberSingle(gbr: GbrObj) {
+		// 	let ctx: CanvasRenderingContext2D = G.Kanvas().getContext('2d');
+		// 	let jmlH: number = 0;
+		// 	let frameX: number = 0;
+		// 	let frameY: number = 0;
+		// 	let imgW: number = 0;
+
+		// 	if (gbr.dimuat == false) {
+		// 		console.log("gambar single, belum di muat: ", gbr);
+		// 		return;
+		// 	}
+
+		// 	imgW = gbr.img.naturalWidth;
+
+		// 	// gbr.ctrIdx = GbrObj.ctrDraw++;
+		// 	let frame = Math.floor(gbr.frame);
+
+		// 	jmlH = Math.floor(imgW / gbr.panjangFrame);
+
+		// 	frameX = (frame % jmlH);
+		// 	frameY = Math.floor(frame / jmlH);
+		// 	frameX *= gbr.panjangFrame;
+		// 	frameY *= gbr.lebarFrame;
+		// 	frameX = Math.floor(frameX);
+		// 	frameY = Math.floor(frameY);
+
+		// 	let x2: number = Math.floor(gbr.x);
+		// 	let y2: number = Math.floor(gbr.y);
+
+		// 	let w2: number = Math.floor(gbr.panjang);
+		// 	let h2: number = Math.floor(gbr.lebar);
+
+		// 	x2 -= (gbr.pusatX);
+		// 	y2 -= (gbr.pusatY);
+
+		// 	if (gbr.rotasi != 0) {
+		// 		ctx.save();
+		// 		ctx.translate(gbr.x, gbr.y);
+		// 		ctx.rotate(gbr.rotasi * (Math.PI / 180));
+
+		// 		drawImpl(-gbr.pusatX, -gbr.pusatY)
+
+		// 		ctx.restore();
+		// 	}
+		// 	else {
+		// 		ctx.save();
+
+		// 		drawImpl(x2, y2);
+
+		// 		ctx.restore();
+		// 	}
+
+		// 	function drawImpl(posX: number, posY: number) {
+		// 		//
+		// 		ctx.globalAlpha = gbr.alpha / 100;
+		// 		ctx.drawImage(gbr.img, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(posX), Math.floor(posY), w2, h2);
+		// 		ctx.globalAlpha = 1;
+		// 	}
+
+		// }
+
+		//depecrated, kemungkinan fitur ini dihapus
+		/*
+		private static GambarTransUbin(trans: ItemRender) {
 			let jmlH: number = 0;
-			let frameX: number = 0;
-			let frameY: number = 0;
-			let imgW: number = 0;
+			let jmlV: number = 0;
+			let t: GbrTransform = trans.trans;
 
-			if (gbr.dimuat == false) {
-				console.log("gambar single, belum di muat: ", gbr);
-				return;
+			if (trans.gbr.dimuat == false) return;
+
+			let w2: number = Math.floor(t.panjang);
+			let h2: number = Math.floor(t.lebar);
+
+			while (t.x < 0) {
+				t.x += w2;
 			}
 
-			imgW = gbr.img.naturalWidth;
-
-			// gbr.ctrIdx = GbrObj.ctrDraw++;
-			let frame = Math.floor(gbr.frame);
-
-			jmlH = Math.floor(imgW / gbr.panjangFrame);
-
-			frameX = (frame % jmlH);
-			frameY = Math.floor(frame / jmlH);
-			frameX *= gbr.panjangFrame;
-			frameY *= gbr.lebarFrame;
-			frameX = Math.floor(frameX);
-			frameY = Math.floor(frameY);
-
-			let x2: number = Math.floor(gbr.x);
-			let y2: number = Math.floor(gbr.y);
-
-			let w2: number = Math.floor(gbr.panjang);
-			let h2: number = Math.floor(gbr.lebar);
-
-			x2 -= (gbr.pusatX);
-			y2 -= (gbr.pusatY);
-
-			if (gbr.rotasi != 0) {
-				ctx.save();
-				ctx.translate(gbr.x, gbr.y);
-				ctx.rotate(gbr.rotasi * (Math.PI / 180));
-
-				drawImpl(-gbr.pusatX, -gbr.pusatY)
-
-				ctx.restore();
-			}
-			else {
-				ctx.save();
-
-				drawImpl(x2, y2);
-
-				ctx.restore();
+			while (t.x > 0) {
+				t.x -= w2;
 			}
 
-			function drawImpl(posX: number, posY: number) {
-				//
-				ctx.globalAlpha = gbr.alpha / 100;
-				ctx.drawImage(gbr.img, frameX, frameY, gbr.panjangFrame, gbr.lebarFrame, Math.floor(posX), Math.floor(posY), w2, h2);
-				ctx.globalAlpha = 1;
+			while (t.y < 0) {
+				t.y += h2;
 			}
+
+			while (t.y > 0) {
+				t.y -= h2;
+			}
+
+			t.x -= w2;
+			t.y -= h2;
+
+			// let frame = Math.floor(t.frame);//TODO
+
+			jmlH = Math.ceil((G.Kanvas().width + Math.abs(t.x)) / w2);
+			jmlV = Math.ceil((G.Kanvas().height + Math.abs(t.y)) / h2);
+
+			// for (let i: number = 0; i < jmlH; i++) {
+			// 	for (let j: number = 0; j < jmlV; j++) {
+			// 		gbr.x = x + (i * w2);
+			// 		gbr.y = y + (j * h2);
+			// 		Ip.GamberTransSingle(trans);
+			// 	}
+			// }
+
 
 		}
+			*/
 
-		static GamberTrans(t: ItemRender) {
+		static GambarTrans(t: ItemRender) {
+			// if (t.trans.ubin) {
+			// Ip.gambarUbin(img, img.x, img.y, img.frame);
+			// ImgImpl.GambarTransUbin(t);
+			// }
+			// else {
+			ImgImpl.GamberTransSingle(t);
+			// }
+		}
+
+		static GamberTransSingle(t: ItemRender) {
 			let ctx: CanvasRenderingContext2D = G.Kanvas().getContext('2d');
 			let jmlH: number = 0;
 			let frameX: number = 0;

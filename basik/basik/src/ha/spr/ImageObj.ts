@@ -14,7 +14,7 @@ namespace Basik {
 			h.pusatX = gbr.t.pusatX;
 			h.pusatY = gbr.t.pusatY;
 			h.rotasi = gbr.t.rotasi;
-			h.ubin = gbr.t.ubin;
+			// h.ubin = gbr.t.ubin;
 
 			return h;
 		}
@@ -29,7 +29,7 @@ namespace Basik {
 		private _panjang: number = undefined;
 		private _lebar: number = undefined;
 		private _rotasi: number = 0;
-		private _tilable: boolean = false;
+		// private _tilable: boolean = false;
 		private _panjangFrame: number = 0;
 		private _lebarFrame: number = 0;
 		private _frame: number = 0;
@@ -96,12 +96,12 @@ namespace Basik {
 		public set rotasi(value: number) {
 			this._rotasi = value;
 		}
-		public get ubin(): boolean {
-			return this._tilable;
-		}
-		public set ubin(value: boolean) {
-			this._tilable = value;
-		}
+		// public get ubin(): boolean {
+		// 	return this._tilable;
+		// }
+		// public set ubin(value: boolean) {
+		// 	this._tilable = value;
+		// }
 		public get panjangFrame(): number {
 			return this._panjangFrame;
 		}
@@ -285,12 +285,12 @@ namespace Basik {
 			this.t.frame = value;
 		}
 
-		public get ubin(): boolean {
-			return this.t.ubin;
-		}
-		public set ubin(value: boolean) {
-			this.t.ubin = value;
-		}
+		// public get ubin(): boolean {
+		// 	return this.t.ubin;
+		// }
+		// public set ubin(value: boolean) {
+		// 	this.t.ubin = value;
+		// }
 
 		public get panjangFrame(): number {
 			return this.t.panjangFrame;
