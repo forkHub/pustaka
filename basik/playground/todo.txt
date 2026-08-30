@@ -1,6 +1,3 @@
-[x] Tampilan dibuat dua kolom, bagian kiri untuk kode bagian kanan untuk hasil
-[x] tombol simpan sebagai
-[x] fungsi rename
-[x] menu tombol untuk tampilan demo
-
-load dari file seperti basik-blok
+tampilan error message masih susah dibaca
+harus bisa catch error di main code
+kesalahan nama fungsi bisa di cegah (false positif)
