@@ -16,7 +16,18 @@ namespace Basik {
 			h.rotasi = gbr.t.rotasi;
 			// h.ubin = gbr.t.ubin;
 
+			// console.log("from gambar ", h);
+
 			return h;
+		}
+
+		update(gbr: GbrObj): void {
+			if (this.panjang === undefined) this.panjang = gbr.panjang;
+			if (this.lebar === undefined) this.lebar = gbr.lebar;
+			if (this.panjangOri === undefined) this.panjangOri = gbr.panjangOri;
+			if (this.lebarOri === undefined) this.lebarOri = gbr.lebarOri;
+			if (this.panjangFrame === undefined) this.panjangFrame = gbr.panjangFrame;
+			if (this.lebarFrame === undefined) this.lebarFrame = gbr.lebarFrame;
 		}
 
 		private _panjangOri: number = undefined;
@@ -30,8 +41,8 @@ namespace Basik {
 		private _lebar: number = undefined;
 		private _rotasi: number = 0;
 		// private _tilable: boolean = false;
-		private _panjangFrame: number = 0;
-		private _lebarFrame: number = 0;
+		private _panjangFrame: number = undefined;
+		private _lebarFrame: number = undefined;
 		private _frame: number = 0;
 
 		public get panjangOri(): number {
@@ -135,19 +146,38 @@ namespace Basik {
 		 */
 		constructor(url: string = '', pf?: number, lf?: number) {
 			let gbr: GbrObj = this;
-			gbr.t.lebarFrame = pf;
-			gbr.t.panjangFrame = lf;
+
+			if (lf !== undefined) gbr.t.lebarFrame = lf;
+			if (pf !== undefined) gbr.t.panjangFrame = pf;
 
 			ImageCache.get(Ip.resolveGbrUrl(url), (img) => {
 				Ip.register(gbr, url, 0);
+
+				// console.log("image dimuat");
 
 				gbr.img = img;
 				gbr.dimuat = true;
 
 				gbr.rect = Ktk.buat(0, 0, img.naturalWidth, img.naturalHeight);
 
+				this.t.panjangOri = img.naturalWidth;
+				this.t.lebarOri = img.naturalHeight;
+
+				if (this.t.panjang === undefined) {
+					this.t.panjang = img.naturalWidth;
+				}
+
+				if (this.t.lebar === undefined) {
+					this.t.lebar = img.naturalHeight;
+				}
+
+				if (this.t.panjangFrame === undefined) this.t.panjangFrame = img.naturalWidth;
+				if (this.t.lebarFrame === undefined) this.t.lebarFrame = img.naturalHeight;
+
 				ImgImpl.lastImg = gbr;
 				BEvent.dispatchEvent(Evt.GAMBAR_DILOAD);
+
+				// console.log(this.t);
 			}, () => {
 				gbr.error = true;
 			})
@@ -342,9 +372,10 @@ namespace Basik {
 		}
 
 		public get panjang(): number {
-			if (this.t.panjang != undefined) return this.t.panjang;
-			if (this.img) return this.img.naturalWidth;
-			return 0;
+			return this.t.panjang;
+			// if (this.t.panjang != undefined) return this.t.panjang;
+			// if (this.img) return this.img.naturalWidth;
+			// return 0;
 		}
 
 		public set panjang(value: number) {
@@ -352,9 +383,10 @@ namespace Basik {
 		}
 
 		public get lebar(): number {
-			if (this.t.lebar != undefined) return this.t.lebar;
-			if (this.img) return this.img.naturalHeight;
-			return 0;
+			return this.t.lebar;
+			// if (this.t.lebar != undefined) return this.t.lebar;
+			// if (this.img) return this.img.naturalHeight;
+			// return 0;
 		}
 		public set lebar(value: number) {
 			this.t.lebar = value;

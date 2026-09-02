@@ -373,6 +373,9 @@ namespace Basik {
 			let frameY: number = 0;
 			let imgW: number = 0;
 			let trans = t.trans;
+			let img = t.gbr.img;
+
+			trans.update(t.gbr);
 
 			imgW = trans.panjangOri;
 
@@ -414,9 +417,23 @@ namespace Basik {
 			}
 
 			function drawImpl(posX: number, posY: number) {
+				const { panjangFrame, lebarFrame, alpha } = trans;
+
+				// console.log({
+				// 	frameX,
+				// 	frameY,
+				// 	panjangFrame,
+				// 	lebarFrame,
+				// 	posX,
+				// 	posY,
+				// 	w2,
+				// 	h2,
+				// 	alpha
+				// });
 				//
-				ctx.globalAlpha = trans.alpha / 100;
-				ctx.drawImage(t.gbr.img, frameX, frameY, trans.panjangFrame, trans.lebarFrame, Math.floor(posX), Math.floor(posY), w2, h2);
+
+				ctx.globalAlpha = alpha / 100;
+				ctx.drawImage(img, frameX, frameY, panjangFrame, lebarFrame, Math.floor(posX), Math.floor(posY), w2, h2);
 				ctx.globalAlpha = 1;
 			}
 
