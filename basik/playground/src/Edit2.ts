@@ -439,6 +439,10 @@ class Edit2 {
 		iframeCont.innerHTML = '';
 		iframeCont.appendChild(iframe);
 
+		console.group("compile");
+		console.log(hal2);
+		console.groupEnd();
+
 		setTimeout(() => {
 			iframe.contentWindow.document.open();
 			iframe.contentWindow.document.write(hal2);
