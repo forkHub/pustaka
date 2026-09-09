@@ -95,28 +95,27 @@ namespace Basik {
 		}
 
 		static register(
-			image: GbrObj,
-			url: string,
-			tipeDrag: number): GbrObj {
+			gbr: GbrObj,
+		): GbrObj {
 
-			let hasil: GbrObj;
-			hasil = image;
-			hasil.tipeDrag = tipeDrag;
-			hasil.url = url;
+			// let hasil: GbrObj;
+			// hasil = gbr;
+			// hasil.tipeDrag = tipeDrag;
+			// hasil.url = url;
 
-			Ip.daftar.push(hasil);
+			Ip.daftar.push(gbr);
 
-			return hasil;
+			return gbr;
 		}
 
-		static free(img: Basik.GbrObj) {
+		static free(gbr: Basik.GbrObj) {
 			for (let i = 0; i < this.daftar.length; i++) {
-				if (this.daftar[i] == img) {
+				if (this.daftar[i] == gbr) {
 					// img.kanvas = null;
-					img.img = null;
-					Basik.Ktk.destroy(img.rect);
+					gbr.img = null;
+					Basik.Ktk.destroy(gbr.rect);
 					this.daftar.splice(i, 1);
-					img.rect = null;
+					gbr.rect = null;
 					return;
 				}
 			}

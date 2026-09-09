@@ -151,7 +151,7 @@ namespace Basik {
 			if (pf !== undefined) gbr.t.panjangFrame = pf;
 
 			ImageCache.get(Ip.resolveGbrUrl(url), (img) => {
-				Ip.register(gbr, url, 0);
+				Ip.register(gbr);
 
 				// console.log("image dimuat");
 
@@ -180,6 +180,7 @@ namespace Basik {
 				// console.log(this.t);
 			}, () => {
 				gbr.error = true;
+				//TODO: alert
 			})
 
 		}

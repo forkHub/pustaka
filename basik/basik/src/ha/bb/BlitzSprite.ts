@@ -32,10 +32,11 @@ function stempel(img: Basik.GbrObj | string, x?: number, y?: number) {
 		if (x != undefined && y != undefined) {
 			posisi(img, x, y);
 		}
+		else {
+
+		}
 		Basik.scheduler.reg(img);
 	}
-
-
 
 	function posisi(img: Basik.GbrObj, x: number, y: number) {
 		if (x != undefined) {

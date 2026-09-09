@@ -36,6 +36,7 @@ namespace Basik {
 		}
 
 		private handleGbrDitekan(img: GbrObj, posCanvas: { x: number, y: number }, id: string) {
+			console.debug("handle gambar ditekan");
 			img.ditekan = true;
 			img.dragAwalX = posCanvas.x - img.x;
 			img.dragAwalY = posCanvas.y - img.y;
@@ -87,7 +88,7 @@ namespace Basik {
 						img.rotasi = img.initialAngle + perbedaan;
 					}
 					else {
-
+						console.warn("invalid tipe drag " + img.tipeDrag);
 					}
 
 				}

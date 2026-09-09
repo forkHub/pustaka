@@ -9,4 +9,5 @@
 ///<reference path="./Sound.ts"/>
 ///<reference path="./Keyboard.ts"/>
 ///<reference path="./Warna.ts"/>
+///<reference path="./AutoFunc.ts"/>
 

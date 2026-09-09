@@ -170,8 +170,9 @@ namespace Basik {
 		}
 
 		static init(buffer: HTMLCanvasElement): void {
-			if (!buffer) {
 
+			if (!buffer) {
+				console.warn("failed to init event, buffer not available");
 			}
 
 			buffer.style.touchAction = 'none';
@@ -181,6 +182,8 @@ namespace Basik {
 				(e: PointerEvent) => {
 					e.stopPropagation();
 					e.preventDefault();
+
+					console.debug("pointer down");
 
 					let pos: any = Input.getPos(e.clientX, e.clientY, buffer);
 
@@ -236,13 +239,16 @@ namespace Basik {
 				"pointerout",
 				(e: PointerEvent) => {
 					pointerUp(e);
-				});
+					console.debug("pointer out");
+				}
+			);
 
 			buffer.addEventListener(
 				"pointerup",
 				(e: PointerEvent) => {
 					this._lastButton = e.button;
 					pointerUp(e);
+					console.debug("pointer up");
 				})
 
 			function pointerUp(e: PointerEvent): void {

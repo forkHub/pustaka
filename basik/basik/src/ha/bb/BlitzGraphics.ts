@@ -26,7 +26,7 @@ function mulai(w: number = 800, h: number = 600, canvas: HTMLCanvasElement = nul
 /**
  * Clear the canvas
  */
-function bersihkanLayar(x: number = 0, y: number = 0, w: number = 0, h: number = 0) {
+function bersihkanLayar(x: number = 0, y: number = 0, w: number = 800, h: number = 600) {
 	G.Cls(x, y, w, h);
 }
 
