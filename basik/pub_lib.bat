@@ -10,7 +10,7 @@ cd ..
 echo =================================
 echo update library 
 echo =================================
-copy build\*.* template\lib || goto error
+REM copy build\*.* template\lib || goto error
 copy build\*.* playground\web\editor\lib || goto error
 echo ==============
 echo.

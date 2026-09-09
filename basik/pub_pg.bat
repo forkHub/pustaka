@@ -10,7 +10,7 @@ echo.
 
 echo publikasi pg
 echo ============
-xcopy playground\web\*.* stg\pg /s /i /y || goto error
+xcopy playground\web\*.* hugo\public\pg /s /i /y || goto error
 echo =========
 echo.
 
