@@ -1,19 +1,17 @@
 Demo Functionality:
 	image collide point
 
-Perintah Adv (kemungkinan langsung ke contex):
-	gradient
-
 Playground:
 	muat dari local storage
 		check apakah ada file yang masih aktif belum disimpan
 	demo integrasi 
 		dibuat dalam bentuk dokumentasi yang bisa di copy paste
-		[x] (load pakai insert javascript seperti di basik blok)
-		[x] perlu grouping?
+	tampilan error lebih rapi
+	tampilan error yang bisa di terjemahkan
 		
 Library:
-	Saat gambar gagal di load akan ada popup modal
+	Saat gambar gagal di load akan ada popup modal.
+	saat ini belum dipanggil akan ada popup modal.
 
 Next:
 Camera dipakai lagi
@@ -25,3 +23,5 @@ perintah gambar sederhana
 	mode global dan relatif
 	
 textObject
+Perintah Adv (kemungkinan langsung ke contex):
+	gradient

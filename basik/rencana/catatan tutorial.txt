@@ -1,19 +1,39 @@
-doc dibuat high level, tidak bisa mentarget terlalu rendah
-target anak kelas atas
+stempel
+gambar sebagai object
+event handling
+menggambar bentuk
+collision
+
+tutorial project:
+doodle
+
 
 fase 2
 ======
 struktur latihan
-	perintah tulis lanjutan
+	memulai applikasi
+	perintah tulis
+	gambar bentuk
 	warna
+
+lanjutan
 	prompt
+	acak
+	variable
+	for
+	if
+	operator
+
+lanjutan 2
 	for nested
 	komplek logical operator
-	basik shape: kotak, lingkaran, elipse, garis, quad
+	gambar bentuk lanjutan
 	array
 	for decrement
+	debugging
 
 proyek:
 	doodle
 	doodle advanced
+
 
