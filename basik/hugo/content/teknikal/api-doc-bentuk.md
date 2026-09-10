@@ -1,3 +1,6 @@
+[Beranda]({{< ref "/" >}})
+
+
 ## 📝 menggambar bentuk dasar
 Berisi kumpulan perintah untuk menggambar dengan bangun geometri
 

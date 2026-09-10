@@ -1,3 +1,5 @@
+[Beranda]({{< ref "/" >}})
+
 ## 📝 Perintah Matematika
 perintah umum matematika.
 

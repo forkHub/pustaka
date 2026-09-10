@@ -1,3 +1,4 @@
+[Beranda]({{< ref "/" >}})
 
 ## 📖 Memulai BASIK
 
