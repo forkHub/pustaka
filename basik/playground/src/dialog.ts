@@ -69,6 +69,12 @@ function dialogDaftarFile(
 
 	function refresh(): void {
 		list.innerHTML = '';
+		if (fileList.length == 0) {
+			let p = document.createElement('p');
+			p.innerText = 'Belum ada file';
+			list.appendChild(p);
+			return;
+		}
 		fileList.forEach(item => {
 			const li = document.createElement('li');
 			li.className = 'dialog-item pd';

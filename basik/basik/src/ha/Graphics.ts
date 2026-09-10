@@ -168,7 +168,7 @@ namespace Basik {
 				}
 				return false;
 			} catch (e) {
-				dialog(`Ada kesalahan di fungsi ${str}. Silahkan check codenya.<hr/>${(e as any).message}<hr/>${(e as any).stack}`);
+				dialog(`Ada kesalahan.<br/> Silahkan check codenya.<hr/>${(e as any).message}<hr/><pre>${(e as any).stack}</pre>`);
 				throw (e);
 			}
 		}
