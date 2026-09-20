@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AcornJS AST Parser</title>
+  <script src="https://unpkg.com/acorn@8.18.0/dist/acorn.js"></script>
+</head>
+<body>
+  <h1>JavaScript Code to AST</h1>
+  <textarea id="jsCode" rows="10" cols="50">// Write your JavaScript code here</textarea><br>
+  <button id="parseBtn">Parse Code</button>
+
+  <h2>Results</h2>
+  <div id="results"></div>
+
+  <script>
+    document.getElementById('parseBtn').addEventListener('click', () => {
+      const code = document.getElementById('jsCode').value;
+
+      try {
+        const ast = acorn.parse(code, { ecmaVersion: 2020, sourceType: 'module' });
+        console.log("AST:", ast);
+
+        const variables = [];
+        const functions = [];
+
+        // Custom recursive walker
+        function walk(node, parent = null) {
+          switch (node.type) {
+            case 'VariableDeclaration':
+              node.declarations.forEach(decl => {
+                if (decl.id && decl.id.name) {
+                  variables.push(decl.id.name);
+                }
+                if (decl.init && (decl.init.type === 'FunctionExpression' || decl.init.type === 'ArrowFunctionExpression')) {
+                  functions.push(decl.id.name);
+                }
+              });
+              break;
+            case 'FunctionDeclaration':
+              if (node.id && node.id.name) {
+                functions.push(node.id.name);
+              }
+              break;
+            case 'AssignmentExpression':
+              if (node.left.type === 'Identifier' &&
+                  (node.right.type === 'FunctionExpression' || node.right.type === 'ArrowFunctionExpression')) {
+                functions.push(node.left.name);
+              }
+              break;
+            case 'ClassDeclaration':
+              if (node.id && node.id.name) {
+                functions.push(node.id.name); // treat class names as functions
+              }
+              break;
+            case 'MethodDefinition':
+              if (node.key && node.key.name) {
+                functions.push(node.key.name);
+              }
+              break;
+          }
+
+          // Traverse children
+          for (let key in node) {
+            if (node.hasOwnProperty(key)) {
+              const child = node[key];
+              if (Array.isArray(child)) {
+                child.forEach(c => { if (c && typeof c.type === 'string') walk(c, node); });
+              } else if (child && typeof child.type === 'string') {
+                walk(child, node);
+              }
+            }
+          }
+        }
+
+        walk(ast);
+
+        document.getElementById('results').innerHTML = `
+          <p><strong>Variables:</strong> ${variables.join(', ') || '(none)'}</p>
+          <p><strong>Functions:</strong> ${functions.join(', ') || '(none)'}</p>
+        `;
+
+        alert("Parsing successful! Check the results below and console for AST.");
+      } catch (err) {
+        console.error("Parsing Error:", err);
+        alert("Error parsing code. Check console for details.");
+      }
+    });
+  </script>
+</body>
+</html>
