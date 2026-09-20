@@ -181,6 +181,7 @@ namespace Basik {
 			}, () => {
 				gbr.error = true;
 				//TODO: alert
+				dialog("gagal memuat image dengan url: " + url);
 			})
 
 		}

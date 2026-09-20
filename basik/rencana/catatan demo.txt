@@ -2,6 +2,7 @@ dasar:
 ======
 drag gambar besar
 drag masjid 360
+image collide point		
 
 intermediate:
 =============

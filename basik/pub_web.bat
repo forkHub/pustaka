@@ -1,9 +1,9 @@
 echo publikasi web
 echo =============
 
-xcopy web\*.html stg /y || goto error
-xcopy web\*.css stg /y || goto error
-echo.
+REM xcopy web\*.html stg /y || goto error
+REM xcopy web\*.css stg /y || goto error
+REM echo.
 
 goto end
 

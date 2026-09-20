@@ -1,3 +1,0 @@
-tampilan error message masih susah dibaca
-harus bisa catch error di main code
-kesalahan nama fungsi bisa di cegah (false positif)

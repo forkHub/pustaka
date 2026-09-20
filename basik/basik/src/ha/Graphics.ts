@@ -157,6 +157,7 @@ namespace Basik {
 			w = w || G._drawCanvas.width;
 			h = h || G._drawCanvas.height;
 			ctx.clearRect(x, y, w, h);
+			scheduler.ls.length = 0;
 		}
 
 		private static callFunc(str: string): boolean {

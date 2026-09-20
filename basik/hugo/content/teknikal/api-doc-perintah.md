@@ -2,7 +2,7 @@
 
 ## 📝 Perintah Umum
 
-### `mulai(pjg: number = 800, lbr: number = 600, kanvas: HTMLCanvasElement = null, mode: number = 1)`  
+### `mulai(pjg: number = 800, lbr: number = 600, kanvas: HTMLCanvasElement = null, mode: number = 1):void`  
 
 Memulai aplikasi. Ini adalah perintah awal untuk memulai applikasi dengan BASIK.
 
@@ -16,9 +16,11 @@ Memulai aplikasi. Ini adalah perintah awal untuk memulai applikasi dengan BASIK.
 	Kanvas yang akan dipakai bila ada.  
 	Bila diisi null maka BASIK akan otomatis mencari kanvas yang ada di dokumen atau membuat baru bila tidak tersedia
 *	`mode`: `number`, default 1  
-	Mode yang dipakai: 1 bila ingin full screen atau 0 bila ingin kanvas apa adanya. Gunakan 0 bila ingin full kontrol terhadap kanvas yang ingin dipakai.  
+	Mode yang dipakai: 1 bila ingin full-screen atau 0 bila ingin kanvas apa adanya. Gunakan 0 bila ingin mendapatkan kontrol penuh terhadap kanvas yang ingin dipakai.  
 
-### `bersihkanLayar(x: number = 0, y: number = 0, pjg: number = 800, lbr: number = 600)`
+**Returns:** `void`
+
+### `bersihkanLayar(x: number = 0, y: number = 0, pjg: number = 800, lbr: number = 600):void`
 
 Membersihkan layar
 
@@ -27,20 +29,22 @@ Membersihkan layar
 *	`x`: `number`, default 0
 	posisi x dari posisi awal membersihkan layar
 *	`y`: `number`, default 0
-	posisi x dari posisi awal membersihkan layar
+	posisi y dari posisi awal membersihkan layar
 *	`pjg`: `number`, default 800
 	panjang area untuk dibersihkan
 *	`lbr`: `number`, default 600
 	lebar area untuk dibersihkan
 
-### `stempel(url = "roket", x?, y?)`
+**Returns:** `void`
+
+### `stempel(url = "roket", x?, y?):void`
 Menstempel gambar ke layar pada posisi tertentu  
 
 **Parameters**
 
-*   `url`: `string` atau object `Gambar` default "roket"
+*   `url`: `string` default "roket", atau object `Gambar` 
 	`url` bisa diisi dengan alamat/url gambar yang akan di stempel atau object `Gambar` yang akan di stempel ke layar.  
-	Bila hanya diisi menggunakan nama file ("kotak" atau "kotak.png") maka BASIK akan otomatis mencari di folder asset.  
+	Bila hanya diisi menggunakan nama file ("kotak" atau "kotak.png") maka BASIK akan otomatis mencari di folder `asset`.  
  	`url` dengan type string ditujukan untuk penyederhanaan bagi pemula yang belum mengenal konsep `object` dengan fitur yang lebih sedikit.
 	Untuk fitur yang lebih kompleks seperti mengatur ukuran gambar, rotasi, dll, maka dianjurkan untuk memuat gambar terlebih dahulu dengan perintah `muatGambar()`.
 *	`x`: `number`, optional  
@@ -52,7 +56,7 @@ Menstempel gambar ke layar pada posisi tertentu
 
 **Returns:** `void`
 
-### `muatGambar(url)`
+### `muatGambar(url):Gambar`
 
 Memuat gambar. Hasil dari perintah ini bisa digunakan dengan perintah `stempel()`, atau perintah lainnya.  
 Dengan memuat gambar terlebih dahulu, kita akan punya lebih banyak fitur seperti mengatur panjang/lebar, rotasi, dsb. 
@@ -82,7 +86,7 @@ Pengecekan mensupport gambar yang di rotasi.
 
 ### `poinDidalamGambar(img: Gambar, x: number, y: number): boolean`  
 
-Mengecek apakah sebuah point pada lokasi tertentu ada di dalam gambar
+Mengecek apakah sebuah poin pada lokasi tertentu ada di dalam gambar
 
 **Parameters**
 
@@ -93,7 +97,7 @@ Mengecek apakah sebuah point pada lokasi tertentu ada di dalam gambar
 *	`y`: `number`  
 	Poisi y point
 
-**Returns:** `boolean`. Bernilai True bila point berada di dalam gambar
+**Returns:** `boolean`. Bernilai `true` bila point berada di dalam gambar
 
 ### `semuaGambarSelesaiDimuat(): boolean`  
 
@@ -101,7 +105,7 @@ Mengecek apakah semua gambar sudah selesai dimuat. Gambar yang belum di muat mas
 Bila kita men-`stempel` gambar yang belum dimuat, maka gambarnya akan terlihat setelah gambar selesai di muat.
 Perintah ini diperlukan kalau kita benar-benar ingin menunggu semua gambar selesai di muat sebelum melakukan sesuatu.
 
-**Returns:** `boolean`. Bernilai true bila semua gambar selesai dimuat.
+**Returns:** `boolean`. Bernilai `true` bila semua gambar selesai dimuat.
 
 ### `posisiGambar(gbr: Gambar, x:number = 0, y:number = 0): void`  
 
@@ -116,7 +120,7 @@ Mengubah posisi gambar. Kita juga bisa mengubah posisi gambar secara parsial den
 *	`y`: `number`, default 0  
 	Posisi y  
 
-### `ukuranGambar(gbr: Gambar, p:number = 32, l:number = 32): void`  
+### `ukuranGambar(gbr: Gambar, pjg:number = 32, lbr:number = 32): void`  
 
 Mengubah ukuran gambar. Kita juga bisa mengubah ukuran gambar melalui property `panjang` dan `lebar`.
 
@@ -124,9 +128,9 @@ Mengubah ukuran gambar. Kita juga bisa mengubah ukuran gambar melalui property `
 
 *	`gbr`: `Gambar`  
 	Gambar yang akan di ubah ukurannya
-*	`p`: `number`, default 32  
+*	`pjg`: `number`, default 32  
 	panjang gambar
-*	`l`: `number`, default 32
+*	`lbr`: `number`, default 32
 	Lebar gambar
 
 ## 📝 Input
@@ -194,22 +198,25 @@ Mengembalikan besar pergerakan vertikal saat mouse bergerak
 
 ### `tombolDitahan(key: string = '')`
 
-mengecek apakah sebuah tombol sedang ditahan
+mengecek apakah sebuah tombol keybord sedang ditahan
 
 **Parameters**
 
 *	`key`: `string`
 	tombol yang sedang ditekan
 
-### ` tombolEvent():string `
+### `tombolEvent():string `
 
 Mengembalikan informasi tombol terakhir yang terlibat saat ada event keyboard
+
+**Returns:** `string`. tombol yang sedang ditekan
+
 
 ## 📝 Perintah Teks
 
 Perintah-perintah yang berhubungan dengan teks.
 
-### `tulis(teks: string = "", x:number, y:number)`
+### `tulis(teks: string = "", x:number, y:number):void`
 
 Menulis sesuatu di layar
 

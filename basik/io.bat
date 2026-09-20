@@ -8,7 +8,7 @@ set io_folder=..\..\io\basik
 
 echo publikasi io
 echo ================
-xcopy stg\*.* %io_folder% /s /y || goto error
+xcopy hugo\public\*.* %io_folder% /s /y || goto error
 echo.
 
 echo selesai

@@ -1,0 +1,10 @@
+tampilan error message masih susah dibaca
+muat dari local storage, check apakah ada file yang masih aktif belum disimpan
+
+static analysis:
+	parser lib
+	test usage
+	simple app to test (textarea, submit button)
+	export using rollup
+	integrasi
+	add functionality

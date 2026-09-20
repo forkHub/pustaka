@@ -7,7 +7,7 @@ title = 'BASIK'
 
 # BASIK - Belajar koding untuk pemula
 
-> Web ini masih dalam tahap pengembangan, namun semua fungsionalitas sudah berjalan. kesalahan bisa terjadi
+> Web ini masih dalam tahap pengembangan, Fungsionalitas utama sudah berjalan, kesalahan dan perubahan bisa terjadi tanpa pemberitahuan lebih dahulu.
 
 ---
 
@@ -33,7 +33,7 @@ BASIK adalah sebuah platform pembelajaran koding dengan pendekatan interaktif da
 
 ## 💾 Download
 
-Unduh template BASIK dan mulai belajar secara luring:
+Unduh BASIK dan mulai belajar secara luring:
 
 [Download BASIK](https://drive.google.com/file/d/1zEYIe2S3IFUF_YD0e-ECOmtPK0U0UxLy/view?usp=sharing)
 
@@ -51,7 +51,7 @@ Klik tombol berikut untuk membuka editor:
 
 ## Tutorial
 
-Kumpulan tutorial yang membahas cara pemakaian basik, dan penjelasan dari demo yang ada:
+Tutorial cara pemakaian basik membuat aplikasi sederhana:
 
 - [Aplikasi pertama](/pelajaran/mulai/)
 
@@ -83,6 +83,8 @@ Dokumentasi teknis tentang basik.
   Animasi dengan menggunakan spritesheet
 - **[doodle](./pg/basik.html?url=./contoh/m_doodle.js)**  
   Applikasi doodle sederhana
+- **[bola memantul](./pg/basik.html?url=./contoh/bola_1.js)**  
+  Animasi bola memantul
 - **[platformer](./pg/basik.html?url=./contoh/m_platformer.js)**  
   Aplikasi game platformer
 

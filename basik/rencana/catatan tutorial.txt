@@ -3,37 +3,7 @@ gambar sebagai object
 event handling
 menggambar bentuk
 collision
+warna
 
-tutorial project:
-doodle
-
-
-fase 2
-======
-struktur latihan
-	memulai applikasi
-	perintah tulis
-	gambar bentuk
-	warna
-
-lanjutan
-	prompt
-	acak
-	variable
-	for
-	if
-	operator
-
-lanjutan 2
-	for nested
-	komplek logical operator
-	gambar bentuk lanjutan
-	array
-	for decrement
-	debugging
-
-proyek:
-	doodle
-	doodle advanced
 
 

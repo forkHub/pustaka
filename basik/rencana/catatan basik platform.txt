@@ -1,27 +1,24 @@
-Demo Functionality:
-	image collide point
+handle event mouse klik/mouse up
+Sound belum bisa load dari nama file seperti image
+ada configurasi
+translatable
+pemisahan core dan perintah
+perintah bentuk dasar yang disederhanakan (1 kata)
+pindahin perintah di bb folder ke core
 
-Playground:
-	muat dari local storage
-		check apakah ada file yang masih aktif belum disimpan
-	demo integrasi 
-		dibuat dalam bentuk dokumentasi yang bisa di copy paste
-	tampilan error lebih rapi
-	tampilan error yang bisa di terjemahkan
-		
-Library:
-	Saat gambar gagal di load akan ada popup modal.
-	saat ini belum dipanggil akan ada popup modal.
-
-Next:
+next2:
+camera support
+poin di dalam gambar diganti titikDidalamGambar
+bersihkanLayar disingkat bl
+handle gambar default ketika tidak bisa meload gambar dengan dummy gambar
+penggunaan bahasa yang konsistent
+update ke module system
+kurangi penggunaan static
 Camera dipakai lagi
 	ada konsep layarX dan layarY
 	layarX dan layarY hanya berlaku bila camera tidak di posisi 0
 	perlu perubahan logic dalam gambar dan collision
-	
-perintah gambar sederhana
-	mode global dan relatif
-	
+
 textObject
 Perintah Adv (kemungkinan langsung ke contex):
-	gradient
+gradient

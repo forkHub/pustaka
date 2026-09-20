@@ -5,7 +5,7 @@ namespace Basik {
 		trans: GbrTransform;
 	}
 
-	export class Scheduler {
+	class Scheduler {
 		readonly ls: ItemRender[] = [];
 
 		reg(obj: GbrObj) {
