@@ -1,0 +1,22 @@
+doc api:
+- tambahin yang belum [ok]
+
+tutorial:
+- muat gambar [ok]
+
+demo:
+- bola gravitasi 
+
+basik:
+- perintah baru: geser, putar, bl [ok]
+
+playground;
+- integrasi acorn => first test [ok]
+- perintah mulai belum dipanggil 
+- perintah event belum masuk static analysis
+
+web:
+- bola memantul tidak muncul [ok]
+- tampilan terlalu kepinggir [ok]
+- tampilan padding buat kode
+- padding saat screen kecil (8 px)

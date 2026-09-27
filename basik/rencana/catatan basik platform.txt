@@ -1,15 +1,16 @@
 handle event mouse klik/mouse up
 Sound belum bisa load dari nama file seperti image
-ada configurasi
-translatable
-pemisahan core dan perintah
-perintah bentuk dasar yang disederhanakan (1 kata)
-pindahin perintah di bb folder ke core
+hapus perintah yang terlalu dalam (biru, setPixel)
+
 
 next2:
+pindahin perintah di bb folder ke core
+ada configurasi
+partikel => kecepatan, percepatan, dll
+pemisahan core dan perintah
+translatable
 camera support
 poin di dalam gambar diganti titikDidalamGambar
-bersihkanLayar disingkat bl
 handle gambar default ketika tidak bisa meload gambar dengan dummy gambar
 penggunaan bahasa yang konsistent
 update ke module system

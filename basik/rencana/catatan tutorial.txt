@@ -1,9 +1,18 @@
 stempel
 gambar sebagai object
-event handling
-menggambar bentuk
+mengenal fungsi update
+- contoh animasi astronot
+mengenal fungsi drag
+- astronot di di drag
 collision
-warna
+- astronot di drag mengambil bintang, bintang pindah setelah collision
+drag-remote => untuk user experience
 
+next:
+canvas ukuran dan auto resize
+polar position
+collision
+menggambar bentuk
+warna
 
 

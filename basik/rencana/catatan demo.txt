@@ -1,5 +1,6 @@
 dasar:
 ======
+demo pakai perintah baru, geser, putar
 drag gambar besar
 drag masjid 360
 image collide point		

@@ -1,10 +1,16 @@
-tampilan error message masih susah dibaca
+static analysis:
+	tidak panggil mulai()
+	
+static analysis dihapus untuk online (jshint, accorn0;
+
+ada demo menu:
+	hanya untuk local
+	ada parameter untuk ignore buat online
+
+dokumentasi api local
+	
+next:
 muat dari local storage, check apakah ada file yang masih aktif belum disimpan
 
-static analysis:
-	parser lib
-	test usage
-	simple app to test (textarea, submit button)
-	export using rollup
-	integrasi
-	add functionality
+next2:
+es6 module, beberapa module masih harus di import manual (jshint, accorn)
