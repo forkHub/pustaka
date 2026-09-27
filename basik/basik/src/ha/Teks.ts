@@ -27,6 +27,10 @@ namespace Basik {
 			Teks.size = n;
 		}
 
+		/**
+		 * 
+		 * @param n 
+		 */
 		static Align(n: number = 1) {
 			let align: CanvasTextAlign = "left";
 

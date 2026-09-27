@@ -111,3 +111,12 @@ function pusatGambar(img: Basik.GbrObj, x = 0, y = 0) {
 	img.pusatX = x;
 	img.pusatY = y;
 }
+
+function geserGambar(img: Basik.GbrObj, x = 0, y = 0) {
+	img.x += x;
+	img.y += y;
+}
+
+function putarGambar(img: Basik.GbrObj, n = 0) {
+	img.rotasi += n;
+}

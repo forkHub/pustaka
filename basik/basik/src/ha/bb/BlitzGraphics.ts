@@ -29,7 +29,9 @@ function mulai(w: number = 800, h: number = 600, canvas: HTMLCanvasElement = nul
 function bersihkanLayar(x: number = 0, y: number = 0, w: number = 800, h: number = 600) {
 	G.Cls(x, y, w, h);
 }
+const bl = bersihkanLayar;
 
+//depecrated
 function hijau(): number {
 	return G.hijau;
 }
@@ -62,7 +64,7 @@ function warnaGaris(idx: number, trans = 100) {
 	Basik.Warna.warnaGaris(idx, trans);
 }
 
-function tebalGaris(n: number) {
+function tebalGaris(n: number = 1) {
 	G.Kanvas().getContext('2d').lineWidth = n;
 }
 

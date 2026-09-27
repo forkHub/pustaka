@@ -71,7 +71,7 @@ function tutupPath() {
 	ctx.fill();
 }
 
-function gambarLingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: number = 0, akhir: number = 360): void {
+function lingkaran(x: number = 100, y: number = 100, radius: number = 20, awal: number = 0, akhir: number = 360): void {
 	let ctx = G.Kanvas().getContext('2d');
 	ctx.beginPath();
 	awal *= (Math.PI / 180);
@@ -81,7 +81,7 @@ function gambarLingkaran(x: number = 100, y: number = 100, radius: number = 20, 
 	ctx.fill();
 }
 
-function gambarElips(x: number = 0, y: number = 0, radiusX: number = 32, radiusY: number = 64, awal: number = 0, akhir: number = 360, searahJarumJam: boolean = false): void {
+function elips(x: number = 0, y: number = 0, radiusX: number = 32, radiusY: number = 64, awal: number = 0, akhir: number = 360, searahJarumJam: boolean = false): void {
 	let ctx = G.Kanvas().getContext('2d');
 	awal *= (Math.PI / 180);
 	akhir *= Math.PI / 180;
@@ -90,13 +90,107 @@ function gambarElips(x: number = 0, y: number = 0, radiusX: number = 32, radiusY
 	ctx.fill();
 }
 
-function gambarKotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 100) {
+function kotak(x1: number = 10, y1: number = 10, x2: number = 100, y2: number = 100) {
 	// console.group("kotak");
 	let ctx = G.Kanvas().getContext('2d');
 	ctx.fillRect(x1, y1, x2, y2);
 	ctx.strokeRect(x1, y1, x2, y2);
 	// console.log("dokument ctx == basik ctx " + (document.getElementsByTagName("canvas")[0].getContext('2d') === ctx));
 	// console.groupEnd();
+}
+
+function pie(
+	x: number, // pusat lingkaran
+	y: number,
+	radius: number, // jari-jari
+	startAngleDeg: number, // sudut awal (derajat)
+	endAngleDeg: number,   // sudut akhir (derajat)
+): void {
+	// Konversi derajat ke radian
+	const startAngle = (startAngleDeg * Math.PI) / 180;
+	const endAngle = (endAngleDeg * Math.PI) / 180;
+
+	let ctx = G.Kontek();
+	ctx.beginPath();
+	ctx.moveTo(x, y); // mulai dari pusat
+	ctx.arc(x, y, radius, startAngle, endAngle); // gambar busur
+	ctx.lineTo(x, y); // kembali ke pusat
+	ctx.closePath();
+
+	ctx.fill();
+	ctx.stroke();
+}
+
+function garis(x = 100, y = 100, x2 = 500, y2 = 500): void {
+	let ctx = G.Kontek();
+	ctx.beginPath();
+	ctx.moveTo(x, y);
+	ctx.lineTo(x2, y2);
+	ctx.stroke();
+}
+
+function polygonTeratur(
+	x: number, // pusat poligon
+	y: number,
+	radius: number, // jari-jari (jarak dari pusat ke titik sudut)
+	sides: number, // jumlah sisi (misalnya 6 untuk hexagon)
+): void {
+	if (sides < 3) return; // minimal segitiga
+
+	const angleStep = (2 * Math.PI) / sides;
+
+	let ctx = G.Kontek();
+	ctx.beginPath();
+	for (let i = 0; i < sides; i++) {
+		const px = x + radius * Math.cos(angleStep * i - Math.PI / 2);
+		const py = y + radius * Math.sin(angleStep * i - Math.PI / 2);
+
+		if (i === 0) {
+			ctx.moveTo(px, py);
+		} else {
+			ctx.lineTo(px, py);
+		}
+	}
+	ctx.closePath();
+
+	ctx.fill();
+	ctx.stroke();
+}
+
+function gambarBintang(
+	ctx: CanvasRenderingContext2D,
+	x: number, // posisi tengah bintang (X)
+	y: number, // posisi tengah bintang (Y)
+	spikes: number, // jumlah sudut (misalnya 5)
+	outerRadius: number, // jari-jari luar
+	innerRadius: number, // jari-jari dalam
+	fillColor: string = "gold" // warna isi
+): void {
+	let rot = Math.PI / 2 * 3;
+	let step = Math.PI / spikes;
+	let cx = x;
+	let cy = y;
+
+	ctx.beginPath();
+	ctx.moveTo(cx, cy - outerRadius);
+
+	for (let i = 0; i < spikes; i++) {
+		let x1 = cx + Math.cos(rot) * outerRadius;
+		let y1 = cy + Math.sin(rot) * outerRadius;
+		ctx.lineTo(x1, y1);
+		rot += step;
+
+		let x2 = cx + Math.cos(rot) * innerRadius;
+		let y2 = cy + Math.sin(rot) * innerRadius;
+		ctx.lineTo(x2, y2);
+		rot += step;
+	}
+
+	ctx.lineTo(cx, cy - outerRadius);
+	ctx.closePath();
+	ctx.fillStyle = fillColor;
+	ctx.fill();
+	ctx.stroke();
 }
 
 function gambarSegitiga(
@@ -190,98 +284,4 @@ function gambarSegitiga(
 		ctx.stroke();
 		ctx.fill(); // jika ingin diwarnai
 	}
-}
-
-function gambarPie(
-	x: number, // pusat lingkaran
-	y: number,
-	radius: number, // jari-jari
-	startAngleDeg: number, // sudut awal (derajat)
-	endAngleDeg: number,   // sudut akhir (derajat)
-): void {
-	// Konversi derajat ke radian
-	const startAngle = (startAngleDeg * Math.PI) / 180;
-	const endAngle = (endAngleDeg * Math.PI) / 180;
-
-	let ctx = G.Kontek();
-	ctx.beginPath();
-	ctx.moveTo(x, y); // mulai dari pusat
-	ctx.arc(x, y, radius, startAngle, endAngle); // gambar busur
-	ctx.lineTo(x, y); // kembali ke pusat
-	ctx.closePath();
-
-	ctx.fill();
-	ctx.stroke();
-}
-
-function polygonTeratur(
-	x: number, // pusat poligon
-	y: number,
-	radius: number, // jari-jari (jarak dari pusat ke titik sudut)
-	sides: number, // jumlah sisi (misalnya 6 untuk hexagon)
-): void {
-	if (sides < 3) return; // minimal segitiga
-
-	const angleStep = (2 * Math.PI) / sides;
-
-	let ctx = G.Kontek();
-	ctx.beginPath();
-	for (let i = 0; i < sides; i++) {
-		const px = x + radius * Math.cos(angleStep * i - Math.PI / 2);
-		const py = y + radius * Math.sin(angleStep * i - Math.PI / 2);
-
-		if (i === 0) {
-			ctx.moveTo(px, py);
-		} else {
-			ctx.lineTo(px, py);
-		}
-	}
-	ctx.closePath();
-
-	ctx.fill();
-	ctx.stroke();
-}
-
-function gambarBintang(
-	ctx: CanvasRenderingContext2D,
-	x: number, // posisi tengah bintang (X)
-	y: number, // posisi tengah bintang (Y)
-	spikes: number, // jumlah sudut (misalnya 5)
-	outerRadius: number, // jari-jari luar
-	innerRadius: number, // jari-jari dalam
-	fillColor: string = "gold" // warna isi
-): void {
-	let rot = Math.PI / 2 * 3;
-	let step = Math.PI / spikes;
-	let cx = x;
-	let cy = y;
-
-	ctx.beginPath();
-	ctx.moveTo(cx, cy - outerRadius);
-
-	for (let i = 0; i < spikes; i++) {
-		let x1 = cx + Math.cos(rot) * outerRadius;
-		let y1 = cy + Math.sin(rot) * outerRadius;
-		ctx.lineTo(x1, y1);
-		rot += step;
-
-		let x2 = cx + Math.cos(rot) * innerRadius;
-		let y2 = cy + Math.sin(rot) * innerRadius;
-		ctx.lineTo(x2, y2);
-		rot += step;
-	}
-
-	ctx.lineTo(cx, cy - outerRadius);
-	ctx.closePath();
-	ctx.fillStyle = fillColor;
-	ctx.fill();
-	ctx.stroke();
-}
-
-function gambarGaris(x = 100, y = 100, x2 = 500, y2 = 500) {
-	let ctx = G.Kontek();
-	ctx.beginPath();
-	ctx.moveTo(x, y);
-	ctx.lineTo(x2, y2);
-	ctx.stroke();
 }

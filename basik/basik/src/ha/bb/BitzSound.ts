@@ -24,7 +24,7 @@ function muatSuara(url: string): HTMLAudioElement {
 
 		}
 	}
-	sound.src = url;
+	sound.src = Basik.ImgImpl.resolveGbrUrl(url);
 
 	return sound;
 }
