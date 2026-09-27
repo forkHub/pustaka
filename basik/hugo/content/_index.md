@@ -83,7 +83,7 @@ Dokumentasi teknis tentang basik.
   Animasi dengan menggunakan spritesheet
 - **[doodle](./pg/basik.html?url=./contoh/m_doodle.js)**  
   Applikasi doodle sederhana
-- **[bola memantul](./pg/basik.html?url=./contoh/bola_1.js)**  
+- **[bola memantul](./pg/basik.html?url=./contoh/bola_01.js)**  
   Animasi bola memantul
 - **[platformer](./pg/basik.html?url=./contoh/m_platformer.js)**  
   Aplikasi game platformer

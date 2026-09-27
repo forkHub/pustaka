@@ -1,6 +1,6 @@
 [Beranda]({{< ref "/" >}})
 
-## 📖 Memulai BASIK
+# 📖 Memulai BASIK
 
 Untuk pengguna daring, BASIK bisa dibuka melalui [alamat ini](https://forkhub.github.io/basik/pg/editor.html). 
 
