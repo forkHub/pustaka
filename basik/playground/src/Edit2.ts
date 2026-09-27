@@ -179,7 +179,7 @@ class Edit2 {
 	}
 
 	init(): void {
-		console.group("init");
+		console.groupCollapsed("init");
 
 		this.initTombol();
 
@@ -398,7 +398,7 @@ class Edit2 {
 		}
 	}
 
-	compile(): void {
+	checkJsHint(): ErrorItem[] {
 		JSHINT(
 			'/* jshint esversion: 6 */\n' +
 			this.myCodeMirror.getValue()
@@ -412,14 +412,73 @@ class Edit2 {
 			})
 		});
 
+		return err;
+
+		// if (err.length > 0) {
+		// 	showErrorDialog(
+		// 		err,
+		// 		() => {
+		// 			return true;
+		// 		},
+		// 		() => {
+		// 			this.editClick();
+		// 			return true;
+		// 		});
+		// }
+		// else {
+		// 	return true;
+		// }
+
+	}
+
+	compile(): void {
+		let err = this.checkJsHint();
+
+		console.group("accorn parse");
+		let { varErr, funErr, callErr } = acornParser.parse(this.myCodeMirror.getValue());
+		console.groupEnd();
+
+		varErr.forEach((v) => {
+			err.push({
+				line: -1,
+				message: `tidak boleh mendeklarasikan variable dengan nama: <code>${v}</code>, karena namanya sama dengan variable/fungsi bawaan dari BASIK`
+			})
+		});
+		funErr.forEach((v) => {
+			err.push({
+				line: -1,
+				message: `fungsi dengan nama <code>${v.v}</code> kemungkinan memiliki kesalahan ejaan, yang benar adalah <code>${v.b}</code>`
+			})
+		})
+		callErr.forEach((v) => {
+			err.push({
+				line: -1,
+				message: `perintah dengan nama <code>${v.v}</code> kemungkinan memiliki kesalahan ejaan, yang benar adalah <code>${v.b}</code>`
+			})
+		})
+
+		// JSHINT(
+		// 	'/* jshint esversion: 6 */\n' +
+		// 	this.myCodeMirror.getValue()
+		// );
+		// console.log(JSHINT.errors);
+		// let err: ErrorItem[] = [];
+		// JSHINT.errors.forEach((item: any) => {
+		// 	err.push({
+		// 		line: item.line - 1,
+		// 		message: item.reason
+		// 	})
+		// });
+
 		if (err.length > 0) {
-			showErrorDialog(err, () => {
-				this.runOk();
-			},
+			showErrorDialog(
+				err,
+				() => {
+					this.runOk();
+				},
 				() => {
 					this.editClick();
 					// this.gantiState(EState.edit);
-
 				});
 		}
 		else {
@@ -439,7 +498,7 @@ class Edit2 {
 		iframeCont.innerHTML = '';
 		iframeCont.appendChild(iframe);
 
-		console.group("compile");
+		console.groupCollapsed("compile");
 		console.log(hal2);
 		console.groupEnd();
 
@@ -605,15 +664,23 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 	const list: HTMLUListElement = document.createElement('ul');
 	errors.forEach((err: ErrorItem) => {
 		const item: HTMLLIElement = document.createElement('li');
-		item.textContent = `Baris ${err.line}: ${err.message}`;
+		if (err.line > -1) {
+			item.innerHTML = `Baris ${err.line}: ${err.message}`;
+		} else {
+			item.innerHTML = err.message;
+		}
 		list.appendChild(item);
 	});
 	dialog.appendChild(list);
 
 	dialog.appendChild(document.createElement('hr'));
 
+	html('p', dialog, (el) => {
+		(el as HTMLParagraphElement).innerText = "Pesan ini mungkin memiliki kesalahan, dan hanya ditujukan untuk pengecekan."
+	})
+
 	const p = document.createElement('p');
-	p.innerText = "Tekan 'Lanjutkan' untuk tetap menjalankan aplikasi, tekan 'Batal' untuk mengedit kembali.";
+	p.innerText = "Tekan 'Lanjutkan' bila yakin tidak ada kesalahan, tekan 'Batal' untuk mengedit kembali.";
 	dialog.appendChild(p);
 
 	// Buttons container
@@ -648,6 +715,12 @@ function showErrorDialog(errors: ErrorItem[], okHandle: () => void, cancelHandle
 	// Append and show
 	document.body.appendChild(dialog);
 	(dialog as any).showModal();
+
+	function html(t: string, p: HTMLElement, e: (el: HTMLElement) => void): void {
+		let h = document.createElement(t);
+		p.appendChild(h);
+		if (e) e(h);
+	}
 }
 
 function dlgBelumSelesai() {
