@@ -54,6 +54,7 @@ Klik tombol berikut untuk membuka editor:
 Tutorial cara pemakaian basik membuat aplikasi sederhana:
 
 - [Aplikasi pertama](/pelajaran/mulai/)
+- [Memuat Gambar](/pelajaran/muat_gambar/)
 
 ---
 
@@ -69,23 +70,25 @@ Dokumentasi teknis tentang basik.
 
 ## Demo
 
-- **[memuat image](./pg/basik.html?url=./contoh/dasar_muat_image.js)**  
+- **[memuat image](./pg/basik.html?online=true&url=./contoh/dasar_muat_image.js)**  
   Dasar memuat image dan menempelkan ke layar.
-- **[drag](./pg/basik.html?url=./contoh/dasar_drag.js)**  
+- **[drag](./pg/basik.html?online=true&url=./contoh/dasar_drag.js)**  
   Menggeser gambar dengan mouse
-- **[drag remote](./pg/basik.html?url=./contoh/dasar_drag_remote.js)**  
+- **[drag remote](./pg/basik.html?online=true&url=./contoh/dasar_drag_remote.js)**  
   Menggeser gambar dengan menggeser di mana saja
-- **[memutar gambar](./pg/basik.html?url=./contoh/dasar_drag_rotasi.js)**  
+- **[memutar gambar](./pg/basik.html?online=true&url=./contoh/dasar_drag_rotasi.js)**  
   Memutar gambar
-- **[memutar secara remote](./pg/basik.html?url=./contoh/dasar_rotate_remote.js)**  
+- **[memutar secara remote](./pg/basik.html?online=true&url=./contoh/dasar_rotate_remote.js)**  
   Memutar image dengan menggeser di mana saja
-- **[dasar animasi](./pg/basik.html?url=./contoh/dasar_animasi.js)**  
+- **[dasar animasi](./pg/basik.html?online=true&url=./contoh/dasar_animasi.js)**  
   Animasi dengan menggunakan spritesheet
-- **[doodle](./pg/basik.html?url=./contoh/m_doodle.js)**  
+- **[doodle](./pg/basik.html?online=true&url=./contoh/m_doodle.js)**  
   Applikasi doodle sederhana
-- **[bola memantul](./pg/basik.html?url=./contoh/bola_01.js)**  
+- **[bola memantul](./pg/basik.html?online=true&url=./contoh/bola_01.js)**  
   Animasi bola memantul
-- **[platformer](./pg/basik.html?url=./contoh/m_platformer.js)**  
+- **[gravitasi](./pg/basik.html?online=true&url=./contoh/bola_02.js)**  
+  Animasi bola memantul
+- **[platformer](./pg/basik.html?online=true&url=./contoh/m_platformer.js)**  
   Aplikasi game platformer
 
 ---

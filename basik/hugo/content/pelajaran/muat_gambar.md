@@ -8,10 +8,11 @@ Pada tulisan kali ini kia akan membahas bagaimana caranya untuk memuat gambar te
 
 Perhatikan kode berikut:
 
-```
+```javascript
 mulai();
 let roket = muatGambar("roket");
 stempel(roket);
+
 ```
 
 `muatGambar()` adalah perintah untuk memuat gambar, di contoh ini kita memuat gambar dengan nama "roket".
@@ -25,27 +26,31 @@ Dengan memuat gambar terlebih dahulu dan menyimpannya ke variable maka kita akan
 
 Sebelumnya kita hanya bisa menentukan posisi gambar.
 
-```
+```javascript
 mulai();
 let roket = muatGambar("roket");
 putarGambar(roket, 45);
 ukuranGambar(roket, 200, 300);
 stempel(roket, 220, 120);
+
 ```
 
 Jalankan kode di atas, maka akan terlihat gambar roket dengan ukuran yang lebih besar dan sudut yang berbeda.
 
 Memuat gambar terlebih dahulu memiliki banyak kelebihan lain, karena sebagian besar perintah BASIK akan membutuhkan gambar untuk dimuat terlebih dahulu.
 
-```
+```javascript
 mulai();
 let roket = muatGambar("roket");
+let bg = muatGambar("bg_bintang");
+let bintang = muatGambar("bintang");
+
 putarGambar(roket, 45);
 ukuranGambar(roket, 200, 300);
-stempel("bg_bintang");
+stempel(bg);
 stempel(roket, 220, 120);
-stempel("bintang", 500, 300);
-stempel("bintang", 400, 50);
-stempel("bintang", 40, 40);
+stempel(bintang, 500, 300);
+stempel(bintang, 400, 50);
+stempel(bintang, 40, 40);
 
 ```

@@ -9,10 +9,9 @@ Untuk pengguna luring, silakan download dahulu, kemudian ekstrak dan buka file `
 Contoh aplikasi sederhana:
 
 ```javascript
-
 mulai();
 stempel("roket");
-  
+
 ```
 
 `mulai()` adalah perintah pertama yang berfungsi untuk memulai aplikasi. Perintah ini harus dipanggil pertama kali sebelum memanggil perintah yang lain.
@@ -30,10 +29,9 @@ Kamu telah berhasil membuat aplikasi untuk menampilkan gambar roket. Mari kita l
 Ganti kodenya dengan kode berikut:
 
 ```javascript
-
 mulai();
 stempel("astronot");
-  
+
 ```
 
 Jalankan lagi (dengan menekan tombol `Jalankan`), maka sekarang akan terlihat gambar astronot di layar.
@@ -45,10 +43,9 @@ Saat ini gambar kita masih di pojok kiri atas layar. Kita akan mengubah posisiny
 Perhatikan kode berikut:
 
 ```javascript
-
 mulai();
 stempel("astronot", 100, 100);
-  
+
 ```
 
 Jalankan lagi aplikasinya (Jangan lupa tombol `Jalankan`), maka sekarang posisi astronot tidak di pojok lagi.
@@ -60,12 +57,11 @@ Gambar astronot saja mungkin kurang menarik, bagaimana kalau astronot dan roket,
 Perhatikan kode berikut:
 
 ```javascript
-
 mulai();
 stempel("bg_bintang");
 stempel("roket", 300, 300);
 stempel("astronot", 100, 100);
-  
+
 ```
 
 Jalankan aplikasinya maka akan terlihat gambar roket, astronot dengan background langit.
@@ -73,7 +69,6 @@ Jalankan aplikasinya maka akan terlihat gambar roket, astronot dengan background
 Coba tambahkan bintang:
 
 ```javascript
-
 mulai();
 stempel("bg_bintang");
 stempel("roket", 300, 300);
@@ -81,7 +76,7 @@ stempel("astronot", 100, 100);
 stempel("bintang", 500, 300);
 stempel("bintang", 400, 50);
 stempel("bintang", 40, 40);
-  
+
 ```
 
 Sekarang langitnya dipenuhi dengan bintang.
