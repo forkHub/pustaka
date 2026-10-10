@@ -1,4 +1,7 @@
 type Handler = (selectedItem: file | null) => void;
+type fileMode = 'demo' | 'file';
+
+declare var demoData: file[];
 
 function dialogDaftarFile(
 	onConfirm: Handler,
@@ -8,6 +11,7 @@ function dialogDaftarFile(
 	let selectedItem: file | null = null;
 	let dialog: HTMLDialogElement;
 	let list: HTMLUListElement;
+	let mode: fileMode = 'file';
 
 	function createDialogEl(list: HTMLUListElement): HTMLDialogElement {
 		// Create dialog element
@@ -55,7 +59,21 @@ function dialogDaftarFile(
 			return buttonContainer;
 		}
 
+		//tipe cont
+		html("div", dialog, (el) => {
+			el.style.display = 'none'; //sementara ditutup
+			el.appendChild(tombol("file", () => {
+				//TODO:
+				mode == 'file';
+			}));
+			el.appendChild(tombol("demo", () => {
+				//TODO:
+				mode == 'demo';
+			}));
+		});
+
 		dialog.appendChild(list);
+		dialog.appendChild(document.createElement("hr"));
 		dialog.appendChild(buatTombolCont());
 
 		return dialog;
@@ -69,27 +87,71 @@ function dialogDaftarFile(
 
 	function refresh(): void {
 		list.innerHTML = '';
-		if (fileList.length == 0) {
-			let p = document.createElement('p');
-			p.innerText = 'Belum ada file';
-			list.appendChild(p);
-			return;
-		}
-		fileList.forEach(item => {
-			const li = document.createElement('li');
-			li.className = 'dialog-item pd';
-			li.textContent = item.namaFile || "---";
+		mode == 'file' ? fileMode() : demoMode();
 
-			li.addEventListener('click', () => {
-				list.querySelectorAll('.dialog-item').forEach(el => {
-					el.classList.remove('selected');
+		function demoMode() {
+			if (!demoData) {
+				console.warn("demo belum ke muat");
+				return;
+			}
+
+			renderItem(demoData);
+			//TODO:
+		}
+
+		function fileMode() {
+			renderItem(fileList);
+			// if (fileList.length == 0) {
+			// 	let p = document.createElement('p');
+			// 	p.innerText = 'Belum ada file';
+			// 	list.appendChild(p);
+			// 	return;
+			// }
+			// fileList.forEach(item => {
+			// 	const li = document.createElement('li');
+			// 	li.className = 'dialog-item pd';
+			// 	li.textContent = item.namaFile || "---";
+
+			// 	li.addEventListener('click', () => {
+			// 		list.querySelectorAll('.dialog-item').forEach(el => {
+			// 			el.classList.remove('selected');
+			// 		});
+			// 		li.classList.add('selected');
+			// 		selectedItem = item;
+			// 	});
+
+			// 	list.appendChild(li);
+			// });
+
+		}
+
+		function renderItem(fileList: file[]) {
+			list.innerHTML = '';
+
+			if (!fileList || fileList.length == 0) {
+				let p = document.createElement('p');
+				p.innerText = 'Belum ada data';
+				list.appendChild(p);
+				return;
+			}
+
+			fileList.forEach(item => {
+				const li = document.createElement('li');
+				li.className = 'dialog-item pd';
+				li.textContent = item.namaFile || "---";
+
+				li.addEventListener('click', () => {
+					list.querySelectorAll('.dialog-item').forEach(el => {
+						el.classList.remove('selected');
+					});
+					li.classList.add('selected');
+					selectedItem = item;
 				});
-				li.classList.add('selected');
-				selectedItem = item;
+
+				list.appendChild(li);
 			});
 
-			list.appendChild(li);
-		});
+		}
 	}
 
 	function hapusKlik() {
@@ -100,22 +162,29 @@ function dialogDaftarFile(
 
 		let konfirm = confirm("Apakah Anda yakin");
 
-		if (konfirm) {
-			for (let i = fileList.length - 1; i >= 0; i--) {
-				if (fileList[i].namaFile == selectedItem.namaFile) {
-					console.log("hapus " + i);
-					console.log(fileList[i].namaFile);
-					console.log(selectedItem.namaFile)
-					console.log(fileList);
-					fileList.splice(i, 1);
-					console.log(fileList);
-					refresh();
+		if (mode == 'file') {
+			if (konfirm) {
+				for (let i = fileList.length - 1; i >= 0; i--) {
+					if (fileList[i].namaFile == selectedItem.namaFile) {
+						console.log("hapus " + i);
+						console.log(fileList[i].namaFile);
+						console.log(selectedItem.namaFile)
+						console.log(fileList);
+						fileList.splice(i, 1);
+						console.log(fileList);
+						refresh();
+					}
 				}
 			}
+
+			//simpan
+			window.localStorage.setItem(storageNama, JSON.stringify(fileList));
+		}
+		else {
+			//TODO:
 		}
 
-		//simpan
-		window.localStorage.setItem(storageNama, JSON.stringify(fileList));
+
 	}
 
 	function confirmKlik() {
