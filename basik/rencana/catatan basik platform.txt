@@ -1,7 +1,5 @@
 handle event mouse klik/mouse up
 Sound belum bisa load dari nama file seperti image
-hapus perintah yang terlalu dalam (biru, setPixel)
-
 
 next2:
 pindahin perintah di bb folder ke core

@@ -1,13 +1,23 @@
+accorn js log dibuat collapsed
+
 static analysis:
 	tidak panggil mulai()
+	parameter salah?
 	
-static analysis dihapus untuk online (jshint, accorn0;
-
+js dipanggil defer: jshint, accorn
+	- loading screen
+	- insert loading screen
+	- fungsi load script
+	- guard external lib saat null
+	- implement load external
+	- s
+	
 ada demo menu:
-	hanya untuk local
-	ada parameter untuk ignore buat online
+	- tombol demo
+	- load demo file defer
+	- dialog demo
 
-dokumentasi api local
+dokumentasi api local:
 	
 next:
 muat dari local storage, check apakah ada file yang masih aktif belum disimpan

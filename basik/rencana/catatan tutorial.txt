@@ -1,6 +1,3 @@
-stempel
-gambar sebagai object
-mengenal fungsi update
 - contoh animasi astronot
 mengenal fungsi drag
 - astronot di di drag

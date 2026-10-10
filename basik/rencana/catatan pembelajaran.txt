@@ -1,7 +1,6 @@
 fase 2
 ======
 struktur latihan
-	memulai applikasi
 	perintah tulis
 	gambar bentuk
 	warna

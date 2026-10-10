@@ -21,7 +21,6 @@ tata surya penuh
 
 demo ellipse path
 fx alpha
-getpixel, setpixel
 paralax
 shump
 	drag auto shoot
