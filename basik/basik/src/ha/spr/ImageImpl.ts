@@ -183,31 +183,31 @@ namespace Basik {
 		}
 			*/
 
-		static AmbilPiksel(x: number = 0, y: number = 0): void {
-			try {
-				let data: Uint8ClampedArray = G.Kanvas().getContext('2d').getImageData(x, y, 1, 1).data;
+		// static AmbilPiksel(x: number = 0, y: number = 0): void {
+		// 	try {
+		// 		let data: Uint8ClampedArray = G.Kanvas().getContext('2d').getImageData(x, y, 1, 1).data;
 
-				let hasil: number[] = [];
+		// 		let hasil: number[] = [];
 
-				hasil.push(data[0]);
-				hasil.push(data[1]);
-				hasil.push(data[2]);
-				hasil.push(data[3]);
+		// 		hasil.push(data[0]);
+		// 		hasil.push(data[1]);
+		// 		hasil.push(data[2]);
+		// 		hasil.push(data[3]);
 
-				G.merah = data[0];
-				G.hijau = data[1];
-				G.biru = data[2];
-				G.alpha = data[3];
+		// 		G.merah = data[0];
+		// 		G.hijau = data[1];
+		// 		G.biru = data[2];
+		// 		G.alpha = data[3];
 
-			}
-			catch (e) {
-				console.error(e);
-			}
-		}
+		// 	}
+		// 	catch (e) {
+		// 		console.error(e);
+		// 	}
+		// }
 
-		static SetPiksel(x: number = 0, y: number = 0) {
-			G.Kanvas().getContext('2d').fillRect(Math.floor(x), Math.floor(y), 1, 1);
-		}
+		// static SetPiksel(x: number = 0, y: number = 0) {
+		// 	G.Kanvas().getContext('2d').fillRect(Math.floor(x), Math.floor(y), 1, 1);
+		// }
 
 		//depecrated
 		/*

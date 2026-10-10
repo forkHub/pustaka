@@ -117,6 +117,6 @@ function geserGambar(img: Basik.GbrObj, x = 0, y = 0) {
 	img.y += y;
 }
 
-function putarGambar(img: Basik.GbrObj, n = 0) {
+function putarGambar(img: Basik.GbrObj, n = 10) {
 	img.rotasi += n;
 }

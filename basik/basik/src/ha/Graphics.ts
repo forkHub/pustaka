@@ -33,10 +33,10 @@ namespace Basik {
 			Graphic._lastY = value;
 		}
 
-		private static _merah: number = 0;
-		private static _green: number = 0;
-		private static _blue: number = 0;
-		private static _transparan: number = 0;
+		// private static _merah: number = 0;
+		// private static _green: number = 0;
+		// private static _blue: number = 0;
+		// private static _transparan: number = 0;
 
 		private static handleWindowResize(): void {
 			if (!G._autoScale) return;
@@ -303,37 +303,37 @@ namespace Basik {
 			overlay.style.display = "flex";
 		}
 
-		public static get merah(): number {
-			return G._merah;
-		}
+		// public static get merah(): number {
+		// 	return G._merah;
+		// }
 
-		public static set merah(value: number) {
-			G._merah = value;
-		}
+		// public static set merah(value: number) {
+		// 	G._merah = value;
+		// }
 
-		public static get hijau(): number {
-			return G._green;
-		}
+		// public static get hijau(): number {
+		// 	return G._green;
+		// }
 
-		public static set hijau(value: number) {
-			G._green = value;
-		}
+		// public static set hijau(value: number) {
+		// 	G._green = value;
+		// }
 
-		public static get biru(): number {
-			return G._blue;
-		}
+		// public static get biru(): number {
+		// 	return G._blue;
+		// }
 
-		public static set biru(value: number) {
-			G._blue = value;
-		}
+		// public static set biru(value: number) {
+		// 	G._blue = value;
+		// }
 
-		public static get alpha(): number {
-			return G._transparan;
-		}
+		// public static get alpha(): number {
+		// 	return G._transparan;
+		// }
 
-		public static set alpha(value: number) {
-			G._transparan = value;
-		}
+		// public static set alpha(value: number) {
+		// 	G._transparan = value;
+		// }
 
 
 	}

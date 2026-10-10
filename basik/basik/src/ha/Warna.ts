@@ -6,17 +6,17 @@ namespace Basik {
 			let item = Warna.warnaAr[idx];
 			let t2 = trans / 100;
 			G.Kanvas().getContext('2d').fillStyle = `rgba(${item.r}, ${item.g}, ${item.b}, ${t2})`;
-			G.merah = item.r;
-			G.biru = item.b;
-			G.hijau = item.g;
+			// G.merah = item.r;
+			// G.biru = item.b;
+			// G.hijau = item.g;
 		}
 
 		static warnaGaris(idx: number = 0, trans = 100) {
 			let item = Warna.warnaAr[idx];
 			G.Kanvas().getContext('2d').strokeStyle = `rgba(${item.r}, ${item.g}, ${item.b}, ${trans / 100})`;
-			G.merah = item.r;
-			G.biru = item.b;
-			G.hijau = item.g;
+			// G.merah = item.r;
+			// G.biru = item.b;
+			// G.hijau = item.g;
 		}
 
 		static init() {
