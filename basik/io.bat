@@ -13,12 +13,16 @@ echo.
 
 del %io_folder%\basik\.gitIgnore /s /q || goto error
 
+pushd
+cd %io_folder%\basik
+call python -m http.server
+popd
+
 echo selesai
 goto end
 
 :error
 pause
-pause
-
 
 :end
+pause
