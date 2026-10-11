@@ -242,56 +242,58 @@ class Edit2 extends Edit {
 		this.hideTbl("edit");
 		this.muatFileAwal();
 		this.fileInfo.innerText = fileNama;
+		console.groupEnd();
 
 		//code per project
 		//blocking, early return on success/error
 		//depecrated
-		let code = this.getQuery("pId");
-		if (code) {
-			this.injectScript("./demo/" + code + ".js", () => {
-				//TODO:
-				console.log("script loaded");
-				this.initCodeMirror(codeDemo.code);
-			})
-			return;
-		}
+		// let code = this.getQuery("pId");
+		// if (code) {
+		// 	this.injectScript("./demo/" + code + ".js", () => {
+		// 		//TODO:
+		// 		console.log("script loaded");
+		// 		this.initCodeMirror(codeDemo.code);
+		// 	})
+		// 	return;
+		// }
 
 		//is online
-		isOnline = Boolean(this.getQuery('online'))
-		console.log("is online: " + isOnline);
-		if (!isOnline) {
-			loadScript("./editor/lib/jshint.js");
-			loadScript("./editor/lib/acorn.js");
-			//TODO: go with inject scripts multiple
-		}
-
-		console.log("load demo");
-		loadScript("./editor/js/demo.js");
+		// isOnline = Boolean(this.getQuery('online'))
+		// console.log("is online: " + isOnline);
+		// if (!isOnline) {
+		// 	loadScript("./editor/lib/jshint.js");
+		// 	loadScript("./editor/lib/acorn.js");
+		// 	//TODO: go with inject scripts multiple
+		// }
 
 		//let load code demo for online purpose;
+		console.groupCollapsed("init 2");
 		let loadCode = this.getQuery("url");
 		if (loadCode) {
 			console.log("load code from url");
 			loadFileFromUrl(loadCode)
 				.then((code) => {
 					this.initCodeMirror(code);
-
-					//loading stop
+					mulai();
 				})
 				.catch((err) => {
 					console.log(err);
-
-					//loading stop
+					mulai();
 				})
-
 		}
 		else {
-			console.log("start");
-			this.initCodeMirror("mulai();\n");
+			mulai();
 			//loading stop
 		}
 
-		console.groupEnd();
+		function mulai() {
+			console.log("load async js");
+			loadScript("./editor/js/demo.js");
+			loadScript("./editor/lib/jshint.js");
+			loadScript("./editor/lib/acorn.js");
+			console.groupEnd();
+		}
+
 	}
 
 	// demoKlik() {
