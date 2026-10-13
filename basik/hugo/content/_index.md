@@ -70,25 +70,25 @@ Dokumentasi teknis tentang basik.
 
 ## Demo
 
-- **[memuat image](./pg/basik.html?online=true&url=./contoh/dasar_muat_image.js)**  
+- **[memuat image](./basik.html?online=true&url=./contoh/dasar_muat_image.js)**  
   Dasar memuat image dan menempelkan ke layar.
-- **[drag](./pg/basik.html?online=true&url=./contoh/dasar_drag.js)**  
+- **[drag](./basik.html?online=true&url=./contoh/dasar_drag.js)**  
   Menggeser gambar dengan mouse
-- **[drag remote](./pg/basik.html?online=true&url=./contoh/dasar_drag_remote.js)**  
+- **[drag remote](./basik.html?online=true&url=./contoh/dasar_drag_remote.js)**  
   Menggeser gambar dengan menggeser di mana saja
-- **[memutar gambar](./pg/basik.html?online=true&url=./contoh/dasar_drag_rotasi.js)**  
+- **[memutar gambar](./basik.html?online=true&url=./contoh/dasar_drag_rotasi.js)**  
   Memutar gambar
-- **[memutar secara remote](./pg/basik.html?online=true&url=./contoh/dasar_rotate_remote.js)**  
+- **[memutar secara remote](./basik.html?online=true&url=./contoh/dasar_rotate_remote.js)**  
   Memutar image dengan menggeser di mana saja
-- **[dasar animasi](./pg/basik.html?online=true&url=./contoh/dasar_animasi.js)**  
+- **[dasar animasi](./basik.html?online=true&url=./contoh/dasar_animasi.js)**  
   Animasi dengan menggunakan spritesheet
-- **[doodle](./pg/basik.html?online=true&url=./contoh/m_doodle.js)**  
+- **[doodle](./basik.html?online=true&url=./contoh/m_doodle.js)**  
   Applikasi doodle sederhana
-- **[bola memantul](./pg/basik.html?online=true&url=./contoh/bola_01.js)**  
+- **[bola memantul](./basik.html?online=true&url=./contoh/bola_01.js)**  
   Animasi bola memantul
-- **[gravitasi](./pg/basik.html?online=true&url=./contoh/bola_02.js)**  
+- **[gravitasi](./basik.html?online=true&url=./contoh/bola_02.js)**  
   Animasi bola memantul
-- **[platformer](./pg/basik.html?online=true&url=./contoh/m_platformer.js)**  
+- **[platformer](./basik.html?online=true&url=./contoh/m_platformer.js)**  
   Aplikasi game platformer
 
 ---
