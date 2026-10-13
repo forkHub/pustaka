@@ -1,0 +1,23 @@
+handle event mouse klik/mouse up
+Sound belum bisa load dari nama file seperti image
+
+next2:
+pindahin perintah di bb folder ke core
+ada configurasi
+partikel => kecepatan, percepatan, dll
+pemisahan core dan perintah
+translatable
+camera support
+poin di dalam gambar diganti titikDidalamGambar
+handle gambar default ketika tidak bisa meload gambar dengan dummy gambar
+penggunaan bahasa yang konsistent
+update ke module system
+kurangi penggunaan static
+Camera dipakai lagi
+	ada konsep layarX dan layarY
+	layarX dan layarY hanya berlaku bila camera tidak di posisi 0
+	perlu perubahan logic dalam gambar dan collision
+
+textObject
+Perintah Adv (kemungkinan langsung ke contex):
+gradient
