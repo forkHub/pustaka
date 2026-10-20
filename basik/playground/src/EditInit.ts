@@ -41,6 +41,46 @@ window.onload = () => {
 	// JSHINT.info = jsHintInfo;
 }
 
+
+//================================================================================
+
+async function tunggu(getValue: () => any, options: { interval?: number; timeout?: number } = {}) {
+
+	function sleep(durationMs: number) {
+		return new Promise<void>(function (resolve) {
+			setTimeout(function () {
+				resolve();
+			}, durationMs);
+		});
+	}
+	const interval = options.interval !== undefined ? options.interval : 100;
+	const timeout = options.timeout !== undefined ? options.timeout : 5000;
+
+	if (typeof getValue !== "function") {
+		throw new TypeError("getValue harus berupa function");
+	}
+
+	const startTime = Date.now();
+
+	while (true) {
+		const currentValue = getValue();
+
+		if (currentValue) {
+			return true;
+		}
+
+		const elapsedTime = Date.now() - startTime;
+
+		if (elapsedTime > timeout) {
+			throw new Error(
+				"Timeout: nilai tidak berubah menjadi true dalam " + timeout + " ms"
+			);
+		}
+
+		await sleep(interval);
+	}
+}
+
 function loadScript(src: string) {
 	const script = document.createElement('script');
 	script.src = src;
