@@ -8,11 +8,6 @@ call hugo build || goto error
 xcopy public\*.* %io_folder% /s /i /y || goto error
 popd
 
-rem start server
-rem download package
-rem package
-rem 
-
 goto end
 
 :error

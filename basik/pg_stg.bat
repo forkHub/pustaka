@@ -32,10 +32,9 @@ set io_folder=D:\xampp4\htdocs\io\basik
 xcopy playground\web\*.* %io_folder% /s /i /y || goto error
 del %io_folder%\.gitIgnore /s /q || goto error
 set io_folder=
+
 echo =========
 echo.
-
-call hugo.bat
 
 goto end
 

@@ -1,8 +1,8 @@
 @echo off
 echo off
 
-echo publish basic
-echo =============
+echo publish basic ke google drive
+echo =============================
 echo.
 xcopy playground\web\*.* pg2 /s /i /y || goto error
 cd pg2 || goto error
