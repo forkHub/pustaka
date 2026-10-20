@@ -23,4 +23,6 @@ next:
 muat dari local storage, check apakah ada file yang masih aktif belum disimpan
 
 next2:
-es6 module, beberapa module masih harus di import manual (jshint, accorn)
+update code mirror
+update jshint
+

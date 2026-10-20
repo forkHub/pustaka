@@ -47,6 +47,7 @@ trafic jam
 next:
 =====
 demo dibuat format single file untuk menyesuaikan dengan v02
+galery gambar dari perintah shape
 
 integration with matter js
 
@@ -70,3 +71,5 @@ function maxAngleDistance(a, b) {
   let diff = Math.abs(a - b) % 360;
   return diff > 180 ? diff : 360 - diff;
 }
+
+galery demo
