@@ -93,6 +93,8 @@ class Edit2 extends Edit {
 		}
 
 		function mulai() {
+			//loading stop
+			document.querySelector("#loading-screen").classList.add("hidden");
 			console.log("load async js");
 			loadScript("./editor/js/demo.js");
 			loadScript("./editor/lib/jshint.js");
