@@ -1,7 +1,3 @@
-Berikut adalah draf susunan **Modul 1 Pembelajaran Koding Dasar** yang dirancang khusus untuk pemula. Modul ini disusun menggunakan pendekatan *logic-first*, penyampaian *bite-sized*, serta penekanan pada *Higher Order Thinking Skills* (HOTS) agar siswa dapat membangun alur pikir komputasional tanpa merasa terintimidasi oleh kerumitan sintaks.
-
----
-
 # **MODUL 1: PERKENALAN & QUICK WIN**
 ### **"Membuat Komputer Berbicara & Bereaksi"**
 
@@ -35,19 +31,22 @@ Pada sesi ini, siswa langsung berinteraksi dengan lingkungan belajar **BASIK** (
 Buka editor BASIK, ketik dua baris perintah berikut di lembar kerja, lalu tekan tombol **Jalankan / Run**:
 
 ```javascript
+mulai();
 // Langkah 1: Siapkan kotak variabel
 let nama = "Budi";
 
 // Langkah 2: Tampilkan pesan
-tampilkan("Selamat Datang, " + nama + "!");
+tulis("Selamat Datang, " + nama + "!");
 ```
+
+tekan tombol "Jalankan" untuk menjalankan applikasi.
 
 🎯 **Apa yang Terjadi?**
 Dalam hitungan detik, layar akan menampilkan tulisan: **`Selamat Datang, Budi!`**. Siswa mendapatkan *Quick Win* pertama mereka tanpa perlu menginstal aplikasi rumit.
 
 #### **Aktivitas 2: Eksperimen Mandiri (*Hands-On*)**
 * Ubah teks `"Budi"` dengan nama Anda sendiri.
-* Amati bagaimana tampilan di layar berubah secara langsung.
+* Amati bagaimana tampilan di layar berubah ketika applikasi dijalankan.
 
 ---
 
@@ -57,13 +56,17 @@ Dalam hitungan detik, layar akan menampilkan tulisan: **`Selamat Datang, Budi!`*
 Mari bedah bagaimana instruksi bekerja secara bertahap (*scaffolded*):
 
 ```javascript
+mulai();
+
 // 1. Deklarasi Variabel (Membuat Kotak & Mengisi Data)
-let ucapan = "Selamat Ulang Tahun!";
-let warnaLatar = "merah";
+let ucapan = "Saya sedang belajar BASIK";
 
 // 2. Mengubah Tampilan Visual
-buatTeks(ucapan);
-ubahWarnaLatar(warnaLatar);
+warna(12);
+warnaGaris(30);
+tebalGaris(2);
+tulis(ucapan);
+
 ```
 
 * **Urutan Eksekusi**: Komputer selalu membaca dari baris 1, lalu baris 2, hingga selesai.
