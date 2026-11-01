@@ -37,7 +37,7 @@ function update() {
 	bl();
 	geserGambar(astro, 5,0);
 	if (astro.x > 800) {
-		astro.x =0;
+		astro.x = 0;
 	}
 	stempel(astro);
 }
@@ -46,3 +46,4 @@ function update() {
 
 Jalankan applikasinya, maka akan terlihat gambar astronot yang bergerak ke kanan dan akan muncul kembali di sebelah kiri setelah astronot melewati batas layar.
 
+Fungsi `update()` sangat penting dan hampir selalu digunakan dalam setiap aplikasi yang dibuat dengan BASIK.

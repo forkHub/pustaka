@@ -2,9 +2,9 @@
 
 # 📖 Memuat Gambar
 
-Pada tulisan sebelumnya kita sudah belajar cara menempel gambar ke layar.
+Pada tulisan sebelumnya kita sudah belajar cara menyetempel gambar ke layar.
 
-Pada tulisan kali ini kia akan membahas bagaimana caranya untuk memuat gambar terlebih dahulu sebelum menempelkan ke layar.
+Pada tulisan kali ini kia akan membahas bagaimana caranya untuk memuat gambar terlebih dahulu sebelum menyetempelnya ke layar.
 
 Perhatikan kode berikut:
 
@@ -15,16 +15,14 @@ stempel(roket);
 
 ```
 
-`muatGambar()` adalah perintah untuk memuat gambar, di contoh ini kita memuat gambar dengan nama "roket".
-Kita menyimpannya ke variable roket, kemudian kita menggunakan variable ini untuk dipakai sebagai parameter perintah `stempel()`.
+`muatGambar()` adalah perintah untuk memuat gambar, di contoh ini kita memuat gambar "roket",
+menyimpannya ke variable roket, kemudian menyetempelkan ke layar dengan perintah `stempel()`.
 
-Disini kita tidak menggunakan parameter "string", melainkan kita menggunakan parameter berupa variable.
+Perhatikan disini kita menggunakan variable `roket` sebagai parameter perintah `stempel()` dan tidak menggunakan nama file: "stempel";
 
-Apa keunggulan dari metode ini, dibanding metode sebelumnya?
+Dengan memuat gambar terlebih dahulu dan menyimpannya ke variable, kita akan mendapatkan banyak manfaat, antara lain: kita bisa memutar gambar, mengubah ukuran gambar, dan masih banyak fungsi yang lain lagi.
 
-Dengan memuat gambar terlebih dahulu dan menyimpannya ke variable maka kita akan mendapatkan banyak manfaat, antara lain adalah kita bisa memutar gambar, dan mengubah ukuran gambar.
-
-Sebelumnya kita hanya bisa menentukan posisi gambar.
+Perhatikan kode berikut:
 
 ```javascript
 mulai();
@@ -35,9 +33,9 @@ stempel(roket, 220, 120);
 
 ```
 
-Jalankan kode di atas, maka akan terlihat gambar roket dengan ukuran yang lebih besar dan sudut yang berbeda.
+Bila kode di atas dijalankan, akan terlihat gambar roket dengan ukuran yang lebih besar dengan sudut yang berbeda.
 
-Memuat gambar terlebih dahulu memiliki banyak kelebihan lain, karena sebagian besar perintah BASIK akan membutuhkan gambar untuk dimuat terlebih dahulu.
+Berikut kode dari latihan sebelumnya yang diganti dengan memuat gambar terlebih dahulu sebelum di stempel ke layar.
 
 ```javascript
 mulai();

@@ -55,6 +55,8 @@ Tutorial cara pemakaian basik membuat aplikasi sederhana:
 
 - [Aplikasi pertama](/pelajaran/mulai/)
 - [Memuat Gambar](/pelajaran/muat_gambar/)
+- [Interaksi](/pelajaran/interaksi/)
+- [Fungsi Update](/pelajaran/update/)
 
 ---
 
@@ -65,6 +67,7 @@ Dokumentasi teknis tentang basik.
 - [API](/teknikal/api-doc-perintah/)
 - [Penanganan Event](/teknikal/api-doc-event/)
 - [Gambar sebagai object](/teknikal/objek-gambar/)
+- [Warna](/teknikal/warna/)
 
 ---
 
