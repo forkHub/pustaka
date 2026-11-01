@@ -8,7 +8,6 @@ function kanvas(): HTMLCanvasElement {
 	return G.Kanvas();
 }
 
-
 function mulai(w: number = 800, h: number = 600, canvas: HTMLCanvasElement = null, mode: number = 1) {
 	G.Graphics(w, h, canvas, mode);
 }
