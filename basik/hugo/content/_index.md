@@ -73,25 +73,25 @@ Dokumentasi teknis tentang basik.
 
 ## Demo
 
-- **[memuat image](./basik.html?online=true&url=./contoh/dasar_muat_image.js)**  
+- **[memuat image](https://forkhub.github.io/basik/pg/basik.html?online=true&url=./contoh/dasar_muat_image.js)**  
   Dasar memuat image dan menempelkan ke layar.
-- **[drag](./basik.html?online=true&url=./contoh/dasar_drag.js)**  
+- **[drag](https://forkhub.github.io/basik/pg/basik.html?online=true&url=./contoh/dasar_drag.js)**  
   Menggeser gambar dengan mouse
-- **[drag remote](./basik.html?online=true&url=./contoh/dasar_drag_remote.js)**  
+- **[drag remote](https://forkhub.github.io/basik/pg/basik.html?online=true&url=./contoh/dasar_drag_remote.js)**  
   Menggeser gambar dengan menggeser di mana saja
-- **[memutar gambar](./basik.html?online=true&url=./contoh/dasar_drag_rotasi.js)**  
+- **[memutar gambar](https://forkhub.github.io/basik/pg/basik.html?online=true&url=./contoh/dasar_drag_rotasi.js)**  
   Memutar gambar
-- **[memutar secara remote](./basik.html?online=true&url=./contoh/dasar_rotate_remote.js)**  
+- **[memutar secara remote](https://forkhub.github.io/basik/pg/basik.html?online=true&url=./contoh/dasar_rotate_remote.js)**  
   Memutar image dengan menggeser di mana saja
-- **[dasar animasi](./basik.html?online=true&url=./contoh/dasar_animasi.js)**  
+- **[dasar animasi](https://forkhub.github.io/basik/pg/basik.html?online=true&url=./contoh/dasar_animasi.js)**  
   Animasi dengan menggunakan spritesheet
-- **[doodle](./basik.html?online=true&url=./contoh/m_doodle.js)**  
+- **[doodle](https://forkhub.github.io/basik/pg/basik.html?online=true&url=./contoh/m_doodle.js)**  
   Applikasi doodle sederhana
-- **[bola memantul](./basik.html?online=true&url=./contoh/bola_01.js)**  
+- **[bola memantul](https://forkhub.github.io/basik/pg/basik.html?online=true&url=./contoh/bola_01.js)**  
   Animasi bola memantul
-- **[gravitasi](./basik.html?online=true&url=./contoh/bola_02.js)**  
+- **[gravitasi](https://forkhub.github.io/basik/pg/basik.html?online=true&url=./contoh/bola_02.js)**  
   Animasi bola memantul
-- **[platformer](./basik.html?online=true&url=./contoh/m_platformer.js)**  
+- **[platformer](https://forkhub.github.io/basik/pg/basik.html?online=true&url=./contoh/m_platformer.js)**  
   Aplikasi game platformer
 
 ---

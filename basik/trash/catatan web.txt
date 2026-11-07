@@ -1,1 +1,4 @@
-pembedaan web dan doc
+web bisa di download
+	pg url dijadikan absolute
+
+warna spesifik yang lebih fokus (27, 64, 125, gradient)

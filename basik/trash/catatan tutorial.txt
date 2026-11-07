@@ -3,7 +3,9 @@ mengenal fungsi drag
 - astronot di di drag
 collision
 - astronot di drag mengambil bintang, bintang pindah setelah collision
+
 drag-remote => untuk user experience
+auto follow mouse => untuk user experience
 
 next:
 canvas ukuran dan auto resize
