@@ -28,7 +28,7 @@ echo.
 
 echo publikasi pg ke stg
 echo ===================
-set io_folder=D:\xampp4\htdocs\io\basik
+set io_folder=D:\xampp4\htdocs\io\basik_stg
 xcopy playground\web\*.* %io_folder% /s /i /y || goto error
 del %io_folder%\.gitIgnore /s /q || goto error
 set io_folder=

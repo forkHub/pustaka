@@ -1,7 +1,9 @@
 @echo off
 echo off
 
+pushd hugo
 hugo server || goto error
+popd
 
 goto end
 
