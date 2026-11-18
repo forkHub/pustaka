@@ -526,3 +526,16 @@ Membulatkan bilangan
 *	`type`: `number`, default 0  
 	type pembulatan: 0: terdekat, 1: pembulatan ke atas, 2: pembulatan ke bawah
 
+
+### `acak(a: number = 0, b: number = 100): number `
+
+Membuat angka acak
+
+**Parameter**
+
+*	`a`: `number, default = 0  
+	nilai minimum
+*	`b`: `number`, default 100  
+	nilai maksimum
+
+**Returns:** `number`.

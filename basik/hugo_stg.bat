@@ -3,8 +3,9 @@ echo off
 
 set io_folder=D:\xampp4\htdocs\io\basik
 
-pushd %io_folder%
-call python -m http.server
+pushd hugo
+call hugo build || goto error
+xcopy public\*.* %io_folder% /s /i /y || goto error
 popd
 
 goto end

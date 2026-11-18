@@ -1,0 +1,66 @@
+///<reference path="./Route.ts"/>
+
+function Graphics(): HTMLCanvasElement {
+	return Basik.Graphics.Kanvas();
+}
+
+function mulai(w: number = 800, h: number = 600, canvas: HTMLCanvasElement = null, mode: number = 1) {
+	G.Graphics(w, h, canvas, mode);
+}
+
+/**
+ * Clear the canvas
+ */
+function bersihkanLayar(x: number = 0, y: number = 0, w: number = 800, h: number = 600) {
+	G.Cls(x, y, w, h);
+}
+const bl = bersihkanLayar;
+
+function warna(idx: number = 0, trans = 100) {
+	Basik.Warna.warna(idx, trans);
+}
+
+function warnaGaris(idx: number, trans = 100) {
+	Basik.Warna.warnaGaris(idx, trans);
+}
+
+function tebalGaris(n: number = 1) {
+	G.Kanvas().getContext('2d').lineWidth = n;
+}
+
+const dialog = G.alert;
+
+//depecrated
+//TODO: depecrated diganti dengan mulai untuk perintah yang lebih sederhana
+// function buatKanvas(w: number = 800, h: number = 600, canvas: HTMLCanvasElement = null, mode: number = 1) {
+// 	console.log("buat kanvas");
+// 	G.Graphics(w, h, canvas, mode);
+// }
+
+// function hijau(): number {
+// 	return G.hijau;
+// }
+
+// function merah(): number {
+// 	return G.merah;
+// }
+
+// function biru(): number {
+// 	return G.biru;
+// }
+
+// function alpha(): number {
+// 	return Math.floor(G.alpha * 100);
+// }
+
+// function ambilPiksel(x: number = 0, y: number = 0): void {
+// 	Ip.AmbilPiksel(x, y);
+// }
+
+// function setPiksel(x: number = 0, y: number = 0): void {
+// 	Ip.SetPiksel(x, y);
+// }
+
+
+
+

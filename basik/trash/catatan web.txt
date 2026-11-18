@@ -2,3 +2,5 @@ web bisa di download
 	pg url dijadikan absolute
 
 warna spesifik yang lebih fokus (27, 64, 125, gradient)
+api dibuat terpisah agar lebih mudah dibaca, dibuat satu persatu dulu
+

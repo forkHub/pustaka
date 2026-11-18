@@ -53,3 +53,12 @@ function pembulatan(n: number, b: number = 1, type: number = 0) {
 	}
 	return Math.round(n / b) * b;
 }
+
+function acak(a: number = 0, b: number = 100): number {
+	// Memastikan a adalah nilai minimum dan b adalah nilai maksimum
+	const min = Math.ceil(Math.min(a, b));
+	const max = Math.floor(Math.max(a, b));
+
+	// Menghasilkan angka acak dari min sampai max (inklusif)
+	return Math.floor(Math.random() * (max - min + 1)) + min;
+}

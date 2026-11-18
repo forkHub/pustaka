@@ -63,7 +63,7 @@
 	],
 	"exclude": [
 		"./src/ha/event/**",
-		"./src/ha/event/**",
+		"./src/ha/bbasik/**",
 		"./src/ha/bblok/**",
 	],
 	// "outDir": "./dist",
