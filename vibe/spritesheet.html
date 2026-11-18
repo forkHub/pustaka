@@ -1,0 +1,100 @@
+<!-- membuat sprite sheet berisi karakter printable dan fungsi untuk menulis ke layar -->
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Spritesheet Grid Karakter</title>
+	<style>
+		canvas {
+			border: 1px solid #444;
+			display: block;
+			margin: 20px auto;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>Spritesheet Grid Karakter ASCII</h2>
+	<canvas id="spritesheet"></canvas>
+
+	<script>
+		const canvas = document.getElementById('spritesheet');
+		const ctx = canvas.getContext('2d');
+
+		const tileSize = 25;
+		const cols = 10; // jumlah kolom dalam grid
+		const asciiStart = 32;
+		const asciiEnd = 126;
+		const totalChars = asciiEnd - asciiStart + 1;
+		const rows = Math.ceil(totalChars / cols);
+
+		canvas.width = cols * tileSize;
+		canvas.height = rows * tileSize;
+
+		ctx.font = "24px monospace";
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+		ctx.fillStyle = "#000";
+
+		for (let i = 0; i < totalChars; i++) {
+			const char = String.fromCharCode(asciiStart + i);
+			const col = i % cols;
+			const row = Math.floor(i / cols);
+			const x = col * tileSize + tileSize / 2;
+			const y = row * tileSize + tileSize / 2;
+
+			// Optional: garis grid
+			ctx.strokeStyle = "#ccc";
+			ctx.strokeRect(col * tileSize, row * tileSize, tileSize, tileSize);
+
+			ctx.fillText(char, x, y + 1);
+		}
+
+		//tambahan fungsi:
+		// Simpan spritesheet sebagai image
+		const spriteImage = new Image();
+		spriteImage.src = canvas.toDataURL();
+
+		spriteImage.onload = () => {
+			// Buat canvas baru untuk menulis teks
+			const outputCanvas = document.createElement('canvas');
+			const outputCtx = outputCanvas.getContext('2d');
+			document.body.appendChild(outputCanvas);
+
+			const maxLineLength = 40; // maksimal karakter per baris
+			const lines = 5; // jumlah baris awal
+			outputCanvas.width = maxLineLength * tileSize;
+			outputCanvas.height = lines * tileSize;
+
+			function drawTextWithSpritesheet(text, startX, startY) {
+				const lines = text.split('\n');
+				lines.forEach((line, rowIndex) => {
+					[...line].forEach((char, colIndex) => {
+						const code = char.charCodeAt(0);
+						if (code < 32 || code > 126) return; // skip non-printable
+
+						const index = code - 32;
+						const srcX = (index % cols) * tileSize;
+						const srcY = Math.floor(index / cols) * tileSize;
+						const destX = startX + colIndex * tileSize;
+						const destY = startY + rowIndex * tileSize;
+
+						outputCtx.drawImage(
+							spriteImage,
+							srcX, srcY, tileSize, tileSize,
+							destX, destY, tileSize, tileSize
+						);
+					});
+				});
+			}
+
+			// Contoh pemakaian
+			const sampleText = `HELLO, FAJAR!\nSPRITESHEET DEMO\n1234567890`;
+			drawTextWithSpritesheet(sampleText, 0, 0);
+		};
+
+	</script>
+</body>
+
+</html>

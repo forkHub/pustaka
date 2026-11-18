@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Emoji Spritesheet Generator</title>
+	<style>
+		canvas {
+			border: 1px solid #ccc;
+			margin-top: 10px;
+		}
+	</style>
+</head>
+
+<body>
+	<h2>🍱 Emoji Spritesheet Generator (131 Emoji)</h2>
+	<canvas id="spritesheet"></canvas>
+	<script>
+		const canvas = document.getElementById('spritesheet');
+		const ctx = canvas.getContext('2d');
+		const gridSize = 48;
+
+		const emojis = [
+			'🍇', '🍈', '🍉', '🍊', '🍋', '🍌', '🍍', '🥭', '🍎', '🍏',
+			'🍐', '🍑', '🍒', '🍓', '🫐', '🥝', '🍅', '🫒', '🥥', '🥑',
+			'🍆', '🥔', '🥕', '🌽', '🌶️', '🫑', '🥒', '🥬', '🥦', '🧄',
+			'🧅', '🍄', '🥜', '🌰', '🍞', '🥐', '🥖', '🫓', '🥨', '🥯',
+			'🥞', '🧇', '🫐', '🍗', '🍖', '🦴', '🥩', '🥓', '🍔', '🍟',
+			'🍕', '🌭', '🥪', '🌮', '🌯', '🫔', '🥙', '🧆', '🥚', '🍳',
+			'🥘', '🍲', '🫕', '🥣', '🥗', '🍿', '🧈', '🧂', '🥫', '🍱',
+			'🍘', '🍙', '🍚', '🍛', '🍜', '🍝', '🍠', '🍢', '🍣', '🍤',
+			'🍥', '🥮', '🍡', '🥟', '🦪', '🍦', '🍧', '🍨', '🍩', '🍪',
+			'🎂', '🍰', '🧁', '🥧', '🍫', '🍬', '🍭', '🍮', '🍯', '🍼',
+			'🥛', '☕', '🫖', '🍵', '🧃', '🥤', '🧋', '🍶', '🍺', '🍻',
+			'🥂', '🍷', '🥃', '🫗', '🍸', '🍹', '🍾', '🧊', '🥄', '🍴',
+			'🍽️', '🥢', '🧂', '🫙', '🫛', '🫚', '🫠', '🫓', '🫔', '🫕',
+			'🫖'
+		];
+
+		const total = emojis.length;
+		const cols = 12;
+		const rows = Math.ceil(total / cols);
+
+		canvas.width = cols * gridSize;
+		canvas.height = rows * gridSize;
+
+		ctx.font = `${gridSize - 8}px "Segoe UI Emoji", "Noto Color Emoji", sans-serif`;
+		ctx.textAlign = 'center';
+		ctx.textBaseline = 'middle';
+
+		emojis.forEach((emoji, i) => {
+			const x = (i % cols) * gridSize + gridSize / 2;
+			const y = Math.floor(i / cols) * gridSize + gridSize / 2;
+			ctx.fillText(emoji, x, y);
+		});
+
+		// Ekspor sebagai image (opsional)
+		const imageDataURL = canvas.toDataURL('image/png');
+		console.log("Spritesheet URL:", imageDataURL);
+	</script>
+</body>
+
+</html>

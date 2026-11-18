@@ -1,0 +1,77 @@
+<html>
+
+<head>
+	<style>
+		.container {
+			position: relative;
+			width: 300px;
+			height: 150px;
+			border: 1px solid #ccc;
+			margin: 20px;
+		}
+
+		#moveBtn {
+			position: absolute;
+			transition: all 0.5s ease;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="div1" class="container"></div>
+	<div id="div2" class="container">
+		<button id="moveBtn">Click Me</button>
+	</div>
+
+	<script>
+		const btn = document.getElementById('moveBtn');
+		const div1 = document.getElementById('div1');
+		const div2 = document.getElementById('div2');
+
+		function moveButton() {
+			// Get current position relative to viewport
+			const rect = btn.getBoundingClientRect();
+
+			// Clone the button
+			const clone = btn.cloneNode(true);
+			document.body.appendChild(clone);
+
+			// Set initial position
+			clone.style.position = 'absolute';
+			clone.style.left = `${rect.left}px`;
+			clone.style.top = `${rect.top}px`;
+			clone.style.width = `${rect.width}px`;
+			clone.style.height = `${rect.height}px`;
+			clone.style.transition = 'all 0.5s ease';
+			clone.innerText = "clone";
+
+			// Hide original button
+			btn.style.visibility = 'hidden';
+			btn.style.opacity = '0';
+
+			// Get target position
+			const targetRect = div1.getBoundingClientRect();
+			const offsetX = targetRect.left; // adjust as needed
+			const offsetY = targetRect.top;
+
+			// Animate to new position
+			requestAnimationFrame(() => {
+				clone.style.left = `${offsetX}px`;
+				clone.style.top = `${offsetY}px`;
+			});
+
+			// After animation, move real button
+			setTimeout(() => {
+				div1.appendChild(btn);
+				btn.style.visibility = 'visible';
+				btn.style.opacity = '1';
+				clone.remove();
+			}, 500);
+		}
+
+		btn.addEventListener('click', moveButton);
+	</script>
+
+</body>
+
+</html>

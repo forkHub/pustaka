@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Emoji Spritesheet Generator</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			text-align: center;
+			background: #f0f0f0;
+			padding: 20px;
+		}
+
+		canvas {
+			border: 1px solid #333;
+			margin-top: 20px;
+		}
+
+		button {
+			margin-top: 20px;
+			padding: 10px 20px;
+			font-size: 16px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>🎨 Emoji Spritesheet Generator</h1>
+	<canvas id="spritesheet"></canvas>
+	<br>
+	<button id="downloadBtn">Download Spritesheet</button>
+
+	<script>
+		const canvas = document.getElementById('spritesheet');
+		const ctx = canvas.getContext('2d');
+		const gridSize = 48;
+
+		const emojis = [
+			// Events (15)
+			"🎉", "🎊", "🎈", "🎂", "🎄", "🎃", "🎆", "🎇", "🧨", "✨", "🎍", "🎎", "🎏", "🎐", "🎑",
+			// Awards & Medals (6)
+			"🏆", "🏅", "🎖", "🥇", "🥈", "🥉",
+			// Sports (30)
+			"⚽", "🏀", "🏈", "⚾", "🥎", "🏐", "🏉", "🎾", "🥏", "🪃", "🏓", "🏸", "🥅", "🏒", "🏑",
+			"🏏", "🥍", "🛹", "🛼", "🛷", "⛸", "🥌", "🤿", "🏹", "🎯", "🏋️‍♂️", "🤼‍♂️", "🤸‍♂️", "🤾‍♂️", "🏇", "🚴‍♂️",
+			// Games (20)
+			"🎮", "🕹", "🎲", "♟", "🧩", "🧸", "🪀", "🪁", "🪄", "🪅", "🪆", "🪭", "🃏", "🀄", "🎴",
+			"🎯", "🧃", "🧪", "🧫", "🧬",
+			// Art & Craft (14)
+			"🎨", "🖌️", "🖍️", "✏️", "📝", "🖋️", "🖊️", "🗒️", "🗓️", "📒", "📔", "📕", "📖", "📗"
+		];
+
+		const columns = 10;
+		const rows = Math.ceil(emojis.length / columns);
+		canvas.width = columns * gridSize;
+		canvas.height = rows * gridSize;
+
+		ctx.font = `${gridSize - 8}px serif`;
+		ctx.textAlign = "center";
+		ctx.textBaseline = "middle";
+
+		emojis.forEach((emoji, index) => {
+			const x = (index % columns) * gridSize + gridSize / 2;
+			const y = Math.floor(index / columns) * gridSize + gridSize / 2;
+			ctx.fillText(emoji, x, y);
+		});
+
+		document.getElementById('downloadBtn').addEventListener('click', () => {
+			const link = document.createElement('a');
+			link.download = 'emoji_spritesheet.png';
+			link.href = canvas.toDataURL();
+			link.click();
+		});
+	</script>
+</body>
+
+</html>
